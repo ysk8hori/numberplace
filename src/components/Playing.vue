@@ -1,5 +1,5 @@
 <template>
-  <v-container style="height:100%;">
+  <v-container>
     <v-app-bar app color="primary" dark hide-on-scroll>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
@@ -19,11 +19,7 @@
         <v-icon>mdi-dots-vertical</v-icon>
       </v-btn>
     </v-app-bar>
-    <div style="height:50px;"></div>
-    <v-row justify="center" align="center" style="height:100%;">
-      <v-btn outlined color="indigo" @click="randomCreate">問題をランダム生成する</v-btn>
-    </v-row>
+    <div style="height:50px;"></div>PLAY!
   </v-container>
 </template>
-
-<script src="./home.vm.ts" />
+<script src="./playing.vm.ts" />

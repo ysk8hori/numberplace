@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark></v-app-bar>
-    <div style="height:100px;">a</div>
-    <router-view />
+    <transition name="fade">
+      <router-view></router-view>
+    </transition>
   </v-app>
 </template>
 
