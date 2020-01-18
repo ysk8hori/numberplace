@@ -46,6 +46,7 @@ export default class CreateGoodGameLogic {
         this.baseHeight,
         this.baseWidth
       ).execute();
+      console.log(`this is Good? :${this.isGood(createdGameId)}`);
     } while (!this.isGood(createdGameId));
     return createdGameId;
   }
@@ -56,6 +57,8 @@ export default class CreateGoodGameLogic {
    */
   private isGood(createdGameId: GameID) {
     const allCell = this.cellRepository.findAll(createdGameId);
-    return allCell.filter(cell => cell.isAnswered).length < allCell.length / 2;
+    return (
+      allCell.filter(cell => cell.isAnswered).length < allCell.length / 2 + 5
+    );
   }
 }

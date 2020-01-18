@@ -22,7 +22,7 @@ describe('CreateGameLogic', () => {
         CellRepositoryImpl.create()
           .findAll(gameId)
           .filter(cell => cell.isAnswered).length
-      ).toBeLessThan(10 / 2);
+      ).toBeLessThan(10 / 2 + 5);
     });
   });
   describe('2x2(base)', () => {
@@ -39,7 +39,7 @@ describe('CreateGameLogic', () => {
         CellRepositoryImpl.create()
           .findAll(gameId)
           .filter(cell => cell.isAnswered).length
-      ).toBeLessThan(17 / 2);
+      ).toBeLessThan(17 / 2 + 5);
     });
   });
   describe('2x3(base)', () => {
@@ -56,7 +56,7 @@ describe('CreateGameLogic', () => {
         CellRepositoryImpl.create()
           .findAll(gameId)
           .filter(cell => cell.isAnswered).length
-      ).toBeLessThan(37 / 2);
+      ).toBeLessThan(37 / 2 + 5);
     });
   });
   describe('3x3(base)', () => {
@@ -73,7 +73,7 @@ describe('CreateGameLogic', () => {
         CellRepositoryImpl.create()
           .findAll(gameId)
           .filter(cell => cell.isAnswered).length
-      ).toBeLessThan(82 / 2);
+      ).toBeLessThan(82 / 2 + 5);
     });
   });
   // describe('3x4(base)', () => {

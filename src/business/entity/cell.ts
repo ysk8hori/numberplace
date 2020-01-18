@@ -56,11 +56,11 @@ export default class Cell {
    */
   public removeCandidate(removeValue: IAnswer): void {
     this.answerCandidateList.removeCandidate(removeValue);
-    if (this.answerCandidateList.length === 0 && !this.isAnswered) {
-      console.log(
-        `未回答のCellの答えの候補が0件になりました。position:${this.position.toString()} `
-      );
-    }
+    // if (this.answerCandidateList.length === 0 && !this.isAnswered) {
+    //   console.log(
+    //     `未回答のCellの答えの候補が0件になりました。position:${this.position.toString()} `
+    //   );
+    // }
   }
 
   /**
