@@ -6,16 +6,28 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "test:unit:business:fillLonelyLogic": "vue-cli-service test:unit tests/unit/business/fillLonelyLogic.spec.ts",
+    "test:unit:business:game": "vue-cli-service test:unit tests/unit/business/game.spec.ts",
+    "test:unit:business:groupFactory": "vue-cli-service test:unit tests/unit/business/groupFactory.spec.ts",
+    "test:unit:business:inversionLazor": "vue-cli-service test:unit tests/unit/business/inversionLazor.spec.ts",
+    "test:unit:business:lazor": "vue-cli-service test:unit tests/unit/business/lazor.spec.ts",
+    "test:unit:story:gameMaker": "vue-cli-service test:unit tests/unit/story/gameMaker.spec.ts"
   },
   "dependencies": {
     "core-js": "^3.4.4",
+    "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.0.1",
+    "uuid": "^3.3.3",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
     "vue-property-decorator": "^8.3.0",
-    "vue-router": "^3.1.3"
+    "vue-router": "^3.1.3",
+    "vuetify": "^2.1.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.7.4",
+    "@babel/plugin-proposal-optional-chaining": "^7.7.5",
     "@types/jest": "^24.0.19",
     "@vue/cli-plugin-babel": "^4.1.0",
     "@vue/cli-plugin-eslint": "^4.1.0",
@@ -30,8 +42,12 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^5.0.0",
     "prettier": "^1.19.1",
-    "typescript": "~3.5.3",
-    "vue-template-compiler": "^2.6.10"
+    "sass": "^1.19.0",
+    "sass-loader": "^8.0.0",
+    "typescript": "~3.7.3",
+    "vue-cli-plugin-vuetify": "^2.0.3",
+    "vue-template-compiler": "^2.6.10",
+    "vuetify-loader": "^1.3.0"
   },
   "eslintConfig": {
     "root": true,
@@ -40,12 +56,16 @@
     },
     "extends": [
       "plugin:vue/essential",
+      "eslint:recommended",
       "@vue/prettier",
       "@vue/typescript"
     ],
-    "rules": {},
+    "rules": {
+      "no-console": "off"
+    },
     "parserOptions": {
-      "parser": "@typescript-eslint/parser"
+      "parser": "@typescript-eslint/parser",
+      "ecmaVersion": 6
     },
     "overrides": [
       {
@@ -64,6 +84,9 @@
     "last 2 versions"
   ],
   "jest": {
-    "preset": "@vue/cli-plugin-unit-jest/presets/typescript-and-babel"
+    "preset": "@vue/cli-plugin-unit-jest/presets/typescript-and-babel",
+    "setupFilesAfterEnv": [
+      "<rootDir>/tests/jest.setup.ts"
+    ]
   }
 }
