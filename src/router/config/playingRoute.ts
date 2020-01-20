@@ -1,5 +1,4 @@
-import Vue from 'vue';
-import VueRouter, { RouteConfig } from 'vue-router';
+import { RouteConfig } from 'vue-router';
 import Playing from '@/components/Playing.vue';
 
 export default class PlayingRoute implements RouteConfig {

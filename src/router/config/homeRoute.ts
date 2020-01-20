@@ -1,5 +1,4 @@
-import Vue from 'vue';
-import VueRouter, { RouteConfig } from 'vue-router';
+import { RouteConfig } from 'vue-router';
 // import Home from '@/views/home.vm';
 import Home from '@/components/Home.vue';
 

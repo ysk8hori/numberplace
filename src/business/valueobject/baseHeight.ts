@@ -12,4 +12,5 @@ export default class BaseHeight {
   public equals(other: BaseHeight): boolean {
     return this.value === other.value;
   }
+  public static selectableValues: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 }

@@ -15,4 +15,16 @@ export default class Height {
   public equals(other: Height): boolean {
     return this.value === other.value;
   }
+
+  public static validation(
+    baseHeight: number,
+    baseWidth: number
+  ): boolean | string {
+    const oneSideLength = baseHeight * baseWidth;
+    return Number.isNaN(oneSideLength)
+      ? 'Please chose base-height and base-width.'
+      : oneSideLength < 10
+      ? true
+      : 'Please chose smaller size.';
+  }
 }
