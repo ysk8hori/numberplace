@@ -46,7 +46,7 @@
           </v-row>
           <v-row justify="center" align="center">
             <v-col>
-              <v-btn @click="randomCreate" block :disabled="!startBtnEnabled">START</v-btn>
+              <v-btn @click="gameStart" block :disabled="!startBtnEnabled">START</v-btn>
             </v-col>
           </v-row>
         </v-card-text>
@@ -61,7 +61,7 @@
   max-width: 100%;
   width: 100%;
   height: 100%;
-  background-image: url(/img/11-g-90.8676b648.png);
+  background-image: url(images/11-g-90.png);
   background-repeat: repeat;
   background-color: rgba(255, 255, 255, 0.8);
   background-blend-mode: lighten;

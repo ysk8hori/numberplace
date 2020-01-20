@@ -18,11 +18,17 @@ export default class GameSize {
           BaseWidth.create(baseWidth)
         );
   }
-  constructor(private baseHeight: BaseHeight, private baseWidth: BaseWidth) {}
+  constructor(private _baseHeight: BaseHeight, private _baseWidth: BaseWidth) {}
   public get size(): number {
     return this.baseHeight.value * this.baseWidth.value;
   }
   public get gameSizeString(): string {
     return `${this.size} x ${this.size}`;
+  }
+  public get baseWidth(): BaseWidth {
+    return this._baseWidth;
+  }
+  public get baseHeight(): BaseHeight {
+    return this._baseHeight;
   }
 }
