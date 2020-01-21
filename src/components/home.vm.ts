@@ -3,7 +3,7 @@ import PlayingRoute from '@/router/config/playingRoute';
 import BaseHeight from '@/business/valueobject/baseHeight';
 import BaseWidth from '@/business/valueobject/baseWidth';
 import Height from '@/business/valueobject/height';
-import GameSize from '@/application/gameSize';
+import GameSize from '@/application/entity/gameSize';
 import AppVm from '@/app.vm';
 
 /** TodoList.vueに対するViewModel */

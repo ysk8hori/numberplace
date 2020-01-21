@@ -1,5 +1,5 @@
 import { Vue, Prop, Component } from 'vue-property-decorator';
-import GameSize from './application/gameSize';
+import GameSize from './application/entity/gameSize';
 
 /** TodoList.vueに対するViewModel */
 @Component({})
