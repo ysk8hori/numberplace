@@ -1,8 +1,9 @@
 import { Vue, Prop, Component } from 'vue-property-decorator';
 import GameSize from './application/entity/gameSize';
+import AppLayout from '@/components/AppLayout.vue';
 
 /** TodoList.vueに対するViewModel */
-@Component({})
+@Component({ components: { AppLayout } })
 export default class AppVm extends Vue {
   private _playingGameSize: GameSize | undefined;
   public get playingGameSize(): GameSize | undefined {

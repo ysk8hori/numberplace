@@ -3,7 +3,7 @@ import { RouteConfig } from 'vue-router';
 import Home from '@/components/Home.vue';
 
 export default class HomeRoute implements RouteConfig {
-  public static NAME = 'name';
+  public static NAME = 'home';
   constructor() {}
   public static create(): HomeRoute {
     return new HomeRoute();

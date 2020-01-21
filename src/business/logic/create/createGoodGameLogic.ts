@@ -56,7 +56,10 @@ export default class CreateGoodGameLogic {
    */
   private isGood(createdGameId: GameID, remove: boolean = true) {
     const allCell = this.cellRepository.findAll(createdGameId);
-    if (allCell.filter(cell => cell.isAnswered).length < allCell.length / 2) {
+    if (
+      allCell.filter(cell => cell.isAnswered).length <
+      allCell.length / 2 + 5
+    ) {
       //good
       return true;
     } else {
