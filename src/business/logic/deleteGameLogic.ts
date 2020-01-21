@@ -33,7 +33,6 @@ export default class DeleteGameLogic {
   private groupRepository: GroupRepository;
   private gameRepository: GameRepository;
   public execute(gameId: GameID) {
-    console.log(`DeleteGameLogic: ${gameId.value}`);
     this.cellRepository.remove(gameId);
     this.groupRepository.remove(gameId);
     this.gameRepository.remove(gameId);

@@ -21,9 +21,7 @@ import { Trace } from '@/utils/trace';
 @autoInjectable()
 export default class Game {
   public static create(baseHeight: BaseHeight, baseWidth: BaseWidth): Game {
-    const game = new Game(baseHeight, baseWidth);
-    console.log(`gameID:${game.gameId.value} \n ${new Error().stack}`);
-    return game;
+    return new Game(baseHeight, baseWidth);
   }
   public constructor(
     private _baseHeight: BaseHeight,

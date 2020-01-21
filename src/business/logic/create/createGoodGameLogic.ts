@@ -45,7 +45,7 @@ export default class CreateGoodGameLogic {
         this.baseHeight,
         this.baseWidth
       ).execute();
-      console.log(`this is Good? :${this.isGood(createdGameId)}`);
+      console.log(`this is Good? :${this.isGood(createdGameId, false)}`);
     } while (!this.isGood(createdGameId));
     return createdGameId;
   }
@@ -54,17 +54,14 @@ export default class CreateGoodGameLogic {
    * 解答済みのセルの数が全セルの半分より少なければGOOD!
    * @param createdGameId
    */
-  private isGood(createdGameId: GameID) {
+  private isGood(createdGameId: GameID, remove: boolean = true) {
     const allCell = this.cellRepository.findAll(createdGameId);
-    if (
-      allCell.filter(cell => cell.isAnswered).length <
-      allCell.length / 2 + 5
-    ) {
+    if (allCell.filter(cell => cell.isAnswered).length < allCell.length / 2) {
       //good
       return true;
     } else {
       //bad
-      DeleteGameLogic.create().execute(createdGameId);
+      if (remove) DeleteGameLogic.create().execute(createdGameId);
       return false;
     }
   }
