@@ -16,11 +16,14 @@ import FillOwnAnswerIfLastOneAnswerCandidate from '@/business/logic/analyze/fill
 import FillAllLonelyLogic from '@/business/logic/analyze/fillAllLonelyLogic';
 import AnalyzeLogic from '../logic/analyze/analyzeLogic';
 import Difficalty from '../valueobject/difficalty';
+import { Trace } from '@/utils/trace';
 
 @autoInjectable()
 export default class Game {
   public static create(baseHeight: BaseHeight, baseWidth: BaseWidth): Game {
-    return new Game(baseHeight, baseWidth);
+    const game = new Game(baseHeight, baseWidth);
+    console.log(`gameID:${game.gameId.value} \n ${new Error().stack}`);
+    return game;
   }
   public constructor(
     private _baseHeight: BaseHeight,

@@ -17,4 +17,5 @@ export default interface GroupRepository {
     gameId: GameID,
     horizontalPosition: HorizontalPosition
   ): Group;
+  remove(gameId: GameID): void;
 }

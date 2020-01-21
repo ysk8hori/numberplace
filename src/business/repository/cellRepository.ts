@@ -31,4 +31,6 @@ export default interface CellRepository {
    * @param gameId
    */
   getMinimumAnswerCountCells(gameId: GameID): Cell[];
+
+  remove(gameId: GameID): void;
 }

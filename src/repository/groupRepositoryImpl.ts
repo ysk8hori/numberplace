@@ -67,6 +67,10 @@ export default class GroupRepositoryImpl implements GroupRepository {
     );
   }
 
+  public remove(gameId: GameID): void {
+    GroupRepositoryImpl.groupMap.delete(gameId);
+  }
+
   public throw(gameId: GameID, arg2?: any): never {
     RepositoryError.throw(
       GroupRepositoryImpl.name,

@@ -8,6 +8,7 @@ import BusinessError from '@/business/businessError';
 import Game from '@/business/entity/game';
 import BaseHeight from '@/business/valueobject/baseHeight';
 import BaseWidth from '@/business/valueobject/baseWidth';
+import DeleteGameLogic from '../deleteGameLogic';
 
 @autoInjectable()
 export default class CreateGoodGameLogic {
@@ -34,10 +35,8 @@ export default class CreateGoodGameLogic {
         'リポジトリが指定されていません。'
       );
     this.cellRepository = cellRepository;
-    this.game = Game.create(baseHeight, baseWidth);
   }
   private cellRepository: CellRepository;
-  private game: Game;
 
   public execute(): GameID {
     let createdGameId;
@@ -57,8 +56,16 @@ export default class CreateGoodGameLogic {
    */
   private isGood(createdGameId: GameID) {
     const allCell = this.cellRepository.findAll(createdGameId);
-    return (
-      allCell.filter(cell => cell.isAnswered).length < allCell.length / 2 + 5
-    );
+    if (
+      allCell.filter(cell => cell.isAnswered).length <
+      allCell.length / 2 + 5
+    ) {
+      //good
+      return true;
+    } else {
+      //bad
+      DeleteGameLogic.create().execute(createdGameId);
+      return false;
+    }
   }
 }

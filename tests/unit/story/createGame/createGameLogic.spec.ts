@@ -6,6 +6,7 @@ import OutputAnswerStringLogic from '@/business/logic/outputAnswerStringLogic';
 import CreateGoodGameLogic from '@/business/logic/create/createGoodGameLogic';
 import GameID from '@/business/valueobject/gameId';
 import CellRepositoryImpl from '@/repository/cellRepositoryImpl';
+import GameRepositoryImpl from '@/repository/gameRepositoryImpl';
 
 describe('CreateGameLogic', () => {
   describe('1x3(base)', () => {
@@ -23,6 +24,9 @@ describe('CreateGameLogic', () => {
           .findAll(gameId)
           .filter(cell => cell.isAnswered).length
       ).toBeLessThan(10 / 2 + 5);
+    });
+    test('GameRepositoryの件数', () => {
+      expect(GameRepositoryImpl.games.length).toBe(1);
     });
   });
   describe('2x2(base)', () => {
@@ -76,6 +80,7 @@ describe('CreateGameLogic', () => {
       ).toBeLessThan(82 / 2 + 5);
     });
   });
+
   // describe('3x4(base)', () => {
   //   let gameId: GameID;
   //   beforeAll(() => {

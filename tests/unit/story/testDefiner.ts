@@ -8,6 +8,7 @@ import CellRepository from '@/business/repository/cellRepository';
 import Cell from '@/business/entity/cell';
 import InfiniteAnalyzeLogic from '@/business/logic/analyze/infiniteAnalyze/infiniteAnalyzeLogic';
 import OutputAnswerStringLogic from '@/business/logic/outputAnswerStringLogic';
+import DeleteGameLogic from '@/business/logic/deleteGameLogic';
 
 @autoInjectable()
 export default class TestDefiner {
@@ -52,7 +53,6 @@ export default class TestDefiner {
     return this;
   }
   private game!: Game;
-  private remainingCount: number = -1;
   private answeredGame!: Game;
 
   public defineBeforeAll() {
@@ -92,5 +92,10 @@ export default class TestDefiner {
           .getAnswer()?.value
       ).toEqual(answeredCell.getAnswer()?.value);
     });
+  }
+  public destructor() {
+    const deleteGameLogic = DeleteGameLogic.create();
+    deleteGameLogic.execute(this.game.gameId);
+    deleteGameLogic.execute(this.answeredGame.gameId);
   }
 }

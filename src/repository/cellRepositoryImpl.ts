@@ -76,6 +76,9 @@ export default class CellRepositoryImpl implements CellRepository {
     });
     return minimumAnswerCandidateLength;
   }
+  public remove(gameId: GameID): void {
+    CellRepositoryImpl.cellCollectionMap.delete(gameId);
+  }
 
   private throw(): never {
     return RepositoryError.throw(

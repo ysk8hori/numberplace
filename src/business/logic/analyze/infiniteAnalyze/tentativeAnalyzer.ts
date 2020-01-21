@@ -10,6 +10,7 @@ import Game from '@/business/entity/game';
 import AnalyzeLogic from '../analyzeLogic';
 import Cell from '@/business/entity/cell';
 import Utils from '@/utils/utils';
+import DeleteGameLogic from '../../deleteGameLogic';
 
 /**
  * Gameの解析がAnalizeLogicで完了できない場合に、仮でいずれかのセルに値を入力して解析を進めるためのクラス。
@@ -70,8 +71,13 @@ export default class TentativeAnalyzer {
     for (const tentativeDecision of this.generateTentativeDecision()) {
       this.myGame.incrementDifficalty(); // 仮で値を決める場合は難易度が上がる。難易度はゲーム作成の際に参照する。
       this.executeOneTentativeAnalize(tentativeDecision);
-      if (this._successGameId) return;
+      if (this._successGameId) {
+        DeleteGameLogic.create().execute(this.myGame.gameId);
+        return;
+      }
     }
+    // メモリ解放
+    DeleteGameLogic.create().execute(this.myGame.gameId);
   }
 
   private executeOneTentativeAnalize(tentativeDecision: TentativeDecision) {

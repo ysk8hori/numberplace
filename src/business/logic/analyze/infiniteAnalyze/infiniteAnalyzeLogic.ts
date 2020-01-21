@@ -7,6 +7,7 @@ import BusinessError from '../../../businessError';
 import TentativeAnalyzer from './tentativeAnalyzer';
 import Game from '@/business/entity/game';
 import Difficalty from '@/business/valueobject/difficalty';
+import DeleteGameLogic from '../../deleteGameLogic';
 
 @autoInjectable()
 export default class InfiniteAnalyzeLogic {
@@ -36,6 +37,7 @@ export default class InfiniteAnalyzeLogic {
   private cellRepository: CellRepository;
   private gameRepository: GameRepository;
   private game: Game;
+  private deleteGameLogic = DeleteGameLogic.create();
 
   public execute() {
     // 難易度を初期化
@@ -61,6 +63,8 @@ export default class InfiniteAnalyzeLogic {
           if (cell.isAnswered) return;
           this.game.fill(cell.position, analyzedCell.answer!);
         });
+      // 解析用ゲームを解放
+      this.deleteGameLogic.execute(tentativeAnalyzer.successGameId);
     } else {
       BusinessError.throw(
         InfiniteAnalyzeLogic.name,

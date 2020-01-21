@@ -4,4 +4,5 @@ import Game from '@/business/entity/game';
 export default interface GameRepository {
   regist(game: Game): void;
   find(gameId: GameID): Game;
+  remove(gameId: GameID): void;
 }

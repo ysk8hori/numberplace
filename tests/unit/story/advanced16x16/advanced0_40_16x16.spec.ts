@@ -1,4 +1,5 @@
 import TestDefiner from '../testDefiner';
+import GameRepositoryImpl from '@/repository/gameRepositoryImpl';
 
 describe('クラシック上級お試し16x16 40', () => {
   let testDefiner = TestDefiner.create(
@@ -9,4 +10,11 @@ describe('クラシック上級お試し16x16 40', () => {
   );
   testDefiner.defineBeforeAll();
   testDefiner.defineTests();
+
+  afterAll(() => {
+    testDefiner.destructor();
+    console.log(
+      `GameRepositoryImpl.games.length:${GameRepositoryImpl.games.length}`
+    );
+  });
 });

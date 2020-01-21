@@ -11,6 +11,7 @@ import Game from '@/business/entity/game';
 import Cell from '@/business/entity/cell';
 import BaseHeight from '@/business/valueobject/baseHeight';
 import BaseWidth from '@/business/valueobject/baseWidth';
+import DeleteGameLogic from '../deleteGameLogic';
 
 @autoInjectable()
 export default class CreateGameLogic {
@@ -41,6 +42,7 @@ export default class CreateGameLogic {
   }
   private cellRepository: CellRepository;
   private game: Game;
+  private deleteGameLogic = DeleteGameLogic.create();
 
   public execute(): GameID {
     const answeredGame = this.game.clone();
@@ -63,7 +65,11 @@ export default class CreateGameLogic {
     let clonedGame: Game;
     do {
       clonedGame = this.微調整する(shuffledAnsweredCells);
+      this.deleteGameLogic.execute(clonedGame.gameId);
     } while (clonedGame.difficalty?.value !== 0);
+
+    this.deleteGameLogic.execute(answeredGame.gameId);
+
     return this.game.gameId;
   }
 
