@@ -1,5 +1,5 @@
 <template >
-  <v-container class="container">
+  <v-container class="bgcontainer">
     <v-app-bar app dark hide-on-scroll>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
@@ -57,7 +57,7 @@
 
 <script src="./home.vm.ts" />
 <style>
-.container {
+.bgcontainer {
   max-width: 100%;
   width: 100%;
   height: 100%;
@@ -65,5 +65,9 @@
   background-repeat: repeat;
   background-color: rgba(255, 255, 255, 0.8);
   background-blend-mode: lighten;
+}
+.row {
+  margin: 0px;
+  padding: 0px;
 }
 </style>

@@ -37,7 +37,7 @@ export default class Range {
   }
 
   /**
-   * 範囲内のCellを、行ごとに纏めて、上から順番に返す。
+   * 範囲内のCellを、列ごとに纏めて、上から順番に返す。
    */
   public *fetchColsInOrder(): Generator<Cell[], void, unknown> {
     const horizontalPositions = this.getHorizontalPositions();

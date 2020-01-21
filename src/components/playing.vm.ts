@@ -5,15 +5,20 @@ import HomeRoute from '@/router/config/homeRoute';
 import CreateGoodGameLogic from '@/business/logic/create/createGoodGameLogic';
 import GameID from '@/business/valueobject/gameId';
 import OutputAnswerStringLogic from '@/business/logic/outputAnswerStringLogic';
+import Group from '@/business/entity/group';
+import GetGridOfSquareGroupsLogic from '@/business/logic/play/getGridOfSquareGroupsLogic';
+import SquareGroupVm from './squareGroup.vm';
+import SquareGroup from './SquareGroup.vue';
+import CreateGameLogic from '@/business/logic/create/createGameLogic';
 
 /** TodoList.vueに対するViewModel */
-@Component({})
+@Component({ components: { SquareGroup } })
 export default class PlayingVm extends Vue {
   protected message = 'PLAY';
   private gameId: GameID | undefined;
-  protected gameString: string = '';
+  protected groupGrid: Group[][] = [[]];
 
-  public mounted() {
+  public created() {
     const gameSize = (this.$parent as AppVm).playingGameSize;
     if (!gameSize) return this.$router.push(HomeRoute.NAME);
     // this.game = Game.create(gameSize!.baseHeight, gameSize!.baseWidth);
@@ -21,8 +26,6 @@ export default class PlayingVm extends Vue {
       gameSize!.baseHeight,
       gameSize!.baseWidth
     ).execute();
-    this.gameString = OutputAnswerStringLogic.create(
-      this.gameId
-    ).getAnswerString();
+    this.groupGrid = GetGridOfSquareGroupsLogic.create(this.gameId).execute();
   }
 }
