@@ -2,7 +2,7 @@
   <v-container v-if="!!cellGrid" class="groupcol">
     <v-row v-for="row in cellGrid" :key="JSON.stringify(row)" class="grouprow">
       <v-col class="numbercell" v-for="cell in row" :key="cell.position.toString()">
-        <v-sheet>{{ cell.answer ? cell.answer.value : '' }}</v-sheet>
+        <n-cell :userCell="cell" />
       </v-col>
     </v-row>
   </v-container>

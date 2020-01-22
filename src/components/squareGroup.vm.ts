@@ -2,8 +2,9 @@ import { Vue, Prop, Component } from 'vue-property-decorator';
 import Group from '@/business/entity/group';
 import Cell from '@/business/entity/cell';
 import UserCell from '@/application/entity/userCell';
+import NCell from '@/components/NCell.vue';
 
-@Component({})
+@Component({ components: { NCell } })
 export default class SquareGroupVm extends Vue {
   @Prop()
   private group!: Group;
