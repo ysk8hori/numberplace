@@ -22,8 +22,7 @@ export default class PlayingVm extends Vue {
   public created() {
     const gameSize = (this.$parent as AppVm).playingGameSize;
     if (!gameSize) return this.$router.push(HomeRoute.NAME);
-    // this.game = Game.create(gameSize!.baseHeight, gameSize!.baseWidth);
-    this.gameId = CreateGoodGameLogic.create(
+    this.gameId = CreateGameLogic.create(
       gameSize!.baseHeight,
       gameSize!.baseWidth
     ).execute();
