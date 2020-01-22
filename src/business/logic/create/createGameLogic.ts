@@ -63,10 +63,12 @@ export default class CreateGameLogic {
     }
     // 解析を行いdifficaltyを見る。1以上だったら難しいのでさらにもう1つ答えを転写して・・・以降ループ。
     let clonedGame: Game;
+    console.log('微調整開始');
     do {
       clonedGame = this.微調整する(shuffledAnsweredCells);
       this.deleteGameLogic.execute(clonedGame.gameId);
     } while (clonedGame.difficalty?.value !== 0);
+    console.log('微調整完了');
 
     this.deleteGameLogic.execute(answeredGame.gameId);
 

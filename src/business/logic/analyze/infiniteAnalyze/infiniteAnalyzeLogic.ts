@@ -12,7 +12,9 @@ import DeleteGameLogic from '../../deleteGameLogic';
 @autoInjectable()
 export default class InfiniteAnalyzeLogic {
   public static createAndExecute(gameId: GameID, isCreate: boolean = false) {
+    console.log('InfiniteAnalyzeLogic start');
     new InfiniteAnalyzeLogic(gameId, isCreate).execute();
+    console.log('InfiniteAnalyzeLogic end');
   }
   constructor(
     private gameId: GameID,

@@ -24,8 +24,5 @@ export default class GameRepositoryImpl implements GameRepository {
     GameRepositoryImpl.games = GameRepositoryImpl.games.filter(
       game => !game.gameId.equals(gameId)
     );
-    console.log(
-      `GameRepositoryImpl.games.length:${GameRepositoryImpl.games.length}`
-    );
   }
 }
