@@ -11,7 +11,4 @@ export default class Utils {
     }
     return array;
   }
-  public static async sleep(time: number) {
-    new Promise(resolve => setTimeout(resolve, time));
-  }
 }

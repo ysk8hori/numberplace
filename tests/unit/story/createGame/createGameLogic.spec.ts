@@ -5,13 +5,12 @@ import CreateGoodGameLogic from '@/business/logic/create/createGoodGameLogic';
 import GameID from '@/business/valueobject/gameId';
 import CellRepositoryImpl from '@/repository/cellRepositoryImpl';
 import GameRepositoryImpl from '@/repository/gameRepositoryImpl';
-import CreateGameLogic from '@/business/logic/create/createGameLogic';
 
 describe('CreateGameLogic', () => {
   describe('1x3(base)', () => {
     let gameId: GameID;
-    beforeAll(async () => {
-      gameId = await CreateGoodGameLogic.create(
+    beforeAll(() => {
+      gameId = CreateGoodGameLogic.create(
         BaseHeight.create(1),
         BaseWidth.create(3)
       ).execute();
@@ -24,14 +23,14 @@ describe('CreateGameLogic', () => {
           .filter(cell => cell.isAnswered).length
       ).toBeLessThan(10 / 2 + 5);
     });
-    // test('GameRepositoryの件数', () => {
-    //   expect(GameRepositoryImpl.games.length).toBe(1);
-    // });
+    test('GameRepositoryの件数', () => {
+      expect(GameRepositoryImpl.games.length).toBe(1);
+    });
   });
   describe('2x2(base)', () => {
     let gameId: GameID;
-    beforeAll(async () => {
-      gameId = await CreateGoodGameLogic.create(
+    beforeAll(() => {
+      gameId = CreateGoodGameLogic.create(
         BaseHeight.create(2),
         BaseWidth.create(2)
       ).execute();
@@ -47,8 +46,8 @@ describe('CreateGameLogic', () => {
   });
   describe('2x3(base)', () => {
     let gameId: GameID;
-    beforeAll(async () => {
-      gameId = await CreateGoodGameLogic.create(
+    beforeAll(() => {
+      gameId = CreateGoodGameLogic.create(
         BaseHeight.create(2),
         BaseWidth.create(3)
       ).execute();
@@ -64,8 +63,8 @@ describe('CreateGameLogic', () => {
   });
   describe('3x3(base)', () => {
     let gameId: GameID;
-    beforeAll(async () => {
-      gameId = await CreateGoodGameLogic.create(
+    beforeAll(() => {
+      gameId = CreateGoodGameLogic.create(
         BaseHeight.create(3),
         BaseWidth.create(3)
       ).execute();
