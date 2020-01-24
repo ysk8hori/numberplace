@@ -12,6 +12,7 @@ import Cell from '@/business/entity/cell';
 import BaseHeight from '@/business/valueobject/baseHeight';
 import BaseWidth from '@/business/valueobject/baseWidth';
 import DeleteGameLogic from '../deleteGameLogic';
+import AnalyzeTimeoutError from '../analyze/infiniteAnalyze/analyzeTimeoutError';
 
 @autoInjectable()
 export default class CreateGameLogic {
@@ -43,10 +44,25 @@ export default class CreateGameLogic {
   private cellRepository: CellRepository;
   private game: Game;
   private deleteGameLogic = DeleteGameLogic.create();
+  private infiniteAnalyzeLogicForCreate?: InfiniteAnalyzeLogic;
+  private infiniteAnalyzeLogicForTweak?: InfiniteAnalyzeLogic;
 
-  public execute(): GameID {
+  /**
+   * @throws AnalyzeTimeoutError ... 生成にかかる時間が一定を超えた場合にエラーを投げます。
+   */
+  public async execute(): Promise<GameID> {
     const answeredGame = this.game.clone();
-    InfiniteAnalyzeLogic.createAndExecute(answeredGame.gameId, true);
+    do {
+      this.infiniteAnalyzeLogicForCreate = InfiniteAnalyzeLogic.create(
+        answeredGame.gameId,
+        true
+      );
+      await this.infiniteAnalyzeLogicForCreate.execute();
+    } while (
+      !this.cellRepository
+        .findAll(answeredGame.gameId)
+        .every(cell => cell.isAnswered)
+    );
 
     // clonedGameからthis.gameIdのゲームに20数個のセル答えを転写する。
     const shuffledAnsweredCells = Utils.shuffle(
@@ -61,11 +77,12 @@ export default class CreateGameLogic {
         cell.getAnswer()!
       );
     }
+
     // 解析を行いdifficaltyを見る。1以上だったら難しいのでさらにもう1つ答えを転写して・・・以降ループ。
     let clonedGame: Game;
     console.log('微調整開始');
     do {
-      clonedGame = this.微調整する(shuffledAnsweredCells);
+      clonedGame = await this.tweak(shuffledAnsweredCells);
       this.deleteGameLogic.execute(clonedGame.gameId);
     } while (clonedGame.difficalty?.value !== 0);
     console.log('微調整完了');
@@ -75,16 +92,28 @@ export default class CreateGameLogic {
     return this.game.gameId;
   }
 
-  private 微調整する(shuffledAnsweredCells: Cell[]): Game {
+  private async tweak(shuffledAnsweredCells: Cell[]): Promise<Game> {
+    let i = 0;
+    console.log(++i);
     let clonedGame: Game;
+    console.log(++i);
     const answeredCell = shuffledAnsweredCells.pop();
+    console.log(++i);
     AnswerLogic.createAndExecute(
       this.game.gameId,
       answeredCell!.position,
       answeredCell!.getAnswer()!
     );
+    console.log(++i);
     clonedGame = this.game.clone();
-    InfiniteAnalyzeLogic.createAndExecute(clonedGame.gameId);
+    console.log(++i);
+    this.infiniteAnalyzeLogicForTweak = InfiniteAnalyzeLogic.create(
+      clonedGame.gameId,
+      true
+    );
+    console.log(++i);
+    await this.infiniteAnalyzeLogicForTweak.execute();
+    console.log(++i);
     return clonedGame;
   }
 
@@ -92,4 +121,9 @@ export default class CreateGameLogic {
   private getBaseAnsweredCellCount(): number {
     return (this.cellRepository.findAll(this.game.gameId).length / 10) * 3;
   }
+
+  // public cancel() {
+  //   this.infiniteAnalyzeLogicForCreate?.cancel();
+  //   this.infiniteAnalyzeLogicForTweak?.cancel();
+  // }
 }

@@ -11,11 +11,13 @@ import DeleteGameLogic from '../../deleteGameLogic';
 
 @autoInjectable()
 export default class InfiniteAnalyzeLogic {
-  public static createAndExecute(gameId: GameID, isCreate: boolean = false) {
-    console.log('InfiniteAnalyzeLogic start');
-    new InfiniteAnalyzeLogic(gameId, isCreate).execute();
-    console.log('InfiniteAnalyzeLogic end');
+  public static create(
+    gameId: GameID,
+    isCreate: boolean = false
+  ): InfiniteAnalyzeLogic {
+    return new InfiniteAnalyzeLogic(gameId, isCreate);
   }
+
   constructor(
     private gameId: GameID,
     private isCreate: boolean,
@@ -35,28 +37,33 @@ export default class InfiniteAnalyzeLogic {
     this.cellRepository = cellRepository;
     this.gameRepository = gameRepository;
     this.game = gameRepository.find(this.gameId);
+    this.tentativeAnalyzer = TentativeAnalyzer.create(
+      this.gameId,
+      this.isCreate
+    );
   }
   private cellRepository: CellRepository;
   private gameRepository: GameRepository;
   private game: Game;
   private deleteGameLogic = DeleteGameLogic.create();
+  private tentativeAnalyzer: TentativeAnalyzer;
 
-  public execute() {
+  public async execute() {
+    TentativeAnalyzer.count = 0;
     // 難易度を初期化
     this.game.setDifficalty(Difficalty.create());
-    const tentativeAnalyzer = TentativeAnalyzer.create(
-      this.gameId,
-      this.isCreate
-    );
-    tentativeAnalyzer.execute();
-    if (tentativeAnalyzer.successGameId) {
+    console.log('InfiniteAnalyzeLogic start');
+    await this.tentativeAnalyzer.execute();
+    console.log('tentativeAnalyzer.executed');
+    if (this.tentativeAnalyzer.successGameId) {
       this.gameRepository
         .find(this.gameId)
         .setDifficalty(
-          this.gameRepository.find(tentativeAnalyzer.successGameId).difficalty
+          this.gameRepository.find(this.tentativeAnalyzer.successGameId)
+            .difficalty
         );
       this.cellRepository
-        .findAll(tentativeAnalyzer.successGameId)
+        .findAll(this.tentativeAnalyzer.successGameId)
         .forEach(analyzedCell => {
           const cell = this.cellRepository.findByPosition(
             this.gameId,
@@ -66,7 +73,7 @@ export default class InfiniteAnalyzeLogic {
           this.game.fill(cell.position, analyzedCell.answer!);
         });
       // 解析用ゲームを解放
-      this.deleteGameLogic.execute(tentativeAnalyzer.successGameId);
+      this.deleteGameLogic.execute(this.tentativeAnalyzer.successGameId);
     } else {
       BusinessError.throw(
         InfiniteAnalyzeLogic.name,
@@ -75,4 +82,8 @@ export default class InfiniteAnalyzeLogic {
       );
     }
   }
+
+  // public cancel() {
+  //   this.tentativeAnalyzer.cancel;
+  // }
 }

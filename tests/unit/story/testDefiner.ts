@@ -56,14 +56,14 @@ export default class TestDefiner {
   private answeredGame!: Game;
 
   public defineBeforeAll() {
-    beforeAll(() => {
+    beforeAll(async () => {
       const colSplitter =
         10 <= this.baseHeight.value * this.baseWidth.value ? ',' : '';
       LoadLogic.create(this.game.gameId).execute(this.issue, {
         rowSplitter: '|',
         colSplitter
       });
-      InfiniteAnalyzeLogic.createAndExecute(this.game.gameId);
+      await InfiniteAnalyzeLogic.create(this.game.gameId).execute();
       console.log(
         OutputAnswerStringLogic.create(this.game.gameId).getAnswerString()
       );

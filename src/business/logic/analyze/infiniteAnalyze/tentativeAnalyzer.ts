@@ -11,6 +11,8 @@ import AnalyzeLogic from '../analyzeLogic';
 import Cell from '@/business/entity/cell';
 import Utils from '@/utils/utils';
 import DeleteGameLogic from '../../deleteGameLogic';
+import AnalyzeTimeoutError from './analyzeTimeoutError';
+import { Trace } from '@/utils/trace';
 
 /**
  * Gameの解析がAnalizeLogicで完了できない場合に、仮でいずれかのセルに値を入力して解析を進めるためのクラス。
@@ -24,6 +26,7 @@ export default class TentativeAnalyzer {
   ): TentativeAnalyzer {
     return new TentativeAnalyzer(parrentGameId, create, tentativeDecision);
   }
+  public static count = 0;
   constructor(
     private parrentGameId: GameID,
     private isCreate: boolean,
@@ -35,6 +38,14 @@ export default class TentativeAnalyzer {
     @inject('GameRepository')
     gameRepository?: GameRepository
   ) {
+    TentativeAnalyzer.count++;
+    if (TentativeAnalyzer.count === 300) {
+      BusinessError.throw(
+        InfiniteAnalyzeLogic.name,
+        'constructor',
+        '最大カウント数を超えました。'
+      );
+    }
     if (!cellRepository || !groupRepository || !gameRepository)
       BusinessError.throw(
         InfiniteAnalyzeLogic.name,
@@ -57,8 +68,11 @@ export default class TentativeAnalyzer {
   public get successGameId(): GameID | undefined {
     return this._successGameId;
   }
-  static count: number = 1;
-  public execute() {
+  // static count: number = 1;
+  public async execute() {
+    await this.executeAsync();
+  }
+  private async executeAsync() {
     if (this.tentativeDecision) {
       // 仮入力値とそれを入力するセルが指定されている場合はそれを反映する。
       this.fillFromTentativeDecisioin(this.tentativeDecision);
@@ -68,27 +82,36 @@ export default class TentativeAnalyzer {
       this._successGameId = this.myGame.gameId;
       return;
     }
-    for (const tentativeDecision of this.generateTentativeDecision()) {
-      this.myGame.incrementDifficalty(); // 仮で値を決める場合は難易度が上がる。難易度はゲーム作成の際に参照する。
-      this.executeOneTentativeAnalize(tentativeDecision);
-      if (this._successGameId) {
-        DeleteGameLogic.create().execute(this.myGame.gameId);
-        return;
+    try {
+      for (const tentativeDecision of this.generateTentativeDecision()) {
+        if (TentativeAnalyzer.isCancel) {
+          AnalyzeTimeoutError.throw();
+        }
+        this.myGame.incrementDifficalty(); // 仮で値を決める場合は難易度が上がる。難易度はゲーム作成の際に参照する。
+        await this.executeOneTentativeAnalize(tentativeDecision);
+        if (this._successGameId) {
+          return;
+        }
       }
+    } catch (e) {
+      throw e;
+    } finally {
+      // メモリ解放
+      DeleteGameLogic.create().execute(this.myGame.gameId);
     }
-    // メモリ解放
-    DeleteGameLogic.create().execute(this.myGame.gameId);
   }
-
-  private executeOneTentativeAnalize(tentativeDecision: TentativeDecision) {
-    const tentativeAnalyzer = TentativeAnalyzer.create(
+  private tentativeAnalyzer!: TentativeAnalyzer;
+  private async executeOneTentativeAnalize(
+    tentativeDecision: TentativeDecision
+  ) {
+    this.tentativeAnalyzer = TentativeAnalyzer.create(
       this.myGame.gameId,
       this.isCreate,
       tentativeDecision
     );
-    tentativeAnalyzer.execute();
-    if (tentativeAnalyzer.successGameId) {
-      this._successGameId = tentativeAnalyzer.successGameId;
+    await this.tentativeAnalyzer.execute();
+    if (this.tentativeAnalyzer.successGameId) {
+      this._successGameId = this.tentativeAnalyzer.successGameId;
       return;
     }
   }
@@ -121,5 +144,14 @@ export default class TentativeAnalyzer {
           this.cellRepository.getMinimumAnswerCountCells(this.myGame.gameId)
         )
       : this.cellRepository.getMinimumAnswerCountCells(this.myGame.gameId);
+  }
+
+  private static isCancel: boolean = false;
+  @Trace
+  public static cancel() {
+    this.isCancel = true;
+  }
+  public static cancelCancel() {
+    this.isCancel = false;
   }
 }

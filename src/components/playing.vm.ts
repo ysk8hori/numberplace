@@ -19,10 +19,10 @@ export default class PlayingVm extends Vue {
   private gameId: GameID | undefined;
   protected groupGrid: Group[][] = [[]];
 
-  public created() {
+  public async created() {
     const gameSize = (this.$parent as AppVm).playingGameSize;
     if (!gameSize) return this.$router.push(HomeRoute.NAME);
-    this.gameId = CreateGameLogic.create(
+    this.gameId = await CreateGoodGameLogic.create(
       gameSize!.baseHeight,
       gameSize!.baseWidth
     ).execute();
