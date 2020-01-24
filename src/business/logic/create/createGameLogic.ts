@@ -84,12 +84,12 @@ export default class CreateGameLogic {
       answeredCell!.getAnswer()!
     );
     clonedGame = this.game.clone();
-    InfiniteAnalyzeLogic.createAndExecute(clonedGame.gameId);
+    InfiniteAnalyzeLogic.createAndExecute(clonedGame.gameId, true);
     return clonedGame;
   }
 
   /** 答えを入力しておくセルの数を取得する。 */
   private getBaseAnsweredCellCount(): number {
-    return (this.cellRepository.findAll(this.game.gameId).length / 10) * 3;
+    return (this.cellRepository.findAll(this.game.gameId).length / 10) * 2;
   }
 }

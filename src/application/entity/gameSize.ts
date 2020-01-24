@@ -4,6 +4,7 @@ import Game from '@/business/entity/game';
 
 export default class GameSize {
   public static MAX_SIZE = 10;
+  static MIN_SIZE: number = 3;
   public static create(
     baseHeight: number,
     baseWidth: number
@@ -13,6 +14,8 @@ export default class GameSize {
       ? 'Please chose base-height and base-width.'
       : GameSize.MAX_SIZE < oneSideLength
       ? 'Please chose smaller size.'
+      : oneSideLength < GameSize.MIN_SIZE
+      ? 'Please chose larger size.'
       : new GameSize(
           BaseHeight.create(baseHeight),
           BaseWidth.create(baseWidth)

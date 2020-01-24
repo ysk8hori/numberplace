@@ -26,6 +26,7 @@ export default class InfiniteAnalyzeLogic {
     @inject('GameRepository')
     gameRepository?: GameRepository
   ) {
+    TentativeAnalyzer.count = 0;
     if (!cellRepository || !groupRepository || !gameRepository)
       BusinessError.throw(
         InfiniteAnalyzeLogic.name,

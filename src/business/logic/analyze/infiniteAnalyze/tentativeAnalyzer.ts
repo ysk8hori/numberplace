@@ -35,6 +35,14 @@ export default class TentativeAnalyzer {
     @inject('GameRepository')
     gameRepository?: GameRepository
   ) {
+    TentativeAnalyzer.count++;
+    if (1000 < TentativeAnalyzer.count) {
+      BusinessError.throw(
+        InfiniteAnalyzeLogic.name,
+        'constructor',
+        '処理が終了しませんでした。'
+      );
+    }
     if (!cellRepository || !groupRepository || !gameRepository)
       BusinessError.throw(
         InfiniteAnalyzeLogic.name,
@@ -51,13 +59,13 @@ export default class TentativeAnalyzer {
   private myGame: Game;
   /** 解析に成功した際のGameID */
   private _successGameId?: GameID;
+  static count: number = 1;
   /**
    * 解析に成功した際のGameID。解析できなかった場合はundefined。
    */
   public get successGameId(): GameID | undefined {
     return this._successGameId;
   }
-  static count: number = 1;
   public execute() {
     if (this.tentativeDecision) {
       // 仮入力値とそれを入力するセルが指定されている場合はそれを反映する。
