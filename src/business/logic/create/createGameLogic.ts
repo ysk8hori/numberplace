@@ -90,6 +90,6 @@ export default class CreateGameLogic {
 
   /** 答えを入力しておくセルの数を取得する。 */
   private getBaseAnsweredCellCount(): number {
-    return (this.cellRepository.findAll(this.game.gameId).length / 10) * 2;
+    return (this.cellRepository.findAll(this.game.gameId).length / 10) * 3;
   }
 }
