@@ -9,6 +9,9 @@ import HorizontalPosition from '@/business/valueobject/horizontalPosition';
 
 @injectable()
 export default class GroupRepositoryImpl implements GroupRepository {
+  public static create(): GroupRepositoryImpl {
+    return new GroupRepositoryImpl();
+  }
   constructor() {}
   public static groupMap: Map<GameID, Group[]> = new Map<GameID, Group[]>();
 

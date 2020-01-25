@@ -6,13 +6,17 @@ import GroupRepository from '@/business/repository/groupRepository';
 import GroupRepositoryImpl from '@/repository/groupRepositoryImpl';
 import GameRepository from '@/business/repository/gameRepository';
 import GameRepositoryImpl from '@/repository/gameRepositoryImpl';
+import UserCellRepository from '@/application/repository/userCellRepository';
 
 container.register<CellRepository>('CellRepository', {
-  useClass: CellRepositoryImpl
+  useValue: CellRepositoryImpl.create()
 });
 container.register<GroupRepository>('GroupRepository', {
-  useClass: GroupRepositoryImpl
+  useValue: GroupRepositoryImpl.create()
 });
 container.register<GameRepository>('GameRepository', {
-  useClass: GameRepositoryImpl
+  useValue: GameRepositoryImpl.create()
+});
+container.register<UserCellRepository>('UserCellRepository', {
+  useValue: UserCellRepository
 });

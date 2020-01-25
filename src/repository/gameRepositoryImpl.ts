@@ -3,9 +3,13 @@ import { injectable } from 'tsyringe';
 import GameID from '@/business/valueobject/gameId';
 import Game from '@/business/entity/game';
 import BusinessError from '@/business/businessError';
+import GroupRepositoryImpl from './groupRepositoryImpl';
 
 @injectable()
 export default class GameRepositoryImpl implements GameRepository {
+  public static create(): GameRepository {
+    return new GameRepositoryImpl();
+  }
   public static games: Game[] = [];
   public regist(game: Game): void {
     GameRepositoryImpl.games.push(game);

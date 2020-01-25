@@ -5,12 +5,13 @@ import CellCollection from '@/business/cellCollection';
 import RepositoryError from '@/repository/repositoryError';
 import GroupID from '@/business/valueobject/groupId';
 import GameID from '@/business/valueobject/gameId';
-import { injectable } from 'tsyringe';
+import { injectable, singleton } from 'tsyringe';
 
 /**
  * Game生成時のCellの保存、及びCellの取り出しを可能とするリポジトリ。
  */
-@injectable()
+// @singleton()
+// @injectable()
 export default class CellRepositoryImpl implements CellRepository {
   /**
    * CellRepositoryのインスタンスを生成する
@@ -18,7 +19,10 @@ export default class CellRepositoryImpl implements CellRepository {
   public static create(): CellRepository {
     return new CellRepositoryImpl();
   }
-  public constructor() {}
+  static count = 0;
+  public constructor() {
+    console.log(CellRepositoryImpl.count++);
+  }
   private static cellCollectionMap: Map<GameID, CellCollection> = new Map<
     GameID,
     CellCollection
