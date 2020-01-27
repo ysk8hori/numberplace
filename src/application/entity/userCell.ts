@@ -1,6 +1,8 @@
 import CellPosition from '@/business/valueobject/cellPosition';
 import Answer from '@/business/valueobject/answer';
 import Cell from '@/business/entity/cell';
+import SelectCell from '../state/selectCell';
+import { Trace } from '@/utils/trace';
 
 /**
  * ゲームにおける、ユーザーが操作可能なセル
@@ -17,6 +19,14 @@ export default class UserCell {
     public readonly position: CellPosition,
     private _answer?: Answer
   ) {}
+
+  private _unselect?: () => void;
+  public setUnselectCallback(unselect: () => void) {
+    this._unselect = unselect;
+  }
+  public unselect() {
+    if (this._unselect) this._unselect();
+  }
 
   /**
    * 解答済みのCellであるかどうかを判定する。

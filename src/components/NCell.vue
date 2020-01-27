@@ -3,7 +3,7 @@
     justify="center"
     align="center"
     class="nCell"
-    v-bind:class="{selected:isSelected}"
+    v-bind:class="{ selected: isSelected }"
     @click="onClick"
   >
     <!--// eslint-disable-next-line prettier/prettier-->
