@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <v-row justify="center" align="center" style="height:100%;">
-      <v-card elevation="10" v-if="groupGrid">
+    <v-row justify="center" align="center">
+      <v-card elevation="10" v-if="groupGrid" light>
         <v-row v-for="rowOfGroupGrid in groupGrid" :key="JSON.stringify(rowOfGroupGrid)">
           <v-col v-for="group in rowOfGroupGrid" :key="group.groupId.idString" class="groupcol">
             <square-group :group="group" />

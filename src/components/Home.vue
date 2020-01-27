@@ -1,8 +1,8 @@
 <template >
   <v-container>
     <div style="height:50px;"></div>
-    <v-row justify="center" align="center" style="height:100%;">
-      <v-card elevation="10">
+    <v-row justify="center" align="center">
+      <v-card elevation="10" light>
         <v-card-title color="primary">Game settings</v-card-title>
         <v-card-text>
           <v-row justify="center" align="center">

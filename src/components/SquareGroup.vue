@@ -1,7 +1,19 @@
 <template>
   <v-container v-if="!!cellGrid" class="groupcol">
-    <v-row v-for="row in cellGrid" :key="JSON.stringify(row)" class="grouprow">
-      <v-col class="numbercell" v-for="cell in row" :key="cell.position.toString()">
+    <v-row
+      v-for="row in cellGrid"
+      :key="JSON.stringify(row)"
+      class="grouprow"
+      justify="center"
+      align="center"
+    >
+      <v-col
+        class="numbercell"
+        v-for="cell in row"
+        :key="cell.position.toString()"
+        justify="center"
+        align="center"
+      >
         <n-cell :userCell="cell" />
       </v-col>
     </v-row>
@@ -10,12 +22,10 @@
 <script src="./squareGroup.vm.ts"></script>
 <style scoped>
 .numbercell {
-  width: 40px;
-  height: 40px;
   margin: 0px;
   padding: 0px;
   text-align: center;
-  border: gray 1px dotted;
+  border: gray 1px dashed;
 }
 .grouprow {
   margin: 0px;
