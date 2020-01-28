@@ -2,12 +2,10 @@ import GroupRepository from '@/business/repository/groupRepository';
 import Group, { GroupType } from '@/business/entity/group';
 import GroupID from '@/business/valueobject/groupId';
 import RepositoryError from '@/repository/repositoryError';
-import { injectable } from 'tsyringe';
 import GameID from '@/business/valueobject/gameId';
 import VerticalPosition from '@/business/valueobject/verticalPosition';
 import HorizontalPosition from '@/business/valueobject/horizontalPosition';
 
-@injectable()
 export default class GroupRepositoryImpl implements GroupRepository {
   public static create(): GroupRepositoryImpl {
     return new GroupRepositoryImpl();

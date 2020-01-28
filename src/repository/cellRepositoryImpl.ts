@@ -5,13 +5,10 @@ import CellCollection from '@/business/cellCollection';
 import RepositoryError from '@/repository/repositoryError';
 import GroupID from '@/business/valueobject/groupId';
 import GameID from '@/business/valueobject/gameId';
-import { injectable, singleton } from 'tsyringe';
 
 /**
  * Game生成時のCellの保存、及びCellの取り出しを可能とするリポジトリ。
  */
-// @singleton()
-// @injectable()
 export default class CellRepositoryImpl implements CellRepository {
   /**
    * CellRepositoryのインスタンスを生成する
