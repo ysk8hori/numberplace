@@ -22,7 +22,7 @@ export default class Group {
   }
 
   public constructor(
-    private gameId: GameID,
+    public gameId: GameID,
     private _groupType: GroupType,
     private _groupId: GroupID,
     public answerCandidateCollection: AnswerCandidateCollection,

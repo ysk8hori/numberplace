@@ -15,6 +15,11 @@
 .nCell {
   width: 50px;
   height: 50px;
+  font-size: 1.5em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .selected {
   -webkit-animation: blink 0.5s infinite alternate;

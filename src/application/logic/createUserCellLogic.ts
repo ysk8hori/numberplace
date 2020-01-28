@@ -1,8 +1,6 @@
 import GameID from '@/business/valueobject/gameId';
 import { autoInjectable, inject } from 'tsyringe';
 import CellRepository from '@/business/repository/cellRepository';
-import GroupRepository from '@/business/repository/groupRepository';
-import GameRepository from '@/business/repository/gameRepository';
 import BusinessError from '@/business/businessError';
 import DeleteGameLogic from '@/business/logic/deleteGameLogic';
 import UserCellRepository from '../repository/userCellRepository';
@@ -16,9 +14,11 @@ export default class CreateUserCellLogic {
   constructor(
     private gameId: GameID,
     @inject('CellRepository')
-    cellRepository?: CellRepository
+    cellRepository?: CellRepository,
+    @inject('UserCellRepository')
+    userCellRepository?: UserCellRepository
   ) {
-    if (!cellRepository) {
+    if (!cellRepository || !userCellRepository) {
       BusinessError.throw(
         DeleteGameLogic.name,
         'constructor',
@@ -26,12 +26,17 @@ export default class CreateUserCellLogic {
       );
     }
     this.cellRepository = cellRepository;
+    this.userCellRepository = userCellRepository;
   }
   private cellRepository: CellRepository;
+  private userCellRepository: UserCellRepository;
 
   public execute() {
     this.cellRepository.findAll(this.gameId).forEach(cell => {
-      UserCellRepository.push(UserCell.create(cell));
+      this.userCellRepository.push(
+        this.gameId,
+        UserCell.create(this.gameId, cell)
+      );
     });
   }
 }

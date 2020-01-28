@@ -11,6 +11,7 @@ import App from './App.vue';
 import router from './router';
 import vuetify from './plugins/vuetify';
 import UserCellRepository from './application/repository/userCellRepository';
+import UserCellRepositoryImpl from './repository/userCellRepositoryImpl';
 
 container.register<CellRepository>('CellRepository', {
   useValue: CellRepositoryImpl.create()
@@ -22,7 +23,7 @@ container.register<GameRepository>('GameRepository', {
   useValue: GameRepositoryImpl.create()
 });
 container.register<UserCellRepository>('UserCellRepository', {
-  useValue: UserCellRepository
+  useValue: UserCellRepositoryImpl.create()
 });
 
 Vue.config.productionTip = false;

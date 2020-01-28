@@ -1,21 +1,22 @@
 import CellPosition from '@/business/valueobject/cellPosition';
 import Answer from '@/business/valueobject/answer';
 import Cell from '@/business/entity/cell';
-import SelectCell from '../state/selectCell';
-import { Trace } from '@/utils/trace';
+import GameID from '@/business/valueobject/gameId';
 
 /**
  * ゲームにおける、ユーザーが操作可能なセル
  */
 export default class UserCell {
-  public static create(cell: Cell): UserCell {
-    return new UserCell(cell.position, cell.getAnswer());
+  public static create(gameId: GameID, cell: Cell): UserCell {
+    return new UserCell(gameId, cell.position, cell.getAnswer());
   }
+
   /**
    * コンストラクタ。
    * @deprecated
    */
-  public constructor(
+  private constructor(
+    public readonly gameId: GameID,
     public readonly position: CellPosition,
     private _answer?: Answer
   ) {}

@@ -7,18 +7,23 @@ import { autoInjectable, inject } from 'tsyringe';
 import CellRepository from '@/business/repository/cellRepository';
 import UserCellRepository from '@/application/repository/userCellRepository';
 import BusinessError from '@/business/businessError';
+import CreateCellGridLogic from '@/application/logic/createCellGridLogic';
+import GameID from '@/business/valueobject/gameId';
 
 @autoInjectable()
 @Component({ components: { NCell } })
 export default class SquareGroupVm extends Vue {
+  @Prop()
+  private gameId!: GameID;
   @Prop()
   private group!: Group;
 
   protected cellGrid?: UserCell[][];
 
   public created() {
-    this.cellGrid = Array.from(this.group.range.fetchRowsInOrder()).map(cells =>
-      cells.map(cell => UserCellRepository.findByPosition(cell.position))
-    );
+    this.cellGrid = CreateCellGridLogic.create(
+      this.gameId,
+      this.group.groupId
+    ).execute();
   }
 }
