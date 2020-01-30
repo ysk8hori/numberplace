@@ -21,12 +21,34 @@ export default class UserCell {
     private _answer?: Answer
   ) {}
 
+  /** セレクト解除時のコールバック */
   private _unselect?: () => void;
+  /** セレクト解除時のコールバック関数を設定する */
   public setUnselectCallback(unselect: () => void) {
     this._unselect = unselect;
   }
+  /** セレクト状態を解除する */
   public unselect() {
+    this._isSelected = false;
     if (this._unselect) this._unselect();
+  }
+  /** セレクト状態であるかどうか */
+  public _isSelected = false;
+  /** セレクト状態であるかどうか */
+  public get isSelected(): boolean {
+    return this._isSelected;
+  }
+
+  /** セレクト時のコールバック */
+  private _select?: () => void;
+  /** セレクト時のコールバック関数を設定する */
+  public setSelectCallback(select: () => void) {
+    this._select = select;
+  }
+  /** セレクト状態にする */
+  public select() {
+    this._isSelected = true;
+    if (this._select) this._select();
   }
 
   /**

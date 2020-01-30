@@ -5,5 +5,6 @@ import GameID from '@/business/valueobject/gameId';
 export default interface UserCellRepository {
   push(gameId: GameID, userCell: UserCell): void;
   findByPosition(gameId: GameID, position: CellPosition): UserCell;
+  findSelectedCell(gameId: GameID): UserCell | undefined;
   clear(gameId: GameID): void;
 }

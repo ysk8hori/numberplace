@@ -26,6 +26,11 @@ export default class UserCellRepositoryImpl implements UserCellRepository {
         ?.find(userCell => userCell.position.equals(position)) ?? this.throw()
     );
   }
+  public findSelectedCell(gameId: GameID): UserCell | undefined {
+    return UserCellRepositoryImpl.cellCollectionMap
+      .get(gameId)
+      ?.find(userCell => userCell.isSelected);
+  }
 
   public push(gameId: GameID, userCell: UserCell): void {
     if (!UserCellRepositoryImpl.cellCollectionMap.has(gameId)) {
