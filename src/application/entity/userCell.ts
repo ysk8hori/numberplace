@@ -62,8 +62,13 @@ export default class UserCell {
     return this._answer;
   }
 
+  private fill?: (answer: Answer) => void;
+  public setFillCallback(fill: (answer: Answer) => void) {
+    this.fill = fill;
+  }
   public setAnswer(answer: Answer): UserCell {
     this._answer = answer;
+    if (this.fill) this.fill(answer);
     return this;
   }
 }

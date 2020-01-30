@@ -7,7 +7,7 @@
     @click="onClick"
   >
     <!--// eslint-disable-next-line prettier/prettier-->
-    {{ userCell.answer ? userCell.answer.value : '' }}
+    {{ answer }}
   </v-row>
 </template>
 <script src="./nCell.vm.ts" />

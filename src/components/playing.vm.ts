@@ -11,6 +11,8 @@ import SquareGroupVm from './squareGroup.vm';
 import SquareGroup from './SquareGroup.vue';
 import CreateGameLogic from '@/business/logic/create/createGameLogic';
 import CreateUserCellLogic from '@/application/logic/createUserCellLogic';
+import UserAnswerLogic from '@/application/logic/userAnswerLogic';
+import Answer from '@/business/valueobject/answer';
 
 /** TodoList.vueに対するViewModel */
 @Component({ components: { SquareGroup } })
@@ -28,5 +30,10 @@ export default class PlayingVm extends Vue {
     ).execute();
     CreateUserCellLogic.createAndExecute(this.gameId);
     this.groupGrid = GetGridOfSquareGroupsLogic.create(this.gameId).execute();
+  }
+
+  protected fill(answer: number) {
+    console.log(answer);
+    UserAnswerLogic.create(this.gameId!, Answer.create(answer)).execute();
   }
 }
