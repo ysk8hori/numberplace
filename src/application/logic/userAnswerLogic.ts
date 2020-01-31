@@ -15,7 +15,7 @@ export default class UserAnswerLogic implements Logic {
   constructor(
     private gameId: GameID,
     private answer: Answer,
-    @inject('userCellRepository') userCellRepository?: UserCellRepository
+    @inject('UserCellRepository') userCellRepository?: UserCellRepository
   ) {
     if (!userCellRepository) {
       BusinessError.throw(

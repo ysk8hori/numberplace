@@ -15,7 +15,7 @@ export default class CreateUserCellLogic {
     private gameId: GameID,
     @inject('CellRepository')
     cellRepository?: CellRepository,
-    @inject('userCellRepository')
+    @inject('UserCellRepository')
     userCellRepository?: UserCellRepository
   ) {
     if (!cellRepository || !userCellRepository) {

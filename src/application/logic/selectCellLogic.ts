@@ -17,7 +17,7 @@ export default class SelectCellLogic implements Logic {
   constructor(
     private gameId: GameID,
     private position: CellPosition,
-    @inject('userCellRepository') userCellRepository?: UserCellRepository
+    @inject('UserCellRepository') userCellRepository?: UserCellRepository
   ) {
     if (!userCellRepository) {
       BusinessError.throw(

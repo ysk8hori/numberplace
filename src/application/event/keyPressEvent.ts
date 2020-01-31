@@ -19,7 +19,7 @@ export default class KeyPressEvent {
   }
   constructor(
     private event: KeyboardEvent,
-    @inject('userCellRepository') userCellRepository?: UserCellRepository,
+    @inject('UserCellRepository') userCellRepository?: UserCellRepository,
     @inject('GameIdRepository') gameIdRepository?: GameIdRepository,
     @inject('GameRepository') gameRepository?: GameRepository
   ) {

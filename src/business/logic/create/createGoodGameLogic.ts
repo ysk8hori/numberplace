@@ -45,7 +45,7 @@ export default class CreateGoodGameLogic {
         this.baseHeight,
         this.baseWidth
       ).execute();
-      console.log(`this is Good? :${this.isGood(createdGameId, false)}`);
+      // console.log(`this is Good? :${this.isGood(createdGameId, false)}`);
     } while (!this.isGood(createdGameId));
     return createdGameId;
   }

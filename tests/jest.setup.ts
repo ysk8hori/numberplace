@@ -18,6 +18,6 @@ container.register<GroupRepository>('GroupRepository', {
 container.register<GameRepository>('GameRepository', {
   useValue: GameRepositoryImpl.create()
 });
-container.register<UserCellRepository>('userCellRepository', {
+container.register<UserCellRepository>('UserCellRepository', {
   useValue: UserCellRepositoryImpl.create()
 });

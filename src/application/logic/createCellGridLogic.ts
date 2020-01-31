@@ -16,7 +16,7 @@ export default class CreateCellGridLogic {
     private groupId: GroupID,
     @inject('GroupRepository')
     groupRepository?: GroupRepository,
-    @inject('userCellRepository')
+    @inject('UserCellRepository')
     userCellRepository?: UserCellRepository
   ) {
     if (!groupRepository || !userCellRepository) {
