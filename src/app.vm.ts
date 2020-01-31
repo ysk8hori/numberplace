@@ -1,6 +1,7 @@
 import { Vue, Prop, Component } from 'vue-property-decorator';
 import GameSize from './application/entity/gameSize';
 import AppLayout from '@/components/AppLayout.vue';
+import { Trace } from './utils/trace';
 
 /** TodoList.vueに対するViewModel */
 @Component({ components: { AppLayout } })

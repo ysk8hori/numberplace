@@ -4,9 +4,10 @@ import UserCellRepository from '../repository/userCellRepository';
 import BusinessError from '@/business/businessError';
 import UserCell from '../entity/userCell';
 import GameID from '@/business/valueobject/gameId';
+import Logic from './logic';
 
 @autoInjectable()
-export default class SelectCellLogic {
+export default class SelectCellLogic implements Logic {
   public static create(
     gameId: GameID,
     position: CellPosition
@@ -16,7 +17,7 @@ export default class SelectCellLogic {
   constructor(
     private gameId: GameID,
     private position: CellPosition,
-    @inject('UserCellRepository') userCellRepository?: UserCellRepository
+    @inject('userCellRepository') userCellRepository?: UserCellRepository
   ) {
     if (!userCellRepository) {
       BusinessError.throw(

@@ -1,5 +1,14 @@
 <template>
   <v-container>
+    <!-- <v-row
+      justify="center"
+      align="center"
+      @keyup="up"
+      @keypress.down="down"
+      @keypress.left="left"
+      @keypress.right="right"
+    >-->
+
     <v-row justify="center" align="center">
       <v-card light elevation="10">
         <v-row justify="center">
