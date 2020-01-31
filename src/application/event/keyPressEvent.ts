@@ -31,17 +31,15 @@ export default class KeyPressEvent {
       );
     }
     this.userCellRepository = userCellRepository;
-    this.gameIdRepository = gameIdRepository;
-    this.gameId = this.gameIdRepository.getCurrentGameId();
-    this.game = this.gameId ? gameRepository.find(this.gameId) : undefined;
+    this.game = gameIdRepository.getCurrentGameId()
+      ? gameRepository.find(gameIdRepository.getCurrentGameId()!)
+      : undefined;
   }
   private userCellRepository: UserCellRepository;
-  private gameIdRepository: GameIdRepository;
-  private gameId: GameID | undefined;
   private game: Game | undefined;
 
   public createLogic(): Logic | undefined {
-    return this.gameId && this.game
+    return this.game
       ? this.isArrowKey()
         ? this.createSelectCellLogic()
         : this.createUserAnswerLogic()
@@ -67,11 +65,14 @@ export default class KeyPressEvent {
     ) {
       return;
     }
-    return UserAnswerLogic.create(this.gameId!, Answer.create(this.event.key));
+    return UserAnswerLogic.create(
+      this.game!.gameId,
+      Answer.create(this.event.key)
+    );
   }
 
   private createSelectCellLogic(): SelectCellLogic {
-    return SelectCellLogic.create(this.gameId!, this.getNextPosition());
+    return SelectCellLogic.create(this.game!.gameId, this.getNextPosition());
   }
   private static readonly UP = 'ArrowUp';
   private static readonly DOWN = 'ArrowDown';
@@ -79,9 +80,9 @@ export default class KeyPressEvent {
   private static readonly LEFT = 'ArrowLeft';
 
   private getNextPosition(): CellPosition {
-    const position = this.userCellRepository.findSelectedCell(this.gameId!)
-      ?.position;
-    if (!position) return pos(0, 0);
+    const position =
+      this.userCellRepository.findSelectedCell(this.game!.gameId)?.position ??
+      pos(0, 0);
 
     const gameSize = this.game!.baseHeight.value * this.game!.baseWidth.value;
 
