@@ -37,7 +37,7 @@ export default class HorizontalPosition {
    * @param value 移動する距離
    */
   public move(value: number): HorizontalPosition {
-    this.value + value;
+    this._value = this.value + value;
     return this;
   }
 
@@ -49,6 +49,10 @@ export default class HorizontalPosition {
     } else {
       return 1;
     }
+  }
+
+  public clone(): HorizontalPosition {
+    return HorizontalPosition.create(this.value);
   }
 }
 export function hPos(pos: number): HorizontalPosition {

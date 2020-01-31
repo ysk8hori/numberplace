@@ -106,17 +106,6 @@ export default class CellPosition {
     return this.horizontalPosition.equals(hPos);
   }
 
-  /**
-   * 指定した距離を移動する。
-   * @param horizontalCount 右方向への移動距離
-   * @param verticalCount 下方向への移動距離
-   */
-  public move(horizontalCount: number, verticalCount: number): CellPosition {
-    this.horizontalPosition.move(horizontalCount);
-    this.verticalPosition.move(verticalCount);
-    return this;
-  }
-
   public compareByRow(other: CellPosition): -1 | 0 | 1 {
     return this.verticalPosition.compare(other.verticalPosition);
   }

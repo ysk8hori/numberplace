@@ -36,10 +36,10 @@ export default class VerticalPosition {
   }
   /**
    * 縦方向に移動する
-   * @param value 移動する距離
+   * @param count 移動する距離
    */
-  public move(value: number): VerticalPosition {
-    this.value + value;
+  public move(count: number): VerticalPosition {
+    this._value = this.value + count;
     return this;
   }
 
@@ -51,6 +51,10 @@ export default class VerticalPosition {
     } else {
       return 1;
     }
+  }
+
+  public clone(): VerticalPosition {
+    return VerticalPosition.create(this.value);
   }
 }
 export function vPos(pos: number): VerticalPosition {
