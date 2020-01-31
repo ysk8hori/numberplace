@@ -8,6 +8,7 @@ export default class NCellVm extends Vue {
   @Prop()
   protected userCell!: UserCell;
   protected answer: string = '';
+  protected unchangeable = false;
 
   protected isSelected = false;
   public mounted() {
@@ -15,6 +16,7 @@ export default class NCellVm extends Vue {
     this.userCell.setSelectCallback(this.select);
     this.userCell.setFillCallback(this.fill);
     this.answer = this.userCell.answer?.value ?? '';
+    this.unchangeable = this.userCell.answer !== undefined;
   }
 
   private unselect() {

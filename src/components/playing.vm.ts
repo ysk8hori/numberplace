@@ -33,7 +33,6 @@ export default class PlayingVm extends Vue {
   }
 
   protected fill(answer: number) {
-    console.log(answer);
     UserAnswerLogic.create(this.gameId!, Answer.create(answer)).execute();
   }
 }

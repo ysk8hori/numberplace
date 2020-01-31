@@ -3,7 +3,7 @@
     justify="center"
     align="center"
     class="nCell"
-    v-bind:class="{ selected: isSelected }"
+    v-bind:class="{ selected: isSelected, unchangeable }"
     @click="onClick"
   >
     <!--// eslint-disable-next-line prettier/prettier-->
@@ -49,5 +49,8 @@
   100% {
     background-color: pink;
   }
+}
+.unchangeable {
+  font-weight: bold;
 }
 </style>

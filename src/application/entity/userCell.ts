@@ -19,7 +19,9 @@ export default class UserCell {
     public readonly gameId: GameID,
     public readonly position: CellPosition,
     private _answer?: Answer
-  ) {}
+  ) {
+    this._isChangeable = !_answer;
+  }
 
   /** セレクト解除時のコールバック */
   private _unselect?: () => void;
@@ -51,6 +53,11 @@ export default class UserCell {
     if (this._select) this._select();
   }
 
+  private _isChangeable = true;
+  public get isChangeable(): boolean {
+    return this._isChangeable;
+  }
+
   /**
    * 解答済みのCellであるかどうかを判定する。
    */
@@ -67,6 +74,7 @@ export default class UserCell {
     this.fill = fill;
   }
   public setAnswer(answer: Answer): UserCell {
+    if (!this.isChangeable) return this;
     this._answer = answer;
     if (this.fill) this.fill(answer);
     return this;
