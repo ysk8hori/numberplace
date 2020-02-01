@@ -9,7 +9,7 @@
       @keypress.right="right"
     >-->
 
-    <v-row justify="center" align="center">
+    <v-row align="stretch">
       <v-card light elevation="10">
         <v-row justify="center">
           <v-card elevation="0" v-if="groupGrid" light class="ma-5">
