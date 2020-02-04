@@ -62,7 +62,7 @@ export default class UserCell {
    * 解答済みのCellであるかどうかを判定する。
    */
   public get isAnswered(): boolean {
-    return !!this._answer;
+    return !!this._answer || this.answer?.value !== '';
   }
 
   public get answer(): Answer | undefined {

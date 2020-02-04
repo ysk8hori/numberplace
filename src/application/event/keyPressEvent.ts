@@ -15,6 +15,7 @@ import Answer from '@/business/valueobject/answer';
 @autoInjectable()
 export default class KeyPressEvent {
   public static createLogic(event: KeyboardEvent): Logic | undefined {
+    // console.log(`code:${event.code}, key:${event.key}`);
     return new KeyPressEvent(event).createLogic();
   }
   constructor(
@@ -58,6 +59,9 @@ export default class KeyPressEvent {
   }
 
   private createUserAnswerLogic(): UserAnswerLogic | undefined {
+    if (this.event.key === 'Backspace') {
+      return UserAnswerLogic.create(this.game!.gameId, Answer.create(''));
+    }
     if (
       this.game?.answerCandidateCollection
         .getAnswerCandidateStringArray()
