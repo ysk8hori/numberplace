@@ -4,19 +4,8 @@ import CellRepository from '@/business/repository/cellRepository';
 import GroupRepository from '@/business/repository/groupRepository';
 import GameRepository from '@/business/repository/gameRepository';
 import BusinessError from '@/business/businessError';
-import Group, { GroupType } from '@/business/entity/group';
-import AnswerCandidate from '@/business/valueobject/answerCandidate';
-import VerticalPosition, {
-  vPos
-} from '@/business/valueobject/verticalPosition';
-import HorizontalPosition, {
-  hPos
-} from '@/business/valueobject/horizontalPosition';
-import CellPosition, { pos } from '@/business/valueobject/cellPosition';
+import { pos } from '@/business/valueobject/cellPosition';
 import Answer from '@/business/valueobject/answer';
-import FillOwnAnswerIfLastOneAnswerCandidate from './analyze/fillOwnAnswerIfLastOneAnswerCandidateLogic';
-import FillAllLonelyLogic from './analyze/fillAllLonelyLogic';
-import AnswerLogic from './analyze/answerLogic';
 
 @autoInjectable()
 export default class LoadLogic {

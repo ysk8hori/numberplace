@@ -6,7 +6,7 @@ import CreateGoodGameLogic from '@/business/logic/create/createGoodGameLogic';
 import GameID from '@/business/valueobject/gameId';
 import OutputAnswerStringLogic from '@/business/logic/outputAnswerStringLogic';
 import Group from '@/business/entity/group';
-import GetGridOfSquareGroupsLogic from '@/business/logic/play/getGridOfSquareGroupsLogic';
+import GetGridOfSquareGroupsLogic from '@/application/logic/getGridOfSquareGroupsLogic';
 import SquareGroupVm from './squareGroup.vm';
 import SquareGroup from './SquareGroup.vue';
 import CreateGameLogic from '@/business/logic/create/createGameLogic';

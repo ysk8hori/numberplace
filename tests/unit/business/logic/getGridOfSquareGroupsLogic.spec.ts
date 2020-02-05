@@ -2,7 +2,7 @@ import GameID from '@/business/valueobject/gameId';
 import Game from '@/business/entity/game';
 import BaseHeight from '@/business/valueobject/baseHeight';
 import BaseWidth from '@/business/valueobject/baseWidth';
-import GetGridOfSquareGroupsLogic from '@/business/logic/play/getGridOfSquareGroupsLogic';
+import GetGridOfSquareGroupsLogic from '@/application/logic/getGridOfSquareGroupsLogic';
 
 describe('GetGridOfSquareGroupsLogic', () => {
   describe('3, 3', () => {
