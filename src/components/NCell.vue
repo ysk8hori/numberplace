@@ -3,7 +3,7 @@
     justify="center"
     align="center"
     class="nCell"
-    v-bind:class="{ selected: isSelected, unchangeable }"
+    v-bind:class="{ selected: isSelected, unchangeable: !changeable }"
     @click="onClick"
   >
     <!--// eslint-disable-next-line prettier/prettier-->

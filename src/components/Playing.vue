@@ -1,14 +1,5 @@
 <template>
   <v-container>
-    <!-- <v-row
-      justify="center"
-      align="center"
-      @keyup="up"
-      @keypress.down="down"
-      @keypress.left="left"
-      @keypress.right="right"
-    >-->
-
     <v-row align="stretch">
       <v-card light elevation="10">
         <v-row justify="center">
@@ -31,60 +22,6 @@
             </template>
           </v-row>
         </template>
-        <!-- <v-row>
-          <v-col class="input-btn">
-            <v-btn text icon color="pink" large>
-              <v-icon>mdi-numeric-1-box-outline</v-icon>
-            </v-btn>
-          </v-col>
-          <v-col class="input-btn">
-            <v-btn text icon color="pink" large>
-              <v-icon>mdi-numeric-2-box-outline</v-icon>
-            </v-btn>
-          </v-col>
-          <v-col class="input-btn">
-            <v-btn text icon color="pink" large>
-              <v-icon>mdi-numeric-3-box-outline</v-icon>
-            </v-btn>
-          </v-col>
-          <v-col class="input-btn">
-            <v-btn text icon color="pink" large>
-              <v-icon>mdi-numeric-4-box-outline</v-icon>
-            </v-btn>
-          </v-col>
-          <v-col class="input-btn">
-            <v-btn text icon color="pink" large>
-              <v-icon>mdi-numeric-5-box-outline</v-icon>
-            </v-btn>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col class="input-btn">
-            <v-btn text icon color="pink" large>
-              <v-icon>mdi-numeric-6-box-outline</v-icon>
-            </v-btn>
-          </v-col>
-          <v-col class="input-btn">
-            <v-btn text icon color="pink" large>
-              <v-icon>mdi-numeric-7-box-outline</v-icon>
-            </v-btn>
-          </v-col>
-          <v-col class="input-btn">
-            <v-btn text icon color="pink" large>
-              <v-icon>mdi-numeric-8-box-outline</v-icon>
-            </v-btn>
-          </v-col>
-          <v-col class="input-btn">
-            <v-btn text dark icon color="pink" large>
-              <v-icon dark>mdi-numeric-9-box-outline</v-icon>
-            </v-btn>
-          </v-col>
-          <v-col class="input-btn">
-            <v-btn text icon color="pink" large>
-              <v-icon>mdi-numeric-0-box-outline</v-icon>
-            </v-btn>
-          </v-col>
-        </v-row>-->
       </v-card>
     </v-row>
   </v-container>

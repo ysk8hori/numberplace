@@ -19,7 +19,6 @@ import UpdateCurrentGameIdLogic from '@/application/logic/updateCurrentGameIdLog
 /** TodoList.vueに対するViewModel */
 @Component({ components: { SquareGroup } })
 export default class PlayingVm extends Vue {
-  protected message = 'PLAY';
   private gameId: GameID | undefined;
   protected groupGrid: Group[][] = [[]];
 
