@@ -15,6 +15,8 @@ import UserAnswerLogic from '@/application/logic/userAnswerLogic';
 import Answer from '@/business/valueobject/answer';
 import { Trace } from '@/utils/trace';
 import UpdateCurrentGameIdLogic from '@/application/logic/updateCurrentGameIdLogic';
+import WindowHeight from '@/application/valueObject/windowHeight';
+import WindowWidth from '@/application/valueObject/windowWidth';
 
 /** TodoList.vueに対するViewModel */
 @Component({ components: { SquareGroup } })
@@ -30,7 +32,12 @@ export default class PlayingVm extends Vue {
       gameSize!.baseWidth
     ).execute();
     UpdateCurrentGameIdLogic.create(this.gameId).execute();
-    CreateUserCellLogic.createAndExecute(this.gameId);
+    CreateUserCellLogic.createAndExecute(
+      this.gameId,
+      gameSize,
+      WindowHeight.create(window.innerHeight),
+      WindowWidth.create(window.innerWidth)
+    );
     this.groupGrid = GetGridOfSquareGroupsLogic.create(this.gameId).execute();
   }
 

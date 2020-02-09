@@ -27,11 +27,9 @@
     </v-app-bar>
 
     <v-content class="pl-0 pr-0 bgcontainer">
-      <v-container class="bgcontainer pl-0 pr-0">
-        <v-row align="start" justify="start">
-          <router-view></router-view>
-        </v-row>
-      </v-container>
+      <v-card elevation="10" light class="ma-3">
+        <router-view></router-view>
+      </v-card>
     </v-content>
 
     <v-footer app>

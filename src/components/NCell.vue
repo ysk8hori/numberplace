@@ -4,6 +4,7 @@
     align="center"
     class="nCell"
     v-bind:class="{ selected: isSelected, unchangeable: !changeable }"
+    :style="cellStyle"
     @click="onClick"
   >
     <!--// eslint-disable-next-line prettier/prettier-->
@@ -13,8 +14,6 @@
 <script src="./nCell.vm.ts" />
 <style scoped>
 .nCell {
-  width: 26px;
-  height: 26px;
   font-size: 1em;
   -webkit-user-select: none;
   -moz-user-select: none;

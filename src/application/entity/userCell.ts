@@ -2,13 +2,20 @@ import CellPosition from '@/business/valueobject/cellPosition';
 import Answer from '@/business/valueobject/answer';
 import Cell from '@/business/entity/cell';
 import GameID from '@/business/valueobject/gameId';
+import CellHeight from '../valueObject/cellHeight';
+import CellWidth from '../valueObject/cellWidth';
+import CellSize from '../valueObject/cellSize';
 
 /**
  * ゲームにおける、ユーザーが操作可能なセル
  */
 export default class UserCell {
-  public static create(gameId: GameID, cell: Cell): UserCell {
-    return new UserCell(gameId, cell.position, cell.getAnswer());
+  public static create(
+    gameId: GameID,
+    cell: Cell,
+    cellSize: CellSize
+  ): UserCell {
+    return new UserCell(gameId, cell.position, cellSize, cell.getAnswer());
   }
 
   /**
@@ -18,6 +25,7 @@ export default class UserCell {
   private constructor(
     public readonly gameId: GameID,
     public readonly position: CellPosition,
+    public readonly cellSize: CellSize,
     private _answer?: Answer
   ) {
     this._isChangeable = !_answer;
