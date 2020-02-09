@@ -21,3 +21,7 @@ yarn-error.log*
 *.sw?
 memo.txt
 memo.txt
+.VSCodeCounter/details.md
+.VSCodeCounter/results.csv
+.VSCodeCounter/results.md
+.VSCodeCounter/results.txt
