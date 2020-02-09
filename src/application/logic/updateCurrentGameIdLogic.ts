@@ -1,7 +1,7 @@
-import GameID from '@/business/valueobject/gameId';
+import GameID from '@/core/valueobject/gameId';
 import { autoInjectable, inject } from 'tsyringe';
 import GameIdRepository from '../repository/gameIdRepository';
-import BusinessError from '@/business/businessError';
+import BusinessError from '@/core/businessError';
 
 @autoInjectable()
 export default class UpdateCurrentGameIdLogic {

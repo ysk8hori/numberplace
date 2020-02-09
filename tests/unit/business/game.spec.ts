@@ -1,9 +1,9 @@
-import Game from '@/business/entity/game';
-import BaseHeight from '@/business/valueobject/baseHeight';
-import BaseWidth from '@/business/valueobject/baseWidth';
+import Game from '@/core/entity/game';
+import BaseHeight from '@/core/valueobject/baseHeight';
+import BaseWidth from '@/core/valueobject/baseWidth';
 import CellRepositoryImpl from '@/repository/cellRepositoryImpl';
-import GroupID from '@/business/valueobject/groupId';
-import CellPosition from '@/business/valueobject/cellPosition';
+import GroupID from '@/core/valueobject/groupId';
+import CellPosition from '@/core/valueobject/cellPosition';
 
 describe('game.ts', () => {
   describe('ゲームを生成し、各グループに6つずつCellが設定されていることをチェックする', () => {
@@ -155,8 +155,10 @@ describe('game.ts', () => {
     });
     it('0,0 が v0,h0,s0に属していること', () => {
       expect(
-        cellRepository.findByPosition(game.gameId, CellPosition.createFromNumber(0, 0))
-          .groupIds
+        cellRepository.findByPosition(
+          game.gameId,
+          CellPosition.createFromNumber(0, 0)
+        ).groupIds
       ).toEqual([
         GroupID.create(game.gameId, 'h0'),
         GroupID.create(game.gameId, 'v0'),
@@ -165,8 +167,10 @@ describe('game.ts', () => {
     });
     it('1,0 が v1,h0,s0に属していること', () => {
       expect(
-        cellRepository.findByPosition(game.gameId, CellPosition.createFromNumber(1, 0))
-          .groupIds
+        cellRepository.findByPosition(
+          game.gameId,
+          CellPosition.createFromNumber(1, 0)
+        ).groupIds
       ).toEqual([
         GroupID.create(game.gameId, 'h0'),
         GroupID.create(game.gameId, 'v1'),
@@ -175,8 +179,10 @@ describe('game.ts', () => {
     });
     it('2, 0 が h0,v2,s0に属していること', () => {
       expect(
-        cellRepository.findByPosition(game.gameId, CellPosition.createFromNumber(2, 0))
-          .groupIds
+        cellRepository.findByPosition(
+          game.gameId,
+          CellPosition.createFromNumber(2, 0)
+        ).groupIds
       ).toEqual([
         GroupID.create(game.gameId, 'h0'),
         GroupID.create(game.gameId, 'v2'),
@@ -185,8 +191,10 @@ describe('game.ts', () => {
     });
     it('3, 0 が h0,v3,s1に属していること', () => {
       expect(
-        cellRepository.findByPosition(game.gameId, CellPosition.createFromNumber(3, 0))
-          .groupIds
+        cellRepository.findByPosition(
+          game.gameId,
+          CellPosition.createFromNumber(3, 0)
+        ).groupIds
       ).toEqual([
         GroupID.create(game.gameId, 'h0'),
         GroupID.create(game.gameId, 'v3'),
@@ -195,8 +203,10 @@ describe('game.ts', () => {
     });
     it('4, 0 が h0,v4,s1に属していること', () => {
       expect(
-        cellRepository.findByPosition(game.gameId, CellPosition.createFromNumber(4, 0))
-          .groupIds
+        cellRepository.findByPosition(
+          game.gameId,
+          CellPosition.createFromNumber(4, 0)
+        ).groupIds
       ).toEqual([
         GroupID.create(game.gameId, 'h0'),
         GroupID.create(game.gameId, 'v4'),
@@ -205,8 +215,10 @@ describe('game.ts', () => {
     });
     it('5, 0 が h0,v5,s1に属していること', () => {
       expect(
-        cellRepository.findByPosition(game.gameId, CellPosition.createFromNumber(5, 0))
-          .groupIds
+        cellRepository.findByPosition(
+          game.gameId,
+          CellPosition.createFromNumber(5, 0)
+        ).groupIds
       ).toEqual([
         GroupID.create(game.gameId, 'h0'),
         GroupID.create(game.gameId, 'v5'),
@@ -215,8 +227,10 @@ describe('game.ts', () => {
     });
     it('0, 1 が h1,v0,s0に属していること', () => {
       expect(
-        cellRepository.findByPosition(game.gameId, CellPosition.createFromNumber(0, 1))
-          .groupIds
+        cellRepository.findByPosition(
+          game.gameId,
+          CellPosition.createFromNumber(0, 1)
+        ).groupIds
       ).toEqual([
         GroupID.create(game.gameId, 'h1'),
         GroupID.create(game.gameId, 'v0'),
@@ -225,8 +239,10 @@ describe('game.ts', () => {
     });
     it('0, 2 が h2,v0,s2に属していること', () => {
       expect(
-        cellRepository.findByPosition(game.gameId, CellPosition.createFromNumber(0, 2))
-          .groupIds
+        cellRepository.findByPosition(
+          game.gameId,
+          CellPosition.createFromNumber(0, 2)
+        ).groupIds
       ).toEqual([
         GroupID.create(game.gameId, 'h2'),
         GroupID.create(game.gameId, 'v0'),
@@ -235,8 +251,10 @@ describe('game.ts', () => {
     });
     it('0, 3 が h3,v0,s2に属していること', () => {
       expect(
-        cellRepository.findByPosition(game.gameId, CellPosition.createFromNumber(0, 3))
-          .groupIds
+        cellRepository.findByPosition(
+          game.gameId,
+          CellPosition.createFromNumber(0, 3)
+        ).groupIds
       ).toEqual([
         GroupID.create(game.gameId, 'h3'),
         GroupID.create(game.gameId, 'v0'),
@@ -245,8 +263,10 @@ describe('game.ts', () => {
     });
     it('0, 4 が h4,v0,s4に属していること', () => {
       expect(
-        cellRepository.findByPosition(game.gameId, CellPosition.createFromNumber(0, 4))
-          .groupIds
+        cellRepository.findByPosition(
+          game.gameId,
+          CellPosition.createFromNumber(0, 4)
+        ).groupIds
       ).toEqual([
         GroupID.create(game.gameId, 'h4'),
         GroupID.create(game.gameId, 'v0'),
@@ -255,8 +275,10 @@ describe('game.ts', () => {
     });
     it('0, 5 が h5,v0,s4に属していること', () => {
       expect(
-        cellRepository.findByPosition(game.gameId, CellPosition.createFromNumber(0, 5))
-          .groupIds
+        cellRepository.findByPosition(
+          game.gameId,
+          CellPosition.createFromNumber(0, 5)
+        ).groupIds
       ).toEqual([
         GroupID.create(game.gameId, 'h5'),
         GroupID.create(game.gameId, 'v0'),

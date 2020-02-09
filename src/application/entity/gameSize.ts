@@ -1,6 +1,6 @@
-import BaseHeight from '@/business/valueobject/baseHeight';
-import BaseWidth from '@/business/valueobject/baseWidth';
-import Game from '@/business/entity/game';
+import BaseHeight from '@/core/valueobject/baseHeight';
+import BaseWidth from '@/core/valueobject/baseWidth';
+import Game from '@/core/entity/game';
 
 export default class GameSize {
   public static MAX_SIZE = 10;

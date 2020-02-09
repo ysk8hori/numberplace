@@ -1,8 +1,8 @@
-import Game from '@/business/entity/game';
-import BaseHeight from '@/business/valueobject/baseHeight';
-import BaseWidth from '@/business/valueobject/baseWidth';
-import CellPosition from '@/business/valueobject/cellPosition';
-import Answer from '@/business/valueobject/answer';
+import Game from '@/core/entity/game';
+import BaseHeight from '@/core/valueobject/baseHeight';
+import BaseWidth from '@/core/valueobject/baseWidth';
+import CellPosition from '@/core/valueobject/cellPosition';
+import Answer from '@/core/valueobject/answer';
 
 describe('初級ミニ1', () => {
   let game: Game;

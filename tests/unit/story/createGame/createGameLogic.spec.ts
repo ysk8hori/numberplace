@@ -1,8 +1,8 @@
-import BaseHeight from '@/business/valueobject/baseHeight';
-import BaseWidth from '@/business/valueobject/baseWidth';
-import OutputAnswerStringLogic from '@/business/logic/outputAnswerStringLogic';
-import CreateGoodGameLogic from '@/business/logic/create/createGoodGameLogic';
-import GameID from '@/business/valueobject/gameId';
+import BaseHeight from '@/core/valueobject/baseHeight';
+import BaseWidth from '@/core/valueobject/baseWidth';
+import OutputAnswerStringLogic from '@/core/logic/outputAnswerStringLogic';
+import CreateGoodGameLogic from '@/core/logic/create/createGoodGameLogic';
+import GameID from '@/core/valueobject/gameId';
 import CellRepositoryImpl from '@/repository/cellRepositoryImpl';
 import GameRepositoryImpl from '@/repository/gameRepositoryImpl';
 

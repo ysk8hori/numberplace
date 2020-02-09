@@ -7,11 +7,11 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "test:unit:business:fillLonelyLogic": "vue-cli-service test:unit tests/unit/business/fillLonelyLogic.spec.ts",
-    "test:unit:business:game": "vue-cli-service test:unit tests/unit/business/game.spec.ts",
-    "test:unit:business:groupFactory": "vue-cli-service test:unit tests/unit/business/groupFactory.spec.ts",
-    "test:unit:business:inversionLazor": "vue-cli-service test:unit tests/unit/business/inversionLazor.spec.ts",
-    "test:unit:business:lazor": "vue-cli-service test:unit tests/unit/business/lazor.spec.ts",
+    "test:unit:core:fillLonelyLogic": "vue-cli-service test:unit tests/unit/core/fillLonelyLogic.spec.ts",
+    "test:unit:core:game": "vue-cli-service test:unit tests/unit/core/game.spec.ts",
+    "test:unit:core:groupFactory": "vue-cli-service test:unit tests/unit/core/groupFactory.spec.ts",
+    "test:unit:core:inversionLazor": "vue-cli-service test:unit tests/unit/core/inversionLazor.spec.ts",
+    "test:unit:core:lazor": "vue-cli-service test:unit tests/unit/core/lazor.spec.ts",
     "test:unit:story:gameMaker": "vue-cli-service test:unit tests/unit/story/gameMaker.spec.ts"
   },
   "dependencies": {

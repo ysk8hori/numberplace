@@ -1,7 +1,7 @@
-import GameRepository from '@/business/repository/gameRepository';
-import GameID from '@/business/valueobject/gameId';
-import Game from '@/business/entity/game';
-import BusinessError from '@/business/businessError';
+import GameRepository from '@/core/repository/gameRepository';
+import GameID from '@/core/valueobject/gameId';
+import Game from '@/core/entity/game';
+import BusinessError from '@/core/businessError';
 
 export default class GameRepositoryImpl implements GameRepository {
   public static create(): GameRepository {

@@ -1,10 +1,10 @@
-import Game from '@/business/entity/game';
-import BaseHeight from '@/business/valueobject/baseHeight';
-import BaseWidth from '@/business/valueobject/baseWidth';
-import CellPosition from '@/business/valueobject/cellPosition';
-import { vPos } from '@/business/valueobject/verticalPosition';
-import { hPos } from '@/business/valueobject/horizontalPosition';
-import Answer from '@/business/valueobject/answer';
+import Game from '@/core/entity/game';
+import BaseHeight from '@/core/valueobject/baseHeight';
+import BaseWidth from '@/core/valueobject/baseWidth';
+import CellPosition from '@/core/valueobject/cellPosition';
+import { vPos } from '@/core/valueobject/verticalPosition';
+import { hPos } from '@/core/valueobject/horizontalPosition';
+import Answer from '@/core/valueobject/answer';
 import CellRepositoryImpl from '@/repository/cellRepositoryImpl';
 
 describe('AnswerLogic', () => {

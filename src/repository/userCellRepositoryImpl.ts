@@ -1,6 +1,6 @@
-import CellPosition from '@/business/valueobject/cellPosition';
+import CellPosition from '@/core/valueobject/cellPosition';
 import RepositoryError from '@/repository/repositoryError';
-import GameID from '@/business/valueobject/gameId';
+import GameID from '@/core/valueobject/gameId';
 import UserCellRepository from '@/application/repository/userCellRepository';
 import UserCell from '@/application/entity/userCell';
 

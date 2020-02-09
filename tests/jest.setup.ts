@@ -1,10 +1,10 @@
 import 'reflect-metadata';
 import { container } from 'tsyringe';
-import CellRepository from '@/business/repository/cellRepository';
+import CellRepository from '@/core/repository/cellRepository';
 import CellRepositoryImpl from '@/repository/cellRepositoryImpl';
-import GroupRepository from '@/business/repository/groupRepository';
+import GroupRepository from '@/core/repository/groupRepository';
 import GroupRepositoryImpl from '@/repository/groupRepositoryImpl';
-import GameRepository from '@/business/repository/gameRepository';
+import GameRepository from '@/core/repository/gameRepository';
 import GameRepositoryImpl from '@/repository/gameRepositoryImpl';
 import UserCellRepository from '@/application/repository/userCellRepository';
 import UserCellRepositoryImpl from '@/repository/userCellRepositoryImpl';

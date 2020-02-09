@@ -1,13 +1,13 @@
-import GameID from '@/business/valueobject/gameId';
+import GameID from '@/core/valueobject/gameId';
 import { autoInjectable, inject } from 'tsyringe';
-import CellRepository from '@/business/repository/cellRepository';
-import BusinessError from '@/business/businessError';
-import DeleteGameLogic from '@/business/logic/deleteGameLogic';
+import CellRepository from '@/core/repository/cellRepository';
+import BusinessError from '@/core/businessError';
+import DeleteGameLogic from '@/core/logic/deleteGameLogic';
 import UserCellRepository from '../repository/userCellRepository';
 import UserCell from '../entity/userCell';
 import WindowHeight from '../valueObject/windowHeight';
 import WindowWidth from '../valueObject/windowWidth';
-import GameRepository from '@/business/repository/gameRepository';
+import GameRepository from '@/core/repository/gameRepository';
 import CalcCellSize from './calcCellSize';
 import GameSize from '../entity/gameSize';
 

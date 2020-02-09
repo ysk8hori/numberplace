@@ -1,7 +1,7 @@
-import GameID from '@/business/valueobject/gameId';
-import Game from '@/business/entity/game';
-import BaseHeight from '@/business/valueobject/baseHeight';
-import BaseWidth from '@/business/valueobject/baseWidth';
+import GameID from '@/core/valueobject/gameId';
+import Game from '@/core/entity/game';
+import BaseHeight from '@/core/valueobject/baseHeight';
+import BaseWidth from '@/core/valueobject/baseWidth';
 import GetGridOfSquareGroupsLogic from '@/application/logic/getGridOfSquareGroupsLogic';
 
 describe('GetGridOfSquareGroupsLogic', () => {

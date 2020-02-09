@@ -1,12 +1,12 @@
 import { autoInjectable, inject } from 'tsyringe';
 import UserCellRepository from '../repository/userCellRepository';
-import BusinessError from '@/business/businessError';
-import GameID from '@/business/valueobject/gameId';
-import Answer from '@/business/valueobject/answer';
+import BusinessError from '@/core/businessError';
+import GameID from '@/core/valueobject/gameId';
+import Answer from '@/core/valueobject/answer';
 import Logic from './logic';
-import CellRepository from '@/business/repository/cellRepository';
-import InfiniteAnalyzeLogic from '@/business/logic/analyze/infiniteAnalyze/infiniteAnalyzeLogic';
-import OutputAnswerStringLogic from '@/business/logic/outputAnswerStringLogic';
+import CellRepository from '@/core/repository/cellRepository';
+import InfiniteAnalyzeLogic from '@/core/logic/analyze/infiniteAnalyze/infiniteAnalyzeLogic';
+import OutputAnswerStringLogic from '@/core/logic/outputAnswerStringLogic';
 
 @autoInjectable()
 export default class UserAnswerLogic implements Logic {

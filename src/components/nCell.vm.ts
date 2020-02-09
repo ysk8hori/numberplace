@@ -1,7 +1,7 @@
 import { Vue, Prop, Component } from 'vue-property-decorator';
 import UserCell from '@/application/entity/userCell';
 import SelectCellLogic from '@/application/logic/selectCellLogic';
-import Answer from '@/business/valueobject/answer';
+import Answer from '@/core/valueobject/answer';
 
 @Component({})
 export default class NCellVm extends Vue {

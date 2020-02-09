@@ -1,9 +1,9 @@
-import Range from '@/business/range';
-import CellPosition from '@/business/valueobject/cellPosition';
-import GameID from '@/business/valueobject/gameId';
-import Game from '@/business/entity/game';
-import BaseHeight from '@/business/valueobject/baseHeight';
-import BaseWidth from '@/business/valueobject/baseWidth';
+import Range from '@/core/range';
+import CellPosition from '@/core/valueobject/cellPosition';
+import GameID from '@/core/valueobject/gameId';
+import Game from '@/core/entity/game';
+import BaseHeight from '@/core/valueobject/baseHeight';
+import BaseWidth from '@/core/valueobject/baseWidth';
 
 describe('range', () => {
   describe('fetchRowsInOrder', () => {

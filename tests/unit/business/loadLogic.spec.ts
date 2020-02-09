@@ -1,12 +1,12 @@
-import GameID from '@/business/valueobject/gameId';
-import Game from '@/business/entity/game';
-import BaseHeight from '@/business/valueobject/baseHeight';
-import BaseWidth from '@/business/valueobject/baseWidth';
+import GameID from '@/core/valueobject/gameId';
+import Game from '@/core/entity/game';
+import BaseHeight from '@/core/valueobject/baseHeight';
+import BaseWidth from '@/core/valueobject/baseWidth';
 import CellRepositoryImpl from '@/repository/cellRepositoryImpl';
-import CellPosition, { pos } from '@/business/valueobject/cellPosition';
-import { vPos } from '@/business/valueobject/verticalPosition';
-import { hPos } from '@/business/valueobject/horizontalPosition';
-import LoadLogic from '@/business/logic/loadLogic';
+import CellPosition, { pos } from '@/core/valueobject/cellPosition';
+import { vPos } from '@/core/valueobject/verticalPosition';
+import { hPos } from '@/core/valueobject/horizontalPosition';
+import LoadLogic from '@/core/logic/loadLogic';
 
 describe('LoadLogic', () => {
   describe('クラシック中級1 85 9x9 中上級', () => {

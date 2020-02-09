@@ -1,11 +1,11 @@
 // import CellFactory from '@/factory/cellFactory';
 // import GroupFactory from '@/factory/groupFactory';
-// import Cell from '@/business/entity/cell';
-// import Group from '@/business/group';
-// import BaseHeight from '@/business/valueobject/baseHeight';
-// import BaseWidth from '@/business/valueobject/baseWidth';
-// import Height from '@/business/valueobject/height';
-// import Width from '@/business/valueobject/width';
+// import Cell from '@/core/entity/cell';
+// import Group from '@/core/group';
+// import BaseHeight from '@/core/valueobject/baseHeight';
+// import BaseWidth from '@/core/valueobject/baseWidth';
+// import Height from '@/core/valueobject/height';
+// import Width from '@/core/valueobject/width';
 
 // export default class TestConstants {
 //   public cells: Cell[];

@@ -1,5 +1,5 @@
 import GameIdRepository from '@/application/repository/gameIdRepository';
-import GameID from '@/business/valueobject/gameId';
+import GameID from '@/core/valueobject/gameId';
 
 export default class GameIdRepositoryImpl implements GameIdRepository {
   public static create(): GameIdRepository {

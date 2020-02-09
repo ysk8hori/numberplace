@@ -1,10 +1,10 @@
-import GameID from '@/business/valueobject/gameId';
-import Group, { GroupType } from '@/business/entity/group';
+import GameID from '@/core/valueobject/gameId';
+import Group, { GroupType } from '@/core/entity/group';
 import { inject, autoInjectable } from 'tsyringe';
-import CellRepository from '@/business/repository/cellRepository';
-import GroupRepository from '@/business/repository/groupRepository';
-import GameRepository from '@/business/repository/gameRepository';
-import BusinessError from '@/business/businessError';
+import CellRepository from '@/core/repository/cellRepository';
+import GroupRepository from '@/core/repository/groupRepository';
+import GameRepository from '@/core/repository/gameRepository';
+import BusinessError from '@/core/businessError';
 import Utils from '@/utils/utils';
 
 @autoInjectable()

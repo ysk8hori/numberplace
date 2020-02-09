@@ -1,14 +1,14 @@
 import { Vue, Prop, Component } from 'vue-property-decorator';
-import Group from '@/business/entity/group';
-import Cell from '@/business/entity/cell';
+import Group from '@/core/entity/group';
+import Cell from '@/core/entity/cell';
 import UserCell from '@/application/entity/userCell';
 import NCell from '@/components/NCell.vue';
 import { autoInjectable, inject } from 'tsyringe';
-import CellRepository from '@/business/repository/cellRepository';
+import CellRepository from '@/core/repository/cellRepository';
 import UserCellRepository from '@/application/repository/userCellRepository';
-import BusinessError from '@/business/businessError';
+import BusinessError from '@/core/businessError';
 import CreateCellGridLogic from '@/application/logic/createCellGridLogic';
-import GameID from '@/business/valueobject/gameId';
+import GameID from '@/core/valueobject/gameId';
 
 @autoInjectable()
 @Component({ components: { NCell } })

@@ -1,12 +1,12 @@
-import GroupFactory from '@/business/factory/groupFactory';
-import CellFactory from '@/business/factory/cellFactory';
-import BaseWidth from '@/business/valueobject/baseWidth';
-import BaseHeight from '@/business/valueobject/baseHeight';
-import CellPosition from '@/business/valueobject/cellPosition';
-import GameID from '@/business/valueobject/gameId';
-import AnswerCandidateCollection from '@/business/answerCandidateCollection';
+import GroupFactory from '@/core/factory/groupFactory';
+import CellFactory from '@/core/factory/cellFactory';
+import BaseWidth from '@/core/valueobject/baseWidth';
+import BaseHeight from '@/core/valueobject/baseHeight';
+import CellPosition from '@/core/valueobject/cellPosition';
+import GameID from '@/core/valueobject/gameId';
+import AnswerCandidateCollection from '@/core/answerCandidateCollection';
 import GroupRepositoryImpl from '@/repository/groupRepositoryImpl';
-import { GroupType } from '@/business/entity/group';
+import { GroupType } from '@/core/entity/group';
 
 describe('GroupFactory', () => {
   const baseHeight = BaseHeight.create(2);

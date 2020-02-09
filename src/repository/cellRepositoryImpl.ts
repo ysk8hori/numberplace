@@ -1,10 +1,10 @@
-import Cell from '@/business/entity/cell';
-import CellRepository from '@/business/repository/cellRepository';
-import CellPosition from '@/business/valueobject/cellPosition';
-import CellCollection from '@/business/cellCollection';
+import Cell from '@/core/entity/cell';
+import CellRepository from '@/core/repository/cellRepository';
+import CellPosition from '@/core/valueobject/cellPosition';
+import CellCollection from '@/core/cellCollection';
 import RepositoryError from '@/repository/repositoryError';
-import GroupID from '@/business/valueobject/groupId';
-import GameID from '@/business/valueobject/gameId';
+import GroupID from '@/core/valueobject/groupId';
+import GameID from '@/core/valueobject/gameId';
 
 /**
  * Game生成時のCellの保存、及びCellの取り出しを可能とするリポジトリ。

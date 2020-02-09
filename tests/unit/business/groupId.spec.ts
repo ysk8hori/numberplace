@@ -1,5 +1,5 @@
-import GroupID from '@/business/valueobject/groupId';
-import GameID from '@/business/valueobject/gameId';
+import GroupID from '@/core/valueobject/groupId';
+import GameID from '@/core/valueobject/gameId';
 
 describe('GroupID', () => {
   const gameA = GameID.create();

@@ -1,10 +1,10 @@
-import GroupRepository from '@/business/repository/groupRepository';
-import Group, { GroupType } from '@/business/entity/group';
-import GroupID from '@/business/valueobject/groupId';
+import GroupRepository from '@/core/repository/groupRepository';
+import Group, { GroupType } from '@/core/entity/group';
+import GroupID from '@/core/valueobject/groupId';
 import RepositoryError from '@/repository/repositoryError';
-import GameID from '@/business/valueobject/gameId';
-import VerticalPosition from '@/business/valueobject/verticalPosition';
-import HorizontalPosition from '@/business/valueobject/horizontalPosition';
+import GameID from '@/core/valueobject/gameId';
+import VerticalPosition from '@/core/valueobject/verticalPosition';
+import HorizontalPosition from '@/core/valueobject/horizontalPosition';
 
 export default class GroupRepositoryImpl implements GroupRepository {
   public static create(): GroupRepositoryImpl {

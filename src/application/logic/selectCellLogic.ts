@@ -1,9 +1,9 @@
-import CellPosition from '@/business/valueobject/cellPosition';
+import CellPosition from '@/core/valueobject/cellPosition';
 import { autoInjectable, inject } from 'tsyringe';
 import UserCellRepository from '../repository/userCellRepository';
-import BusinessError from '@/business/businessError';
+import BusinessError from '@/core/businessError';
 import UserCell from '../entity/userCell';
-import GameID from '@/business/valueobject/gameId';
+import GameID from '@/core/valueobject/gameId';
 import Logic from './logic';
 
 @autoInjectable()

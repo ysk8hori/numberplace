@@ -1,9 +1,9 @@
-import GameID from '@/business/valueobject/gameId';
+import GameID from '@/core/valueobject/gameId';
 import { inject, autoInjectable } from 'tsyringe';
 import UserCellRepository from '../repository/userCellRepository';
-import BusinessError from '@/business/businessError';
-import GroupID from '@/business/valueobject/groupId';
-import GroupRepository from '@/business/repository/groupRepository';
+import BusinessError from '@/core/businessError';
+import GroupID from '@/core/valueobject/groupId';
+import GroupRepository from '@/core/repository/groupRepository';
 import UserCell from '../entity/userCell';
 
 @autoInjectable()

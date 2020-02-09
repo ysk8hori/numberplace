@@ -1,10 +1,10 @@
-import Game from '@/business/entity/game';
-import BaseHeight from '@/business/valueobject/baseHeight';
-import BaseWidth from '@/business/valueobject/baseWidth';
-import CellPosition from '@/business/valueobject/cellPosition';
-import Answer from '@/business/valueobject/answer';
-import FillAllLonelyLogic from '@/business/logic/analyze/fillAllLonelyLogic';
-import FillOwnAnswerIfLastOneAnswerCandidate from '@/business/logic/analyze/fillOwnAnswerIfLastOneAnswerCandidateLogic';
+import Game from '@/core/entity/game';
+import BaseHeight from '@/core/valueobject/baseHeight';
+import BaseWidth from '@/core/valueobject/baseWidth';
+import CellPosition from '@/core/valueobject/cellPosition';
+import Answer from '@/core/valueobject/answer';
+import FillAllLonelyLogic from '@/core/logic/analyze/fillAllLonelyLogic';
+import FillOwnAnswerIfLastOneAnswerCandidate from '@/core/logic/analyze/fillOwnAnswerIfLastOneAnswerCandidateLogic';
 
 describe('FillLonelyLogic', () => {
   describe('候補が一つになった際に、自動的に答えが決まるかを検証する1', () => {

@@ -1,14 +1,14 @@
-import Game from '@/business/entity/game';
-import BaseHeight from '@/business/valueobject/baseHeight';
-import BaseWidth from '@/business/valueobject/baseWidth';
-import LoadLogic from '@/business/logic/loadLogic';
-import AnalyzeLogic from '@/business/logic/analyze/analyzeLogic';
+import Game from '@/core/entity/game';
+import BaseHeight from '@/core/valueobject/baseHeight';
+import BaseWidth from '@/core/valueobject/baseWidth';
+import LoadLogic from '@/core/logic/loadLogic';
+import AnalyzeLogic from '@/core/logic/analyze/analyzeLogic';
 import { inject, autoInjectable, injectable } from 'tsyringe';
-import CellRepository from '@/business/repository/cellRepository';
-import Cell from '@/business/entity/cell';
-import InfiniteAnalyzeLogic from '@/business/logic/analyze/infiniteAnalyze/infiniteAnalyzeLogic';
-import OutputAnswerStringLogic from '@/business/logic/outputAnswerStringLogic';
-import DeleteGameLogic from '@/business/logic/deleteGameLogic';
+import CellRepository from '@/core/repository/cellRepository';
+import Cell from '@/core/entity/cell';
+import InfiniteAnalyzeLogic from '@/core/logic/analyze/infiniteAnalyze/infiniteAnalyzeLogic';
+import OutputAnswerStringLogic from '@/core/logic/outputAnswerStringLogic';
+import DeleteGameLogic from '@/core/logic/deleteGameLogic';
 
 @autoInjectable()
 export default class TestDefiner {

@@ -3,14 +3,14 @@ import SelectCellLogic from '../logic/selectCellLogic';
 import Logic from '../logic/logic';
 import { inject, autoInjectable } from 'tsyringe';
 import UserCellRepository from '../repository/userCellRepository';
-import BusinessError from '@/business/businessError';
-import GameID from '@/business/valueobject/gameId';
-import CellPosition, { pos } from '@/business/valueobject/cellPosition';
+import BusinessError from '@/core/businessError';
+import GameID from '@/core/valueobject/gameId';
+import CellPosition, { pos } from '@/core/valueobject/cellPosition';
 import GameIdRepository from '../repository/gameIdRepository';
-import GameRepository from '@/business/repository/gameRepository';
-import Game from '@/business/entity/game';
+import GameRepository from '@/core/repository/gameRepository';
+import Game from '@/core/entity/game';
 import UserAnswerLogic from '../logic/userAnswerLogic';
-import Answer from '@/business/valueobject/answer';
+import Answer from '@/core/valueobject/answer';
 
 @autoInjectable()
 export default class KeyPressEvent {

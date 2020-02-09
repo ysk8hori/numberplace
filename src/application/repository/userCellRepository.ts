@@ -1,6 +1,6 @@
-import CellPosition from '@/business/valueobject/cellPosition';
+import CellPosition from '@/core/valueobject/cellPosition';
 import UserCell from '../entity/userCell';
-import GameID from '@/business/valueobject/gameId';
+import GameID from '@/core/valueobject/gameId';
 
 export default interface UserCellRepository {
   push(gameId: GameID, userCell: UserCell): void;
