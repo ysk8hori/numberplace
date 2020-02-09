@@ -26,9 +26,9 @@
       <v-toolbar-title>number place infinity</v-toolbar-title>
     </v-app-bar>
 
-    <v-content>
-      <v-container class="fill-height bgcontainer" fluid>
-        <v-row align="center" justify="center">
+    <v-content class="pl-0 pr-0 bgcontainer">
+      <v-container class="bgcontainer pl-0 pr-0">
+        <v-row align="start" justify="start">
           <router-view></router-view>
         </v-row>
       </v-container>
@@ -44,9 +44,9 @@
 </script>
 <style>
 .bgcontainer {
-  max-width: 100%;
+  /* max-width: 100%;
   width: 100%;
-  height: 100%;
+  height: 100%; */
   background-image: url(images/11-g-90.png);
   background-repeat: repeat;
   background-color: rgba(255, 255, 255, 0.8);

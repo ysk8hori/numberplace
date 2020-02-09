@@ -3,7 +3,7 @@
     <v-row align="stretch">
       <v-card light elevation="10">
         <v-row justify="center">
-          <v-card elevation="0" v-if="groupGrid" light class="ma-5">
+          <v-card elevation="0" v-if="groupGrid" light class="mt-3">
             <v-row v-for="rowOfGroupGrid in groupGrid" :key="JSON.stringify(rowOfGroupGrid)">
               <v-col v-for="group in rowOfGroupGrid" :key="group.groupId.idString" class="groupcol">
                 <square-group :group="group" :gameId="gameId" />

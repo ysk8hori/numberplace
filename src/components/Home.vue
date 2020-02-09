@@ -1,7 +1,7 @@
 <template >
   <v-container>
     <!-- <div style="height:50px;"></div> -->
-    <v-row align="stretch">
+    <v-row align="start">
       <v-card elevation="10" light>
         <v-card-title color="primary">Game settings</v-card-title>
         <v-card-text>
