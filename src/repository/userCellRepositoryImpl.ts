@@ -19,6 +19,9 @@ export default class UserCellRepositoryImpl implements UserCellRepository {
     GameID,
     UserCell[]
   >();
+  public findAll(gameId: GameID): UserCell[] {
+    return UserCellRepositoryImpl.cellCollectionMap.get(gameId) ?? this.throw();
+  }
   public findByPosition(gameId: GameID, position: CellPosition): UserCell {
     return (
       UserCellRepositoryImpl.cellCollectionMap

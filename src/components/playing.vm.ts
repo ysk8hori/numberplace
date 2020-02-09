@@ -23,6 +23,8 @@ import WindowWidth from '@/application/valueObject/windowWidth';
 export default class PlayingVm extends Vue {
   private gameId: GameID | undefined;
   protected groupGrid: Group[][] = [[]];
+  protected oops: boolean = false;
+  protected cleared: boolean = false;
 
   public created() {
     const gameSize = (this.$parent as AppVm).playingGameSize;
@@ -39,9 +41,18 @@ export default class PlayingVm extends Vue {
       WindowWidth.create(window.innerWidth)
     );
     this.groupGrid = GetGridOfSquareGroupsLogic.create(this.gameId).execute();
+    UserAnswerLogic.setClearCallback(this.gameCleared);
+    UserAnswerLogic.setFailureCallback(this.gameFailured);
   }
 
   protected fill(answer: number) {
     UserAnswerLogic.create(this.gameId!, Answer.create(answer)).execute();
+  }
+
+  protected gameCleared() {
+    this.cleared = true;
+  }
+  protected gameFailured() {
+    this.oops = true;
   }
 }

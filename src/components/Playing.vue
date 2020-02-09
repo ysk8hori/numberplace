@@ -20,6 +20,12 @@
         </template>
       </v-row>
     </template>
+    <v-overlay :value="oops">
+      <strong class="oops">Oops!</strong>
+    </v-overlay>
+    <v-overlay :value="cleared">
+      <strong class="clearMessage">Clear!</strong>
+    </v-overlay>
   </v-container>
 </template>
 <script src="./playing.vm.ts" />
@@ -31,5 +37,12 @@
 .input-btn {
   text-align: center;
   /* max-width: 40px; */
+}
+.oops {
+  font-size: 5em;
+  color: red;
+}
+.clearMessage {
+  font-size: 5em;
 }
 </style>

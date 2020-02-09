@@ -70,7 +70,7 @@ export default class UserCell {
    * 解答済みのCellであるかどうかを判定する。
    */
   public get isAnswered(): boolean {
-    return !!this._answer || this.answer?.value !== '';
+    return this._answer !== undefined && this._answer.value !== '';
   }
 
   public get answer(): Answer | undefined {
