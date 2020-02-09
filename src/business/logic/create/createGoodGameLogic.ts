@@ -39,14 +39,19 @@ export default class CreateGoodGameLogic {
   private cellRepository: CellRepository;
 
   public execute(): GameID {
-    let createdGameId;
+    let createdGameId: GameID | undefined;
     do {
-      createdGameId = CreateGameLogic.create(
-        this.baseHeight,
-        this.baseWidth
-      ).execute();
-      // console.log(`this is Good? :${this.isGood(createdGameId, false)}`);
-    } while (!this.isGood(createdGameId));
+      try {
+        createdGameId = undefined;
+        createdGameId = CreateGameLogic.create(
+          this.baseHeight,
+          this.baseWidth
+        ).execute();
+        // console.log(`this is Good? :${this.isGood(createdGameId, false)}`);
+      } catch (e) {
+        //
+      }
+    } while (createdGameId === undefined || !this.isGood(createdGameId));
     return createdGameId;
   }
 
