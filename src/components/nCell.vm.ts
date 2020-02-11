@@ -9,7 +9,7 @@ export default class NCellVm extends Vue {
   protected userCell!: UserCell;
   protected answer: string = '';
   protected changeable = false;
-  protected cellStyle = { width: '26px', height: '26px' };
+  protected cellStyle = { width: '26px', height: '26px', fontSize: '26px' };
 
   protected isSelected = false;
   public mounted() {
@@ -20,6 +20,7 @@ export default class NCellVm extends Vue {
     this.changeable = this.userCell.answer === undefined;
     this.cellStyle.height = this.userCell.cellSize.cellHeight.getPixels();
     this.cellStyle.width = this.userCell.cellSize.cellWidth.getPixels();
+    this.cellStyle.fontSize = this.userCell.cellSize.cellWidth.getPixels();
   }
 
   private unselect() {

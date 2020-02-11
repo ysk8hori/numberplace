@@ -8,7 +8,7 @@ import UserCell from '../entity/userCell';
 import WindowHeight from '../valueObject/windowHeight';
 import WindowWidth from '../valueObject/windowWidth';
 import GameRepository from '@/core/repository/gameRepository';
-import CalcCellSize from './calcCellSize';
+import CalcCellStyleLogic from './createCellStyleLogic';
 import GameSize from '../entity/gameSize';
 
 @autoInjectable()
@@ -50,7 +50,9 @@ export default class CreateUserCellLogic {
   private userCellRepository: UserCellRepository;
 
   public execute() {
-    const cellSize = CalcCellSize.create(
+    // Cellのサイズ等の計算はuserCellクラスの責務とはせず、
+    // CalcCellSizeLogicでの計算結果を一律適用する。
+    const cellSize = CalcCellStyleLogic.create(
       this.windowHeight,
       this.windowWidth,
       this.gameSize

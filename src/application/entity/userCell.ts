@@ -4,7 +4,7 @@ import Cell from '@/core/entity/cell';
 import GameID from '@/core/valueobject/gameId';
 import CellHeight from '../valueObject/cellHeight';
 import CellWidth from '../valueObject/cellWidth';
-import CellSize from '../valueObject/cellSize';
+import CellStyle from '../valueObject/cellStyle';
 
 /**
  * ゲームにおける、ユーザーが操作可能なセル
@@ -13,7 +13,7 @@ export default class UserCell {
   public static create(
     gameId: GameID,
     cell: Cell,
-    cellSize: CellSize
+    cellSize: CellStyle
   ): UserCell {
     return new UserCell(gameId, cell.position, cellSize, cell.getAnswer());
   }
@@ -25,7 +25,7 @@ export default class UserCell {
   private constructor(
     public readonly gameId: GameID,
     public readonly position: CellPosition,
-    public readonly cellSize: CellSize,
+    public readonly cellSize: CellStyle,
     private _answer?: Answer
   ) {
     this._isChangeable = !_answer;

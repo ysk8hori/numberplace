@@ -3,15 +3,15 @@ import WindowWidth from '../valueObject/windowWidth';
 import CellWidth from '../valueObject/cellWidth';
 import CellHeight from '../valueObject/cellHeight';
 import GameSize from '../entity/gameSize';
-import CellSize from '../valueObject/cellSize';
+import CellStyle from '../valueObject/cellStyle';
 
-export default class CalcCellSize {
+export default class CalcCellStyleLogic {
   public static create(
     windowHeight: WindowHeight,
     windowWidth: WindowWidth,
     gameSize: GameSize
-  ): CalcCellSize {
-    return new CalcCellSize(windowHeight, windowWidth, gameSize);
+  ): CalcCellStyleLogic {
+    return new CalcCellStyleLogic(windowHeight, windowWidth, gameSize);
   }
 
   constructor(
@@ -20,10 +20,10 @@ export default class CalcCellSize {
     private gameSize: GameSize
   ) {}
 
-  public execute(): CellSize {
+  public execute(): CellStyle {
     const baseSize = Math.min(this.windowHeight.value, this.windowWidth.value);
     const cellSize = baseSize / (this.gameSize.size + 3);
-    return CellSize.create(
+    return CellStyle.create(
       CellHeight.create(cellSize),
       CellWidth.create(cellSize)
     );
