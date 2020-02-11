@@ -38,7 +38,7 @@ export default class LoadLogic {
   /**
    *
    * @param input ロード対象文字列
-   * @param option rowSplitter:省略時は\n。　colSplitter:省略時は1文字ずつ。
+   * @param option rowSplitter:省略時は\n colSplitter:省略時は1文字ずつ。
    */
   public execute(
     input: string,
