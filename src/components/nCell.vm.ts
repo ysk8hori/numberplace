@@ -9,6 +9,7 @@ export default class NCellVm extends Vue {
   protected userCell!: UserCell;
   protected answer: string = '';
   protected changeable = false;
+  /** Cellのスタイル。デフォルト値はmountedにて上書きされる。 */
   protected cellStyle = { width: '26px', height: '26px', fontSize: '26px' };
 
   protected isSelected = false;
@@ -18,9 +19,7 @@ export default class NCellVm extends Vue {
     this.userCell.setFillCallback(this.fill);
     this.answer = this.userCell.answer?.value ?? '';
     this.changeable = this.userCell.answer === undefined;
-    this.cellStyle.height = this.userCell.cellSize.cellHeight.getPixels();
-    this.cellStyle.width = this.userCell.cellSize.cellWidth.getPixels();
-    this.cellStyle.fontSize = this.userCell.cellSize.cellWidth.getPixels();
+    this.cellStyle = this.userCell.cellSize.getStyle();
   }
 
   private unselect() {

@@ -1,15 +1,23 @@
-import CellHeight from './cellHeight';
-import CellWidth from './cellWidth';
+import CellSize from './cellSize';
+import AnswerFontSize from './answerFontSize';
+import GameSize from '../entity/gameSize';
 
 export default class CellStyle {
-  public static create(
-    cellHeight: CellHeight,
-    cellWidth: CellWidth
-  ): CellStyle {
-    return new CellStyle(cellHeight, cellWidth);
+  public static create(gameSize: GameSize, baseSize: number): CellStyle {
+    return new CellStyle(
+      CellSize.create(gameSize, baseSize),
+      AnswerFontSize.create(gameSize, baseSize)
+    );
   }
   private constructor(
-    public readonly cellHeight: CellHeight,
-    public readonly cellWidth: CellWidth
+    public readonly cellSize: CellSize,
+    public readonly answerFontSize: AnswerFontSize
   ) {}
+  public getStyle(): { width: string; height: string; fontSize: string } {
+    return {
+      width: this.cellSize.getPixels(),
+      height: this.cellSize.getPixels(),
+      fontSize: this.answerFontSize.getPixels()
+    };
+  }
 }

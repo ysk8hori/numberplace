@@ -2,8 +2,6 @@ import CellPosition from '@/core/valueobject/cellPosition';
 import Answer from '@/core/valueobject/answer';
 import Cell from '@/core/entity/cell';
 import GameID from '@/core/valueobject/gameId';
-import CellHeight from '../valueObject/cellHeight';
-import CellWidth from '../valueObject/cellWidth';
 import CellStyle from '../valueObject/cellStyle';
 
 /**
