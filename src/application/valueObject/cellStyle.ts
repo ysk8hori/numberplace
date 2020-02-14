@@ -13,20 +13,20 @@ export default class CellStyle {
     return new CellStyle(gameSize, baseSize);
   }
   private constructor(private gameSize: GameSize, private baseSize: number) {}
-  public getStyle(): { width: string; height: string; fontSize: string } {
+  public getStyle(): any {
     return {
-      width: this.getWidth(),
+      // width: this.getWidth(),
       height: this.getHeight(),
       fontSize: this.getAnswerFontSize()
     };
   }
 
   private getWidth(): string {
-    return `${this.baseSize / (this.gameSize.size + 3)}px`;
+    return `${this.baseSize / (this.gameSize.size + 1)}px`;
   }
 
   private getHeight(): string {
-    return `${this.baseSize / (this.gameSize.size + 3)}px`;
+    return `${this.baseSize / (this.gameSize.size + 1)}px`;
   }
 
   private getAnswerFontSize(): string {

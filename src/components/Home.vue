@@ -1,5 +1,5 @@
 <template >
-  <v-container>
+  <v-card elevation="10" light class="ma-3">
     <v-card-title color="primary">Game settings</v-card-title>
     <v-card-text>
       <v-row justify="center" align="center">
@@ -28,7 +28,7 @@
         </v-col>
       </v-row>
     </v-card-text>
-  </v-container>
+  </v-card>
 </template>
 
 <script src="./home.vm.ts" />

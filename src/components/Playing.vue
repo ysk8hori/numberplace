@@ -1,14 +1,12 @@
 <template>
-  <v-container>
-    <v-row justify="center">
-      <v-card elevation="0" v-if="groupGrid" light class="mt-3">
-        <v-row v-for="rowOfGroupGrid in groupGrid" :key="JSON.stringify(rowOfGroupGrid)">
-          <v-col v-for="group in rowOfGroupGrid" :key="group.groupId.idString" class="groupcol">
-            <square-group :group="group" :gameId="gameId" />
-          </v-col>
-        </v-row>
-      </v-card>
-    </v-row>
+  <v-container class="pa-1">
+    <div style="background-color:white; color:black;">
+      <v-row v-for="rowOfGroupGrid in groupGrid" :key="JSON.stringify(rowOfGroupGrid)">
+        <v-col v-for="group in rowOfGroupGrid" :key="group.groupId.idString" class="groupcol">
+          <square-group :group="group" :gameId="gameId" />
+        </v-col>
+      </v-row>
+    </div>
     <template v-for="rownum in [0, 5]">
       <v-row justify="center" :key="rownum">
         <template v-for="num in [1, 2, 3, 4, 5]">

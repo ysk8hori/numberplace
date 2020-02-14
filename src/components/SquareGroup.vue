@@ -25,13 +25,13 @@
   margin: 0px;
   padding: 0px;
   text-align: center;
-  border: gray 1px dashed;
+  border: #aad6ec 1px solid;
 }
 .grouprow {
   margin: 0px;
   padding: 0px;
 }
 .groupcol {
-  border: black 1px solid;
+  border: #aad6ec 1px solid;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <v-row
+  <div
     justify="center"
     align="center"
     class="nCell"
@@ -9,7 +9,7 @@
   >
     <!--// eslint-disable-next-line prettier/prettier-->
     {{ answer }}
-  </v-row>
+  </div>
 </template>
 <script src="./nCell.vm.ts" />
 <style scoped>
