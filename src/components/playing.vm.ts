@@ -55,4 +55,8 @@ export default class PlayingVm extends Vue {
   protected gameFailured() {
     this.oops = true;
   }
+  @Trace
+  protected toTop() {
+    this.$router.push('/');
+  }
 }

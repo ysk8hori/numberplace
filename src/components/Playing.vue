@@ -18,11 +18,21 @@
         </template>
       </v-row>
     </template>
-    <v-overlay :value="oops">
-      <strong class="oops">Oops!</strong>
+    <v-overlay :value="oops" @click="toTop">
+      <v-row>
+        <strong class="oops">Oops!</strong>
+      </v-row>
+      <v-row justify="center">
+        <v-btn @click="toTop" text>TOP</v-btn>
+      </v-row>
     </v-overlay>
-    <v-overlay :value="cleared">
-      <strong class="clearMessage">Clear!</strong>
+    <v-overlay :value="cleared" @click="toTop">
+      <v-row>
+        <strong class="clearMessage">Clear!</strong>
+      </v-row>
+      <v-row justify="center">
+        <v-btn @click="toTop" text>TOP</v-btn>
+      </v-row>
     </v-overlay>
   </v-container>
 </template>
