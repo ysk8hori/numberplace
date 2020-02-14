@@ -7,9 +7,8 @@ import UserCellRepository from '../repository/userCellRepository';
 import UserCell from '../entity/userCell';
 import WindowHeight from '../valueObject/windowHeight';
 import WindowWidth from '../valueObject/windowWidth';
-import GameRepository from '@/core/repository/gameRepository';
-import CalcCellStyleLogic from './createCellStyleLogic';
 import GameSize from '../entity/gameSize';
+import CellStyle from '../valueObject/cellStyle';
 
 @autoInjectable()
 export default class CreateUserCellLogic {
@@ -52,11 +51,11 @@ export default class CreateUserCellLogic {
   public execute() {
     // Cellのサイズ等の計算はuserCellクラスの責務とはせず、
     // CalcCellSizeLogicでの計算結果を一律適用する。
-    const cellSize = CalcCellStyleLogic.create(
+    const cellSize = CellStyle.create(
+      this.gameSize,
       this.windowHeight,
-      this.windowWidth,
-      this.gameSize
-    ).execute();
+      this.windowWidth
+    );
     this.cellRepository.findAll(this.gameId).forEach(cell => {
       this.userCellRepository.push(
         this.gameId,

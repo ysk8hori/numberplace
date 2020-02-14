@@ -14,7 +14,6 @@
 <script src="./nCell.vm.ts" />
 <style scoped>
 .nCell {
-  font-size: 1em;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

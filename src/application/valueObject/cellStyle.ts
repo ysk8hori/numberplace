@@ -1,23 +1,35 @@
-import CellSize from './cellSize';
-import AnswerFontSize from './answerFontSize';
 import GameSize from '../entity/gameSize';
+import WindowHeight from './windowHeight';
+import WindowWidth from './windowWidth';
 
+/** Cellのスタイルを定義するクラス。主にDisplaySizeによって動的に変化するスタイルを作る。 */
 export default class CellStyle {
-  public static create(gameSize: GameSize, baseSize: number): CellStyle {
-    return new CellStyle(
-      CellSize.create(gameSize, baseSize),
-      AnswerFontSize.create(gameSize, baseSize)
-    );
+  public static create(
+    gameSize: GameSize,
+    windowHeight: WindowHeight,
+    windowWidth: WindowWidth
+  ): CellStyle {
+    const baseSize = Math.min(windowHeight.value, windowWidth.value);
+    return new CellStyle(gameSize, baseSize);
   }
-  private constructor(
-    public readonly cellSize: CellSize,
-    public readonly answerFontSize: AnswerFontSize
-  ) {}
+  private constructor(private gameSize: GameSize, private baseSize: number) {}
   public getStyle(): { width: string; height: string; fontSize: string } {
     return {
-      width: this.cellSize.getPixels(),
-      height: this.cellSize.getPixels(),
-      fontSize: this.answerFontSize.getPixels()
+      width: this.getWidth(),
+      height: this.getHeight(),
+      fontSize: this.getAnswerFontSize()
     };
+  }
+
+  private getWidth(): string {
+    return `${this.baseSize / (this.gameSize.size + 3)}px`;
+  }
+
+  private getHeight(): string {
+    return `${this.baseSize / (this.gameSize.size + 3)}px`;
+  }
+
+  private getAnswerFontSize(): string {
+    return `${(this.baseSize / (this.gameSize.size + 3)) * 0.8}px`;
   }
 }
