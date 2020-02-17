@@ -1,8 +1,8 @@
 <template>
   <v-container
     class="pa-0 inputContainer"
-    v-on:touchstart="mousedown"
-    v-on:touchmove="mousemove"
+    v-on:touchstart="touchstart"
+    v-on:touchmove="touchmove"
     v-on:touchend="stop"
     v-on:touchcancel="stop"
   >
