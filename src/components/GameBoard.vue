@@ -8,3 +8,10 @@
   </div>
 </template>
 <script src="./gameBoard.vm.ts"></script>
+
+<style scoped>
+.groupcol {
+  margin: 0px;
+  padding: 0px;
+}
+</style>

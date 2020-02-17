@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="!!cellGrid" class="groupcol">
+  <v-container v-if="!!cellGrid" class="groupContainer">
     <v-row
       v-for="row in cellGrid"
       :key="JSON.stringify(row)"
@@ -31,7 +31,9 @@
   margin: 0px;
   padding: 0px;
 }
-.groupcol {
+.groupContainer {
   border: #aad6ec 1px solid;
+  margin: 0px;
+  padding: 0px;
 }
 </style>

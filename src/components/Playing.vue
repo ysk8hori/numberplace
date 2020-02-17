@@ -22,10 +22,6 @@
 </template>
 <script src="./playing.vm.ts" />
 <style>
-.groupcol {
-  margin: 0px;
-  padding: 0px;
-}
 .oops {
   font-size: 5em;
   color: red;
