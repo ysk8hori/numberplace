@@ -20,16 +20,16 @@ export default class NumberPlaceControllerVm extends Vue {
     this.mouseEventForControllingGame = MouseEventForControllingGame.create(
       this.gameId
     );
-    this.mouseEventForControllingGame.moveStarted(event);
+    this.mouseEventForControllingGame.moveStarted(event.offsetX, event.offsetY);
   }
 
   protected mousemove(event: MouseEvent) {
     // if (!this.mouseEventForControllingGame) this.mousedown(event);
-    this.mouseEventForControllingGame?.moving(event);
+    this.mouseEventForControllingGame?.moving(event.offsetX, event.offsetY);
   }
 
   protected stop(event: MouseEvent) {
-    this.mouseEventForControllingGame?.moving(event);
+    this.mouseEventForControllingGame?.moving(event.offsetX, event.offsetY);
     this.mouseEventForControllingGame = undefined;
   }
 }

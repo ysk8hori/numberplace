@@ -5,7 +5,9 @@ import GameID from '@/core/valueobject/gameId';
 import UserCell from '../entity/userCell';
 import CellPosition, { pos } from '@/core/valueobject/cellPosition';
 import VerticalPosition, { vPos } from '@/core/valueobject/verticalPosition';
-import HorizontalPosition from '@/core/valueobject/horizontalPosition';
+import HorizontalPosition, {
+  hPos
+} from '@/core/valueobject/horizontalPosition';
 import SelectCellLogic from '../logic/selectCellLogic';
 import GameRepository from '@/core/repository/gameRepository';
 
@@ -43,9 +45,9 @@ export default class MouseEventForControllingGame {
   public moveStarted(offsetX: number, offsetY: number) {
     this.startOffsetX = offsetX;
     this.startOffsetY = offsetY;
-    this.startingCell =
-      this.userCellRepository.findSelectedCell(this.gameId) ??
-      this.userCellRepository.findByPosition(this.gameId, pos(0, 0)); // move開始時に選択したセルがない場合は0,0を選択しているものとする。
+    this.userCellRepository.findSelectedCell(this.gameId) ??
+      SelectCellLogic.create(this.gameId, pos(0, 0)).execute();
+    this.startingCell = this.userCellRepository.findSelectedCell(this.gameId)!;
   }
 
   /**
@@ -68,7 +70,7 @@ export default class MouseEventForControllingGame {
         ? vPos(0)
         : this.gameRepository.find(this.gameId).gameSize.size <=
           nextVerticalPosition.value
-        ? vPos(this.gameRepository.find(this.gameId).gameSize.size)
+        ? vPos(this.gameRepository.find(this.gameId).gameSize.size - 1)
         : nextVerticalPosition;
 
     nextHorizontalPosition = this.startingCell.position.horizontalPosition
@@ -77,11 +79,19 @@ export default class MouseEventForControllingGame {
         Math.sign(horizontalDistance) *
           Math.floor(Math.abs(horizontalDistance) / threshold)
       );
+    nextHorizontalPosition =
+      nextHorizontalPosition.value < 0
+        ? hPos(0)
+        : this.gameRepository.find(this.gameId).gameSize.size <=
+          nextHorizontalPosition.value
+        ? hPos(this.gameRepository.find(this.gameId).gameSize.size - 1)
+        : nextHorizontalPosition;
 
     const nextCellPosition = CellPosition.create(
       nextVerticalPosition,
       nextHorizontalPosition
     );
+    console.log(nextCellPosition.toString());
     SelectCellLogic.create(this.gameId, nextCellPosition).execute();
   }
 }

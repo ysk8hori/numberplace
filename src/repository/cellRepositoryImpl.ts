@@ -17,9 +17,7 @@ export default class CellRepositoryImpl implements CellRepository {
     return new CellRepositoryImpl();
   }
   static count = 0;
-  public constructor() {
-    console.log(CellRepositoryImpl.count++);
-  }
+  public constructor() {}
   private static cellCollectionMap: Map<GameID, CellCollection> = new Map<
     GameID,
     CellCollection
