@@ -54,17 +54,41 @@ export default class MouseEventForControllingGame {
    * startOffsetから10px動いたら1セル移動ってことにする。
    */
   public moving(offsetX: number, offsetY: number) {
-    const threshold = MouseEventForControllingGame.PIXEL_REQUIRED_TO_MOVE_ONE;
-    const verticalDistance = offsetY - this.startOffsetY;
-    const horizontalDistance = offsetX - this.startOffsetX;
-    let nextVerticalPosition: VerticalPosition = this.startingCell.position.verticalPosition.clone();
-    let nextHorizontalPosition: HorizontalPosition = this.startingCell.position.horizontalPosition.clone();
-    nextVerticalPosition = this.startingCell.position.verticalPosition
+    SelectCellLogic.create(
+      this.gameId,
+      CellPosition.create(
+        this.calculateNextVerticalPosition(
+          this.calculateVerticalDistance(offsetY)
+        ),
+        this.calculateNextHorizontalPosition(
+          this.calculateHorizontalDistance(offsetX)
+        )
+      )
+    ).execute();
+  }
+
+  private calculateHorizontalDistance(offsetX: number): number {
+    return offsetX - this.startOffsetX;
+  }
+
+  private calculateVerticalDistance(offsetY: number): number {
+    return offsetY - this.startOffsetY;
+  }
+
+  private calculateNextVerticalPosition(
+    verticalDistance: number
+  ): VerticalPosition {
+    // 縦方向の移動を行う
+    let nextVerticalPosition = this.startingCell.position.verticalPosition
       .clone()
       .move(
         Math.sign(verticalDistance) *
-          Math.floor(Math.abs(verticalDistance) / threshold)
+          Math.floor(
+            Math.abs(verticalDistance) /
+              MouseEventForControllingGame.PIXEL_REQUIRED_TO_MOVE_ONE
+          )
       );
+    // ゲーム盤の範囲に収まるように調整する。
     nextVerticalPosition =
       nextVerticalPosition.value < 0
         ? vPos(0)
@@ -72,13 +96,22 @@ export default class MouseEventForControllingGame {
           nextVerticalPosition.value
         ? vPos(this.gameRepository.find(this.gameId).gameSize.size - 1)
         : nextVerticalPosition;
-
-    nextHorizontalPosition = this.startingCell.position.horizontalPosition
+    return nextVerticalPosition;
+  }
+  private calculateNextHorizontalPosition(
+    horizontalDistance: number
+  ): HorizontalPosition {
+    // 横方向の移動を行う
+    let nextHorizontalPosition = this.startingCell.position.horizontalPosition
       .clone()
       .move(
         Math.sign(horizontalDistance) *
-          Math.floor(Math.abs(horizontalDistance) / threshold)
+          Math.floor(
+            Math.abs(horizontalDistance) /
+              MouseEventForControllingGame.PIXEL_REQUIRED_TO_MOVE_ONE
+          )
       );
+    // ゲーム盤の範囲に収まるように調整する。
     nextHorizontalPosition =
       nextHorizontalPosition.value < 0
         ? hPos(0)
@@ -87,11 +120,6 @@ export default class MouseEventForControllingGame {
         ? hPos(this.gameRepository.find(this.gameId).gameSize.size - 1)
         : nextHorizontalPosition;
 
-    const nextCellPosition = CellPosition.create(
-      nextVerticalPosition,
-      nextHorizontalPosition
-    );
-    console.log(nextCellPosition.toString());
-    SelectCellLogic.create(this.gameId, nextCellPosition).execute();
+    return nextHorizontalPosition;
   }
 }
