@@ -1,11 +1,5 @@
 <template>
-  <v-container
-    class="pa-0 inputContainer"
-    v-on:touchstart="touchstart"
-    v-on:touchmove="touchmove"
-    v-on:touchend="stop"
-    v-on:touchcancel="stop"
-  >
+  <v-container class="pa-0 inputContainer">
     <v-row justify="end" v-for="rownum in [0, 5]" :key="rownum">
       <template v-for="num in [1, 2, 3, 4, 5]">
         <v-col class="input-btn" :key="num">

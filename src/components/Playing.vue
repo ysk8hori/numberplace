@@ -1,5 +1,11 @@
 <template>
-  <v-container class="pa-0 playingContainer">
+  <v-container
+    class="pa-0 playingContainer"
+    v-on:touchstart="touchstart"
+    v-on:touchmove="touchmove"
+    v-on:touchend="stop"
+    v-on:touchcancel="stop"
+  >
     <game-board :groupGrid="groupGrid" :gameId="gameId" />
     <number-place-controller :gameId="gameId" />
     <v-overlay :value="oops" @click="toTop">
@@ -25,6 +31,7 @@
 .playingContainer {
   position: fixed;
   top: 30;
+  height: 100%;
 }
 .oops {
   font-size: 5em;

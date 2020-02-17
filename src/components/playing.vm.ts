@@ -13,6 +13,7 @@ import Answer from '@/core/valueobject/answer';
 import UpdateCurrentGameIdLogic from '@/application/logic/updateCurrentGameIdLogic';
 import WindowHeight from '@/application/valueObject/windowHeight';
 import WindowWidth from '@/application/valueObject/windowWidth';
+import MouseEventForControllingGame from '@/application/event/mouseEventForControllingGame';
 
 @Component({ components: { GameBoard, NumberPlaceController } })
 export default class PlayingVm extends Vue {
@@ -46,5 +47,31 @@ export default class PlayingVm extends Vue {
   }
   protected toTop() {
     this.$router.push('/');
+  }
+
+  private mouseEventForControllingGame:
+    | MouseEventForControllingGame
+    | undefined;
+
+  protected touchstart(event: TouchEvent) {
+    if (!this.gameId) return;
+    this.mouseEventForControllingGame = MouseEventForControllingGame.create(
+      this.gameId
+    );
+    this.mouseEventForControllingGame.moveStarted(
+      event.targetTouches[0].screenX,
+      event.targetTouches[0].screenY
+    );
+  }
+
+  protected touchmove(event: TouchEvent) {
+    this.mouseEventForControllingGame?.moving(
+      event.targetTouches[0].screenX,
+      event.targetTouches[0].screenY
+    );
+  }
+
+  protected stop(event: TouchEvent) {
+    this.mouseEventForControllingGame = undefined;
   }
 }

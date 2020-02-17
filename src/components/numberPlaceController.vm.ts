@@ -11,29 +11,4 @@ export default class NumberPlaceControllerVm extends Vue {
   protected fill(answer: number) {
     UserAnswerLogic.create(this.gameId!, Answer.create(answer)).execute();
   }
-
-  private mouseEventForControllingGame:
-    | MouseEventForControllingGame
-    | undefined;
-
-  protected touchstart(event: TouchEvent) {
-    this.mouseEventForControllingGame = MouseEventForControllingGame.create(
-      this.gameId
-    );
-    this.mouseEventForControllingGame.moveStarted(
-      event.targetTouches[0].screenX,
-      event.targetTouches[0].screenY
-    );
-  }
-
-  protected touchmove(event: TouchEvent) {
-    this.mouseEventForControllingGame?.moving(
-      event.targetTouches[0].screenX,
-      event.targetTouches[0].screenY
-    );
-  }
-
-  protected stop(event: TouchEvent) {
-    this.mouseEventForControllingGame = undefined;
-  }
 }
