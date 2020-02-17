@@ -27,8 +27,9 @@ describe('mouseEventForControllingGame', () => {
   describe.each`
     startingVPos | startingHPos | startingTouchPos      | movingVPos | movingHPos | resultVPos | resultHPos
     ${0}         | ${0}         | ${{ x: 300, y: 300 }} | ${9}       | ${9}       | ${0}       | ${0}
-    ${2}         | ${2}         | ${{ x: 300, y: 300 }} | ${10}      | ${10}      | ${3}       | ${3}
-    ${6}         | ${8}         | ${{ x: 300, y: 300 }} | ${-9}      | ${-9}      | ${6}       | ${8}
+    ${2}         | ${2}         | ${{ x: 310, y: 300 }} | ${10}      | ${10}      | ${3}       | ${3}
+    ${6}         | ${8}         | ${{ x: 300, y: 400 }} | ${-9}      | ${-9}      | ${6}       | ${8}
+    ${7}         | ${4}         | ${{ x: 100, y: 300 }} | ${-10}     | ${-10}     | ${6}       | ${3}
   `(
     '($startingVPos, $startingHPos)から縦方向へ$movingVPos px、横方向へ$movingHPos px移動する',
     ({

@@ -59,7 +59,10 @@ export default class MouseEventForControllingGame {
     let nextHorizontalPosition: HorizontalPosition = this.startingCell.position.horizontalPosition.clone();
     nextVerticalPosition = this.startingCell.position.verticalPosition
       .clone()
-      .move(Math.floor(verticalDistance / threshold));
+      .move(
+        Math.sign(verticalDistance) *
+          Math.floor(Math.abs(verticalDistance) / threshold)
+      );
     nextVerticalPosition =
       nextVerticalPosition.value < 0
         ? vPos(0)
@@ -67,9 +70,13 @@ export default class MouseEventForControllingGame {
           nextVerticalPosition.value
         ? vPos(this.gameRepository.find(this.gameId).gameSize.size)
         : nextVerticalPosition;
+
     nextHorizontalPosition = this.startingCell.position.horizontalPosition
       .clone()
-      .move(Math.floor(horizontalDistance / threshold));
+      .move(
+        Math.sign(horizontalDistance) *
+          Math.floor(Math.abs(horizontalDistance) / threshold)
+      );
 
     const nextCellPosition = CellPosition.create(
       nextVerticalPosition,
