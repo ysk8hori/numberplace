@@ -22,9 +22,9 @@
       <router-view></router-view>
     </v-content>
 
-    <v-footer app>
+    <!-- <v-footer app>
       <span>&copy; 2020</span>
-    </v-footer>
+    </v-footer>-->
   </v-app>
 </template>
 
@@ -32,9 +32,10 @@
 </script>
 <style>
 .bgcontainer {
-  /* max-width: 100%;
+  position: fixed;
+  top: 0;
   width: 100%;
-  height: 100%; */
+  height: 100%;
   background-image: url(images/11-g-90.png);
   background-repeat: repeat;
   background-color: rgba(255, 255, 255, 0.8);

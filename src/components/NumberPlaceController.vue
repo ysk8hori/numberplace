@@ -1,13 +1,13 @@
 <template>
   <v-container
-    class="pa-0"
-    @mousedown="mousedown"
-    @mousemove="mousemove"
-    @mouseout="stop"
-    @mouseleave="stop"
-    @mouseup="stop"
+    class="pa-0 inputContainer"
+    v-on:touchstart="mousedown"
+    v-on:touchmove="mousemove"
+    v-on:touchend="stop"
+    v-on:touchcancel="stop"
+    @
   >
-    <v-row justify="center" v-for="rownum in [0, 5]" :key="rownum">
+    <v-row justify="end" v-for="rownum in [0, 5]" :key="rownum">
       <template v-for="num in [1, 2, 3, 4, 5]">
         <v-col class="input-btn" :key="num">
           <v-btn text icon color="pink" large @click="fill(num + rownum)">
@@ -20,6 +20,11 @@
 </template>
 <script src="./numberPlaceController.vm.ts" />
 <style>
+.inputContainer {
+  position: fixed; /*←絶対位置*/
+  bottom: 0; /*下に固定*/
+  z-index: 99;
+}
 .input-btn {
   text-align: center;
 }
