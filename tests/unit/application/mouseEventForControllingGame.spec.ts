@@ -9,7 +9,6 @@ import GameSize from '@/core/entity/gameSize';
 import SelectCellLogic from '@/application/logic/selectCellLogic';
 import { pos } from '@/core/valueobject/cellPosition';
 import MouseEventForControllingGame from '@/application/event/mouseEventForControllingGame';
-import UserCellRepositoryImpl from '@/repository/userCellRepositoryImpl';
 import { container } from 'tsyringe';
 import UserCellRepository from '@/application/repository/userCellRepository';
 
@@ -24,52 +23,51 @@ describe('mouseEventForControllingGame', () => {
     WindowHeight.create(window.innerHeight),
     WindowWidth.create(window.innerWidth)
   );
-  describe('(0,0)から右へ9px、下へ9px移動する', () => {
-    beforeAll(() => {
-      SelectCellLogic.create(gameId, pos(0, 0)).execute();
-      const event = MouseEventForControllingGame.create(gameId);
-      event.moveStarted(300, 300);
-      event.moving(309, 309);
-    });
-    test('選択セルのverticalPositionが0であること', () => {
-      expect(
-        (container.resolve(
-          'UserCellRepository'
-        ) as UserCellRepository).findSelectedCell(gameId)?.position
-          .verticalPosition.value
-      ).toBe(0);
-    });
-    test('選択セルのhorizontalPositionが0であること', () => {
-      expect(
-        (container.resolve(
-          'UserCellRepository'
-        ) as UserCellRepository).findSelectedCell(gameId)?.position
-          .horizontalPosition.value
-      ).toBe(0);
-    });
-  });
-  describe('(2,2)から右へ10px、下へ10px移動する', () => {
-    beforeAll(() => {
-      SelectCellLogic.create(gameId, pos(2, 2)).execute();
-      const event = MouseEventForControllingGame.create(gameId);
-      event.moveStarted(300, 300);
-      event.moving(310, 310);
-    });
-    test('選択セルのverticalPositionが3であること', () => {
-      expect(
-        (container.resolve(
-          'UserCellRepository'
-        ) as UserCellRepository).findSelectedCell(gameId)?.position
-          .verticalPosition.value
-      ).toBe(3);
-    });
-    test('選択セルのhorizontalPositionが3であること', () => {
-      expect(
-        (container.resolve(
-          'UserCellRepository'
-        ) as UserCellRepository).findSelectedCell(gameId)?.position
-          .horizontalPosition.value
-      ).toBe(3);
-    });
-  });
+
+  describe.each`
+    startingVPos | startingHPos | startingTouchPos      | movingVPos | movingHPos | resultVPos | resultHPos
+    ${0}         | ${0}         | ${{ x: 300, y: 300 }} | ${9}       | ${9}       | ${0}       | ${0}
+    ${2}         | ${2}         | ${{ x: 300, y: 300 }} | ${10}      | ${10}      | ${3}       | ${3}
+    ${6}         | ${8}         | ${{ x: 300, y: 300 }} | ${-9}      | ${-9}      | ${6}       | ${8}
+  `(
+    '($startingVPos, $startingHPos)から縦方向へ$movingVPos px、横方向へ$movingHPos px移動する',
+    ({
+      startingVPos,
+      startingHPos,
+      startingTouchPos,
+      movingVPos,
+      movingHPos,
+      resultVPos,
+      resultHPos
+    }) => {
+      beforeAll(() => {
+        SelectCellLogic.create(
+          gameId,
+          pos(startingVPos, startingHPos)
+        ).execute();
+        const event = MouseEventForControllingGame.create(gameId);
+        event.moveStarted(startingTouchPos.x, startingTouchPos.y);
+        event.moving(
+          startingTouchPos.x + movingHPos,
+          startingTouchPos.y + movingVPos
+        );
+      });
+      test(`選択セルのverticalPositionが${resultVPos}であること`, () => {
+        expect(
+          (container.resolve(
+            'UserCellRepository'
+          ) as UserCellRepository).findSelectedCell(gameId)?.position
+            .verticalPosition.value
+        ).toBe(resultVPos);
+      });
+      test(`選択セルのhorizontalPositionが${resultHPos}であること`, () => {
+        expect(
+          (container.resolve(
+            'UserCellRepository'
+          ) as UserCellRepository).findSelectedCell(gameId)?.position
+            .horizontalPosition.value
+        ).toBe(resultHPos);
+      });
+    }
+  );
 });
