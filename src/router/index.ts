@@ -8,7 +8,11 @@ Vue.use(VueRouter);
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: [HomeRoute.create(), PlayingRoute.create()]
+  routes: [
+    HomeRoute.create(),
+    PlayingRoute.create(),
+    { path: '*', redirect: '/' }
+  ]
 });
 
 export default router;
