@@ -26,7 +26,7 @@ describe('mouseEventForControllingGame', () => {
   );
   describe('(0,0)から右へ9px、下へ9px移動する', () => {
     beforeAll(() => {
-      SelectCellLogic.create(gameId, pos(0, 0));
+      SelectCellLogic.create(gameId, pos(0, 0)).execute();
       const event = MouseEventForControllingGame.create(gameId);
       event.moveStarted(300, 300);
       event.moving(309, 309);
@@ -48,28 +48,28 @@ describe('mouseEventForControllingGame', () => {
       ).toBe(0);
     });
   });
-  // describe('(2,2)から右へ10px、下へ10px移動する', () => {
-  //   beforeAll(() => {
-  //     SelectCellLogic.create(gameId, pos(2, 2));
-  //     const event = MouseEventForControllingGame.create(gameId);
-  //     event.moveStarted(300, 300);
-  //     event.moving(310, 310);
-  //   });
-  //   test('選択セルのverticalPositionが3であること', () => {
-  //     expect(
-  //       (container.resolve(
-  //         'UserCellRepository'
-  //       ) as UserCellRepository).findSelectedCell(gameId)?.position
-  //         .verticalPosition.value
-  //     ).toBe(3);
-  //   });
-  //   test('選択セルのhorizontalPositionが3であること', () => {
-  //     expect(
-  //       (container.resolve(
-  //         'UserCellRepository'
-  //       ) as UserCellRepository).findSelectedCell(gameId)?.position
-  //         .horizontalPosition.value
-  //     ).toBe(3);
-  //   });
-  // });
+  describe('(2,2)から右へ10px、下へ10px移動する', () => {
+    beforeAll(() => {
+      SelectCellLogic.create(gameId, pos(2, 2)).execute();
+      const event = MouseEventForControllingGame.create(gameId);
+      event.moveStarted(300, 300);
+      event.moving(310, 310);
+    });
+    test('選択セルのverticalPositionが3であること', () => {
+      expect(
+        (container.resolve(
+          'UserCellRepository'
+        ) as UserCellRepository).findSelectedCell(gameId)?.position
+          .verticalPosition.value
+      ).toBe(3);
+    });
+    test('選択セルのhorizontalPositionが3であること', () => {
+      expect(
+        (container.resolve(
+          'UserCellRepository'
+        ) as UserCellRepository).findSelectedCell(gameId)?.position
+          .horizontalPosition.value
+      ).toBe(3);
+    });
+  });
 });
