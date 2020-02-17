@@ -5,7 +5,6 @@
     v-on:touchmove="mousemove"
     v-on:touchend="stop"
     v-on:touchcancel="stop"
-    @
   >
     <v-row justify="end" v-for="rownum in [0, 5]" :key="rownum">
       <template v-for="num in [1, 2, 3, 4, 5]">
