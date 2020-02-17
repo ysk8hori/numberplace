@@ -17,6 +17,7 @@ import FillAllLonelyLogic from '@/core/logic/analyze/fillAllLonelyLogic';
 import AnalyzeLogic from '../logic/analyze/analyzeLogic';
 import Difficalty from '../valueobject/difficalty';
 import { Trace } from '@/utils/trace';
+import GameSize from './gameSize';
 
 @autoInjectable()
 export default class Game {
@@ -116,5 +117,12 @@ export default class Game {
   }
   public setDifficalty(difficalty: Difficalty) {
     this.difficalty = Difficalty.create(difficalty.value);
+  }
+
+  public get gameSize(): GameSize {
+    return GameSize.create(
+      this.baseHeight.value,
+      this.baseWidth.value
+    ) as GameSize;
   }
 }

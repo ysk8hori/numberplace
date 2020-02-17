@@ -7,7 +7,7 @@ import UserCellRepository from '../repository/userCellRepository';
 import UserCell from '../entity/userCell';
 import WindowHeight from '../valueObject/windowHeight';
 import WindowWidth from '../valueObject/windowWidth';
-import GameSize from '../entity/gameSize';
+import GameSize from '../../core/entity/gameSize';
 import CellStyle from '../valueObject/cellStyle';
 
 @autoInjectable()

@@ -25,27 +25,27 @@
   animation: blink 0.5s infinite alternate;
 }
 @-webkit-keyframes blink {
-  0% {
-    background-color: white;
-  }
   100% {
     background-color: pink;
+  }
+  0% {
+    background-color: white;
   }
 }
 @-moz-keyframes blink {
-  0% {
-    background-color: white;
-  }
   100% {
     background-color: pink;
+  }
+  0% {
+    background-color: white;
   }
 }
 @keyframes blink {
-  0% {
-    background-color: white;
-  }
   100% {
     background-color: pink;
+  }
+  0% {
+    background-color: white;
   }
 }
 .unchangeable {

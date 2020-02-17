@@ -1,4 +1,4 @@
-import GameSize from '../entity/gameSize';
+import GameSize from '../../core/entity/gameSize';
 import WindowHeight from './windowHeight';
 import WindowWidth from './windowWidth';
 
