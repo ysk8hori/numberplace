@@ -1,12 +1,6 @@
 <template>
   <v-container class="pa-1">
-    <div style="background-color:white; color:black;">
-      <v-row v-for="rowOfGroupGrid in groupGrid" :key="JSON.stringify(rowOfGroupGrid)">
-        <v-col v-for="group in rowOfGroupGrid" :key="group.groupId.idString" class="groupcol">
-          <square-group :group="group" :gameId="gameId" />
-        </v-col>
-      </v-row>
-    </div>
+    <game-board :groupGrid="groupGrid" :gameId="gameId" />
     <template v-for="rownum in [0, 5]">
       <v-row justify="center" :key="rownum">
         <template v-for="num in [1, 2, 3, 4, 5]">
