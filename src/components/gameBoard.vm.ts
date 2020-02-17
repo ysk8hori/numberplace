@@ -6,7 +6,7 @@ import SquareGroup from './SquareGroup.vue';
 @Component({ components: { SquareGroup } })
 export default class GameBoardVm extends Vue {
   @Prop()
-  protected gameId: GameID | undefined;
+  protected gameId!: GameID;
   @Prop()
   protected groupGrid!: Group[][];
 }
