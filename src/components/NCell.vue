@@ -20,6 +20,7 @@
   user-select: none;
 }
 .selected {
+  border: indianred 1px solid;
   -webkit-animation: blink 0.5s infinite alternate;
   -moz-animation: blink 0.5s infinite alternate;
   animation: blink 0.5s infinite alternate;
