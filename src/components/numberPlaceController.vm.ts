@@ -27,7 +27,6 @@ export default class NumberPlaceControllerVm extends Vue {
   }
 
   protected mousemove(event: TouchEvent) {
-    // if (!this.mouseEventForControllingGame) this.mousedown(event);
     this.mouseEventForControllingGame?.moving(
       event.targetTouches[0].screenX,
       event.targetTouches[0].screenY
@@ -35,7 +34,6 @@ export default class NumberPlaceControllerVm extends Vue {
   }
 
   protected stop(event: TouchEvent) {
-    // this.mouseEventForControllingGame?.moving(event.offsetX, event.offsetY);
     this.mouseEventForControllingGame = undefined;
   }
 }

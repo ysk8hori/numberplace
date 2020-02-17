@@ -21,8 +21,8 @@
 <script src="./numberPlaceController.vm.ts" />
 <style>
 .inputContainer {
-  position: fixed; /*←絶対位置*/
-  bottom: 0; /*下に固定*/
+  position: fixed;
+  bottom: 0;
   z-index: 99;
 }
 .input-btn {

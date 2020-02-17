@@ -23,8 +23,8 @@
 <script src="./playing.vm.ts" />
 <style>
 .playingContainer {
-  position: fixed; /*←絶対位置*/
-  top: 30; /*下に固定*/
+  position: fixed;
+  top: 30;
 }
 .oops {
   font-size: 5em;

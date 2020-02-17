@@ -13,8 +13,6 @@
 .gameBoard {
   background-color: white;
   color: black;
-  /* position: fixed;
-  top: 30;  */
 }
 .groupcol {
   margin: 0px;
