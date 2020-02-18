@@ -14,7 +14,7 @@ import GameRepository from '@/core/repository/gameRepository';
 @autoInjectable()
 export default class MouseEventForControllingGame {
   /** セルを一つ移動するのに必要なマウス移動 */
-  private static readonly PIXEL_REQUIRED_TO_MOVE_ONE = 15;
+  public static readonly PIXEL_REQUIRED_TO_MOVE_ONE = 15;
 
   public static create(gameId: GameID): MouseEventForControllingGame {
     return new MouseEventForControllingGame(gameId);

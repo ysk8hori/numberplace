@@ -23,21 +23,21 @@ describe('mouseEventForControllingGame', () => {
     WindowHeight.create(window.innerHeight),
     WindowWidth.create(window.innerWidth)
   );
-
+  const THRESHOLD = MouseEventForControllingGame.PIXEL_REQUIRED_TO_MOVE_ONE;
   describe.each`
-    startingVPos | startingHPos | startingTouchPos      | movingVPos | movingHPos | resultVPos | resultHPos
-    ${undefined} | ${undefined} | ${{ x: 300, y: 300 }} | ${10}      | ${10}      | ${1}       | ${1}
-    ${undefined} | ${undefined} | ${{ x: 300, y: 300 }} | ${100}     | ${-100}    | ${8}       | ${0}
-    ${0}         | ${0}         | ${{ x: 300, y: 300 }} | ${9.99}    | ${9}       | ${0}       | ${0}
-    ${2}         | ${2}         | ${{ x: 310, y: 300 }} | ${10}      | ${10}      | ${3}       | ${3}
-    ${0}         | ${0}         | ${{ x: 123, y: 321 }} | ${89}      | ${89}      | ${8}       | ${8}
-    ${6}         | ${8}         | ${{ x: 300, y: 400 }} | ${-9}      | ${-9}      | ${6}       | ${8}
-    ${7}         | ${4}         | ${{ x: 100, y: 300 }} | ${-10}     | ${-10}     | ${6}       | ${3}
-    ${0}         | ${0}         | ${{ x: 999, y: 543 }} | ${90}      | ${0}       | ${8}       | ${0}
-    ${0}         | ${0}         | ${{ x: 999, y: 543 }} | ${0}       | ${90}      | ${0}       | ${8}
-    ${0}         | ${0}         | ${{ x: 999, y: 543 }} | ${-100}    | ${-100}    | ${0}       | ${0}
-    ${0}         | ${0}         | ${{ x: 999, y: 543 }} | ${100}     | ${-100}    | ${8}       | ${0}
-    ${0}         | ${0}         | ${{ x: 999, y: 543 }} | ${-100}    | ${100}     | ${0}       | ${8}
+    startingVPos | startingHPos | startingTouchPos      | movingVPos              | movingHPos              | resultVPos | resultHPos
+    ${undefined} | ${undefined} | ${{ x: 300, y: 300 }} | ${THRESHOLD}            | ${THRESHOLD}            | ${1}       | ${1}
+    ${undefined} | ${undefined} | ${{ x: 300, y: 300 }} | ${THRESHOLD * 10}       | ${THRESHOLD * -10}      | ${8}       | ${0}
+    ${0}         | ${0}         | ${{ x: 300, y: 300 }} | ${THRESHOLD - 0.01}     | ${THRESHOLD - 1}        | ${0}       | ${0}
+    ${2}         | ${2}         | ${{ x: 310, y: 300 }} | ${THRESHOLD}            | ${THRESHOLD}            | ${3}       | ${3}
+    ${0}         | ${0}         | ${{ x: 123, y: 321 }} | ${THRESHOLD * 9 - 1}    | ${THRESHOLD * 9 - 1}    | ${8}       | ${8}
+    ${6}         | ${8}         | ${{ x: 300, y: 400 }} | ${(THRESHOLD - 1) * -1} | ${(THRESHOLD - 1) * -1} | ${6}       | ${8}
+    ${7}         | ${4}         | ${{ x: 100, y: 300 }} | ${THRESHOLD * -1}       | ${THRESHOLD * -1}       | ${6}       | ${3}
+    ${0}         | ${0}         | ${{ x: 999, y: 543 }} | ${THRESHOLD * 9}        | ${0}                    | ${8}       | ${0}
+    ${0}         | ${0}         | ${{ x: 999, y: 543 }} | ${0}                    | ${THRESHOLD * 9}        | ${0}       | ${8}
+    ${0}         | ${0}         | ${{ x: 999, y: 543 }} | ${THRESHOLD * -10}      | ${THRESHOLD - 10}       | ${0}       | ${0}
+    ${0}         | ${0}         | ${{ x: 999, y: 543 }} | ${THRESHOLD * 10}       | ${THRESHOLD * -10}      | ${8}       | ${0}
+    ${0}         | ${0}         | ${{ x: 999, y: 543 }} | ${THRESHOLD * -10}      | ${THRESHOLD * 10}       | ${0}       | ${8}
   `(
     '($startingVPos, $startingHPos)から縦方向へ$movingVPos px、横方向へ$movingHPos px移動する',
     ({
