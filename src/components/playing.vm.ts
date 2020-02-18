@@ -59,15 +59,15 @@ export default class PlayingVm extends Vue {
       this.gameId
     );
     this.mouseEventForControllingGame.moveStarted(
-      event.targetTouches[0].screenX,
-      event.targetTouches[0].screenY
+      event.targetTouches[0].clientX,
+      event.targetTouches[0].clientY
     );
   }
 
   protected touchmove(event: TouchEvent) {
     this.mouseEventForControllingGame?.moving(
-      event.targetTouches[0].screenX,
-      event.targetTouches[0].screenY
+      event.targetTouches[0].clientX,
+      event.targetTouches[0].clientY
     );
   }
 
