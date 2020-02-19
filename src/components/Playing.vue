@@ -1,6 +1,7 @@
 <template>
   <v-container
-    class="pa-0 playingContainer"
+    class="pa-0 playingContainer mx-auto"
+    :style="playingContainerStyles"
     v-on:touchstart="touchstart"
     v-on:touchmove="touchmove"
     v-on:touchend="stop"
@@ -29,8 +30,6 @@
 <script src="./playing.vm.ts" />
 <style>
 .playingContainer {
-  position: fixed;
-  top: 30;
   height: 100%;
 }
 .oops {

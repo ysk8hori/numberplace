@@ -24,18 +24,21 @@ export default class CellStyle {
   private constructor(private gameSize: GameSize, private baseSize: number) {}
   public getStyle(): any {
     return {
-      // width: this.getWidth(),
       height: this.getHeight(),
       fontSize: this.getAnswerFontSize()
     };
   }
 
-  private getWidth(): string {
-    return `${this.baseSize / (this.gameSize.size + 1)}px`;
+  public calculateWidthValue(): number {
+    return this.baseSize / (this.gameSize.size + 1);
   }
 
   private getHeight(): string {
-    return `${this.baseSize / (this.gameSize.size + 1)}px`;
+    return `${this.calculateHeightValue()}px`;
+  }
+
+  public calculateHeightValue(): number {
+    return this.baseSize / (this.gameSize.size + 1);
   }
 
   private getAnswerFontSize(): string {

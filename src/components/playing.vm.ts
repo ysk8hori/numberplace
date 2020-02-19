@@ -9,11 +9,12 @@ import GameBoard from './GameBoard.vue';
 import NumberPlaceController from './NumberPlaceController.vue';
 import CreateUserCellLogic from '@/application/logic/createUserCellLogic';
 import UserAnswerLogic from '@/application/logic/userAnswerLogic';
-import Answer from '@/core/valueobject/answer';
 import UpdateCurrentGameIdLogic from '@/application/logic/updateCurrentGameIdLogic';
 import WindowHeight from '@/application/valueObject/windowHeight';
 import WindowWidth from '@/application/valueObject/windowWidth';
 import MouseEventForControllingGame from '@/application/event/mouseEventForControllingGame';
+import GameSize from '@/core/entity/gameSize';
+import CellStyle from '@/application/valueObject/cellStyle';
 
 @Component({ components: { GameBoard, NumberPlaceController } })
 export default class PlayingVm extends Vue {
@@ -21,6 +22,7 @@ export default class PlayingVm extends Vue {
   protected groupGrid: Group[][] = [[]];
   protected oops: boolean = false;
   protected cleared: boolean = false;
+  protected playingContainerStyles = {};
   public created() {
     const gameSize = (this.$parent as AppVm).playingGameSize;
     if (!gameSize) return this.$router.push(HomeRoute.NAME);
@@ -38,6 +40,27 @@ export default class PlayingVm extends Vue {
     this.groupGrid = GetGridOfSquareGroupsLogic.create(this.gameId).execute();
     UserAnswerLogic.setClearCallback(this.gameCleared);
     UserAnswerLogic.setFailureCallback(this.gameFailured);
+    this.createPlayingContainerStyles(
+      gameSize,
+      WindowHeight.create(window.innerHeight),
+      WindowWidth.create(window.innerWidth)
+    );
+  }
+
+  private createPlayingContainerStyles(
+    gameSize: GameSize,
+    windowHeight: WindowHeight,
+    windowWidth: WindowWidth
+  ) {
+    if (windowWidth.value < 600) {
+      this.playingContainerStyles = { maxWidth: '100%', position: 'fixed' };
+    } else {
+      const cellStyle = CellStyle.create(gameSize, windowHeight, windowWidth);
+      this.playingContainerStyles = {
+        maxWidth: `${cellStyle.calculateWidthValue() * gameSize.size}px`,
+        marginTop: '10px'
+      };
+    }
   }
   protected gameCleared() {
     this.cleared = true;
