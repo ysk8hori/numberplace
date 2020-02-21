@@ -11,4 +11,22 @@ export default class Utils {
     }
     return array;
   }
+  public static round(number: number, precision: number = 0) {
+    let shift = (number: number, precision: number, reverseShift: boolean) => {
+      if (reverseShift) {
+        precision = -precision;
+      }
+      var numArray = ('' + number).split('e');
+      return +(
+        numArray[0] +
+        'e' +
+        (numArray[1] ? +numArray[1] + precision : precision)
+      );
+    };
+    return shift(Math.round(shift(number, precision, false)), precision, true);
+  }
+
+  public static degreeToRadian(degree: number): number {
+    return degree * (Math.PI / 180);
+  }
 }

@@ -1,14 +1,29 @@
 <template>
   <v-container class="pa-0 inputContainer">
-    <v-row justify="end" v-for="rownum in [0, 5]" :key="rownum">
-      <template v-for="num in [1, 2, 3, 4, 5]">
-        <v-col class="input-btn" :key="num">
-          <v-btn text icon color="pink" large @click="fill(num + rownum)">
-            <v-icon>{{ `mdi-numeric-${num + rownum}-box-outline` }}</v-icon>
-          </v-btn>
-        </v-col>
+    <svg
+      class="svg"
+      width="200"
+      height="200"
+      viewBox="-100 -100 200 200"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <template v-for="numberPlate in numberPlates">
+        <path
+          :key="numberPlate.answer"
+          :d="numberPlate.d"
+          :fill="numberPlate.fill"
+          :stroke="numberPlate.stroke"
+          @click="fill(numberPlate.answer)"
+        />
       </template>
-    </v-row>
+      <template v-for="numberPlate in numberPlates">
+        <text
+          :x="numberPlate.charaPositionX"
+          :y="numberPlate.charaPositionY"
+          :key="numberPlate.answer"
+        >{{ numberPlate.answer }}</text>
+      </template>
+    </svg>
   </v-container>
 </template>
 <script src="./numberPlaceController.vm.ts" />
@@ -20,5 +35,10 @@
 }
 .input-btn {
   text-align: center;
+}
+.svg {
+  position: fixed;
+  bottom: 0;
+  right: 0;
 }
 </style>
