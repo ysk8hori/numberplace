@@ -9,7 +9,7 @@
     >
       <template v-for="numberPlate in numberPlates">
         <path
-          :key="numberPlate.answer"
+          :key="`numberPlate${numberPlate.answer}`"
           :d="numberPlate.d"
           :fill="numberPlate.fill"
           :stroke="numberPlate.stroke"
@@ -19,10 +19,12 @@
       <template v-for="numberPlate in numberPlates">
         <text
           :x="numberPlate.charaPositionX"
-          :y="numberPlate.charaPositionY"
-          :key="numberPlate.answer"
+          :y="numberPlate.charaPositionY + 10"
+          :key="`numberPlateText${numberPlate.answer}`"
         >{{ numberPlate.answer }}</text>
       </template>
+      <circle cx="100" cy="100" r="100" fill="white" stroke="#aad6ec" @click="fill('')" />
+      <text x="60" y="60">X</text>
     </svg>
   </v-container>
 </template>
@@ -40,5 +42,9 @@
   position: fixed;
   bottom: 0;
   right: 0;
+  /* opacity: 50; */
+}
+.svg > text {
+  font-size: 30px;
 }
 </style>

@@ -8,7 +8,7 @@
     v-on:touchcancel="stop"
   >
     <game-board :groupGrid="groupGrid" :gameId="gameId" />
-    <number-place-controller :gameId="gameId" />
+    <number-place-controller :gameId="gameId" :gameSize="gameSize" />
     <v-overlay :value="oops" @click="toTop">
       <v-row>
         <strong class="oops">Oops!</strong>

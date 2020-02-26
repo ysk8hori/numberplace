@@ -42,6 +42,6 @@ export default class CellStyle {
   }
 
   private getAnswerFontSize(): string {
-    return `${(this.baseSize / (this.gameSize.size + 3)) * 0.8}px`;
+    return `${(this.baseSize / (this.gameSize.size + 3)) * 0.9}px`;
   }
 }

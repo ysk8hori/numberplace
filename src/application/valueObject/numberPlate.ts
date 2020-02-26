@@ -1,29 +1,37 @@
 import Utils from '@/utils/utils';
+import GameSize from '@/core/entity/gameSize';
 
 /**
  * コントローラーのうち番号を入力するプレートとして描画する扇型の図形の描画に使用する値の計算と提供を行う。
  */
 export default class NumberPlate {
-  private static create(
-    startDegree: number,
-    endDegree: number,
-    answer: string
-  ): NumberPlate {
+  public static create(index: number, buttonCount: number): NumberPlate {
+    // 2段に分ける
+    const row = index < buttonCount / 2 ? 0 : 1;
+    const r = 200 * (row === 0 ? 1 : 3 / 4); // このボタンの半径
+    const colCount = row === 0 ? index : index - Math.ceil(buttonCount / 2); // このボタンの段におけるカラム
+    const rangeDegree =
+      90 /
+      (row === 0
+        ? Math.ceil(buttonCount / 2)
+        : buttonCount - Math.ceil(buttonCount / 2));
+    const startDegree = rangeDegree * colCount + 180;
+    const endDegree = rangeDegree * colCount + rangeDegree + 180;
     return new NumberPlate(
       100,
       100,
-      200,
-      200,
+      r,
+      r,
       Utils.degreeToRadian(startDegree),
       Utils.degreeToRadian(endDegree),
       0,
-      answer
+      (++index).toString(10),
+      index
     );
   }
-  public static createList(buttonCount: number): NumberPlate[] {
-    let degree = 180;
-    return Utils.createArray(buttonCount).map(index =>
-      this.create(degree, (degree += 90 / buttonCount), (++index).toString(10))
+  public static createList(gameSize: GameSize): NumberPlate[] {
+    return Utils.createArray(gameSize.size).map(index =>
+      this.create(index, gameSize.size)
     );
   }
   /**
@@ -35,6 +43,7 @@ export default class NumberPlate {
    * @param startAngle 描画開始角度
    * @param endAngle 描画終了角度
    * @param tilt 傾き(度)
+   * @param answer この画像を押下した際に入力する答え
    */
   constructor(
     private cx: number,
@@ -44,7 +53,8 @@ export default class NumberPlate {
     private startAngle: number,
     private endAngle: number,
     private tilt: number,
-    public readonly answer: string
+    public readonly answer: string,
+    public key: number
   ) {}
 
   /**
@@ -52,8 +62,6 @@ export default class NumberPlate {
    */
   public get d(): string {
     let d = `M ${this.cx},${this.cy} L ${this.x1},${this.y1} A ${this.rx} ${this.ry} ${this.tilt} ${this.f1} ${this.f2} ${this.x2},${this.y2}z`;
-    // d = `M 0,0 L ${this.x1},${this.y1}z`;
-    console.log(d);
     return d;
   }
   /** 円弧始点: (x1, y1) */

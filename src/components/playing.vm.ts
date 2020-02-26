@@ -23,17 +23,18 @@ export default class PlayingVm extends Vue {
   protected oops: boolean = false;
   protected cleared: boolean = false;
   protected playingContainerStyles = {};
+  protected gameSize?: GameSize;
   public created() {
-    const gameSize = (this.$parent as AppVm).playingGameSize;
-    if (!gameSize) return this.$router.push(HomeRoute.NAME);
+    this.gameSize = (this.$parent as AppVm).playingGameSize;
+    if (!this.gameSize) return this.$router.push(HomeRoute.NAME);
     this.gameId = CreateGoodGameLogic.create(
-      gameSize!.baseHeight,
-      gameSize!.baseWidth
+      this.gameSize!.baseHeight,
+      this.gameSize!.baseWidth
     ).execute();
     UpdateCurrentGameIdLogic.create(this.gameId).execute();
     CreateUserCellLogic.createAndExecute(
       this.gameId,
-      gameSize,
+      this.gameSize,
       WindowHeight.create(window.innerHeight),
       WindowWidth.create(window.innerWidth)
     );
@@ -41,7 +42,7 @@ export default class PlayingVm extends Vue {
     UserAnswerLogic.setClearCallback(this.gameCleared);
     UserAnswerLogic.setFailureCallback(this.gameFailured);
     this.createPlayingContainerStyles(
-      gameSize,
+      this.gameSize,
       WindowHeight.create(window.innerHeight),
       WindowWidth.create(window.innerWidth)
     );
