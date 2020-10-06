@@ -68,7 +68,7 @@ export default class AnswerCandidateCollection {
   }
   /** 残り一つの答えの候補を取得する */
   public getLastOne(): AnswerCandidate {
-    return this.isLastOne
+    return this.isLastOne()
       ? this.answerCandidateList[0]
       : BusinessError.throw(
           AnswerCandidateCollection.name,
