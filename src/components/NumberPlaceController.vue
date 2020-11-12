@@ -21,6 +21,7 @@
           :x="numberPlate.charaPositionX"
           :y="numberPlate.charaPositionY + 10"
           :key="`numberPlateText${numberPlate.answer}`"
+          @click="fill(numberPlate.answer)"
         >{{ numberPlate.answer }}</text>
       </template>
       <circle cx="100" cy="100" r="100" fill="white" stroke="#aad6ec" @click="fill('')" />
