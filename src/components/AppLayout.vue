@@ -28,8 +28,7 @@
   </v-app>
 </template>
 
-<script src="./appLayout.vm.ts">
-</script>
+<script src="./appLayout.vm.ts"></script>
 <style>
 .bgcontainer {
   position: fixed;
