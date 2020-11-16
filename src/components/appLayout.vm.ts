@@ -3,7 +3,7 @@ import HomeRoute from '@/router/config/homeRoute';
 
 @Component({})
 export default class AppLayoutVm extends Vue {
-  protected drawer = null;
+  protected drawer = false;
   protected home = '/';
   public created() {
     this.$vuetify.theme.dark = true;
