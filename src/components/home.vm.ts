@@ -11,7 +11,7 @@ import AppVm from '@/app.vm';
 export default class HomeVm extends Vue {
   protected baseHeightItems = BaseHeight.selectableValues;
   protected baseWidthItems = BaseWidth.selectableValues;
-  protected baseHeightValue: number = 3;
+  protected baseHeightValue: number = 2;
   protected baseWidthValue: number = 3;
   private choseResult: GameSize | string = '';
   protected get gameSize(): string {
