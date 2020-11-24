@@ -55,6 +55,10 @@
   /* opacity: 50; */
 }
 .svg > text {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   font-size: 30px;
 }
 </style>

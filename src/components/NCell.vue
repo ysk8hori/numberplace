@@ -20,34 +20,7 @@
   user-select: none;
 }
 .selected {
-  border: indianred 1px solid;
-  -webkit-animation: blink 0.5s infinite alternate;
-  -moz-animation: blink 0.5s infinite alternate;
-  animation: blink 0.5s infinite alternate;
-}
-@-webkit-keyframes blink {
-  100% {
-    background-color: pink;
-  }
-  0% {
-    background-color: white;
-  }
-}
-@-moz-keyframes blink {
-  100% {
-    background-color: pink;
-  }
-  0% {
-    background-color: white;
-  }
-}
-@keyframes blink {
-  100% {
-    background-color: pink;
-  }
-  0% {
-    background-color: white;
-  }
+  border: indianred 2px solid;
 }
 .unchangeable {
   font-weight: bold;
