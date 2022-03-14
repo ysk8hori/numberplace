@@ -7,33 +7,12 @@ function App() {
 
   return (
     <>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(9, 20px)',
-        }}
-      >
+      <div className="aspect-square max-w-screen-sm max-h-screen grid grid-cols-9 box-border">
         {puzzle.cells.map(cell => {
           return (
             <div
               key={`${cell.pos[0]}-${cell.pos[1]}`}
-              style={{ border: '1px solid black' }}
-            >
-              {cell.answer ?? ' '}
-            </div>
-          );
-        })}
-      </div>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(9, 20px)',
-        }}
-      >
-        {correct.cells.map(cell => {
-          return (
-            <div
-              key={`${cell.pos[0]}-${cell.pos[1]}`}
+              className="box-border"
               style={{ border: '1px solid black' }}
             >
               {cell.answer ?? ' '}
