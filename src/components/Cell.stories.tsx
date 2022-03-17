@@ -47,3 +47,9 @@ SmallCell.decorators = [
 SmallCell.args = {
   answer: '1',
 };
+
+export const Right = Template.bind({});
+Right.args = {
+  answer: '1',
+  right: true,
+};
