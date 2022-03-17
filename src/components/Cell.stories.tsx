@@ -7,6 +7,13 @@ import Cell from './Cell';
 export default {
   title: 'components/Cell',
   component: Cell,
+  decorators: [
+    Story => (
+      <div className="w-16">
+        <Story />
+      </div>
+    ),
+  ],
 } as ComponentMeta<typeof Cell>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
