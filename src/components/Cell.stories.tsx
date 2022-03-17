@@ -24,3 +24,26 @@ export const Primary = Template.bind({});
 Primary.args = {
   answer: '1',
 };
+
+export const LargeCell = Template.bind({});
+LargeCell.decorators = [
+  Story => (
+    <div className="w-32">
+      <Story />
+    </div>
+  ),
+];
+LargeCell.args = {
+  answer: '1',
+};
+export const SmallCell = Template.bind({});
+SmallCell.decorators = [
+  Story => (
+    <div className="w-6">
+      <Story />
+    </div>
+  ),
+];
+SmallCell.args = {
+  answer: '1',
+};
