@@ -7,4 +7,9 @@ module.exports = {
     '@storybook/addon-postcss',
   ],
   framework: '@storybook/react',
+  options: {
+    postcssLoaderOptions: {
+      implementation: require('postcss'),
+    },
+  },
 };
