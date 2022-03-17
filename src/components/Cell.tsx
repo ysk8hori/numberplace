@@ -1,4 +1,10 @@
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, {
+  PropsWithChildren,
+  ReactElement,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 
 /**
  * マス目１つを表すコンポーネント。以下の特徴を持つ。
@@ -9,10 +15,11 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
  */
 export default function Cell({
   answer,
-}: {
+  ...rest
+}: PropsWithChildren<{
   /** そのセルの答え。未回答ならば undefined */
   answer: string | undefined;
-}) {
+}>) {
   const box = useRef<HTMLDivElement>(null);
   const [fontSize, setFontSize] = useState('1rem');
   const boxStyle = { fontSize };
@@ -26,6 +33,7 @@ export default function Cell({
       ref={box}
       className="box-border border-solid border aspect-square flex justify-center items-center"
       style={boxStyle}
+      {...rest}
     >
       {answer}
     </div>
