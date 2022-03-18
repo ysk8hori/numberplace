@@ -42,20 +42,28 @@ export default function Cell({
     () =>
       [
         'box-border',
-        'border-solid',
-        'border',
         'aspect-square',
-        'flex',
-        'justify-center',
-        'items-center',
         right ? 'border-r-2 border-r-black' : '',
         bottom ? 'border-b-2 border-b-black' : '',
       ].join(' '),
     [right],
   );
+  const innerClassName = useMemo(
+    () =>
+      [
+        'w-full',
+        'h-full',
+        'flex',
+        'justify-center',
+        'items-center',
+        right ? '' : 'border-r-2',
+        bottom ? '' : 'border-b-2',
+      ].join(' '),
+    [right],
+  );
   return (
     <div ref={box} className={className} style={boxStyle} {...rest}>
-      {answer}
+      <div className={innerClassName}>{answer}</div>
     </div>
   );
 }

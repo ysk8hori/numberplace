@@ -25,6 +25,10 @@ export default function GameBoard({
         'grid',
         `grid-cols-${blockSize.height * blockSize.width}`,
         'box-border',
+        'border-t-2',
+        'border-t-black',
+        'border-l-2',
+        'border-l-black',
       ].join(' '),
     [blockSize],
   );
