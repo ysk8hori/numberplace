@@ -29,16 +29,15 @@ export default function GameBoard({
     [blockSize],
   );
   return (
-    <>
-      <div className={className}>
-        {puzzle.cells.map(cell => (
-          <Cell
-            answer={cell.answer}
-            key={JSON.stringify(cell.pos)}
-            data-testid={cell.pos}
-          />
-        ))}
-      </div>
-    </>
+    <div className={className}>
+      {puzzle.cells.map(cell => (
+        <Cell
+          answer={cell.answer}
+          key={JSON.stringify(cell.pos)}
+          right={(cell.pos[0] + 1) % blockSize.width === 0}
+          data-testid={cell.pos}
+        />
+      ))}
+    </div>
   );
 }
