@@ -53,3 +53,9 @@ Right.args = {
   answer: '1',
   right: true,
 };
+
+export const Bottom = Template.bind({});
+Bottom.args = {
+  answer: '1',
+  bottom: true,
+};
