@@ -35,6 +35,7 @@ export default function GameBoard({
           answer={cell.answer}
           key={JSON.stringify(cell.pos)}
           right={(cell.pos[0] + 1) % blockSize.width === 0}
+          bottom={(cell.pos[1] + 1) % blockSize.height === 0}
           data-testid={cell.pos}
         />
       ))}

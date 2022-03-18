@@ -85,4 +85,38 @@ describe('GameBoard', () => {
     expect(screen.getByTestId('4,5')).not.toHaveClass('border-r-2');
     expect(screen.getByTestId('5,5')).toHaveClass('border-r-2');
   });
+  test('GameBoard は block 下端の cell に bottom を指定し ボーダーを濃くする', () => {
+    // BlockSize 2 x 3
+    render(<GameBoard puzzle={puzzle_2_3} blockSize={blockSize_2_3} />);
+    // 1行目
+    expect(screen.getByTestId('0,0')).not.toHaveClass('border-b-2');
+    expect(screen.getByTestId('1,0')).not.toHaveClass('border-b-2');
+    expect(screen.getByTestId('2,0')).not.toHaveClass('border-b-2');
+    expect(screen.getByTestId('3,0')).not.toHaveClass('border-b-2');
+    expect(screen.getByTestId('4,0')).not.toHaveClass('border-b-2');
+    expect(screen.getByTestId('5,0')).not.toHaveClass('border-b-2');
+    // 2行目
+    expect(screen.getByTestId('0,1')).toHaveClass('border-b-2');
+    expect(screen.getByTestId('1,1')).toHaveClass('border-b-2');
+    expect(screen.getByTestId('2,1')).toHaveClass('border-b-2');
+    expect(screen.getByTestId('3,1')).toHaveClass('border-b-2');
+    expect(screen.getByTestId('4,1')).toHaveClass('border-b-2');
+    expect(screen.getByTestId('5,1')).toHaveClass('border-b-2');
+    // 3行目
+    // 4行目
+    // 5行目
+    expect(screen.getByTestId('0,4')).not.toHaveClass('border-b-2');
+    expect(screen.getByTestId('1,4')).not.toHaveClass('border-b-2');
+    expect(screen.getByTestId('2,4')).not.toHaveClass('border-b-2');
+    expect(screen.getByTestId('3,4')).not.toHaveClass('border-b-2');
+    expect(screen.getByTestId('4,4')).not.toHaveClass('border-b-2');
+    expect(screen.getByTestId('5,4')).not.toHaveClass('border-b-2');
+    // 6行目
+    expect(screen.getByTestId('0,5')).toHaveClass('border-b-2');
+    expect(screen.getByTestId('1,5')).toHaveClass('border-b-2');
+    expect(screen.getByTestId('2,5')).toHaveClass('border-b-2');
+    expect(screen.getByTestId('3,5')).toHaveClass('border-b-2');
+    expect(screen.getByTestId('4,5')).toHaveClass('border-b-2');
+    expect(screen.getByTestId('5,5')).toHaveClass('border-b-2');
+  });
 });
