@@ -46,7 +46,7 @@ export default function Cell({
         right ? 'border-r-2 border-r-black' : '',
         bottom ? 'border-b-2 border-b-black' : '',
       ].join(' '),
-    [right],
+    [right, bottom],
   );
   const innerClassName = useMemo(
     () =>
@@ -59,7 +59,7 @@ export default function Cell({
         right ? '' : 'border-r-2',
         bottom ? '' : 'border-b-2',
       ].join(' '),
-    [right],
+    [right, bottom],
   );
   return (
     <div ref={box} className={className} style={boxStyle} {...rest}>
