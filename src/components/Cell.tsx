@@ -42,38 +42,62 @@ export default function Cell({
       setFontSize(`${box.current.offsetWidth / 2}px`);
     }
   });
+  return (
+    <div
+      ref={box}
+      className={'relative aspect-square flex justify-center items-center'}
+      style={boxStyle}
+      {...rest}
+    >
+      {answer}
+      <BorderLayer right={right} bottom={bottom} />
+      <SelectLayer select={select} />
+    </div>
+  );
+}
+
+/**
+ * cell のボーダーを表示するレイヤー。
+ *
+ * 2段構造になっているのは、黒いボーダーと灰色のボーダーが交差する箇所で黒いボーダーを勝たせるため。
+ * @see https://twitter.com/ysk8_/status/1504855146240811012?s=21
+ */
+const BorderLayer = ({
+  right,
+  bottom,
+}: {
+  /** セルの右側のボーダーを太くする */ right?: boolean;
+  /** セルの下側のボーダーを太くする */ bottom?: boolean;
+}) => {
   const className = useMemo(
     () =>
       [
-        'box-border',
-        'aspect-square',
+        'w-full h-full',
+        'absolute top-0 left-0',
         right ? 'border-r-2 border-r-black' : '',
         bottom ? 'border-b-2 border-b-black' : '',
-        'relative',
       ].join(' '),
     [right, bottom],
   );
   const innerClassName = useMemo(
     () =>
       [
-        'w-full',
-        'h-full',
-        'flex',
-        'justify-center',
-        'items-center',
+        'w-full h-full',
         right ? '' : 'border-r-2',
         bottom ? '' : 'border-b-2',
       ].join(' '),
     [right, bottom],
   );
   return (
-    <div ref={box} className={className} style={boxStyle} {...rest}>
-      <div className={innerClassName}>{answer}</div>
-      <SelectLayer select={select} />
+    <div className={className}>
+      <div className={innerClassName}></div>
     </div>
   );
-}
+};
 
+/**
+ * セルが選択中であることを表現するレイヤー。
+ */
 const SelectLayer = ({
   select,
 }: {
