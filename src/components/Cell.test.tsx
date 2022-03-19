@@ -13,16 +13,4 @@ describe('Cell', () => {
     render(<Cell answer={undefined} />);
     expect(screen.queryByText(/[0-9]/)).not.toBeInTheDocument();
   });
-  test('Cell は right を指定すると右側のボーダーが濃くなる', () => {
-    render(<Cell answer={undefined} right data-testid="cell" />);
-    expect(screen.queryByTestId('cell')).toHaveClass(
-      'border-r-2 border-r-black',
-    );
-  });
-  test('Cell は bottom を指定すると下側のボーダーが濃くなる', () => {
-    render(<Cell answer={undefined} bottom data-testid="cell" />);
-    expect(screen.queryByTestId('cell')).toHaveClass(
-      'border-b-2 border-b-black',
-    );
-  });
 });
