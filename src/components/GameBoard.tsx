@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { generateGame } from '@ysk8hori/numberplace-generator';
+import { BlockSize, Game } from '@ysk8hori/numberplace-generator';
 import Cell from './Cell';
 
 /**
@@ -7,14 +7,15 @@ import Cell from './Cell';
  *
  * - 正方形
  * - 親要素に合わせた大きさで表示する
+ * - cell を1つ選択状態にできる
  *
  */
 export default function GameBoard({
   puzzle,
   blockSize,
 }: {
-  puzzle: ReturnType<typeof generateGame>[0];
-  blockSize: Parameters<typeof generateGame>[0];
+  puzzle: Game;
+  blockSize: BlockSize;
 }) {
   const className = useMemo(
     () =>
@@ -41,6 +42,7 @@ export default function GameBoard({
           right={(cell.pos[0] + 1) % blockSize.width === 0}
           bottom={(cell.pos[1] + 1) % blockSize.height === 0}
           data-testid={cell.pos}
+          selected={cell.pos[0] === 2 && cell.pos[1] === 2 ? true : false}
         />
       ))}
     </div>
