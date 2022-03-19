@@ -23,7 +23,7 @@ export default function GameBoard({
         'max-w-screen-sm',
         'max-h-screen',
         'grid',
-        `grid-cols-${blockSize.height * blockSize.width}`,
+        generateGridColsClass(blockSize),
         'box-border',
         'border-t-2',
         'border-t-black',
@@ -45,4 +45,20 @@ export default function GameBoard({
       ))}
     </div>
   );
+}
+
+/**
+ * gird-cols-n の tailwind クラスを決定する。
+ *
+ * @param BlockSize
+ * @returns gird-cols-n の tailwind クラス
+ */
+function generateGridColsClass({
+  width,
+  height,
+}: {
+  width: number;
+  height: number;
+}) {
+  return `game-size-${width * height}`;
 }

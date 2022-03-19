@@ -15,3 +15,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.game-size-3 {
+  @apply grid-cols-3;
+}
+.game-size-4 {
+  @apply grid-cols-4;
+}
+.game-size-5 {
+  @apply grid-cols-5;
+}
+.game-size-6 {
+  @apply grid-cols-6;
+}
+.game-size-7 {
+  @apply grid-cols-7;
+}
+.game-size-8 {
+  @apply grid-cols-8;
+}
+.game-size-9 {
+  @apply grid-cols-9;
+}
