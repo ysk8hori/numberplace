@@ -59,3 +59,9 @@ Bottom.args = {
   answer: '1',
   bottom: true,
 };
+
+export const Selected = Template.bind({});
+Selected.args = {
+  answer: '1',
+  selected: true,
+};
