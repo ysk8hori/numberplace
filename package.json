@@ -12,7 +12,8 @@
     "test:watch": "vitest",
     "coverage": "vitest run --coverage",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "chromatic": "npx chromatic --project-token=069f5022b6fc"
   },
   "dependencies": {
     "@ysk8hori/numberplace-generator": "^1.0.7",
@@ -41,6 +42,7 @@
     "@vitest/ui": "latest",
     "autoprefixer": "^10.4.2",
     "babel-loader": "^8.2.3",
+    "chromatic": "^6.5.3",
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.4.0",
     "jsdom": "latest",
