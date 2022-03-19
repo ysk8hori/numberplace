@@ -42,7 +42,7 @@ export default function GameBoard({
           right={(cell.pos[0] + 1) % blockSize.width === 0}
           bottom={(cell.pos[1] + 1) % blockSize.height === 0}
           data-testid={cell.pos}
-          selected={cell.pos[0] === 2 && cell.pos[1] === 2 ? true : false}
+          select={cell.pos[0] === 2 && cell.pos[1] === 2 ? true : false}
         />
       ))}
     </div>

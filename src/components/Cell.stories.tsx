@@ -60,8 +60,8 @@ Bottom.args = {
   bottom: true,
 };
 
-export const Selected = Template.bind({});
-Selected.args = {
+export const Select = Template.bind({});
+Select.args = {
   answer: '1',
-  selected: true,
+  select: true,
 };

@@ -22,7 +22,7 @@ export default function Cell({
   answer,
   right,
   bottom,
-  selected,
+  select,
   ...rest
 }: PropsWithChildren<{
   /** そのセルの答え。未回答ならば省略可。 */
@@ -32,7 +32,7 @@ export default function Cell({
   /** セルの下側のボーダーを太くする */
   bottom?: boolean;
   /** セルを選択中表示にする */
-  selected?: boolean;
+  select?: boolean;
 }>) {
   const box = useRef<HTMLDivElement>(null);
   const [fontSize, setFontSize] = useState('1rem');
@@ -49,21 +49,11 @@ export default function Cell({
         'aspect-square',
         right ? 'border-r-2 border-r-black' : '',
         bottom ? 'border-b-2 border-b-black' : '',
-      ].join(' '),
-    [right, bottom, selected],
-  );
-  const innerClassName = useMemo(
-    () =>
-      [
-        'w-full',
-        'h-full',
-        'p-1',
-        right ? '' : 'border-r-2',
-        bottom ? '' : 'border-b-2',
+        'relative',
       ].join(' '),
     [right, bottom],
   );
-  const innerClass2 = useMemo(
+  const innerClassName = useMemo(
     () =>
       [
         'w-full',
@@ -71,16 +61,27 @@ export default function Cell({
         'flex',
         'justify-center',
         'items-center',
-        'aspect-square',
-        selected ? 'border-4 rounded-lg border-pink-300' : '',
+        right ? '' : 'border-r-2',
+        bottom ? '' : 'border-b-2',
       ].join(' '),
-    [selected],
+    [right, bottom],
   );
   return (
     <div ref={box} className={className} style={boxStyle} {...rest}>
-      <div className={innerClassName}>
-        <div className={innerClass2}>{answer}</div>
-      </div>
+      <div className={innerClassName}>{answer}</div>
+      <SelectLayer select={select} />
     </div>
   );
 }
+
+const SelectLayer = ({
+  select,
+}: {
+  /** セルを選択中表示にする */ select?: boolean;
+}) => {
+  return select ? (
+    <div className="w-full h-full p-1 absolute top-0 left-0">
+      <div className="w-full h-full border-4 rounded-lg border-pink-300"></div>
+    </div>
+  ) : null;
+};
