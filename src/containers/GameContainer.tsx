@@ -30,6 +30,24 @@ export default function GameContainer({
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   useFiller(puzzle, selectedPos, forceUpdate);
+  useArrowSelector(selectedPos, blockSize, setSelectedPos);
+  return (
+    <GameBoard
+      puzzle={puzzle}
+      blockSize={blockSize}
+      selectedPos={selectedPos}
+      onSelectCell={setSelectedPos}
+    />
+  );
+}
+
+function useArrowSelector(
+  selectedPos: readonly [number, number],
+  blockSize: BlockSize,
+  setSelectedPos: React.Dispatch<
+    React.SetStateAction<readonly [number, number]>
+  >,
+) {
   const movePos = useCallback(
     (ev: KeyboardEvent) => {
       console.log(ev.key);
@@ -49,15 +67,8 @@ export default function GameContainer({
     window.addEventListener('keydown', movePos);
     return () => window.removeEventListener('keydown', movePos);
   });
-  return (
-    <GameBoard
-      puzzle={puzzle}
-      blockSize={blockSize}
-      selectedPos={selectedPos}
-      onSelectCell={setSelectedPos}
-    />
-  );
 }
+
 function useFiller(
   puzzle: Game,
   selectedPos: readonly [number, number],
