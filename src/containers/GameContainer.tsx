@@ -29,20 +29,7 @@ export default function GameContainer({
 }) {
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   const [, forceUpdate] = useReducer(x => x + 1, 0);
-  const fill = useCallback(
-    (ev: KeyboardEvent) => {
-      if (ev.key.match(/[1-9]/)) {
-        puzzle.cells.find(cell => isSamePos(cell.pos, selectedPos))!.answer =
-          ev.key;
-        forceUpdate();
-      }
-    },
-    [puzzle, selectedPos, forceUpdate],
-  );
-  useEffect(() => {
-    window.addEventListener('keydown', fill);
-    return () => window.removeEventListener('keydown', fill);
-  });
+  useFiller(puzzle, selectedPos, forceUpdate);
   const movePos = useCallback(
     (ev: KeyboardEvent) => {
       console.log(ev.key);
@@ -70,4 +57,24 @@ export default function GameContainer({
       onSelectCell={setSelectedPos}
     />
   );
+}
+function useFiller(
+  puzzle: Game,
+  selectedPos: readonly [number, number],
+  forceUpdate: React.DispatchWithoutAction,
+) {
+  const fill = useCallback(
+    (ev: KeyboardEvent) => {
+      if (ev.key.match(/[1-9]/)) {
+        puzzle.cells.find(cell => isSamePos(cell.pos, selectedPos))!.answer =
+          ev.key;
+        forceUpdate();
+      }
+    },
+    [puzzle, selectedPos, forceUpdate],
+  );
+  useEffect(() => {
+    window.addEventListener('keydown', fill);
+    return () => window.removeEventListener('keydown', fill);
+  });
 }
