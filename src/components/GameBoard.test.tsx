@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import React from 'react';
-import { describe, test, it, expect } from 'vitest';
+import { describe, test, fn, expect } from 'vitest';
 import { render, screen, userEvent } from '../utils/test-utils';
 import GameBoard from './GameBoard';
 import { BlockSize, Game } from '@ysk8hori/numberplace-generator';
@@ -56,5 +56,19 @@ describe('GameBoard', () => {
     expect(screen.getByTestId('1,3')).toHaveTextContent('');
     expect(screen.getByTestId('2,3')).toHaveTextContent('2');
     expect(screen.getByTestId('3,3')).toHaveTextContent('');
+  });
+  test('選択したセルをコールバックで親へ伝えられる', () => {
+    const onSelectCell = fn();
+    render(
+      <GameBoard
+        puzzle={puzzle}
+        blockSize={blockSize}
+        onSelectCell={onSelectCell}
+      />,
+    );
+    userEvent.click(screen.getByTestId('0,1'));
+    expect(onSelectCell).toHaveBeenCalledWith([0, 1]);
+    userEvent.click(screen.getByTestId('3,3'));
+    expect(onSelectCell).toHaveBeenCalledWith([3, 3]);
   });
 });
