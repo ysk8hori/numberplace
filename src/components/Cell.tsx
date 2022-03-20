@@ -14,6 +14,7 @@ import React, {
  * - セルの大きさに合わせたフォントのサイズで表示する
  * - セルを選んだ時、選んでいることがわかる
  * - クリックできる（結果的に選択状態となる想定）
+ * - 選択中の Cell には data-select 属性が付く
  *
  * 以下のことは行わない。
  *
@@ -32,7 +33,12 @@ export default function Cell({
     SelectLayerProps
 >) {
   return (
-    <div className={'relative aspect-square'} onClick={onSelect} {...rest}>
+    <div
+      className={'relative aspect-square'}
+      onClick={onSelect}
+      data-select={select}
+      {...rest}
+    >
       <AnswerLayer answer={answer} />
       <BorderLayer right={right} bottom={bottom} />
       <SelectLayer select={select} />

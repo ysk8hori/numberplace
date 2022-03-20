@@ -19,4 +19,10 @@ describe('Cell', () => {
     userEvent.click(screen.getByText('2'));
     expect(onSelect).toHaveBeenCalled();
   });
+  test('選択中の Cell には data-select 属性が付く', () => {
+    render(<Cell data-testid="cell" select />);
+    expect(screen.getByTestId('cell')).toHaveAttribute('data-select');
+    render(<Cell data-testid="cell2" />);
+    expect(screen.getByTestId('cell2')).not.toHaveAttribute('data-select');
+  });
 });
