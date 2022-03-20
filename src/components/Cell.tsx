@@ -24,29 +24,10 @@ export default function Cell({
   bottom,
   select,
   ...rest
-}: PropsWithChildren<
-  {
-    /** そのセルの答え。未回答ならば省略可。 */
-    answer?: string;
-  } & BorderLayerProps &
-    SelectLayerProps
->) {
-  const box = useRef<HTMLDivElement>(null);
-  const [fontSize, setFontSize] = useState('1rem');
-  const boxStyle = { fontSize };
-  useLayoutEffect(() => {
-    if (box.current?.offsetWidth) {
-      setFontSize(`${box.current.offsetWidth / 2}px`);
-    }
-  });
+}: PropsWithChildren<AnswerLayerProps & BorderLayerProps & SelectLayerProps>) {
   return (
-    <div
-      ref={box}
-      className={'relative aspect-square flex justify-center items-center'}
-      style={boxStyle}
-      {...rest}
-    >
-      {answer}
+    <div className={'relative aspect-square'} {...rest}>
+      <AnswerLayer answer={answer} />
       <BorderLayer right={right} bottom={bottom} />
       <SelectLayer select={select} />
     </div>
@@ -104,4 +85,31 @@ const SelectLayer = ({ select }: SelectLayerProps) => {
       <div className="w-full h-full border-4 rounded-lg border-pink-300"></div>
     </div>
   ) : null;
+};
+
+type AnswerLayerProps = {
+  /** そのセルの答え。未回答ならば省略可。 */
+  answer?: string;
+};
+
+/**
+ * 答えを表示するレイヤー。
+ */
+const AnswerLayer = ({ answer }: AnswerLayerProps) => {
+  const box = useRef<HTMLDivElement>(null);
+  const [fontSize, setFontSize] = useState('1rem');
+  useLayoutEffect(() => {
+    if (box.current?.offsetWidth) {
+      setFontSize(`${box.current.offsetWidth / 2}px`);
+    }
+  });
+  return (
+    <span
+      ref={box}
+      className="w-full h-full flex justify-center items-center"
+      style={{ fontSize }}
+    >
+      {answer}
+    </span>
+  );
 };
