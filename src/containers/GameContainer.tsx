@@ -60,6 +60,15 @@ function useArrowSelector(
             }),
           );
           break;
+        case 'ArrowUp':
+          setSelectedPos(
+            moveY({
+              pos: selectedPos,
+              num: -1,
+              size: blockSize.height * blockSize.width,
+            }),
+          );
+          break;
       }
     },
     [selectedPos],

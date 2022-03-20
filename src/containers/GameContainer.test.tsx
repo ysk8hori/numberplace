@@ -47,4 +47,20 @@ describe('GameContainer', () => {
     expect(screen.getByTestId('0,3')).toHaveAttribute('data-select', 'false');
     expect(screen.getByTestId('0,0')).toHaveAttribute('data-select', 'true');
   });
+  test('キーボードの ArrowUp で選択セルを上に移動できる。端まで行くとループする。', () => {
+    render(<GameContainer puzzle={puzzle} blockSize={blockSize} />);
+    expect(screen.getByTestId('0,0')).toHaveAttribute('data-select', 'true');
+    userEvent.keyboard('{ArrowUp}');
+    expect(screen.getByTestId('0,0')).toHaveAttribute('data-select', 'false');
+    expect(screen.getByTestId('0,3')).toHaveAttribute('data-select', 'true');
+    userEvent.keyboard('{ArrowUp}');
+    expect(screen.getByTestId('0,3')).toHaveAttribute('data-select', 'false');
+    expect(screen.getByTestId('0,2')).toHaveAttribute('data-select', 'true');
+    userEvent.keyboard('{ArrowUp}');
+    expect(screen.getByTestId('0,2')).toHaveAttribute('data-select', 'false');
+    expect(screen.getByTestId('0,1')).toHaveAttribute('data-select', 'true');
+    userEvent.keyboard('{ArrowUp}');
+    expect(screen.getByTestId('0,1')).toHaveAttribute('data-select', 'false');
+    expect(screen.getByTestId('0,0')).toHaveAttribute('data-select', 'true');
+  });
 });
