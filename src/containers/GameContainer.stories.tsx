@@ -1,5 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { within, userEvent } from '@storybook/testing-library';
 import GameContainer from './GameContainer';
 import {
   blockSize_2_3 as blockSize,
@@ -23,10 +24,20 @@ export default {
 const Template: ComponentStory<typeof GameContainer> = args => (
   <GameContainer {...args} />
 );
-
-export const Primary = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
+Template.args = {
   puzzle,
   blockSize,
 };
+
+export const Primary = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Primary.args = Template.args;
+
+export const Click2_3 = Template.bind({});
+Click2_3.args = Template.args;
+Click2_3.play = async ({ canvasElement }) => {
+  // Starts querying the component from its root element
+  const canvas = within(canvasElement);
+  await userEvent.click(canvas.getByTestId('2,3'));
+};
+Click2_3.storyName = '[2,3] をクリックすると [2,3] が選択中となる';

@@ -16,4 +16,12 @@ describe('GameContainer', () => {
     expect(screen.getByTestId('0,0')).toHaveAttribute('data-select', 'true');
     expect(screen.getByTestId('0,1')).toHaveAttribute('data-select', 'false');
   });
+  test('クリックしたセルを選択中にする', () => {
+    render(<GameContainer puzzle={puzzle} blockSize={blockSize} />);
+    expect(screen.getByTestId('0,0')).toHaveAttribute('data-select', 'true');
+    expect(screen.getByTestId('2,2')).toHaveAttribute('data-select', 'false');
+    userEvent.click(screen.getByTestId('2,2'));
+    expect(screen.getByTestId('0,0')).toHaveAttribute('data-select', 'false');
+    expect(screen.getByTestId('2,2')).toHaveAttribute('data-select', 'true');
+  });
 });

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BlockSize, Game, Position } from '@ysk8hori/numberplace-generator';
 import GameBoard from '../components/GameBoard';
 
@@ -23,12 +23,13 @@ export default function GameContainer({
   /** ナンプレのブロックのサイズ */
   blockSize: BlockSize;
 }) {
-  const selectedPos: Position = [0, 0];
+  const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   return (
     <GameBoard
       puzzle={puzzle}
       blockSize={blockSize}
       selectedPos={selectedPos}
+      onSelectCell={setSelectedPos}
     />
   );
 }
