@@ -106,7 +106,7 @@ const AnswerLayer = ({ answer }: AnswerLayerProps) => {
   return (
     <span
       ref={box}
-      className="w-full h-full flex justify-center items-center"
+      className="w-full h-full flex justify-center items-center select-none"
       style={{ fontSize }}
     >
       {answer}
