@@ -24,37 +24,20 @@ export default function Cell({
   bottom,
   select,
   ...rest
-}: PropsWithChildren<{
-  /** そのセルの答え。未回答ならば省略可。 */
-  answer?: string;
-  /** セルの右側のボーダーを太くする */
-  right?: boolean;
-  /** セルの下側のボーダーを太くする */
-  bottom?: boolean;
-  /** セルを選択中表示にする */
-  select?: boolean;
-}>) {
-  const box = useRef<HTMLDivElement>(null);
-  const [fontSize, setFontSize] = useState('1rem');
-  const boxStyle = { fontSize };
-  useLayoutEffect(() => {
-    if (box.current?.offsetWidth) {
-      setFontSize(`${box.current.offsetWidth / 2}px`);
-    }
-  });
+}: PropsWithChildren<AnswerLayerProps & BorderLayerProps & SelectLayerProps>) {
   return (
-    <div
-      ref={box}
-      className={'relative aspect-square flex justify-center items-center'}
-      style={boxStyle}
-      {...rest}
-    >
-      {answer}
+    <div className={'relative aspect-square'} {...rest}>
+      <AnswerLayer answer={answer} />
       <BorderLayer right={right} bottom={bottom} />
       <SelectLayer select={select} />
     </div>
   );
 }
+
+type BorderLayerProps = {
+  /** セルの右側のボーダーを太くする */ right?: boolean;
+  /** セルの下側のボーダーを太くする */ bottom?: boolean;
+};
 
 /**
  * cell のボーダーを表示するレイヤー。
@@ -62,13 +45,7 @@ export default function Cell({
  * 2段構造になっているのは、黒いボーダーと灰色のボーダーが交差する箇所で黒いボーダーを勝たせるため。
  * @see https://twitter.com/ysk8_/status/1504855146240811012?s=21
  */
-const BorderLayer = ({
-  right,
-  bottom,
-}: {
-  /** セルの右側のボーダーを太くする */ right?: boolean;
-  /** セルの下側のボーダーを太くする */ bottom?: boolean;
-}) => {
+const BorderLayer = ({ right, bottom }: BorderLayerProps) => {
   const className = useMemo(
     () =>
       [
@@ -95,17 +72,44 @@ const BorderLayer = ({
   );
 };
 
+type SelectLayerProps = {
+  /** セルを選択中表示にする */ select?: boolean;
+};
+
 /**
  * セルが選択中であることを表現するレイヤー。
  */
-const SelectLayer = ({
-  select,
-}: {
-  /** セルを選択中表示にする */ select?: boolean;
-}) => {
+const SelectLayer = ({ select }: SelectLayerProps) => {
   return select ? (
     <div className="w-full h-full p-1 absolute top-0 left-0">
       <div className="w-full h-full border-4 rounded-lg border-pink-300"></div>
     </div>
   ) : null;
+};
+
+type AnswerLayerProps = {
+  /** そのセルの答え。未回答ならば省略可。 */
+  answer?: string;
+};
+
+/**
+ * 答えを表示するレイヤー。
+ */
+const AnswerLayer = ({ answer }: AnswerLayerProps) => {
+  const box = useRef<HTMLDivElement>(null);
+  const [fontSize, setFontSize] = useState('1rem');
+  useLayoutEffect(() => {
+    if (box.current?.offsetWidth) {
+      setFontSize(`${box.current.offsetWidth / 2}px`);
+    }
+  });
+  return (
+    <span
+      ref={box}
+      className="w-full h-full flex justify-center items-center"
+      style={{ fontSize }}
+    >
+      {answer}
+    </span>
+  );
 };
