@@ -16,6 +16,11 @@ code {
     monospace;
 }
 
+/* 
+ * grid-cols-n をスクリプトで動的に使用したいが、tailwind はクラス名を完全な状態で記載していないとスタイルを生成してくれない。
+ * そのためここでラッパーを定義して回避している。
+ * @see https://twitter.com/ysk8_/status/1505018757391200256?s=21
+ */
 .game-size-3 {
   @apply grid-cols-3;
 }
