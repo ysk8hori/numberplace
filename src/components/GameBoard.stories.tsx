@@ -40,6 +40,7 @@ export const Primary = Template.bind({});
 Primary.args = {
   puzzle,
   blockSize,
+  selectedPos: [2, 2],
 };
 
 export const Large = Template.bind({});
@@ -47,6 +48,7 @@ export const Large = Template.bind({});
 Large.args = {
   puzzle,
   blockSize,
+  selectedPos: [2, 2],
 };
 Large.decorators = [
   Story => (
@@ -61,6 +63,7 @@ export const Small = Template.bind({});
 Small.args = {
   puzzle,
   blockSize,
+  selectedPos: [2, 2],
 };
 Small.decorators = [
   Story => (

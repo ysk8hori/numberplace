@@ -71,4 +71,24 @@ describe('GameBoard', () => {
     userEvent.click(screen.getByTestId('3,3'));
     expect(onSelectCell).toHaveBeenCalledWith([3, 3]);
   });
+  test('選択したセルをコールバックで親へ伝えられる', () => {
+    const onSelectCell = fn();
+    render(
+      <GameBoard
+        puzzle={puzzle}
+        blockSize={blockSize}
+        onSelectCell={onSelectCell}
+      />,
+    );
+    userEvent.click(screen.getByTestId('0,1'));
+    expect(onSelectCell).toHaveBeenCalledWith([0, 1]);
+    userEvent.click(screen.getByTestId('3,3'));
+    expect(onSelectCell).toHaveBeenCalledWith([3, 3]);
+  });
+  test('選択中のセルを指定できる', () => {
+    render(
+      <GameBoard puzzle={puzzle} blockSize={blockSize} selectedPos={[0, 1]} />,
+    );
+    expect(screen.getByTestId('0,1')).toHaveAttribute('data-select');
+  });
 });

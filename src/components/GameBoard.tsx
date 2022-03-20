@@ -9,18 +9,23 @@ import Cell from './Cell';
  * - 親要素に合わせた大きさで表示する
  * - cell を1つ選択状態にできる
  * - 選択したセルをコールバックで親へ伝えられる
+ * - 選択中のセルを指定できる
  *
  */
 export default function GameBoard({
   puzzle,
   blockSize,
   onSelectCell = () => undefined,
+  selectedPos,
 }: {
   /** ナンプレの問題 */
   puzzle: Game;
   /** ナンプレのブロックのサイズ */
   blockSize: BlockSize;
+  /** セル選択時イベント */
   onSelectCell?: (pos: Position) => void;
+  /** 選択中セルの座標 */
+  selectedPos?: Position;
 }) {
   const className = useMemo(
     () =>
@@ -47,7 +52,11 @@ export default function GameBoard({
           right={(cell.pos[0] + 1) % blockSize.width === 0}
           bottom={(cell.pos[1] + 1) % blockSize.height === 0}
           data-testid={cell.pos}
-          select={cell.pos[0] === 2 && cell.pos[1] === 2 ? true : false}
+          select={
+            cell.pos[0] === selectedPos?.[0] && cell.pos[1] === selectedPos?.[1]
+              ? true
+              : false
+          }
           onSelect={() => onSelectCell(cell.pos)}
         />
       ))}
