@@ -24,16 +24,13 @@ export default function Cell({
   bottom,
   select,
   ...rest
-}: PropsWithChildren<{
-  /** そのセルの答え。未回答ならば省略可。 */
-  answer?: string;
-  /** セルの右側のボーダーを太くする */
-  right?: boolean;
-  /** セルの下側のボーダーを太くする */
-  bottom?: boolean;
-  /** セルを選択中表示にする */
-  select?: boolean;
-}>) {
+}: PropsWithChildren<
+  {
+    /** そのセルの答え。未回答ならば省略可。 */
+    answer?: string;
+  } & BorderLayerProps &
+    SelectLayerProps
+>) {
   const box = useRef<HTMLDivElement>(null);
   const [fontSize, setFontSize] = useState('1rem');
   const boxStyle = { fontSize };
@@ -56,19 +53,18 @@ export default function Cell({
   );
 }
 
+type BorderLayerProps = {
+  /** セルの右側のボーダーを太くする */ right?: boolean;
+  /** セルの下側のボーダーを太くする */ bottom?: boolean;
+};
+
 /**
  * cell のボーダーを表示するレイヤー。
  *
  * 2段構造になっているのは、黒いボーダーと灰色のボーダーが交差する箇所で黒いボーダーを勝たせるため。
  * @see https://twitter.com/ysk8_/status/1504855146240811012?s=21
  */
-const BorderLayer = ({
-  right,
-  bottom,
-}: {
-  /** セルの右側のボーダーを太くする */ right?: boolean;
-  /** セルの下側のボーダーを太くする */ bottom?: boolean;
-}) => {
+const BorderLayer = ({ right, bottom }: BorderLayerProps) => {
   const className = useMemo(
     () =>
       [
@@ -95,14 +91,14 @@ const BorderLayer = ({
   );
 };
 
+type SelectLayerProps = {
+  /** セルを選択中表示にする */ select?: boolean;
+};
+
 /**
  * セルが選択中であることを表現するレイヤー。
  */
-const SelectLayer = ({
-  select,
-}: {
-  /** セルを選択中表示にする */ select?: boolean;
-}) => {
+const SelectLayer = ({ select }: SelectLayerProps) => {
   return select ? (
     <div className="w-full h-full p-1 absolute top-0 left-0">
       <div className="w-full h-full border-4 rounded-lg border-pink-300"></div>
