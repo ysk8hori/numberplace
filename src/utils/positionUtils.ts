@@ -29,3 +29,29 @@ export function moveX({
     ? [nextX, pos[1]]
     : [nextX - size, pos[1]];
 }
+
+/**
+ * 現在の座標から、指定した数移動した座標を返却する。
+ * そのゲームの端の座標値を超える場合はループする。
+ *
+ * @param pos 現在の座標
+ * @param num 移動する数
+ * @param size ゲーム側面のサイズ（幅や高さ）
+ */
+export function moveY({
+  pos,
+  num,
+  size,
+}: {
+  pos: Position;
+  num: number;
+  size: number;
+}): Position {
+  const _num = num % size;
+  const nextY = pos[1] + _num;
+  return nextY < 0
+    ? [pos[0], nextY + size]
+    : nextY < size
+    ? [pos[0], nextY]
+    : [pos[0], nextY - size];
+}
