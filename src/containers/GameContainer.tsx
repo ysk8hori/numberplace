@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState, useReducer } from 'react';
 import { BlockSize, Game, Position } from '@ysk8hori/numberplace-generator';
 import GameBoard from '../components/GameBoard';
+import { isSamePos } from '../utils/isSamePos';
 
 /**
  * ゲームの状態を保持し制御する。
@@ -10,6 +11,7 @@ import GameBoard from '../components/GameBoard';
  * - ゲーム初期表示時の選択中セルは 0,0
  * - 選択中セルの状態を保持する
  * - 選択中セルの情報をゲームに反映する
+ * - キーボードから数字の入力が可能
  *
  * 以下を行わない。
  * - ゲームの生成
@@ -24,6 +26,21 @@ export default function GameContainer({
   blockSize: BlockSize;
 }) {
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
+  const [, forceUpdate] = useReducer(x => x + 1, 0);
+  const fill = useCallback(
+    (ev: KeyboardEvent) => {
+      if (ev.key.match(/[1-9]/)) {
+        puzzle.cells.find(cell => isSamePos(cell.pos, selectedPos))!.answer =
+          ev.key;
+        forceUpdate();
+      }
+    },
+    [puzzle, selectedPos],
+  );
+  useEffect(() => {
+    window.addEventListener('keypress', fill);
+    return () => window.removeEventListener('keypress', fill);
+  });
   return (
     <GameBoard
       puzzle={puzzle}

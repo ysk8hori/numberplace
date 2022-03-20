@@ -40,4 +40,14 @@ Click2_3.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
   await userEvent.click(canvas.getByTestId('2,3'));
 };
-Click2_3.storyName = '[2,3] をクリックすると [2,3] が選択中となる';
+Click2_3.storyName = 'セルをクリックすると選択中となる';
+
+export const FillableByKeyboard = Template.bind({});
+FillableByKeyboard.args = Template.args;
+FillableByKeyboard.play = async ({ canvasElement }) => {
+  // Starts querying the component from its root element
+  const canvas = within(canvasElement);
+  await userEvent.click(canvas.getByTestId('2,0'));
+  await userEvent.keyboard('1');
+};
+FillableByKeyboard.storyName = 'キーボードから数字を入力できる';

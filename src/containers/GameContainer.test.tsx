@@ -24,4 +24,11 @@ describe('GameContainer', () => {
     expect(screen.getByTestId('0,0')).toHaveAttribute('data-select', 'false');
     expect(screen.getByTestId('2,2')).toHaveAttribute('data-select', 'true');
   });
+  test('キーボードから数字を入力して選択中セルに記入できる', () => {
+    render(<GameContainer puzzle={puzzle} blockSize={blockSize} />);
+    expect(screen.getByTestId('2,2')).not.toHaveTextContent('1');
+    userEvent.click(screen.getByTestId('2,2'));
+    userEvent.keyboard('1');
+    expect(screen.getByTestId('2,2')).toHaveTextContent('1');
+  });
 });
