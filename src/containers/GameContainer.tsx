@@ -12,6 +12,8 @@ import { isSamePos } from '../utils/isSamePos';
  * - 選択中セルの状態を保持する
  * - 選択中セルの情報をゲームに反映する
  * - キーボードから数字の入力が可能
+ * - キーボードの矢印キーで選択セルを変更可能
+ *   - 端までいくとループする
  *
  * 以下を行わない。
  * - ゲームの生成
@@ -35,11 +37,30 @@ export default function GameContainer({
         forceUpdate();
       }
     },
-    [puzzle, selectedPos],
+    [puzzle, selectedPos, forceUpdate],
   );
   useEffect(() => {
-    window.addEventListener('keypress', fill);
-    return () => window.removeEventListener('keypress', fill);
+    window.addEventListener('keydown', fill);
+    return () => window.removeEventListener('keydown', fill);
+  });
+  const movePos = useCallback(
+    (ev: KeyboardEvent) => {
+      console.log(ev.key);
+      switch (ev.key) {
+        case 'ArrowDown':
+          if (selectedPos[1] + 1 < blockSize.height * blockSize.width) {
+            setSelectedPos([selectedPos[0], selectedPos[1] + 1]);
+          } else {
+            setSelectedPos([selectedPos[0], 0]);
+          }
+          break;
+      }
+    },
+    [selectedPos],
+  );
+  useEffect(() => {
+    window.addEventListener('keydown', movePos);
+    return () => window.removeEventListener('keydown', movePos);
   });
   return (
     <GameBoard
