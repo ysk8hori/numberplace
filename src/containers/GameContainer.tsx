@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState, useReducer } from 'react';
 import { BlockSize, Game, Position } from '@ysk8hori/numberplace-generator';
 import GameBoard from '../components/GameBoard';
-import { isSamePos } from '../utils/isSamePos';
+import { isSamePos } from '../utils/positionUtils';
 
 /**
  * ゲームの状態を保持し制御する。
@@ -50,7 +50,6 @@ function useArrowSelector(
 ) {
   const movePos = useCallback(
     (ev: KeyboardEvent) => {
-      console.log(ev.key);
       switch (ev.key) {
         case 'ArrowDown':
           if (selectedPos[1] + 1 < blockSize.height * blockSize.width) {
