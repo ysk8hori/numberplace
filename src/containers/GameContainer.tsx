@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState, useReducer } from 'react';
 import { BlockSize, Game, Position } from '@ysk8hori/numberplace-generator';
 import GameBoard from '../components/GameBoard';
-import { isSamePos } from '../utils/positionUtils';
+import { isSamePos, moveY } from '../utils/positionUtils';
 
 /**
  * ゲームの状態を保持し制御する。
@@ -52,11 +52,13 @@ function useArrowSelector(
     (ev: KeyboardEvent) => {
       switch (ev.key) {
         case 'ArrowDown':
-          if (selectedPos[1] + 1 < blockSize.height * blockSize.width) {
-            setSelectedPos([selectedPos[0], selectedPos[1] + 1]);
-          } else {
-            setSelectedPos([selectedPos[0], 0]);
-          }
+          setSelectedPos(
+            moveY({
+              pos: selectedPos,
+              num: 1,
+              size: blockSize.height * blockSize.width,
+            }),
+          );
           break;
       }
     },
