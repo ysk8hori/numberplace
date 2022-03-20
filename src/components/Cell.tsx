@@ -13,20 +13,26 @@ import React, {
  * - 正方形
  * - セルの大きさに合わせたフォントのサイズで表示する
  * - セルを選んだ時、選んでいることがわかる
+ * - クリックできる（結果的に選択状態となる想定）
  *
  * 以下のことは行わない。
  *
  * - 自分のポジションを意識した処理
  */
 export default function Cell({
+  onSelect = () => undefined,
   answer,
   right,
   bottom,
   select,
   ...rest
-}: PropsWithChildren<AnswerLayerProps & BorderLayerProps & SelectLayerProps>) {
+}: PropsWithChildren<
+  { onSelect?: () => void } & AnswerLayerProps &
+    BorderLayerProps &
+    SelectLayerProps
+>) {
   return (
-    <div className={'relative aspect-square'} {...rest}>
+    <div className={'relative aspect-square'} onClick={onSelect} {...rest}>
       <AnswerLayer answer={answer} />
       <BorderLayer right={right} bottom={bottom} />
       <SelectLayer select={select} />
