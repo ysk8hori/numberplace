@@ -66,6 +66,7 @@ describe('GameBoard', () => {
     render(
       <GameBoard puzzle={puzzle} blockSize={blockSize} selectedPos={[0, 1]} />,
     );
-    expect(screen.getByTestId('0,1')).toHaveAttribute('data-select');
+    expect(screen.getByTestId('0,1')).toHaveAttribute('data-select', 'true');
+    expect(screen.getByTestId('0,2')).toHaveAttribute('data-select', 'false');
   });
 });
