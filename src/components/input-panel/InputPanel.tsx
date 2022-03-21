@@ -6,6 +6,8 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import styled from 'styled-components';
+import InputPanelButton from './InputPanelButton';
 
 /**
  * 答えを入力するための数字のパネルを表示する。
@@ -20,11 +22,11 @@ export default function InputPanel({
   blockSize: BlockSize;
 }>) {
   return (
-    <div {...rest}>
-      <button data-testid="input_1">1</button>
-      <button data-testid="input_2">2</button>
-      <button data-testid="input_3">3</button>
-      <button data-testid="input_4">4</button>
+    <div className="flex" {...rest}>
+      <InputPanelButton data-testid="input_1">1</InputPanelButton>
+      <InputPanelButton data-testid="input_2">2</InputPanelButton>
+      <InputPanelButton data-testid="input_3">3</InputPanelButton>
+      <InputPanelButton data-testid="input_4">4</InputPanelButton>
     </div>
   );
 }

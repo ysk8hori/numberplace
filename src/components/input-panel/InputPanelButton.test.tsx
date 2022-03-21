@@ -6,7 +6,7 @@ import InputPanelButton from './InputPanelButton';
 
 describe('InputPanelButton', () => {
   test('答えとなる文字列を表示する', () => {
-    render(<InputPanelButton answerString="1" data-testid="input_1" />);
+    render(<InputPanelButton data-testid="input_1">1</InputPanelButton>);
     expect(screen.getByTestId('input_1')).toHaveTextContent('1');
   });
 });

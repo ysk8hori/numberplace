@@ -9,7 +9,7 @@ export default {
   component: InputPanel,
   decorators: [
     Story => (
-      <div className="w-16">
+      <div style={{ width: '300px' }}>
         <Story />
       </div>
     ),

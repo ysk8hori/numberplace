@@ -9,7 +9,7 @@ export default {
   component: InputPanelButton,
   decorators: [
     Story => (
-      <div className="w-16">
+      <div className="w-16 bg-teal-100 p-4">
         <Story />
       </div>
     ),
@@ -18,11 +18,8 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof InputPanelButton> = args => (
-  <InputPanelButton {...args} />
+  <InputPanelButton {...args}>1</InputPanelButton>
 );
 
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
-  answerString: '1',
-};
