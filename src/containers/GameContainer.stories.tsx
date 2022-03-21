@@ -9,7 +9,7 @@ import {
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'components/GameContainer',
+  title: 'containers/GameContainer',
   component: GameContainer,
   decorators: [
     Story => (
