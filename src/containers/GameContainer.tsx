@@ -8,6 +8,7 @@ import React, {
 import { BlockSize, Game, Position } from '@ysk8hori/numberplace-generator';
 import GameBoard from '../components/GameBoard';
 import { isSamePos, moveX, moveY } from '../utils/positionUtils';
+import InputPanel from '../components/input-panel/InputPanel';
 
 /**
  * ゲームの状態を保持し制御する。
@@ -20,6 +21,7 @@ import { isSamePos, moveX, moveY } from '../utils/positionUtils';
  * - キーボードから数字の入力が可能
  * - キーボードの矢印キーで選択セルを変更可能
  *   - 端までいくとループする
+ * - 入力パネルを表示する
  *
  * 以下を行わない。
  * - ゲームの生成
@@ -43,13 +45,17 @@ export default function GameContainer({
   const fill = useFill(puzzle, selectedPos, forceUpdate);
   useFillByKeyboard(fill);
   useArrowSelector(selectedPos, blockSize, setSelectedPos);
+
   return (
-    <GameBoard
-      puzzle={puzzle}
-      blockSize={blockSize}
-      selectedPos={selectedPos}
-      onSelectCell={setSelectedPos}
-    />
+    <>
+      <GameBoard
+        puzzle={puzzle}
+        blockSize={blockSize}
+        selectedPos={selectedPos}
+        onSelectCell={setSelectedPos}
+      />
+      <InputPanel blockSize={blockSize} />
+    </>
   );
 }
 
