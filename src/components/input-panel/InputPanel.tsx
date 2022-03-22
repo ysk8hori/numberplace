@@ -2,6 +2,13 @@ import { BlockSize } from '@ysk8hori/numberplace-generator';
 import React, { useMemo } from 'react';
 import InputPanelButton from './InputPanelButton';
 
+type Props = {
+  /** ゲームのブロックサイズ */
+  blockSize: BlockSize;
+  /** 入力ボタンを押下した際のイベント */
+  onInput?: (buttonText: string) => void;
+};
+
 /**
  * 答えを入力するための数字のパネルを表示する。
  *
@@ -11,12 +18,11 @@ import InputPanelButton from './InputPanelButton';
  * - ボタン押下時に押下したボタンのテキストを callback で親へ通知する
  * - 入力ボタンが６個以上並ぶ場合は横２列になる
  */
-const InputPanel: React.FC<{
-  /** ゲームのブロックサイズ */
-  blockSize: BlockSize;
-  /** 入力ボタンを押下した際のイベント */
-  onInput?: (buttonText: string) => void;
-}> = ({ blockSize, onInput = () => undefined, ...rest }) => {
+const InputPanel: React.FC<Props> = ({
+  blockSize,
+  onInput = () => undefined,
+  ...rest
+}) => {
   const size = blockSize.height * blockSize.width;
   const buttons = useMemo(
     () =>
