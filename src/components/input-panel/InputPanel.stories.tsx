@@ -21,8 +21,20 @@ const Template: ComponentStory<typeof InputPanel> = args => (
   <InputPanel {...args} />
 );
 
-export const Primary = Template.bind({});
+export const BlockSize_2x2 = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
+BlockSize_2x2.args = {
   blockSize: blockSize_2_2,
+};
+
+export const BlockSize_3x2 = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+BlockSize_3x2.args = {
+  blockSize: { width: 3, height: 2 },
+};
+
+export const BlockSize_3x3 = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+BlockSize_3x3.args = {
+  blockSize: { width: 3, height: 3 },
 };

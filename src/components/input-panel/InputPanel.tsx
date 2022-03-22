@@ -8,11 +8,13 @@ import InputPanelButton from './InputPanelButton';
  * 以下のことを実現する。
  * - その問題で入力する可能性のある数字のパネルを表示する
  * - ボタン押下時に押下したボタンのテキストを callback で親へ通知する
+ * - 入力ボタンが６個以上並ぶ場合は横２列になる
  */
 const InputPanel: React.FC<{
   blockSize: BlockSize;
   onInput?: (buttonText: string) => void;
 }> = ({ blockSize, onInput = () => undefined, ...rest }) => {
+  const size = blockSize.height * blockSize.width;
   const buttons = new Array(blockSize.height * blockSize.width)
     .fill(true)
     .map((_, index) => ++index)
@@ -25,7 +27,12 @@ const InputPanel: React.FC<{
       </InputPanelButton>
     ));
   return (
-    <div className="flex" {...rest}>
+    <div
+      className={`grid ${`grid-cols-wrap-${
+        size < 6 ? size : size % 2 === 0 ? size / 2 : Math.floor(size / 2) + 1
+      }`} gap-4`}
+      {...rest}
+    >
       {buttons}
     </div>
   );
