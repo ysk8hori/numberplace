@@ -9,6 +9,7 @@ import { BlockSize, Game, Position } from '@ysk8hori/numberplace-generator';
 import GameBoard from '../components/GameBoard';
 import { isSamePos, moveX, moveY } from '../utils/positionUtils';
 import InputPanel from '../components/input-panel/InputPanel';
+import styled from 'styled-components';
 
 /**
  * ゲームの状態を保持し制御する。
@@ -55,10 +56,15 @@ export default function GameContainer({
         selectedPos={selectedPos}
         onSelectCell={setSelectedPos}
       />
+      <Spacer />
       <InputPanel blockSize={blockSize} onInput={fill} />
     </>
   );
 }
+
+const Spacer = styled.div`
+  height: 8px;
+`;
 
 function useArrowSelector(
   selectedPos: readonly [number, number],
