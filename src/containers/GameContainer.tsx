@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useState, useReducer } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useState,
+  useReducer,
+  useMemo,
+} from 'react';
 import { BlockSize, Game, Position } from '@ysk8hori/numberplace-generator';
 import GameBoard from '../components/GameBoard';
 import { isSamePos, moveX, moveY } from '../utils/positionUtils';
@@ -17,9 +23,10 @@ import { isSamePos, moveX, moveY } from '../utils/positionUtils';
  *
  * 以下を行わない。
  * - ゲームの生成
+ * - 親から受け取った puzzle の変更
  */
 export default function GameContainer({
-  puzzle,
+  puzzle: basePuzzle,
   blockSize,
 }: {
   /** ナンプレの問題 */
@@ -27,6 +34,10 @@ export default function GameContainer({
   /** ナンプレのブロックのサイズ */
   blockSize: BlockSize;
 }) {
+  const puzzle = useMemo(
+    () => JSON.parse(JSON.stringify(basePuzzle)),
+    [basePuzzle],
+  );
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   useFiller(puzzle, selectedPos, forceUpdate);

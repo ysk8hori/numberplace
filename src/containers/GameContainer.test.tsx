@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 import { describe, test, fn, expect } from 'vitest';
+import { isSamePos } from '../utils/positionUtils';
 import {
   render,
   screen,
@@ -30,6 +31,16 @@ describe('GameContainer', () => {
     userEvent.click(screen.getByTestId('2,2'));
     userEvent.keyboard('1');
     expect(screen.getByTestId('2,2')).toHaveTextContent('1');
+  });
+  test('親から受け取った puzzle の変更を行わない', () => {
+    render(<GameContainer puzzle={puzzle} blockSize={blockSize} />);
+    expect(screen.getByTestId('2,2')).not.toHaveTextContent('1');
+    userEvent.click(screen.getByTestId('2,2'));
+    userEvent.keyboard('1');
+    expect(screen.getByTestId('2,2')).toHaveTextContent('1');
+    expect(
+      puzzle.cells.find(cell => isSamePos(cell.pos, [2, 2]))!.answer,
+    ).not.toEqual('1');
   });
   test('キーボードの ArrowDown で選択セルを下に移動できる。端まで行くとループする。', () => {
     render(<GameContainer puzzle={puzzle} blockSize={blockSize} />);
