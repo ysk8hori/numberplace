@@ -33,7 +33,7 @@ const InputPanel: React.FC<{
             {buttonText}
           </InputPanelButton>
         )),
-    [size],
+    [size, onInput],
   );
   return (
     <div className={`grid grid-cols-5 gap-4`} {...rest}>

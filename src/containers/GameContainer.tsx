@@ -22,6 +22,7 @@ import InputPanel from '../components/input-panel/InputPanel';
  * - キーボードの矢印キーで選択セルを変更可能
  *   - 端までいくとループする
  * - 入力パネルを表示する
+ * - 入力パネルから数字の入力が可能
  *
  * 以下を行わない。
  * - ゲームの生成
@@ -54,7 +55,7 @@ export default function GameContainer({
         selectedPos={selectedPos}
         onSelectCell={setSelectedPos}
       />
-      <InputPanel blockSize={blockSize} />
+      <InputPanel blockSize={blockSize} onInput={fill} />
     </>
   );
 }

@@ -114,4 +114,11 @@ describe('GameContainer', () => {
     expect(screen.getByRole('button', { name: '4' })).toBeEnabled();
     expect(screen.queryByRole('button', { name: '5' })).toBeDisabled();
   });
+  test('入力パネルから数字を入力して選択中セルに記入できる', () => {
+    render(<GameContainer puzzle={puzzle_2_2} blockSize={blockSize_2_2} />);
+    expect(screen.getByTestId('2,2')).not.toHaveTextContent('1');
+    userEvent.click(screen.getByTestId('2,2'));
+    userEvent.click(screen.getByRole('button', { name: '1' }));
+    expect(screen.getByTestId('2,2')).toHaveTextContent('1');
+  });
 });
