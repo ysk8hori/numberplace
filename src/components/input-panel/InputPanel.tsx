@@ -30,11 +30,14 @@ const InputPanel: React.FC<{
         )),
     [size],
   );
+  const gridColsLength = useMemo(
+    () =>
+      size < 6 ? size : size % 2 === 0 ? size / 2 : Math.floor(size / 2) + 1,
+    [size],
+  );
   return (
     <div
-      className={`grid ${`grid-cols-wrap-${
-        size < 6 ? size : size % 2 === 0 ? size / 2 : Math.floor(size / 2) + 1
-      }`} gap-4`}
+      className={`grid ${`grid-cols-wrap-${gridColsLength}`} gap-4`}
       {...rest}
     >
       {buttons}
