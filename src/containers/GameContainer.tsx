@@ -40,7 +40,8 @@ export default function GameContainer({
   );
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   const [, forceUpdate] = useReducer(x => x + 1, 0);
-  useFiller(puzzle, selectedPos, forceUpdate);
+  const fill = useFill(puzzle, selectedPos, forceUpdate);
+  useFillByKeyboard(fill);
   useArrowSelector(selectedPos, blockSize, setSelectedPos);
   return (
     <GameBoard
@@ -108,23 +109,34 @@ function useArrowSelector(
   });
 }
 
-function useFiller(
+type Fill = (answer: string) => void;
+
+function useFill(
   puzzle: Game,
   selectedPos: readonly [number, number],
   forceUpdate: React.DispatchWithoutAction,
 ) {
-  const fill = useCallback(
-    (ev: KeyboardEvent) => {
-      if (ev.key.match(/[1-9]/)) {
-        puzzle.cells.find(cell => isSamePos(cell.pos, selectedPos))!.answer =
-          ev.key;
-        forceUpdate();
-      }
+  return useCallback<Fill>(
+    (answer: string) => {
+      puzzle.cells.find(cell => isSamePos(cell.pos, selectedPos))!.answer =
+        answer;
+      forceUpdate();
     },
     [puzzle, selectedPos, forceUpdate],
   );
+}
+
+function useFillByKeyboard(fill: Fill) {
+  const fillByKeyboard = useCallback(
+    (ev: KeyboardEvent) => {
+      if (ev.key.match(/[1-9]/)) {
+        fill(ev.key);
+      }
+    },
+    [fill],
+  );
   useEffect(() => {
-    window.addEventListener('keydown', fill);
-    return () => window.removeEventListener('keydown', fill);
+    window.addEventListener('keydown', fillByKeyboard);
+    return () => window.removeEventListener('keydown', fillByKeyboard);
   });
 }
