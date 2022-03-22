@@ -108,10 +108,10 @@ describe('GameContainer', () => {
   });
   test('入力パネルを表示する', () => {
     render(<GameContainer puzzle={puzzle_2_2} blockSize={blockSize_2_2} />);
-    expect(screen.getByRole('button', { name: '1' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: '2' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: '3' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: '4' })).toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: '5' })).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '1' })).toBeEnabled();
+    expect(screen.getByRole('button', { name: '2' })).toBeEnabled();
+    expect(screen.getByRole('button', { name: '3' })).toBeEnabled();
+    expect(screen.getByRole('button', { name: '4' })).toBeEnabled();
+    expect(screen.queryByRole('button', { name: '5' })).toBeDisabled();
   });
 });

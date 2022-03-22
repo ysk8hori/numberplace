@@ -6,7 +6,8 @@ import InputPanelButton from './InputPanelButton';
  * 答えを入力するための数字のパネルを表示する。
  *
  * 以下のことを実現する。
- * - その問題で入力する可能性のある数字のパネルを表示する
+ * - 1〜9までの数字のボタンを表示する
+ * - その問題で入力する可能性のある数字のパネルが押下可能
  * - ボタン押下時に押下したボタンのテキストを callback で親へ通知する
  * - 入力ボタンが６個以上並ぶ場合は横２列になる
  */
@@ -19,29 +20,23 @@ const InputPanel: React.FC<{
   const size = blockSize.height * blockSize.width;
   const buttons = useMemo(
     () =>
-      new Array(size)
+      new Array(9)
         .fill(true)
         .map((_, index) => ++index)
         .map(buttonText => (
           <InputPanelButton
             data-testid={`input_${buttonText}`}
             onClick={() => onInput(buttonText.toString())}
+            disabled={size < buttonText}
+            key={buttonText}
           >
             {buttonText}
           </InputPanelButton>
         )),
     [size],
   );
-  const gridColsLength = useMemo(
-    () =>
-      size < 6 ? size : size % 2 === 0 ? size / 2 : Math.floor(size / 2) + 1,
-    [size],
-  );
   return (
-    <div
-      className={`grid ${`grid-cols-wrap-${gridColsLength}`} gap-4`}
-      {...rest}
-    >
+    <div className={`grid grid-cols-5 gap-4`} {...rest}>
       {buttons}
     </div>
   );

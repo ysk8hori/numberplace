@@ -6,13 +6,17 @@ import InputPanel from './InputPanel';
 import { blockSize_2_2 } from '../../utils/test-utils';
 
 describe('InputPanel', () => {
-  test('その問題で入力する可能性のある数字のパネルを表示する', () => {
+  test('その問題で入力する可能性のある数字のパネルが押下可能', () => {
     render(<InputPanel blockSize={blockSize_2_2} />);
-    expect(screen.getByTestId('input_1')).toHaveTextContent('1');
-    expect(screen.getByTestId('input_2')).toHaveTextContent('2');
-    expect(screen.getByTestId('input_3')).toHaveTextContent('3');
-    expect(screen.getByTestId('input_4')).toHaveTextContent('4');
-    expect(screen.queryByTestId('input_5')).not.toBeInTheDocument();
+    expect(screen.getByTestId('input_1')).toBeEnabled();
+    expect(screen.getByTestId('input_2')).toBeEnabled();
+    expect(screen.getByTestId('input_3')).toBeEnabled();
+    expect(screen.getByTestId('input_4')).toBeEnabled();
+    expect(screen.getByTestId('input_5')).toBeDisabled();
+    expect(screen.getByTestId('input_6')).toBeDisabled();
+    expect(screen.getByTestId('input_7')).toBeDisabled();
+    expect(screen.getByTestId('input_8')).toBeDisabled();
+    expect(screen.getByTestId('input_9')).toBeDisabled();
   });
   test('ボタン押下時に押下したボタンのテキストを callback で親へ通知する', () => {
     const onInput = fn();
