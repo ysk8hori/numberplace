@@ -1,8 +1,6 @@
 import React, {
-  HTMLAttributes,
   PropsWithChildren,
   useLayoutEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -15,12 +13,7 @@ import styled from 'styled-components';
  * - 押下可能な数字のパネルを表示する
  * - ボタンの大きさに合わせたフォントのサイズで表示する
  */
-export default function InputPanelButton({
-  children,
-  ...rest
-}: PropsWithChildren<{
-  //
-}>) {
+const InputPanelButton: React.FC = ({ children, ...rest }) => {
   const button = useRef<HTMLButtonElement>(null);
   const [fontSize, setFontSize] = useState('1rem');
   useLayoutEffect(() => {
@@ -38,7 +31,7 @@ export default function InputPanelButton({
       {children}
     </NewMorphizmButton>
   );
-}
+};
 
 const NewMorphizmButton = styled.button`
   box-shadow: -2px -2px 5px rgba(255, 255, 255, 1),
@@ -49,3 +42,5 @@ const NewMorphizmButton = styled.button`
       inset -3px -3px 5px rgba(255, 255, 255, 1);
   }
 `;
+
+export default InputPanelButton;

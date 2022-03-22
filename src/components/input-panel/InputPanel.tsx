@@ -1,12 +1,5 @@
 import { BlockSize } from '@ysk8hori/numberplace-generator';
-import React, {
-  PropsWithChildren,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import styled from 'styled-components';
+import React from 'react';
 import InputPanelButton from './InputPanelButton';
 
 /**
@@ -15,12 +8,9 @@ import InputPanelButton from './InputPanelButton';
  * 以下のことを実現する。
  * - その問題で入力する可能性のある数字のパネルを表示する
  */
-export default function InputPanel({
-  blockSize,
-  ...rest
-}: PropsWithChildren<{
+const InputPanel: React.FC<{
   blockSize: BlockSize;
-}>) {
+}> = ({ blockSize, ...rest }) => {
   const buttons = new Array(blockSize.height * blockSize.width)
     .fill(true)
     .map((_, index) => ++index)
@@ -34,4 +24,6 @@ export default function InputPanel({
       {buttons}
     </div>
   );
-}
+};
+
+export default InputPanel;
