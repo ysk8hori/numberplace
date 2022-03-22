@@ -7,6 +7,7 @@ import {
   puzzle_2_3 as puzzle,
 } from '../utils/test-utils';
 import styled from 'styled-components';
+import { resolve_2_3 } from '../utils/storybookUtils';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -48,8 +49,7 @@ FillableByKeyboard.args = Template.args;
 FillableByKeyboard.play = async ({ canvasElement }) => {
   // Starts querying the component from its root element
   const canvas = within(canvasElement);
-  await userEvent.click(canvas.getByTestId('2,0'));
-  await userEvent.keyboard('1');
+  await resolve_2_3(canvas);
 };
 FillableByKeyboard.storyName = 'キーボードから数字を入力できる';
 
@@ -68,6 +68,10 @@ const FontKaushanScript = styled.div`
 `;
 export const KaushanScript = Template.bind({});
 KaushanScript.args = Template.args;
+KaushanScript.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
 KaushanScript.decorators = [
   Story => (
     <FontKaushanScript>
@@ -81,6 +85,10 @@ const FontOswald = styled.div`
 `;
 export const Oswald = Template.bind({});
 Oswald.args = Template.args;
+Oswald.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
 Oswald.decorators = [
   Story => (
     <FontOswald>
@@ -94,6 +102,10 @@ const FontQuicksand = styled.div`
 `;
 export const Quicksand = Template.bind({});
 Quicksand.args = Template.args;
+Quicksand.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
 Quicksand.decorators = [
   Story => (
     <FontQuicksand>
@@ -107,6 +119,10 @@ const FontRobotoCondensed = styled.div`
 `;
 export const RobotoCondensed = Template.bind({});
 RobotoCondensed.args = Template.args;
+RobotoCondensed.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
 RobotoCondensed.decorators = [
   Story => (
     <FontRobotoCondensed>
@@ -120,6 +136,10 @@ const FontVollkorn = styled.div`
 `;
 export const Vollkorn = Template.bind({});
 Vollkorn.args = Template.args;
+Vollkorn.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
 Vollkorn.decorators = [
   Story => (
     <FontVollkorn>
@@ -133,6 +153,10 @@ const FontAlegreyaSansSC = styled.div`
 `;
 export const AlegreyaSansSC = Template.bind({});
 AlegreyaSansSC.args = Template.args;
+AlegreyaSansSC.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
 AlegreyaSansSC.decorators = [
   Story => (
     <FontAlegreyaSansSC>
@@ -146,6 +170,10 @@ const FontAmaticSC = styled.div`
 `;
 export const AmaticSC = Template.bind({});
 AmaticSC.args = Template.args;
+AmaticSC.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
 AmaticSC.decorators = [
   Story => (
     <FontAmaticSC>
@@ -159,6 +187,10 @@ const FontAnton = styled.div`
 `;
 export const Anton = Template.bind({});
 Anton.args = Template.args;
+Anton.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
 Anton.decorators = [
   Story => (
     <FontAnton>
@@ -172,6 +204,10 @@ const FontBangers = styled.div`
 `;
 export const Bangers = Template.bind({});
 Bangers.args = Template.args;
+Bangers.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
 Bangers.decorators = [
   Story => (
     <FontBangers>
@@ -185,6 +221,10 @@ const FontCherrySwash = styled.div`
 `;
 export const CherrySwash = Template.bind({});
 CherrySwash.args = Template.args;
+CherrySwash.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
 CherrySwash.decorators = [
   Story => (
     <FontCherrySwash>
@@ -198,6 +238,10 @@ const FontCorben = styled.div`
 `;
 export const Corben = Template.bind({});
 Corben.args = Template.args;
+Corben.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
 Corben.decorators = [
   Story => (
     <FontCorben>
@@ -211,6 +255,10 @@ const FontCreepster = styled.div`
 `;
 export const Creepster = Template.bind({});
 Creepster.args = Template.args;
+Creepster.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
 Creepster.decorators = [
   Story => (
     <FontCreepster>
@@ -224,6 +272,10 @@ const FontEconomica = styled.div`
 `;
 export const Economica = Template.bind({});
 Economica.args = Template.args;
+Economica.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
 Economica.decorators = [
   Story => (
     <FontEconomica>
@@ -237,6 +289,10 @@ const FontPermanentMarker = styled.div`
 `;
 export const PermanentMarker = Template.bind({});
 PermanentMarker.args = Template.args;
+PermanentMarker.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
 PermanentMarker.decorators = [
   Story => (
     <FontPermanentMarker>
@@ -250,6 +306,10 @@ const FontLondrinaShadow = styled.div`
 `;
 export const LondrinaShadow = Template.bind({});
 LondrinaShadow.args = Template.args;
+LondrinaShadow.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
 LondrinaShadow.decorators = [
   Story => (
     <FontLondrinaShadow>
