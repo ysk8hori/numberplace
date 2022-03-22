@@ -13,6 +13,7 @@ import styled from 'styled-components';
  *
  * 以下のことを実現する。
  * - 押下可能な数字のパネルを表示する
+ * - ボタンの大きさに合わせたフォントのサイズで表示する
  */
 export default function InputPanelButton({
   children,
@@ -20,9 +21,18 @@ export default function InputPanelButton({
 }: PropsWithChildren<{
   //
 }>) {
+  const button = useRef<HTMLButtonElement>(null);
+  const [fontSize, setFontSize] = useState('1rem');
+  useLayoutEffect(() => {
+    if (button.current?.offsetWidth) {
+      setFontSize(`${button.current.offsetWidth / 2}px`);
+    }
+  });
   return (
     <NewMorphizmButton
+      ref={button}
       className="aspect-square w-full h-full rounded-full"
+      style={{ fontSize }}
       {...rest}
     >
       {children}
