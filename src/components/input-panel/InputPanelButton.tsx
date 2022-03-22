@@ -41,6 +41,9 @@ const NewMorphizmButton = styled.button`
     box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1),
       inset -3px -3px 5px rgba(255, 255, 255, 1);
   }
+  & + & {
+    margin: 0px;
+  }
 `;
 
 export default InputPanelButton;
