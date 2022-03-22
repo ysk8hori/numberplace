@@ -121,4 +121,20 @@ describe('GameContainer', () => {
     userEvent.click(screen.getByRole('button', { name: '1' }));
     expect(screen.getByTestId('2,2')).toHaveTextContent('1');
   });
+  test('最初から記入済みのセルは上書きできない', () => {
+    render(<GameContainer puzzle={puzzle_2_2} blockSize={blockSize_2_2} />);
+    expect(screen.getByTestId('0,1')).toHaveTextContent('2');
+    userEvent.click(screen.getByTestId('0,1'));
+    userEvent.click(screen.getByRole('button', { name: '1' }));
+    expect(screen.getByTestId('0,1')).toHaveTextContent('2');
+  });
+  test('最初空欄だったセルは上書きできる', () => {
+    render(<GameContainer puzzle={puzzle_2_2} blockSize={blockSize_2_2} />);
+    expect(screen.getByTestId('0,0')).not.toHaveTextContent('2');
+    userEvent.click(screen.getByTestId('0,0'));
+    userEvent.click(screen.getByRole('button', { name: '2' }));
+    expect(screen.getByTestId('0,0')).toHaveTextContent('2');
+    userEvent.click(screen.getByRole('button', { name: '1' }));
+    expect(screen.getByTestId('0,0')).toHaveTextContent('1');
+  });
 });

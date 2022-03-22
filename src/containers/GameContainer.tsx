@@ -10,6 +10,7 @@ import GameBoard from '../components/GameBoard';
 import { isSamePos, moveX, moveY } from '../utils/positionUtils';
 import InputPanel from '../components/input-panel/InputPanel';
 import styled from 'styled-components';
+import { MyGame } from '../utils/typeUtils';
 
 /**
  * ゲームの状態を保持し制御する。
@@ -24,6 +25,7 @@ import styled from 'styled-components';
  *   - 端までいくとループする
  * - 入力パネルを表示する
  * - 入力パネルから数字の入力が可能
+ * - 最初から答えが記入済みのセルは変更不可
  *
  * 以下を行わない。
  * - ゲームの生成
@@ -38,10 +40,13 @@ export default function GameContainer({
   /** ナンプレのブロックのサイズ */
   blockSize: BlockSize;
 }) {
-  const puzzle = useMemo(
-    () => JSON.parse(JSON.stringify(basePuzzle)),
-    [basePuzzle],
-  );
+  const puzzle = useMemo(() => {
+    const puzzle = JSON.parse(JSON.stringify(basePuzzle)) as MyGame;
+    puzzle.cells
+      .filter(cell => cell.answer)
+      .forEach(cell => (cell.isFix = true));
+    return puzzle;
+  }, [basePuzzle]);
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   const fill = useFill(puzzle, selectedPos, forceUpdate);
@@ -125,14 +130,17 @@ function useArrowSelector(
 type Fill = (answer: string) => void;
 
 function useFill(
-  puzzle: Game,
+  puzzle: MyGame,
   selectedPos: readonly [number, number],
   forceUpdate: React.DispatchWithoutAction,
 ) {
   return useCallback<Fill>(
     (answer: string) => {
-      puzzle.cells.find(cell => isSamePos(cell.pos, selectedPos))!.answer =
-        answer;
+      const targetCell = puzzle.cells.find(
+        cell => !cell.isFix && isSamePos(cell.pos, selectedPos),
+      );
+      if (!targetCell) return;
+      targetCell.answer = answer;
       forceUpdate();
     },
     [puzzle, selectedPos, forceUpdate],
