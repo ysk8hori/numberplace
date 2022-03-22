@@ -11,7 +11,9 @@ import InputPanelButton from './InputPanelButton';
  * - 入力ボタンが６個以上並ぶ場合は横２列になる
  */
 const InputPanel: React.FC<{
+  /** ゲームのブロックサイズ */
   blockSize: BlockSize;
+  /** 入力ボタンを押下した際のイベント */
   onInput?: (buttonText: string) => void;
 }> = ({ blockSize, onInput = () => undefined, ...rest }) => {
   const size = blockSize.height * blockSize.width;
