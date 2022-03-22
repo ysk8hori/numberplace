@@ -79,7 +79,7 @@ function generateGridColsClass({
   width: number;
   height: number;
 }) {
-  return `game-size-${width * height}`;
+  return `grid-cols-wrap-${width * height}`;
 }
 
 export default GameBoard;
