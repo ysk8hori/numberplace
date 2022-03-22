@@ -15,6 +15,7 @@ import React, {
  * - セルを選んだ時、選んでいることがわかる
  * - クリックできる（結果的に選択状態となる想定）
  * - 選択中の Cell には data-select 属性が付く
+ * - 変更できない Cell が見た目でわかる
  *
  * 以下のことは行わない。
  *
@@ -27,6 +28,7 @@ const Cell: React.FC<
 > = ({
   onSelect = () => undefined,
   answer,
+  fix,
   right,
   bottom,
   select,
@@ -43,7 +45,7 @@ const Cell: React.FC<
       data-select={select}
       {...rest}
     >
-      <AnswerLayer answer={answer} />
+      <AnswerLayer answer={answer} fix={fix} />
       <BorderLayer right={right} bottom={bottom} />
       <SelectLayer select={select} />
     </div>
@@ -106,14 +108,17 @@ const SelectLayer: React.FC<SelectLayerProps> = ({ select }) => {
 type AnswerLayerProps = {
   /** そのセルの答え。未回答ならば省略可。 */
   answer?: string;
+  /** 変更不可フラグ */
+  fix?: boolean;
 };
 
 /**
  * 答えを表示するレイヤー。
  */
-const AnswerLayer: React.FC<AnswerLayerProps> = ({ answer }) => {
+const AnswerLayer: React.FC<AnswerLayerProps> = ({ answer, fix }) => {
   const box = useRef<HTMLDivElement>(null);
   const [fontSize, setFontSize] = useState('1rem');
+  const fontFamily = useMemo(() => (fix ? 'Vollkorn' : 'Corben'), [fix]);
   useLayoutEffect(() => {
     if (box.current?.offsetWidth) {
       setFontSize(`${box.current.offsetWidth / 2}px`);
@@ -123,7 +128,7 @@ const AnswerLayer: React.FC<AnswerLayerProps> = ({ answer }) => {
     <span
       ref={box}
       className="w-full h-full flex justify-center items-center select-none"
-      style={{ fontSize }}
+      style={{ fontSize, fontFamily }}
     >
       {answer}
     </span>
