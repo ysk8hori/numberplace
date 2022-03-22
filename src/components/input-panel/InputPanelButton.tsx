@@ -1,5 +1,4 @@
 import React, {
-  PropsWithChildren,
   useLayoutEffect,
   useRef,
   useState,
@@ -13,7 +12,11 @@ import styled from 'styled-components';
  * - 押下可能な数字のパネルを表示する
  * - ボタンの大きさに合わせたフォントのサイズで表示する
  */
-const InputPanelButton: React.FC = ({ children, ...rest }) => {
+const InputPanelButton: React.FC<{ onClick?: () => void }> = ({
+  onClick = () => undefined,
+  children,
+  ...rest
+}) => {
   const button = useRef<HTMLButtonElement>(null);
   const [fontSize, setFontSize] = useState('1rem');
   useLayoutEffect(() => {
@@ -26,6 +29,7 @@ const InputPanelButton: React.FC = ({ children, ...rest }) => {
       ref={button}
       className="aspect-square w-full h-full rounded-full"
       style={{ fontSize }}
+      onClick={onClick}
       {...rest}
     >
       {children}
