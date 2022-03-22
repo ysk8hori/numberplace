@@ -1,5 +1,5 @@
 import { BlockSize } from '@ysk8hori/numberplace-generator';
-import React from 'react';
+import React, { useMemo } from 'react';
 import InputPanelButton from './InputPanelButton';
 
 /**
@@ -15,17 +15,21 @@ const InputPanel: React.FC<{
   onInput?: (buttonText: string) => void;
 }> = ({ blockSize, onInput = () => undefined, ...rest }) => {
   const size = blockSize.height * blockSize.width;
-  const buttons = new Array(blockSize.height * blockSize.width)
-    .fill(true)
-    .map((_, index) => ++index)
-    .map(buttonText => (
-      <InputPanelButton
-        data-testid={`input_${buttonText}`}
-        onClick={() => onInput(buttonText.toString())}
-      >
-        {buttonText}
-      </InputPanelButton>
-    ));
+  const buttons = useMemo(
+    () =>
+      new Array(size)
+        .fill(true)
+        .map((_, index) => ++index)
+        .map(buttonText => (
+          <InputPanelButton
+            data-testid={`input_${buttonText}`}
+            onClick={() => onInput(buttonText.toString())}
+          >
+            {buttonText}
+          </InputPanelButton>
+        )),
+    [size],
+  );
   return (
     <div
       className={`grid ${`grid-cols-wrap-${
