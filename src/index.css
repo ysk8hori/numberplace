@@ -21,24 +21,24 @@ code {
  * そのためここでラッパーを定義して回避している。
  * @see https://twitter.com/ysk8_/status/1505018757391200256?s=21
  */
-.game-size-3 {
+.grid-cols-wrap-3 {
   @apply grid-cols-3;
 }
-.game-size-4 {
+.grid-cols-wrap-4 {
   @apply grid-cols-4;
 }
-.game-size-5 {
+.grid-cols-wrap-5 {
   @apply grid-cols-5;
 }
-.game-size-6 {
+.grid-cols-wrap-6 {
   @apply grid-cols-6;
 }
-.game-size-7 {
+.grid-cols-wrap-7 {
   @apply grid-cols-7;
 }
-.game-size-8 {
+.grid-cols-wrap-8 {
   @apply grid-cols-8;
 }
-.game-size-9 {
+.grid-cols-wrap-9 {
   @apply grid-cols-9;
 }

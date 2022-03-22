@@ -9,7 +9,7 @@ import {
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'components/GameContainer',
+  title: 'containers/GameContainer',
   component: GameContainer,
   decorators: [
     Story => (
@@ -51,3 +51,13 @@ FillableByKeyboard.play = async ({ canvasElement }) => {
   await userEvent.keyboard('1');
 };
 FillableByKeyboard.storyName = 'キーボードから数字を入力できる';
+
+export const FillableByPanel = Template.bind({});
+FillableByPanel.args = Template.args;
+FillableByPanel.play = async ({ canvasElement }) => {
+  // Starts querying the component from its root element
+  const canvas = within(canvasElement);
+  await userEvent.click(canvas.getByTestId('2,0'));
+  await userEvent.click(canvas.getByRole('button', { name: '1' }));
+};
+FillableByPanel.storyName = 'パネルのボタンから数字を入力できる';

@@ -20,7 +20,11 @@ import React, {
  *
  * - 自分のポジションを意識した処理
  */
-export default function Cell({
+const Cell: React.FC<
+  { onSelect?: () => void } & AnswerLayerProps &
+    BorderLayerProps &
+    SelectLayerProps
+> = ({
   onSelect = () => undefined,
   answer,
   right,
@@ -31,7 +35,7 @@ export default function Cell({
   { onSelect?: () => void } & AnswerLayerProps &
     BorderLayerProps &
     SelectLayerProps
->) {
+>) => {
   return (
     <div
       className={'relative aspect-square'}
@@ -44,7 +48,7 @@ export default function Cell({
       <SelectLayer select={select} />
     </div>
   );
-}
+};
 
 type BorderLayerProps = {
   /** セルの右側のボーダーを太くする */ right?: boolean;
@@ -57,7 +61,7 @@ type BorderLayerProps = {
  * 2段構造になっているのは、黒いボーダーと灰色のボーダーが交差する箇所で黒いボーダーを勝たせるため。
  * @see https://twitter.com/ysk8_/status/1504855146240811012?s=21
  */
-const BorderLayer = ({ right, bottom }: BorderLayerProps) => {
+const BorderLayer: React.FC<BorderLayerProps> = ({ right, bottom }) => {
   const className = useMemo(
     () =>
       [
@@ -91,7 +95,7 @@ type SelectLayerProps = {
 /**
  * セルが選択中であることを表現するレイヤー。
  */
-const SelectLayer = ({ select }: SelectLayerProps) => {
+const SelectLayer: React.FC<SelectLayerProps> = ({ select }) => {
   return select ? (
     <div className="w-full h-full p-1 absolute top-0 left-0">
       <div className="w-full h-full border-4 rounded-lg border-pink-300"></div>
@@ -107,7 +111,7 @@ type AnswerLayerProps = {
 /**
  * 答えを表示するレイヤー。
  */
-const AnswerLayer = ({ answer }: AnswerLayerProps) => {
+const AnswerLayer: React.FC<AnswerLayerProps> = ({ answer }) => {
   const box = useRef<HTMLDivElement>(null);
   const [fontSize, setFontSize] = useState('1rem');
   useLayoutEffect(() => {
@@ -125,3 +129,5 @@ const AnswerLayer = ({ answer }: AnswerLayerProps) => {
     </span>
   );
 };
+
+export default Cell;

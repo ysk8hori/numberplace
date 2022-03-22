@@ -2,6 +2,17 @@ import React, { useMemo } from 'react';
 import { BlockSize, Game, Position } from '@ysk8hori/numberplace-generator';
 import Cell from './Cell';
 
+type Props = {
+  /** ナンプレの問題 */
+  puzzle: Game;
+  /** ナンプレのブロックのサイズ */
+  blockSize: BlockSize;
+  /** セル選択時イベント */
+  onSelectCell?: (pos: Position) => void;
+  /** 選択中セルの座標 */
+  selectedPos?: Position;
+};
+
 /**
  * ナンプレのゲームを表示するゲームボード。以下の特徴を持つ。
  *
@@ -12,21 +23,12 @@ import Cell from './Cell';
  * - 選択中のセルを指定できる
  *
  */
-export default function GameBoard({
+const GameBoard: React.FC<Props> = ({
   puzzle,
   blockSize,
   onSelectCell = () => undefined,
   selectedPos,
-}: {
-  /** ナンプレの問題 */
-  puzzle: Game;
-  /** ナンプレのブロックのサイズ */
-  blockSize: BlockSize;
-  /** セル選択時イベント */
-  onSelectCell?: (pos: Position) => void;
-  /** 選択中セルの座標 */
-  selectedPos?: Position;
-}) {
+}) => {
   const className = useMemo(
     () =>
       [
@@ -62,7 +64,7 @@ export default function GameBoard({
       ))}
     </div>
   );
-}
+};
 
 /**
  * gird-cols-n の tailwind クラスを決定する。
@@ -77,5 +79,7 @@ function generateGridColsClass({
   width: number;
   height: number;
 }) {
-  return `game-size-${width * height}`;
+  return `grid-cols-wrap-${width * height}`;
 }
+
+export default GameBoard;
