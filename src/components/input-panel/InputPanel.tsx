@@ -21,12 +21,17 @@ export default function InputPanel({
 }: PropsWithChildren<{
   blockSize: BlockSize;
 }>) {
+  const buttons = new Array(blockSize.height * blockSize.width)
+    .fill(true)
+    .map((_, index) => ++index)
+    .map(buttonText => (
+      <InputPanelButton data-testid={`input_${buttonText}`}>
+        {buttonText}
+      </InputPanelButton>
+    ));
   return (
     <div className="flex" {...rest}>
-      <InputPanelButton data-testid="input_1">1</InputPanelButton>
-      <InputPanelButton data-testid="input_2">2</InputPanelButton>
-      <InputPanelButton data-testid="input_3">3</InputPanelButton>
-      <InputPanelButton data-testid="input_4">4</InputPanelButton>
+      {buttons}
     </div>
   );
 }
