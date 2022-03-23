@@ -65,3 +65,8 @@ Select.args = {
   answer: '1',
   select: true,
 };
+export const fix = Template.bind({});
+fix.args = {
+  answer: '1',
+  fix: true,
+};

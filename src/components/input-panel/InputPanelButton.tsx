@@ -1,5 +1,6 @@
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useContext, useLayoutEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { FontFamilyContext } from '../../contexts/fontContext';
 
 /**
  * 答えを入力するための数字のパネル1枚を表示する。
@@ -15,6 +16,7 @@ const InputPanelButton: React.FC<{
   disabled?: boolean;
 }> = ({ onClick, disabled, children, ...rest }) => {
   const button = useRef<HTMLButtonElement>(null);
+  const fontContext = useContext(FontFamilyContext);
   const [fontSize, setFontSize] = useState('1rem');
   useLayoutEffect(() => {
     if (button.current?.offsetWidth) {
@@ -25,7 +27,7 @@ const InputPanelButton: React.FC<{
     <NewMorphizmButton
       ref={button}
       className="aspect-square w-full h-full rounded-full"
-      style={{ fontSize }}
+      style={{ fontSize, fontFamily: fontContext.inputButton }}
       onClick={onClick}
       disabled={disabled}
       {...rest}

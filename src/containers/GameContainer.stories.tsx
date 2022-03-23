@@ -6,6 +6,12 @@ import {
   blockSize_2_3 as blockSize,
   puzzle_2_3 as puzzle,
 } from '../utils/test-utils';
+import styled from 'styled-components';
+import { resolve_2_3 } from '../utils/storybookUtils';
+import {
+  createFontFamilyValue,
+  FontFamilyContext,
+} from '../contexts/fontContext';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -47,8 +53,7 @@ FillableByKeyboard.args = Template.args;
 FillableByKeyboard.play = async ({ canvasElement }) => {
   // Starts querying the component from its root element
   const canvas = within(canvasElement);
-  await userEvent.click(canvas.getByTestId('2,0'));
-  await userEvent.keyboard('1');
+  await resolve_2_3(canvas);
 };
 FillableByKeyboard.storyName = 'キーボードから数字を入力できる';
 
@@ -61,3 +66,303 @@ FillableByPanel.play = async ({ canvasElement }) => {
   await userEvent.click(canvas.getByRole('button', { name: '1' }));
 };
 FillableByPanel.storyName = 'パネルのボタンから数字を入力できる';
+
+export const KaushanScript = Template.bind({});
+KaushanScript.args = Template.args;
+KaushanScript.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
+KaushanScript.decorators = [
+  Story => (
+    <FontFamilyContext.Provider
+      value={createFontFamilyValue({
+        normal: 'Kaushan Script',
+        fixed: 'Anton',
+        inputButton: 'Kaushan Script',
+      })}
+    >
+      <Story />
+    </FontFamilyContext.Provider>
+  ),
+];
+
+export const Oswald = Template.bind({});
+Oswald.args = Template.args;
+Oswald.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
+Oswald.decorators = [
+  Story => (
+    <FontFamilyContext.Provider
+      value={createFontFamilyValue({
+        normal: 'Oswald',
+        fixed: 'Anton',
+        inputButton: 'Oswald',
+      })}
+    >
+      <Story />
+    </FontFamilyContext.Provider>
+  ),
+];
+
+export const Quicksand = Template.bind({});
+Quicksand.args = Template.args;
+Quicksand.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
+Quicksand.decorators = [
+  Story => (
+    <FontFamilyContext.Provider
+      value={createFontFamilyValue({
+        normal: 'Quicksand',
+        fixed: 'Anton',
+        inputButton: 'Quicksand',
+      })}
+    >
+      <Story />
+    </FontFamilyContext.Provider>
+  ),
+];
+
+export const RobotoCondensed = Template.bind({});
+RobotoCondensed.args = Template.args;
+RobotoCondensed.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
+RobotoCondensed.decorators = [
+  Story => (
+    <FontFamilyContext.Provider
+      value={createFontFamilyValue({
+        normal: 'Roboto Condensed',
+        fixed: 'Anton',
+        inputButton: 'Roboto Condensed',
+      })}
+    >
+      <Story />
+    </FontFamilyContext.Provider>
+  ),
+];
+
+export const Vollkorn = Template.bind({});
+Vollkorn.args = Template.args;
+Vollkorn.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
+Vollkorn.decorators = [
+  Story => (
+    <FontFamilyContext.Provider
+      value={createFontFamilyValue({
+        normal: 'Vollkorn',
+        fixed: 'Anton',
+        inputButton: 'Vollkorn',
+      })}
+    >
+      <Story />
+    </FontFamilyContext.Provider>
+  ),
+];
+
+export const AlegreyaSansSC = Template.bind({});
+AlegreyaSansSC.args = Template.args;
+AlegreyaSansSC.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
+AlegreyaSansSC.decorators = [
+  Story => (
+    <FontFamilyContext.Provider
+      value={createFontFamilyValue({
+        normal: 'Alegreya Sans SC',
+        fixed: 'Anton',
+        inputButton: 'Alegreya Sans SC',
+      })}
+    >
+      <Story />
+    </FontFamilyContext.Provider>
+  ),
+];
+
+export const AmaticSC = Template.bind({});
+AmaticSC.args = Template.args;
+AmaticSC.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
+AmaticSC.decorators = [
+  Story => (
+    <FontFamilyContext.Provider
+      value={createFontFamilyValue({
+        normal: 'Amatic SC',
+        fixed: 'Anton',
+        inputButton: 'Amatic SC',
+      })}
+    >
+      <Story />
+    </FontFamilyContext.Provider>
+  ),
+];
+
+export const Anton = Template.bind({});
+Anton.args = Template.args;
+Anton.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
+Anton.decorators = [
+  Story => (
+    <FontFamilyContext.Provider
+      value={createFontFamilyValue({
+        normal: 'Anton',
+        fixed: 'Anton',
+        inputButton: 'Anton',
+      })}
+    >
+      <Story />
+    </FontFamilyContext.Provider>
+  ),
+];
+
+export const Bangers = Template.bind({});
+Bangers.args = Template.args;
+Bangers.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
+Bangers.decorators = [
+  Story => (
+    <FontFamilyContext.Provider
+      value={createFontFamilyValue({
+        normal: 'Bangers',
+        fixed: 'Anton',
+        inputButton: 'Bangers',
+      })}
+    >
+      <Story />
+    </FontFamilyContext.Provider>
+  ),
+];
+
+export const CherrySwash = Template.bind({});
+CherrySwash.args = Template.args;
+CherrySwash.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
+CherrySwash.decorators = [
+  Story => (
+    <FontFamilyContext.Provider
+      value={createFontFamilyValue({
+        normal: 'Cherry Swash',
+        fixed: 'Anton',
+        inputButton: 'Cherry Swash',
+      })}
+    >
+      <Story />
+    </FontFamilyContext.Provider>
+  ),
+];
+
+export const Corben = Template.bind({});
+Corben.args = Template.args;
+Corben.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
+Corben.decorators = [
+  Story => (
+    <FontFamilyContext.Provider
+      value={createFontFamilyValue({
+        normal: 'Corben',
+        fixed: 'Anton',
+        inputButton: 'Corben',
+      })}
+    >
+      <Story />
+    </FontFamilyContext.Provider>
+  ),
+];
+
+export const Creepster = Template.bind({});
+Creepster.args = Template.args;
+Creepster.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
+Creepster.decorators = [
+  Story => (
+    <FontFamilyContext.Provider
+      value={createFontFamilyValue({
+        normal: 'Creepster',
+        fixed: 'Anton',
+        inputButton: 'Creepster',
+      })}
+    >
+      <Story />
+    </FontFamilyContext.Provider>
+  ),
+];
+
+export const Economica = Template.bind({});
+Economica.args = Template.args;
+Economica.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
+Economica.decorators = [
+  Story => (
+    <FontFamilyContext.Provider
+      value={createFontFamilyValue({
+        normal: 'Economica',
+        fixed: 'Anton',
+        inputButton: 'Economica',
+      })}
+    >
+      <Story />
+    </FontFamilyContext.Provider>
+  ),
+];
+
+export const PermanentMarker = Template.bind({});
+PermanentMarker.args = Template.args;
+PermanentMarker.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
+PermanentMarker.decorators = [
+  Story => (
+    <FontFamilyContext.Provider
+      value={createFontFamilyValue({
+        normal: 'Permanent Marker',
+        fixed: 'Anton',
+        inputButton: 'Permanent Marker',
+      })}
+    >
+      <Story />
+    </FontFamilyContext.Provider>
+  ),
+];
+
+export const LondrinaShadow = Template.bind({});
+LondrinaShadow.args = Template.args;
+LondrinaShadow.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
+LondrinaShadow.decorators = [
+  Story => (
+    <FontFamilyContext.Provider
+      value={createFontFamilyValue({
+        normal: 'Londrina Shadow',
+        fixed: 'Anton',
+        inputButton: 'Londrina Shadow',
+      })}
+    >
+      <Story />
+    </FontFamilyContext.Provider>
+  ),
+];
