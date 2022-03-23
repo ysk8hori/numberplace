@@ -140,11 +140,15 @@ describe('GameContainer', () => {
     userEvent.click(screen.getByRole('button', { name: '1' }));
     expect(screen.getByTestId('0,0')).toHaveTextContent('1');
   });
-  test('全てのセルに答えを記入したら、答え合わせするかどうかの確認モーダルを出す。', () => {
+  test('全てのセルに答えを記入したら答え合わせするかどうかの確認ダイアログを出す', () => {
     render(<GameContainer puzzle={puzzle_2_3} blockSize={blockSize_2_3} />);
-    resolve_2_3({ finish: false });
+    const finish = resolve_2_3({ finish: false });
     expect(
       screen.queryByRole('dialog', { name: /答え合わせしますか/ }),
     ).not.toBeInTheDocument();
+    finish?.();
+    expect(
+      screen.getByRole('dialog', { name: /答え合わせの確認/ }),
+    ).toBeInTheDocument();
   });
 });

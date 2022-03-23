@@ -6,7 +6,6 @@ import {
   blockSize_2_3 as blockSize,
   puzzle_2_3 as puzzle,
 } from '../utils/test-utils';
-import styled from 'styled-components';
 import { resolve_2_3 } from '../utils/storybookUtils';
 import {
   createFontFamilyValue,
@@ -66,6 +65,18 @@ FillableByPanel.play = async ({ canvasElement }) => {
   await userEvent.click(canvas.getByRole('button', { name: '1' }));
 };
 FillableByPanel.storyName = 'パネルのボタンから数字を入力できる';
+
+export const Resolved = Template.bind({});
+Resolved.args = Template.args;
+Resolved.play = async ({ canvasElement }) => {
+  // Starts querying the component from its root element
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas, { finish: true });
+};
+Resolved.storyName =
+  '回答を全て記入すると答え合わせをするかどうかの確認ダイアログを表示する';
+
+// 以下フォントの検証 --------------------------------------
 
 export const KaushanScript = Template.bind({});
 KaushanScript.args = Template.args;

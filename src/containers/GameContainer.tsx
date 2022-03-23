@@ -26,6 +26,7 @@ import { MyGame } from '../utils/typeUtils';
  * - 入力パネルを表示する
  * - 入力パネルから数字の入力が可能
  * - 最初から答えが記入済みのセルは変更不可
+ * - 全てのセルに答えを記入したら答え合わせするかどうかの確認ダイアログを出す
  *
  * 以下を行わない。
  * - ゲームの生成
@@ -53,6 +54,10 @@ export default function GameContainer({
   useFillByKeyboard(fill);
   useArrowSelector(selectedPos, blockSize, setSelectedPos);
 
+  const checkFilledAllCells = useCallback(() => {
+    return puzzle.cells.every(cell => cell.answer);
+  }, [puzzle]);
+
   return (
     <>
       <GameBoard
@@ -63,6 +68,11 @@ export default function GameContainer({
       />
       <Spacer />
       <InputPanel blockSize={blockSize} onInput={fill} />
+      {checkFilledAllCells() && (
+        <div role="dialog" aria-label="答え合わせの確認">
+          答え合わせしますか？
+        </div>
+      )}
     </>
   );
 }
