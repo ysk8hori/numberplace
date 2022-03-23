@@ -8,6 +8,9 @@ import {
   userEvent,
   puzzle_2_2,
   blockSize_2_2,
+  puzzle_2_3,
+  blockSize_2_3,
+  resolve_2_3,
 } from '../utils/test-utils';
 import GameContainer from './GameContainer';
 
@@ -136,5 +139,12 @@ describe('GameContainer', () => {
     expect(screen.getByTestId('0,0')).toHaveTextContent('2');
     userEvent.click(screen.getByRole('button', { name: '1' }));
     expect(screen.getByTestId('0,0')).toHaveTextContent('1');
+  });
+  test('全てのセルに答えを記入したら、答え合わせするかどうかの確認モーダルを出す。', () => {
+    render(<GameContainer puzzle={puzzle_2_3} blockSize={blockSize_2_3} />);
+    resolve_2_3({ finish: false });
+    expect(
+      screen.queryByRole('dialog', { name: /答え合わせしますか/ }),
+    ).not.toBeInTheDocument();
   });
 });
