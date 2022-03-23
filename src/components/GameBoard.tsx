@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react';
-import { BlockSize, Game, Position } from '@ysk8hori/numberplace-generator';
+import { BlockSize, Position } from '@ysk8hori/numberplace-generator';
 import Cell from './Cell';
+import { MyGame } from '../utils/typeUtils';
 
 type Props = {
   /** ナンプレの問題 */
-  puzzle: Game;
+  puzzle: MyGame;
   /** ナンプレのブロックのサイズ */
   blockSize: BlockSize;
   /** セル選択時イベント */
@@ -21,6 +22,7 @@ type Props = {
  * - cell を1つ選択状態にできる
  * - 選択したセルをコールバックで親へ伝えられる
  * - 選択中のセルを指定できる
+ * - 変更不可であることをセルに指定できる
  *
  */
 const GameBoard: React.FC<Props> = ({
@@ -60,6 +62,7 @@ const GameBoard: React.FC<Props> = ({
               : false
           }
           onSelect={() => onSelectCell(cell.pos)}
+          fix={cell.isFix}
         />
       ))}
     </div>
