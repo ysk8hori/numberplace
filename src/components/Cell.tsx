@@ -1,10 +1,12 @@
 import React, {
   PropsWithChildren,
+  useContext,
   useLayoutEffect,
   useMemo,
   useRef,
   useState,
 } from 'react';
+import { FontFamilyContext } from '../contexts/fontContext';
 
 /**
  * マス目１つを表すコンポーネント。以下の特徴を持つ。
@@ -118,7 +120,11 @@ type AnswerLayerProps = {
 const AnswerLayer: React.FC<AnswerLayerProps> = ({ answer, fix }) => {
   const box = useRef<HTMLDivElement>(null);
   const [fontSize, setFontSize] = useState('1rem');
-  const fontFamily = useMemo(() => (fix ? 'Vollkorn' : 'Corben'), [fix]);
+  const fontContext = useContext(FontFamilyContext);
+  const fontFamily = useMemo(
+    () => (fix ? fontContext.fixed : fontContext.normal),
+    [fix],
+  );
   useLayoutEffect(() => {
     if (box.current?.offsetWidth) {
       setFontSize(`${box.current.offsetWidth / 2}px`);
