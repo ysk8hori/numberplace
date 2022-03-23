@@ -1,6 +1,9 @@
 import { within, userEvent } from '@storybook/testing-library';
 
-export async function resolve_2_3(canvas: ReturnType<typeof within>) {
+export async function resolve_2_3(
+  canvas: ReturnType<typeof within>,
+  option?: { finish?: boolean },
+) {
   // 1行目
   await userEvent.click(canvas.getByTestId('0,0'));
   await userEvent.keyboard('6');
@@ -47,6 +50,8 @@ export async function resolve_2_3(canvas: ReturnType<typeof within>) {
   await userEvent.keyboard('1');
   await userEvent.click(canvas.getByTestId('3,5'));
   await userEvent.keyboard('3');
-  await userEvent.click(canvas.getByTestId('5,5'));
-  await userEvent.keyboard('2');
+  if (option?.finish) {
+    await userEvent.click(canvas.getByTestId('5,5'));
+    await userEvent.keyboard('2');
+  }
 }
