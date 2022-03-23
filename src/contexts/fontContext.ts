@@ -14,4 +14,10 @@ export function createFontFamilyValue(
   };
 }
 
-export const FontFamilyContext = createContext(createFontFamilyValue());
+export const FontFamilyContext = createContext(
+  createFontFamilyValue({
+    fixed: 'Anton',
+    inputButton: 'Quicksand',
+    normal: 'Quicksand',
+  }),
+);
