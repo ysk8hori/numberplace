@@ -11,6 +11,7 @@ import { isSamePos, moveX, moveY } from '../utils/positionUtils';
 import InputPanel from '../components/input-panel/InputPanel';
 import styled from 'styled-components';
 import { MyGame } from '../utils/typeUtils';
+import Modal from '../components/atoms/Modal';
 
 /**
  * ゲームの状態を保持し制御する。
@@ -68,11 +69,9 @@ export default function GameContainer({
       />
       <Spacer />
       <InputPanel blockSize={blockSize} onInput={fill} />
-      {checkFilledAllCells() && (
-        <div role="dialog" aria-label="答え合わせの確認">
-          答え合わせしますか？
-        </div>
-      )}
+      <Modal isOpen={checkFilledAllCells()} contentLabel="答え合わせの確認">
+        答え合わせしますか？
+      </Modal>
     </>
   );
 }
