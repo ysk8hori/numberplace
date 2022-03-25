@@ -140,15 +140,14 @@ describe('GameContainer', () => {
     userEvent.click(screen.getByRole('button', { name: '1' }));
     expect(screen.getByTestId('0,0')).toHaveTextContent('1');
   });
-  test('全てのセルに答えを記入したら答え合わせするかどうかの確認ダイアログを出す', () => {
+  test('「こたえあわせ」ボタンを押下したら答え合わせするかどうかの確認ダイアログを出す', () => {
     render(<GameContainer puzzle={puzzle_2_3} blockSize={blockSize_2_3} />);
-    const finish = resolve_2_3({ finish: false });
     expect(
-      screen.queryByRole('dialog', { name: /答え合わせしますか/ }),
+      screen.queryByRole('dialog', { name: /答え合わせの確認/ }),
     ).not.toBeInTheDocument();
-    finish?.();
+    userEvent.click(screen.getByRole('button', { name: 'こたえあわせ' }));
     expect(
-      screen.getByRole('dialog', { name: /答え合わせの確認/ }),
+      screen.queryByRole('dialog', { name: /答え合わせの確認/ }),
     ).toBeInTheDocument();
   });
 });

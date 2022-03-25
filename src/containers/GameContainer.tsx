@@ -12,6 +12,7 @@ import InputPanel from '../components/input-panel/InputPanel';
 import styled from 'styled-components';
 import { MyGame } from '../utils/typeUtils';
 import Modal from '../components/atoms/Modal';
+import { Button } from '../stories/Button';
 
 /**
  * ゲームの状態を保持し制御する。
@@ -27,7 +28,7 @@ import Modal from '../components/atoms/Modal';
  * - 入力パネルを表示する
  * - 入力パネルから数字の入力が可能
  * - 最初から答えが記入済みのセルは変更不可
- * - 全てのセルに答えを記入したら答え合わせするかどうかの確認ダイアログを出す
+ * - 「こたえあわせ」ボタンを押下したら答え合わせするかどうかの確認ダイアログを出す
  *
  * 以下を行わない。
  * - ゲームの生成
@@ -55,10 +56,6 @@ export default function GameContainer({
   useFillByKeyboard(fill);
   useArrowSelector(selectedPos, blockSize, setSelectedPos);
 
-  const checkFilledAllCells = useCallback(() => {
-    return puzzle.cells.every(cell => cell.answer);
-  }, [puzzle]);
-
   return (
     <>
       <GameBoard
@@ -69,10 +66,22 @@ export default function GameContainer({
       />
       <Spacer />
       <InputPanel blockSize={blockSize} onInput={fill} />
-      <Modal isOpen={checkFilledAllCells()} contentLabel="答え合わせの確認">
+      <Spacer />
+      <Verifying />
+    </>
+  );
+}
+
+function Verifying() {
+  const [isOpen, setOpenState] = useState(false);
+  const open = useCallback(() => setOpenState(true), [setOpenState]);
+  return (
+    <div>
+      <Button label={'こたえあわせ'} onClick={() => open()} />
+      <Modal isOpen={isOpen} contentLabel="答え合わせの確認">
         答え合わせしますか？
       </Modal>
-    </>
+    </div>
   );
 }
 

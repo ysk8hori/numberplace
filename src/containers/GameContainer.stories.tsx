@@ -71,10 +71,10 @@ Resolved.args = Template.args;
 Resolved.play = async ({ canvasElement }) => {
   // Starts querying the component from its root element
   const canvas = within(canvasElement);
-  await resolve_2_3(canvas, { finish: true });
+  await userEvent.click(canvas.getByRole('button', { name: 'こたえあわせ' }));
 };
 Resolved.storyName =
-  '回答を全て記入すると答え合わせをするかどうかの確認ダイアログを表示する';
+  '「こたえあわせ」ボタンを押下したら答え合わせするかどうかの確認ダイアログを出す';
 
 // 以下フォントの検証 --------------------------------------
 
