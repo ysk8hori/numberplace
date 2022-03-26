@@ -51,6 +51,7 @@ export default function GameContainer({
   }, [basePuzzle]);
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   const [, forceUpdate] = useReducer(x => x + 1, 0);
+  window.onresize = forceUpdate;
   const fill = useFill(puzzle, selectedPos, forceUpdate);
   useFillByKeyboard(fill);
   useArrowSelector(selectedPos, blockSize, setSelectedPos);
