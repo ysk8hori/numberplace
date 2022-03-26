@@ -2,6 +2,11 @@ import { useCallback, useState } from 'react';
 import Modal from './atoms/Modal';
 import NeumorphismButton from './atoms/NeumorphismButton';
 
+/**
+ * こたえあわせボタンとダイアログ
+ *
+ * - 「こたえあわせ」ボタンを押下したら答え合わせするかどうかの確認ダイアログを出す
+ */
 export default function Verifying() {
   const [isOpen, setOpenState] = useState(false);
   const open = useCallback(() => setOpenState(true), [setOpenState]);
