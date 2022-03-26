@@ -8,7 +8,7 @@ import Spacer from './atoms/Spacer';
  *
  * - 「こたえあわせ」ボタンを押下したら答え合わせするかどうかの確認モーダルを出す
  * - モーダルの「いいえ」ボタンを押下でモーダルが閉じる
- * - モーダルの「はい」ボタンを押下でこたえあわせ開始コールバックを実行する
+ * - モーダルの「はい」ボタンを押下でモーダルを閉じこたえあわせ開始コールバックを実行する
  */
 const Verifying: React.FC<{
   /** こたえあわせ開始コールバック */
@@ -29,7 +29,7 @@ const Verifying: React.FC<{
           いいえ
         </NeumorphismButton>
         <NeumorphismButton
-          onClick={() => onStartChecking?.()}
+          onClick={() => (close(), onStartChecking?.())}
           className="p-2 rounded-full"
         >
           はい
