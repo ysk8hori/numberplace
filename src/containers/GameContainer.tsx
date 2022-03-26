@@ -9,11 +9,9 @@ import { BlockSize, Game, Position } from '@ysk8hori/numberplace-generator';
 import GameBoard from '../components/GameBoard';
 import { isSamePos, moveX, moveY } from '../utils/positionUtils';
 import InputPanel from '../components/input-panel/InputPanel';
-import styled from 'styled-components';
 import { MyGame } from '../utils/typeUtils';
-import Modal from '../components/atoms/Modal';
-import { Button } from '../stories/Button';
 import Verifying from '../components/Verifying';
+import Spacer from '../components/atoms/Spacer';
 
 /**
  * ゲームの状態を保持し制御する。
@@ -74,10 +72,6 @@ export default function GameContainer({
     </>
   );
 }
-
-const Spacer = styled.div`
-  height: 8px;
-`;
 
 function useArrowSelector(
   selectedPos: readonly [number, number],
