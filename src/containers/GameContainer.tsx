@@ -13,6 +13,7 @@ import styled from 'styled-components';
 import { MyGame } from '../utils/typeUtils';
 import Modal from '../components/atoms/Modal';
 import { Button } from '../stories/Button';
+import Verifying from '../components/Verifying';
 
 /**
  * ゲームの状態を保持し制御する。
@@ -69,19 +70,6 @@ export default function GameContainer({
       <Spacer />
       <Verifying />
     </>
-  );
-}
-
-function Verifying() {
-  const [isOpen, setOpenState] = useState(false);
-  const open = useCallback(() => setOpenState(true), [setOpenState]);
-  return (
-    <div>
-      <Button label={'こたえあわせ'} onClick={() => open()} />
-      <Modal isOpen={isOpen} contentLabel="答え合わせの確認">
-        答え合わせしますか？
-      </Modal>
-    </div>
   );
 }
 
