@@ -10,7 +10,9 @@ export default {
 } as ComponentMeta<typeof Verifying>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Verifying> = () => <Verifying />;
+const Template: ComponentStory<typeof Verifying> = args => (
+  <Verifying {...args} />
+);
 
 export const Primary = Template.bind({});
 Primary.storyName = 'こたえあわせボタン';

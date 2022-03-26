@@ -16,3 +16,12 @@ test('モーダルの「いいえ」ボタンを押下するとモーダルが�
   expect(await screen.findByRole('dialog', { name: '答え合わせの確認' }));
   userEvent.click(screen.getByRole('button', { name: 'いいえ' }));
 });
+
+test('モーダルの「はい」ボタンを押下すると onStartChecking イベントが実行される', async () => {
+  const onStartChecking = fn();
+  render(<Verifying onStartChecking={onStartChecking} />);
+  userEvent.click(screen.getByRole('button', { name: 'こたえあわせ' }));
+  expect(await screen.findByRole('dialog', { name: '答え合わせの確認' }));
+  userEvent.click(screen.getByRole('button', { name: 'はい' }));
+  expect(onStartChecking).toHaveBeenCalled();
+});
