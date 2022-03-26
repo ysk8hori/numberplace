@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import React from 'react';
-import { describe, test, fn, expect } from 'vitest';
+import { describe, test, expect } from 'vitest';
 import { isSamePos } from '../utils/positionUtils';
 import {
   render,
@@ -228,5 +228,28 @@ describe('GameContainer', () => {
     expect(
       screen.queryByRole('dialog', { name: /答え合わせの確認/ }),
     ).toBeInTheDocument();
+  });
+  test('「こたえあわせ」によって正しい Cell のみ fix する', () => {
+    render(
+      <GameContainer
+        puzzle={puzzle_2_3}
+        corrected={corrected_2_3}
+        blockSize={blockSize_2_3}
+      />,
+    );
+    userEvent.click(screen.getByTestId('0,0'));
+    userEvent.keyboard('6'); // 正答を記入
+    userEvent.click(screen.getByTestId('1,1'));
+    userEvent.keyboard('6'); // 誤答を記入
+    expect(screen.getByTestId('0,0')).not.toHaveAttribute('data-fix'); // 正答を記入したセル
+    expect(screen.getByTestId('1,0')).toHaveAttribute('data-fix'); // fix 済みセル
+    expect(screen.getByTestId('2,0')).not.toHaveAttribute('data-fix'); // 未記入セル
+    expect(screen.getByTestId('1,1')).not.toHaveAttribute('data-fix'); // 誤答を記入したセル
+    userEvent.click(screen.getByRole('button', { name: 'こたえあわせ' }));
+    userEvent.click(screen.getByRole('button', { name: 'はい' }));
+    expect(screen.getByTestId('0,0')).toHaveAttribute('data-fix'); // 正答を記入したセルは fix する
+    expect(screen.getByTestId('1,0')).toHaveAttribute('data-fix'); // fix 済みセル
+    expect(screen.getByTestId('2,0')).not.toHaveAttribute('data-fix'); // 未記入セル
+    expect(screen.getByTestId('1,1')).not.toHaveAttribute('data-fix'); // 誤答を記入したセル
   });
 });
