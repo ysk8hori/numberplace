@@ -68,7 +68,9 @@ export default function GameContainer({
       <Spacer />
       <InputPanel blockSize={blockSize} onInput={fill} />
       <Spacer />
-      <Verifying />
+      <div className="flex justify-center">
+        <Verifying />
+      </div>
     </>
   );
 }
