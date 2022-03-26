@@ -1,6 +1,6 @@
 import React, { useContext, useLayoutEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
 import { FontFamilyContext } from '../../contexts/fontContext';
+import NeumorphismButton from '../atoms/NeumorphismButton';
 
 /**
  * 答えを入力するための数字のパネル1枚を表示する。
@@ -24,7 +24,7 @@ const InputPanelButton: React.FC<{
     }
   });
   return (
-    <NewMorphizmButton
+    <NeumorphismButton
       ref={button}
       className="aspect-square w-full h-full rounded-full"
       style={{ fontSize, fontFamily: fontContext.inputButton }}
@@ -33,25 +33,8 @@ const InputPanelButton: React.FC<{
       {...rest}
     >
       {children}
-    </NewMorphizmButton>
+    </NeumorphismButton>
   );
 };
-
-const NewMorphizmButton = styled.button`
-  box-shadow: -2px -2px 5px rgba(255, 255, 255, 1),
-    3px 3px 5px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s;
-  &:active {
-    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1),
-      inset -3px -3px 5px rgba(255, 255, 255, 1);
-  }
-  &:disabled {
-    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1),
-      inset -3px -3px 5px rgba(255, 255, 255, 1);
-  }
-  & + & {
-    margin: 0px;
-  }
-`;
 
 export default InputPanelButton;
