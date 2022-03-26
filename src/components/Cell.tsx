@@ -1,6 +1,8 @@
 import React, {
   PropsWithChildren,
+  useCallback,
   useContext,
+  useEffect,
   useLayoutEffect,
   useMemo,
   useRef,
@@ -129,7 +131,7 @@ const AnswerLayer: React.FC<AnswerLayerProps> = ({ answer, fix }) => {
     if (box.current?.offsetWidth) {
       setFontSize(`${box.current.offsetWidth / 2}px`);
     }
-  });
+  }, [box.current?.offsetWidth]);
   return (
     <span
       ref={box}
