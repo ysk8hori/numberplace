@@ -11,18 +11,18 @@ import {
   createFontFamilyValue,
   FontFamilyContext,
 } from '../contexts/fontContext';
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'containers/GameContainer',
   component: GameContainer,
-  decorators: [
-    Story => (
-      <div style={{ width: '400px' }}>
-        <Story />
-      </div>
-    ),
-  ],
+  parameters: {
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
+      defaultViewport: 'iphone12mini',
+    },
+  },
 } as ComponentMeta<typeof GameContainer>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
