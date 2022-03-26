@@ -38,6 +38,14 @@ export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = Template.args;
 
+export const IPad = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+IPad.args = Template.args;
+IPad.parameters = {
+  ...Template.parameters,
+  viewport: { defaultViewport: 'ipad' },
+};
+
 export const Click2_3 = Template.bind({});
 Click2_3.args = Template.args;
 Click2_3.play = async ({ canvasElement }) => {
