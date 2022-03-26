@@ -36,6 +36,7 @@ import Spacer from '../components/atoms/Spacer';
  */
 export default function GameContainer({
   puzzle: basePuzzle,
+  corrected,
   blockSize,
 }: {
   /** ナンプレの問題 */
@@ -46,10 +47,6 @@ export default function GameContainer({
   blockSize: BlockSize;
 }) {
   const puzzle = usePuzzle(basePuzzle);
-  const check = useCallback(() => {
-    console.log(JSON.stringify(puzzle));
-    console.log('check');
-  }, [puzzle]);
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   useEffect(() => {
@@ -59,6 +56,23 @@ export default function GameContainer({
   const fill = useFill(puzzle, selectedPos, forceUpdate);
   useFillByKeyboard(fill);
   useArrowSelector(selectedPos, blockSize, setSelectedPos);
+  const check = useCallback(
+    (puzzle: MyGame) => {
+      corrected.cells.forEach(correctedCell => {
+        const targetCell = puzzle.cells.find(cell =>
+          isSamePos(correctedCell.pos, cell.pos),
+        )!;
+        if (correctedCell.answer === targetCell.answer) {
+          // 正解している cell は fix する
+          targetCell.isFix = true;
+        }
+      });
+
+      // fix を反映するために forceUpdate する
+      forceUpdate();
+    },
+    [corrected],
+  );
 
   return (
     <>
@@ -72,7 +86,7 @@ export default function GameContainer({
       <InputPanel blockSize={blockSize} onInput={fill} />
       <Spacer />
       <div className="flex justify-center">
-        <Verifying onStartChecking={check} />
+        <Verifying onStartChecking={() => check(puzzle)} />
       </div>
     </>
   );
