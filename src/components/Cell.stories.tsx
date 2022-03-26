@@ -2,6 +2,8 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import Cell from './Cell';
+import { within } from '@storybook/testing-library';
+import sleep from '../utils/sleep';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -36,6 +38,7 @@ LargeCell.decorators = [
 LargeCell.args = {
   answer: '1',
 };
+
 export const SmallCell = Template.bind({});
 SmallCell.decorators = [
   Story => (
@@ -47,6 +50,25 @@ SmallCell.decorators = [
 SmallCell.args = {
   answer: '1',
 };
+
+export const FontSizeChangesDynamically = Template.bind({});
+FontSizeChangesDynamically.decorators = [
+  Story => (
+    <div style={{ width: '100px' }} data-testid="div">
+      <Story />
+    </div>
+  ),
+];
+FontSizeChangesDynamically.args = {
+  answer: '1',
+};
+FontSizeChangesDynamically.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await sleep(500);
+  (await canvas.findByTestId('div')).style.setProperty('width', '20px');
+};
+FontSizeChangesDynamically.storyName =
+  'フォントサイズはセルの大きさに合わせて動的に変わる';
 
 export const Right = Template.bind({});
 Right.args = {
