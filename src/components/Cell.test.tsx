@@ -25,4 +25,8 @@ describe('Cell', () => {
     render(<Cell data-testid="cell2" />);
     expect(screen.getByTestId('cell2')).not.toHaveAttribute('data-select');
   });
+  test('変更できない Cell には data-fix 属性が付く', () => {
+    render(<Cell data-testid="cell" fix />);
+    expect(screen.getByTestId('cell')).toHaveAttribute('data-fix');
+  });
 });

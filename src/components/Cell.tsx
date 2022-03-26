@@ -1,8 +1,6 @@
 import React, {
   PropsWithChildren,
-  useCallback,
   useContext,
-  useEffect,
   useLayoutEffect,
   useMemo,
   useRef,
@@ -18,7 +16,7 @@ import { FontFamilyContext } from '../contexts/fontContext';
  * - セルの大きさに合わせたフォントのサイズで表示する
  * - セルを選んだ時、選んでいることがわかる
  * - クリックできる（結果的に選択状態となる想定）
- * - 選択中の Cell には data-select 属性が付く
+ * - 選択中の Cell が見た目でわかる
  * - 変更できない Cell が見た目でわかる
  *
  * 以下のことは行わない。
@@ -47,6 +45,7 @@ const Cell: React.FC<
       className={'relative aspect-square select-none'}
       onClick={onSelect}
       data-select={select}
+      data-fix={fix}
       {...rest}
     >
       <AnswerLayer answer={answer} fix={fix} />
