@@ -27,6 +27,8 @@ import Spacer from '../components/atoms/Spacer';
  * - 入力パネルを表示する
  * - 入力パネルから数字の入力が可能
  * - 最初から答えが記入済みのセルは変更不可
+ * - こたえあわせ開始コールバックでこたえあわせを行う
+ *   - 正解した Cell は変更不可とする
  *
  * 以下を行わない。
  * - ゲームの生成
@@ -38,16 +40,16 @@ export default function GameContainer({
 }: {
   /** ナンプレの問題 */
   puzzle: Game;
+  /** ナンプレの答え */
+  corrected: Game;
   /** ナンプレのブロックのサイズ */
   blockSize: BlockSize;
 }) {
-  const puzzle = useMemo(() => {
-    const puzzle = JSON.parse(JSON.stringify(basePuzzle)) as MyGame;
-    puzzle.cells
-      .filter(cell => cell.answer)
-      .forEach(cell => (cell.isFix = true));
-    return puzzle;
-  }, [basePuzzle]);
+  const puzzle = usePuzzle(basePuzzle);
+  const check = useCallback(() => {
+    console.log(JSON.stringify(puzzle));
+    console.log('check');
+  }, [puzzle]);
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   useEffect(() => {
@@ -70,10 +72,20 @@ export default function GameContainer({
       <InputPanel blockSize={blockSize} onInput={fill} />
       <Spacer />
       <div className="flex justify-center">
-        <Verifying />
+        <Verifying onStartChecking={check} />
       </div>
     </>
   );
+}
+
+function usePuzzle(basePuzzle: Game) {
+  return useMemo(() => {
+    const puzzle = JSON.parse(JSON.stringify(basePuzzle)) as MyGame;
+    puzzle.cells
+      .filter(cell => cell.answer)
+      .forEach(cell => (cell.isFix = true));
+    return puzzle;
+  }, [basePuzzle]);
 }
 
 function useArrowSelector(

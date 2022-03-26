@@ -3,8 +3,11 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { within, userEvent } from '@storybook/testing-library';
 import GameContainer from './GameContainer';
 import {
+  blockSize_2_2,
   blockSize_2_3 as blockSize,
+  puzzle_2_2,
   puzzle_2_3 as puzzle,
+  corrected_2_3,
 } from '../utils/test-utils';
 import { resolve_2_3 } from '../utils/storybookUtils';
 import {
@@ -31,12 +34,21 @@ const Template: ComponentStory<typeof GameContainer> = args => (
 );
 Template.args = {
   puzzle,
+  corrected: corrected_2_3,
   blockSize,
 };
 
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = Template.args;
+
+export const Primary_2_2 = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Primary_2_2.args = {
+  puzzle: puzzle_2_2,
+  corrected: corrected_2_3,
+  blockSize: blockSize_2_2,
+};
 
 export const IPad = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args

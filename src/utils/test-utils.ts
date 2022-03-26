@@ -26,6 +26,12 @@ export const puzzle_2_2: Game = {
 3, , ,4
  , ,2, `,
 };
+export const corrected_2_2: Game = {
+  ...JSON.parse(
+    '{"cells":[{"pos":[0,0],"answer":"1"},{"pos":[1,0],"answer":"4","isFix":true},{"pos":[2,0],"answer":"3"},{"pos":[3,0],"answer":"2","isFix":true},{"pos":[0,1],"answer":"2","isFix":true},{"pos":[1,1],"answer":"3"},{"pos":[2,1],"answer":"4","isFix":true},{"pos":[3,1],"answer":"1"},{"pos":[0,2],"answer":"3","isFix":true},{"pos":[1,2],"answer":"2"},{"pos":[2,2],"answer":"1"},{"pos":[3,2],"answer":"4","isFix":true},{"pos":[0,3],"answer":"4"},{"pos":[1,3],"answer":"1"},{"pos":[2,3],"answer":"2","isFix":true},{"pos":[3,3],"answer":"3"}]}',
+  ),
+  toString: () => `必要なら実装する`,
+};
 
 export const blockSize_2_3: BlockSize = {
   height: 2,
@@ -41,6 +47,12 @@ export const puzzle_2_3: Game = {
    ,1,6, , , 
    , ,2, , ,4
    ,6,4, ,5, ,`,
+};
+export const corrected_2_3: Game = {
+  ...JSON.parse(
+    '{"cells":[{"pos":[0,0],"answer":"6"},{"pos":[1,0],"answer":"2","isFix":true},{"pos":[2,0],"answer":"1"},{"pos":[3,0],"answer":"4","isFix":true},{"pos":[4,0],"answer":"3","isFix":true},{"pos":[5,0],"answer":"5","isFix":true},{"pos":[0,1],"answer":"4","isFix":true},{"pos":[1,1],"answer":"5"},{"pos":[2,1],"answer":"3"},{"pos":[3,1],"answer":"6"},{"pos":[4,1],"answer":"2"},{"pos":[5,1],"answer":"1","isFix":true},{"pos":[0,2],"answer":"3","isFix":true},{"pos":[1,2],"answer":"4"},{"pos":[2,2],"answer":"5"},{"pos":[3,2],"answer":"2","isFix":true},{"pos":[4,2],"answer":"1"},{"pos":[5,2],"answer":"6"},{"pos":[0,3],"answer":"2"},{"pos":[1,3],"answer":"1","isFix":true},{"pos":[2,3],"answer":"6","isFix":true},{"pos":[3,3],"answer":"5"},{"pos":[4,3],"answer":"4"},{"pos":[5,3],"answer":"3"},{"pos":[0,4],"answer":"5"},{"pos":[1,4],"answer":"3"},{"pos":[2,4],"answer":"2","isFix":true},{"pos":[3,4],"answer":"1"},{"pos":[4,4],"answer":"6"},{"pos":[5,4],"answer":"4","isFix":true},{"pos":[0,5],"answer":"1"},{"pos":[1,5],"answer":"6","isFix":true},{"pos":[2,5],"answer":"4","isFix":true},{"pos":[3,5],"answer":"3"},{"pos":[4,5],"answer":"5","isFix":true},{"pos":[5,5],"answer":"2"}]}',
+  ),
+  toString: () => `必要なら実装する`,
 };
 
 export function resolve_2_3(option?: { finish?: boolean }) {
