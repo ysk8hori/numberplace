@@ -7,7 +7,6 @@ import { userEvent, within } from '@storybook/testing-library';
 export default {
   title: 'components/Verifying',
   component: Verifying,
-  // decorators: [Story => <Story />],
 } as ComponentMeta<typeof Verifying>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args

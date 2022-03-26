@@ -9,7 +9,7 @@ export default {
   component: InputPanel,
   decorators: [
     Story => (
-      <div style={{ width: '300px' }}>
+      <div style={{ width: '375px' } /* 375px は iphone12mini と同じサイズ */}>
         <Story />
       </div>
     ),

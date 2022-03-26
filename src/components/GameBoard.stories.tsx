@@ -12,7 +12,7 @@ export default {
   component: GameBoard,
   decorators: [
     Story => (
-      <div style={{ width: '400px' }}>
+      <div style={{ width: '375px' } /* 375px は iphone12mini と同じサイズ */}>
         <Story />
       </div>
     ),
