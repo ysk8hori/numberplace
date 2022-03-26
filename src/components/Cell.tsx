@@ -44,7 +44,7 @@ const Cell: React.FC<
 >) => {
   return (
     <div
-      className={'relative aspect-square'}
+      className={'relative aspect-square select-none'}
       onClick={onSelect}
       data-select={select}
       {...rest}
