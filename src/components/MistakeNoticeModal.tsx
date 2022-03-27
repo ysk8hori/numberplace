@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Modal from './atoms/Modal';
 import NeumorphismButton from './atoms/NeumorphismButton';
 import Spacer from './atoms/Spacer';
@@ -15,7 +15,8 @@ const MistakeNoticeModal: React.FC<{
   /** 空欄がある */
   emptycell?: boolean;
 }> = ({ mistake, emptycell }) => {
-  const [isOpen, setOpenState] = useState(mistake || emptycell);
+  const [isOpen, setOpenState] = useState(false);
+  useEffect(() => setOpenState(!!mistake || !!emptycell), [mistake, emptycell]);
   const close = useCallback(() => setOpenState(false), [setOpenState]);
   return (
     <Modal isOpen={!!isOpen} contentLabel="不正解です">

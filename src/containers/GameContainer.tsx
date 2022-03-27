@@ -12,6 +12,7 @@ import InputPanel from '../components/input-panel/InputPanel';
 import { MyGame } from '../utils/typeUtils';
 import Verifying from '../components/Verifying';
 import Spacer from '../components/atoms/Spacer';
+import MistakeNoticeModal from '../components/MistakeNoticeModal';
 
 /**
  * ゲームの状態を保持し制御する。
@@ -29,6 +30,7 @@ import Spacer from '../components/atoms/Spacer';
  * - 最初から答えが記入済みのセルは変更不可
  * - こたえあわせ開始コールバックでこたえあわせを行う
  *   - 正解した Cell は変更不可とする
+ *   - 間違いがある場合はその旨を知らせてゲームを続行する
  *
  * 以下を行わない。
  * - ゲームの生成
@@ -48,6 +50,8 @@ export default function GameContainer({
 }) {
   const puzzle = usePuzzle(basePuzzle);
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
+  const [hasMistake, setMistake] = useState(false);
+  const [hasEmptycell, setEmptycell] = useState(false);
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   useEffect(() => {
     window.addEventListener('resize', forceUpdate);
@@ -62,9 +66,12 @@ export default function GameContainer({
         const targetCell = puzzle.cells.find(cell =>
           isSamePos(correctedCell.pos, cell.pos),
         )!;
+        if (!targetCell.answer) return setEmptycell(true);
         if (correctedCell.answer === targetCell.answer) {
           // 正解している cell は fix する
           targetCell.isFix = true;
+        } else {
+          setMistake(true);
         }
       });
 
@@ -88,6 +95,7 @@ export default function GameContainer({
       <div className="flex justify-center">
         <Verifying onStartChecking={() => check(puzzle)} />
       </div>
+      <MistakeNoticeModal mistake={hasMistake} emptycell={hasEmptycell} />
     </>
   );
 }

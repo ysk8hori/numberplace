@@ -252,4 +252,54 @@ describe('GameContainer', () => {
     expect(screen.getByTestId('2,0')).not.toHaveAttribute('data-fix'); // 未記入セル
     expect(screen.getByTestId('1,1')).not.toHaveAttribute('data-fix'); // 誤答を記入したセル
   });
+  test('「こたえあわせ」によって誤りのセルや空欄のセルがあった場合はダイアログで通知する', () => {
+    render(
+      <GameContainer
+        puzzle={puzzle_2_3}
+        corrected={corrected_2_3}
+        blockSize={blockSize_2_3}
+      />,
+    );
+    userEvent.click(screen.getByTestId('0,0'));
+    userEvent.keyboard('6'); // 正答を記入
+    userEvent.click(screen.getByTestId('1,1'));
+    userEvent.keyboard('6'); // 誤答を記入
+    expect(screen.getByTestId('0,0')).not.toHaveAttribute('data-fix'); // 正答を記入したセル
+    expect(screen.getByTestId('1,0')).toHaveAttribute('data-fix'); // fix 済みセル
+    expect(screen.getByTestId('2,0')).not.toHaveAttribute('data-fix'); // 未記入セル
+    expect(screen.getByTestId('1,1')).not.toHaveAttribute('data-fix'); // 誤答を記入したセル
+    userEvent.click(screen.getByRole('button', { name: 'こたえあわせ' }));
+    userEvent.click(screen.getByRole('button', { name: 'はい' }));
+    expect(
+      screen.getByRole('dialog', { name: '不正解です' }),
+    ).toBeInTheDocument();
+  });
+  test.skip('誤りのセルや空欄のセルがある状態で「こたえあわせ」を２度連続で行った場合、２度ともダイアログで通知する', () => {
+    render(
+      <GameContainer
+        puzzle={puzzle_2_3}
+        corrected={corrected_2_3}
+        blockSize={blockSize_2_3}
+      />,
+    );
+    userEvent.click(screen.getByTestId('0,0'));
+    userEvent.keyboard('6'); // 正答を記入
+    userEvent.click(screen.getByTestId('1,1'));
+    userEvent.keyboard('6'); // 誤答を記入
+    expect(screen.getByTestId('0,0')).not.toHaveAttribute('data-fix'); // 正答を記入したセル
+    expect(screen.getByTestId('1,0')).toHaveAttribute('data-fix'); // fix 済みセル
+    expect(screen.getByTestId('2,0')).not.toHaveAttribute('data-fix'); // 未記入セル
+    expect(screen.getByTestId('1,1')).not.toHaveAttribute('data-fix'); // 誤答を記入したセル
+    userEvent.click(screen.getByRole('button', { name: 'こたえあわせ' }));
+    userEvent.click(screen.getByRole('button', { name: 'はい' }));
+    expect(
+      screen.getByRole('dialog', { name: '不正解です' }),
+    ).toBeInTheDocument();
+    userEvent.click(screen.getByRole('button', { name: 'OK' }));
+    userEvent.click(screen.getByRole('button', { name: 'こたえあわせ' }));
+    userEvent.click(screen.getByRole('button', { name: 'はい' }));
+    expect(
+      screen.getByRole('dialog', { name: '不正解です' }),
+    ).toBeInTheDocument();
+  });
 });
