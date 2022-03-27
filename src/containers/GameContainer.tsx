@@ -80,7 +80,7 @@ export default function GameContainer({
   }, [setEmptycell, setMistake]);
 
   return (
-    <>
+    <div className="max-w-xl grow">
       <GameBoard
         puzzle={puzzle}
         blockSize={blockSize}
@@ -102,7 +102,7 @@ export default function GameContainer({
         gameClear={isGameClear}
         onRegenerate={() => (setGameClear(false), onRegenerate?.())}
       />
-    </>
+    </div>
   );
 }
 

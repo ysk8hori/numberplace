@@ -10,12 +10,14 @@ function App() {
   console.log(puzzle.toString());
   console.log(JSON.stringify(puzzle));
   return (
-    <GameContainer
-      puzzle={puzzle}
-      corrected={corrected}
-      blockSize={blockSize}
-      onRegenerate={forceUpdate}
-    />
+    <div className="w-screen h-screen flex justify-center">
+      <GameContainer
+        puzzle={puzzle}
+        corrected={corrected}
+        blockSize={blockSize}
+        onRegenerate={forceUpdate}
+      />
+    </div>
   );
 }
 
