@@ -60,27 +60,11 @@ export default function GameContainer({
   const fill = useFill(puzzle, selectedPos, forceUpdate);
   useFillByKeyboard(fill);
   useArrowSelector(selectedPos, blockSize, setSelectedPos);
-  const check = useCallback(
-    (puzzle: MyGame) => {
-      corrected.cells.forEach(correctedCell => {
-        const targetCell = puzzle.cells.find(cell =>
-          isSamePos(correctedCell.pos, cell.pos),
-        )!;
-        // 空欄セルがあるか
-        if (!targetCell.answer) return setEmptycell(true);
-        if (correctedCell.answer === targetCell.answer) {
-          // 正解している cell は fix する
-          targetCell.isFix = true;
-        } else {
-          // 誤答がある場合
-          setMistake(true);
-        }
-      });
-
-      // fix を反映するために forceUpdate する
-      forceUpdate();
-    },
-    [corrected],
+  const checkAndUpdate = useCheckAndUpdate(
+    corrected,
+    setEmptycell,
+    setMistake,
+    forceUpdate,
   );
   /** 次回の check で mistake や empty を検知できるようクリアする */
   const clearMistakeAndEmptyInfo = useCallback(() => {
@@ -100,7 +84,7 @@ export default function GameContainer({
       <InputPanel blockSize={blockSize} onInput={fill} />
       <Spacer />
       <div className="flex justify-center">
-        <Verifying onStartChecking={() => check(puzzle)} />
+        <Verifying onStartChecking={() => checkAndUpdate(puzzle)} />
       </div>
       <MistakeNoticeModal
         mistake={hasMistake}
@@ -108,6 +92,43 @@ export default function GameContainer({
         onOk={clearMistakeAndEmptyInfo}
       />
     </>
+  );
+}
+
+/**
+ *
+ * @param corrected 問題の答え
+ * @param setEmptycell check した結果、空欄セルがある場合に true を指定する
+ * @param setMistake check した結果、間違えのセルがある場合に true を指定する
+ * @param forceUpdate チェック後に fix を反映する
+ */
+function useCheckAndUpdate(
+  corrected: Game,
+  setEmptycell: React.Dispatch<React.SetStateAction<boolean>>,
+  setMistake: React.Dispatch<React.SetStateAction<boolean>>,
+  forceUpdate: React.DispatchWithoutAction,
+) {
+  return useCallback(
+    (puzzle: MyGame) => {
+      corrected.cells.forEach(correctedCell => {
+        const targetCell = puzzle.cells.find(cell =>
+          isSamePos(correctedCell.pos, cell.pos),
+        )!;
+        // 空欄セルがあるか
+        if (!targetCell.answer) return setEmptycell(true);
+        if (correctedCell.answer === targetCell.answer) {
+          // 正解している cell は fix する
+          targetCell.isFix = true;
+        } else {
+          // 誤答がある場合
+          setMistake(true);
+        }
+      });
+
+      // fix を反映するために forceUpdate する
+      forceUpdate();
+    },
+    [corrected, setEmptycell, setMistake, forceUpdate],
   );
 }
 
