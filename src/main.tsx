@@ -12,4 +12,4 @@ ReactDOM.render(
 );
 
 // @see https://reactcommunity.org/react-modal/examples/set_app_element/
-ReactModal.setAppElement('root');
+ReactModal.setAppElement('#root');
