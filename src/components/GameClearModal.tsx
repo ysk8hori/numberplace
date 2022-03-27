@@ -7,11 +7,14 @@ import Spacer from './atoms/Spacer';
  * クリアした旨を知らせるモーダル
  *
  * - クリアした旨を表示する
- * - 問題をリトライするコールバックを呼ぶ
+ * - todo: 問題をリトライするコールバックを呼ぶ
  * - 問題を再生成するコールバックを呼ぶ
- * - block size を選択するコールバックを呼ぶ
+ * - todo: block size を選択するコールバックを呼ぶ
  */
-const GameClearModal: React.FC<{ gameClear?: boolean }> = ({ gameClear }) => {
+const GameClearModal: React.FC<{
+  gameClear?: boolean;
+  onRegenerate?: () => void;
+}> = ({ gameClear, onRegenerate }) => {
   const [isOpen, setOpenState] = useState(false);
   useEffect(() => setOpenState(!!gameClear), [gameClear]);
   const close = useCallback(() => setOpenState(false), [setOpenState]);
@@ -20,7 +23,7 @@ const GameClearModal: React.FC<{ gameClear?: boolean }> = ({ gameClear }) => {
       <p className="text-center">クリア！</p>
       <Spacer h={3} />
       <div className="grid grid-cols-2 justify-center gap-8">
-        <NeumorphismButton
+        {/* <NeumorphismButton
           onClick={() => close()}
           className="p-2 rounded-lg w-full font-black"
         >
@@ -29,9 +32,9 @@ const GameClearModal: React.FC<{ gameClear?: boolean }> = ({ gameClear }) => {
           もんだいを
           <br />
           あそぶ
-        </NeumorphismButton>
+        </NeumorphismButton> */}
         <NeumorphismButton
-          onClick={() => close()}
+          onClick={() => (close(), onRegenerate?.())}
           className="p-2 rounded-lg w-full font-black"
         >
           おなじ
@@ -40,7 +43,7 @@ const GameClearModal: React.FC<{ gameClear?: boolean }> = ({ gameClear }) => {
           <br />
           あそぶ
         </NeumorphismButton>
-        <NeumorphismButton
+        {/* <NeumorphismButton
           onClick={() => close()}
           className="p-2 rounded-lg w-full font-black"
         >
@@ -49,7 +52,7 @@ const GameClearModal: React.FC<{ gameClear?: boolean }> = ({ gameClear }) => {
           おおきさで
           <br />
           あそぶ
-        </NeumorphismButton>
+        </NeumorphismButton> */}
       </div>
     </Modal>
   );

@@ -15,3 +15,12 @@ test('game clear すると表示する', async () => {
   render(<GameClearModal gameClear />);
   expect(screen.queryByRole('dialog', { name: 'クリア' })).toBeInTheDocument();
 });
+
+test('おなじおおきさであそぶ押下コールバックが呼ばれる', async () => {
+  const onRegenerate = fn();
+  render(<GameClearModal gameClear onRegenerate={onRegenerate} />);
+  userEvent.click(
+    screen.getByRole('button', { name: 'おなじ おおきさで あそぶ' }),
+  );
+  expect(onRegenerate).toHaveBeenCalled();
+});
