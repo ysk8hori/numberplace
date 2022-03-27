@@ -8,6 +8,7 @@ import {
   puzzle_2_2,
   puzzle_2_3 as puzzle,
   corrected_2_3,
+  corrected_2_2,
 } from '../utils/test-utils';
 import { resolve_2_3 } from '../utils/storybookUtils';
 import {
@@ -15,6 +16,7 @@ import {
   FontFamilyContext,
 } from '../contexts/fontContext';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+import ReactModal from 'react-modal';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -46,7 +48,7 @@ export const Primary_2_2 = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary_2_2.args = {
   puzzle: puzzle_2_2,
-  corrected: corrected_2_3,
+  corrected: corrected_2_2,
   blockSize: blockSize_2_2,
 };
 
@@ -90,11 +92,25 @@ export const Resolved = Template.bind({});
 Resolved.args = Template.args;
 Resolved.play = async ({ canvasElement }) => {
   // Starts querying the component from its root element
+  ReactModal.setAppElement(canvasElement);
   const canvas = within(canvasElement);
   await userEvent.click(canvas.getByRole('button', { name: 'こたえあわせ' }));
 };
 Resolved.storyName =
   '「こたえあわせ」ボタンを押下したら答え合わせするかどうかの確認ダイアログを出す';
+
+export const ClearModal = Template.bind({});
+
+ClearModal.args = Template.args;
+ClearModal.play = async ({ canvasElement }) => {
+  ReactModal.setAppElement(canvasElement);
+  // モーダルが canvasElement の外に描画されモーダル内の要素が取れないので body を canvas にしないと動かない
+  const canvas = within(canvasElement.parentElement!);
+  await resolve_2_3(canvas, { finish: true });
+  await userEvent.click(canvas.getByRole('button', { name: 'こたえあわせ' }));
+  await userEvent.click(canvas.getByRole('button', { name: 'はい' }));
+};
+ClearModal.storyName = 'クリア時にはクリアモーダルを表示する';
 
 // 以下フォントの検証 --------------------------------------
 

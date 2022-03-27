@@ -13,6 +13,7 @@ import { MyGame } from '../utils/typeUtils';
 import Verifying from '../components/Verifying';
 import Spacer from '../components/atoms/Spacer';
 import MistakeNoticeModal from '../components/MistakeNoticeModal';
+import GameClearModal from '../components/GameClearModal';
 
 /**
  * ゲームの状態を保持し制御する。
@@ -31,6 +32,7 @@ import MistakeNoticeModal from '../components/MistakeNoticeModal';
  * - こたえあわせ開始コールバックでこたえあわせを行う
  *   - 正解した Cell は変更不可とする
  *   - 間違いがある場合はその旨を知らせてゲームを続行する
+ *   - 全問正解した場合はその旨を知らせる
  *
  * 以下を行わない。
  * - ゲームの生成
@@ -52,6 +54,7 @@ export default function GameContainer({
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   const [hasMistake, setMistake] = useState(false);
   const [hasEmptycell, setEmptycell] = useState(false);
+  const [isGameClear, setGameClear] = useState(false);
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   useEffect(() => {
     window.addEventListener('resize', forceUpdate);
@@ -65,8 +68,9 @@ export default function GameContainer({
     setEmptycell,
     setMistake,
     forceUpdate,
+    setGameClear,
   );
-  /** 次回の check で mistake や empty を検知できるようクリアする */
+  /** 次回の check で mistake や empty を検知できるようクリアするコールバック */
   const clearMistakeAndEmptyInfo = useCallback(() => {
     setEmptycell(false);
     setMistake(false);
@@ -91,6 +95,7 @@ export default function GameContainer({
         emptycell={hasEmptycell}
         onOk={clearMistakeAndEmptyInfo}
       />
+      <GameClearModal gameClear={isGameClear} />
     </>
   );
 }
@@ -107,6 +112,7 @@ function useCheckAndUpdate(
   setEmptycell: React.Dispatch<React.SetStateAction<boolean>>,
   setMistake: React.Dispatch<React.SetStateAction<boolean>>,
   forceUpdate: React.DispatchWithoutAction,
+  setGameClear: React.Dispatch<React.SetStateAction<boolean>>,
 ) {
   return useCallback(
     (puzzle: MyGame) => {
@@ -124,6 +130,8 @@ function useCheckAndUpdate(
           setMistake(true);
         }
       });
+
+      if (puzzle.cells.every(cell => cell.isFix)) setGameClear(true);
 
       // fix を反映するために forceUpdate する
       forceUpdate();

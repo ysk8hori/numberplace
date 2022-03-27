@@ -12,6 +12,7 @@ import {
   puzzle_2_3,
   blockSize_2_3,
   corrected_2_3,
+  resolve_2_3,
 } from '../utils/test-utils';
 import GameContainer from './GameContainer';
 
@@ -301,5 +302,18 @@ describe('GameContainer', () => {
     expect(
       screen.getByRole('dialog', { name: '不正解です' }),
     ).toBeInTheDocument();
+  });
+  test('間違いがない場合はクリアのエフェクトと、クリア後のメニューを出す。', () => {
+    render(
+      <GameContainer
+        puzzle={puzzle_2_3}
+        corrected={corrected_2_3}
+        blockSize={blockSize_2_3}
+      />,
+    );
+    resolve_2_3({ finish: true });
+    userEvent.click(screen.getByRole('button', { name: 'こたえあわせ' }));
+    userEvent.click(screen.getByRole('button', { name: 'はい' }));
+    expect(screen.getByRole('dialog', { name: 'クリア' }));
   });
 });
