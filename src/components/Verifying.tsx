@@ -23,17 +23,22 @@ const Verifying: React.FC<{
         こたえあわせ
       </NeumorphismButton>
       <Modal isOpen={isOpen} contentLabel="答え合わせの確認">
-        <p>答え合わせしますか？</p>
-        <Spacer />
-        <NeumorphismButton onClick={() => close()} className="p-2 rounded-full">
-          いいえ
-        </NeumorphismButton>
-        <NeumorphismButton
-          onClick={() => (close(), onStartChecking?.())}
-          className="p-2 rounded-full"
-        >
-          はい
-        </NeumorphismButton>
+        <p className="text-center">こたえあわせ しますか？</p>
+        <Spacer h={3} />
+        <div className="w-60 flex justify-between">
+          <NeumorphismButton
+            onClick={() => close()}
+            className="p-2 rounded-full w-2/5 font-black"
+          >
+            いいえ
+          </NeumorphismButton>
+          <NeumorphismButton
+            onClick={() => (close(), onStartChecking?.())}
+            className="p-2 rounded-full w-2/5 ml-auto font-black"
+          >
+            はい
+          </NeumorphismButton>
+        </div>
       </Modal>
     </>
   );
