@@ -14,7 +14,9 @@ const MistakeNoticeModal: React.FC<{
   mistake?: boolean;
   /** 空欄がある */
   emptycell?: boolean;
-}> = ({ mistake, emptycell }) => {
+  /** OKボタン押下 */
+  onOk?: () => void;
+}> = ({ mistake, emptycell, onOk }) => {
   const [isOpen, setOpenState] = useState(false);
   useEffect(() => setOpenState(!!mistake || !!emptycell), [mistake, emptycell]);
   const close = useCallback(() => setOpenState(false), [setOpenState]);
@@ -25,7 +27,7 @@ const MistakeNoticeModal: React.FC<{
       <Spacer h={3} />
       <div className="w-60 flex justify-center">
         <NeumorphismButton
-          onClick={() => close()}
+          onClick={() => (close(), onOk?.())}
           className="p-2 rounded-full w-2/5 font-black"
         >
           OK

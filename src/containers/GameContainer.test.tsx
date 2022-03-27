@@ -274,7 +274,7 @@ describe('GameContainer', () => {
       screen.getByRole('dialog', { name: '不正解です' }),
     ).toBeInTheDocument();
   });
-  test.skip('誤りのセルや空欄のセルがある状態で「こたえあわせ」を２度連続で行った場合、２度ともダイアログで通知する', () => {
+  test('誤りのセルや空欄のセルがある状態で「こたえあわせ」を２度連続で行った場合、２度ともダイアログで通知する', () => {
     render(
       <GameContainer
         puzzle={puzzle_2_3}

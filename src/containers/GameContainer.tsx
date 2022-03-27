@@ -66,11 +66,13 @@ export default function GameContainer({
         const targetCell = puzzle.cells.find(cell =>
           isSamePos(correctedCell.pos, cell.pos),
         )!;
+        // 空欄セルがあるか
         if (!targetCell.answer) return setEmptycell(true);
         if (correctedCell.answer === targetCell.answer) {
           // 正解している cell は fix する
           targetCell.isFix = true;
         } else {
+          // 誤答がある場合
           setMistake(true);
         }
       });
@@ -80,6 +82,11 @@ export default function GameContainer({
     },
     [corrected],
   );
+  /** 次回の check で mistake や empty を検知できるようクリアする */
+  const clearMistakeAndEmptyInfo = useCallback(() => {
+    setEmptycell(false);
+    setMistake(false);
+  }, [setEmptycell, setMistake]);
 
   return (
     <>
@@ -95,7 +102,11 @@ export default function GameContainer({
       <div className="flex justify-center">
         <Verifying onStartChecking={() => check(puzzle)} />
       </div>
-      <MistakeNoticeModal mistake={hasMistake} emptycell={hasEmptycell} />
+      <MistakeNoticeModal
+        mistake={hasMistake}
+        emptycell={hasEmptycell}
+        onOk={clearMistakeAndEmptyInfo}
+      />
     </>
   );
 }
