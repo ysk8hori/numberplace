@@ -1,8 +1,7 @@
 import './App.css';
 import GenerateGameContainer from './containers/GenerateGameContainer';
-import { useReducer, useState } from 'react';
+import { useState } from 'react';
 import { ArrayItem } from './utils/typeUtils';
-import useGenerateGame from './useGenerateGame';
 
 /**
  * 現在のアプリのモード
@@ -28,7 +27,6 @@ const blockSizeList = [
 ];
 
 function App() {
-  const [count, forceUpdate] = useReducer(x => x + 1, 0);
   const [mode, setMode] = useState<Mode>('menu');
   const [blockSize, setBlockSize] = useState<ArrayItem<typeof blockSizeList>>({
     height: 2,
@@ -74,7 +72,10 @@ function App() {
     default:
       return (
         <div className="w-screen h-screen flex justify-center">
-          <GenerateGameContainer blockSize={blockSize} />
+          <GenerateGameContainer
+            blockSize={blockSize}
+            onChangeSize={() => setMode('menu')}
+          />
         </div>
       );
   }

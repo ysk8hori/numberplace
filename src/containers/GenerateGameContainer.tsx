@@ -3,7 +3,14 @@ import { useReducer } from 'react';
 import useGenerateGame from '../useGenerateGame';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 
-function GenerateGameContainer({ blockSize }: { blockSize: BlockSize }) {
+function GenerateGameContainer({
+  blockSize,
+  onChangeSize,
+}: {
+  blockSize: BlockSize;
+  /** 他のサイズで遊ぶコールバック */
+  onChangeSize?: () => void;
+}) {
   const [count, forceUpdate] = useReducer(x => x + 1, 0);
 
   const result = useGenerateGame(blockSize, count);
@@ -18,6 +25,7 @@ function GenerateGameContainer({ blockSize }: { blockSize: BlockSize }) {
         corrected={result.corrected}
         blockSize={blockSize}
         onRegenerate={forceUpdate}
+        onChangeSize={onChangeSize}
       />
     </div>
   );

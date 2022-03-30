@@ -12,9 +12,13 @@ import Spacer from './atoms/Spacer';
  * - todo: block size を選択するコールバックを呼ぶ
  */
 const GameClearModal: React.FC<{
+  /** ゲームをクリアしたかどうかのフラグ。true の場合本モーダルを表示する。 */
   gameClear?: boolean;
+  /** 同じサイズで遊ぶコールバック */
   onRegenerate?: () => void;
-}> = ({ gameClear, onRegenerate }) => {
+  /** 他のサイズで遊ぶコールバック */
+  onChangeSize?: () => void;
+}> = ({ gameClear, onRegenerate, onChangeSize }) => {
   const [isOpen, setOpenState] = useState(false);
   useEffect(() => setOpenState(!!gameClear), [gameClear]);
   const close = useCallback(() => setOpenState(false), [setOpenState]);
@@ -43,8 +47,8 @@ const GameClearModal: React.FC<{
           <br />
           あそぶ
         </NeumorphismButton>
-        {/* <NeumorphismButton
-          onClick={() => close()}
+        <NeumorphismButton
+          onClick={() => (close(), onChangeSize?.())}
           className="p-2 rounded-lg w-full font-black"
         >
           ほかの
@@ -52,7 +56,7 @@ const GameClearModal: React.FC<{
           おおきさで
           <br />
           あそぶ
-        </NeumorphismButton> */}
+        </NeumorphismButton>
       </div>
     </Modal>
   );

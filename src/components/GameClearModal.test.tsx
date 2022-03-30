@@ -24,3 +24,12 @@ test('おなじおおきさであそぶ押下コールバックが呼ばれる',
   );
   expect(onRegenerate).toHaveBeenCalled();
 });
+
+test('ほかのおおきさであそぶ押下コールバックが呼ばれる', async () => {
+  const onChangeSize = fn();
+  render(<GameClearModal gameClear onChangeSize={onChangeSize} />);
+  userEvent.click(
+    screen.getByRole('button', { name: 'ほかの おおきさで あそぶ' }),
+  );
+  expect(onChangeSize).toHaveBeenCalled();
+});

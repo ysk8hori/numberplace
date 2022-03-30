@@ -43,6 +43,7 @@ export default function GameContainer({
   corrected,
   blockSize,
   onRegenerate,
+  onChangeSize,
 }: {
   /** ナンプレの問題 */
   puzzle: MyGame;
@@ -52,6 +53,8 @@ export default function GameContainer({
   blockSize: BlockSize;
   /** 同じサイズで遊ぶコールバック */
   onRegenerate?: () => void;
+  /** 他のサイズで遊ぶコールバック */
+  onChangeSize?: () => void;
 }) {
   const puzzle = usePuzzle(basePuzzle);
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
@@ -101,6 +104,7 @@ export default function GameContainer({
       <GameClearModal
         gameClear={isGameClear}
         onRegenerate={() => (setGameClear(false), onRegenerate?.())}
+        onChangeSize={() => (setGameClear(false), onChangeSize?.())}
       />
     </div>
   );
