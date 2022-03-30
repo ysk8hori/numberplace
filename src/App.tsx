@@ -1,5 +1,5 @@
 import './App.css';
-import GameContainer from './containers/GameContainer';
+import GenerateGameContainer from './containers/GenerateGameContainer';
 import { useReducer, useState } from 'react';
 import { ArrayItem } from './utils/typeUtils';
 import useGenerateGame from './useGenerateGame';
@@ -35,19 +35,9 @@ function App() {
     width: 3,
   });
 
-  const result = useGenerateGame(blockSize, count);
-  if (!result) {
-    return <div>loading</div>;
-  }
-
   return (
     <div className="w-screen h-screen flex justify-center">
-      <GameContainer
-        puzzle={result.puzzle}
-        corrected={result.corrected}
-        blockSize={blockSize}
-        onRegenerate={forceUpdate}
-      />
+      <GenerateGameContainer blockSize={blockSize} />
     </div>
   );
 }
