@@ -35,11 +35,49 @@ function App() {
     width: 3,
   });
 
-  return (
-    <div className="w-screen h-screen flex justify-center">
-      <GenerateGameContainer blockSize={blockSize} />
-    </div>
-  );
+  switch (mode) {
+    case 'menu':
+      return (
+        <div className="flex flex-col">
+          <h1>menu</h1>
+          <button
+            onClick={() => (
+              setBlockSize({ width: 3, height: 1 }), setMode('play')
+            )}
+          >
+            3x1
+          </button>
+          <button
+            onClick={() => (
+              setBlockSize({ width: 2, height: 2 }), setMode('play')
+            )}
+          >
+            2x2
+          </button>
+          <button
+            onClick={() => (
+              setBlockSize({ width: 3, height: 2 }), setMode('play')
+            )}
+          >
+            3x2
+          </button>
+          <button
+            onClick={() => (
+              setBlockSize({ width: 3, height: 3 }), setMode('play')
+            )}
+          >
+            3x3
+          </button>
+        </div>
+      );
+    case 'play':
+    default:
+      return (
+        <div className="w-screen h-screen flex justify-center">
+          <GenerateGameContainer blockSize={blockSize} />
+        </div>
+      );
+  }
 }
 
 export default App;
