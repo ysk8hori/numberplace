@@ -19,7 +19,10 @@ const Verifying: React.FC<{
   const close = useCallback(() => setOpenState(false), [setOpenState]);
   return (
     <>
-      <NeumorphismButton onClick={() => open()} className="p-4 rounded-full ">
+      <NeumorphismButton
+        onClick={() => open()}
+        className="p-4 rounded-full text-2xl"
+      >
         こたえあわせ
       </NeumorphismButton>
       <Modal isOpen={isOpen} contentLabel="答え合わせの確認">

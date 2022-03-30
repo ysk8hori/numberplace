@@ -84,15 +84,17 @@ export default function GameContainer({
 
   return (
     <div className="max-w-xl grow">
-      <GameBoard
-        puzzle={puzzle}
-        blockSize={blockSize}
-        selectedPos={selectedPos}
-        onSelectCell={setSelectedPos}
-      />
-      <Spacer />
-      <InputPanel blockSize={blockSize} onInput={fill} />
-      <Spacer />
+      <div className="shadow-xl m-2 bg-white">
+        <GameBoard
+          puzzle={puzzle}
+          blockSize={blockSize}
+          selectedPos={selectedPos}
+          onSelectCell={setSelectedPos}
+        />
+      </div>
+      <div className="mx-2 my-6">
+        <InputPanel blockSize={blockSize} onInput={fill} />
+      </div>
       <div className="flex justify-center">
         <Verifying onStartChecking={() => checkAndUpdate(puzzle)} />
       </div>

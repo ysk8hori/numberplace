@@ -11,8 +11,8 @@ import ReactModal from 'react-modal';
  */
 const Modal: React.FC<ReactModal.Props> = ({ children, ...rest }) => (
   <ReactModal
-    className="absolute border rounded-lg overflow-auto p-5 bg-white shadow-lg"
-    overlayClassName="fixed top-0 left-0 w-full h-full bg-white/60 flex justify-center items-center"
+    className="absolute border rounded-lg overflow-auto p-5 shadow-lg bg-gray-100"
+    overlayClassName="fixed top-0 left-0 w-full h-full bg-black/30 flex justify-center items-center"
     {...rest}
   >
     {children}

@@ -26,7 +26,7 @@ const InputPanelButton: React.FC<{
   return (
     <NeumorphismButton
       ref={button}
-      className="aspect-square w-full h-full rounded-full"
+      className="aspect-square w-full h-full rounded-2xl"
       style={{ fontSize, fontFamily: fontContext.inputButton }}
       onClick={onClick}
       disabled={disabled}
