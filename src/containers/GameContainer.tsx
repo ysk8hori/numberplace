@@ -5,7 +5,7 @@ import React, {
   useReducer,
   useMemo,
 } from 'react';
-import { BlockSize, Game, Position } from '@ysk8hori/numberplace-generator';
+import { BlockSize, Position } from '@ysk8hori/numberplace-generator';
 import GameBoard from '../components/GameBoard';
 import { isSamePos, moveX, moveY } from '../utils/positionUtils';
 import InputPanel from '../components/input-panel/InputPanel';
@@ -45,9 +45,9 @@ export default function GameContainer({
   onRegenerate,
 }: {
   /** ナンプレの問題 */
-  puzzle: Game;
+  puzzle: MyGame;
   /** ナンプレの答え */
-  corrected: Game;
+  corrected: MyGame;
   /** ナンプレのブロックのサイズ */
   blockSize: BlockSize;
   /** 同じサイズで遊ぶコールバック */
@@ -114,7 +114,7 @@ export default function GameContainer({
  * @param forceUpdate チェック後に fix を反映する
  */
 function useCheckAndUpdate(
-  corrected: Game,
+  corrected: MyGame,
   setEmptycell: React.Dispatch<React.SetStateAction<boolean>>,
   setMistake: React.Dispatch<React.SetStateAction<boolean>>,
   forceUpdate: React.DispatchWithoutAction,
@@ -146,8 +146,9 @@ function useCheckAndUpdate(
   );
 }
 
-function usePuzzle(basePuzzle: Game) {
+function usePuzzle(basePuzzle: MyGame) {
   return useMemo(() => {
+    // basePuzzle をクローンする
     const puzzle = JSON.parse(JSON.stringify(basePuzzle)) as MyGame;
     puzzle.cells
       .filter(cell => cell.answer)
