@@ -9,6 +9,9 @@ import {
   puzzle_2_3 as puzzle,
   corrected_2_3,
   corrected_2_2,
+  blockSize_3_3,
+  puzzle_3_3,
+  corrected_3_3,
 } from '../utils/test-utils';
 import { resolve_2_3 } from '../utils/storybookUtils';
 import {
@@ -69,15 +72,6 @@ Click2_3.play = async ({ canvasElement }) => {
 };
 Click2_3.storyName = 'セルをクリックすると選択中となる';
 
-export const FillableByKeyboard = Template.bind({});
-FillableByKeyboard.args = Template.args;
-FillableByKeyboard.play = async ({ canvasElement }) => {
-  // Starts querying the component from its root element
-  const canvas = within(canvasElement);
-  await resolve_2_3(canvas);
-};
-FillableByKeyboard.storyName = 'キーボードから数字を入力できる';
-
 export const FillableByPanel = Template.bind({});
 FillableByPanel.args = Template.args;
 FillableByPanel.play = async ({ canvasElement }) => {
@@ -111,6 +105,19 @@ ClearModal.play = async ({ canvasElement }) => {
   await userEvent.click(canvas.getByRole('button', { name: 'はい' }));
 };
 ClearModal.storyName = 'クリア時にはクリアモーダルを表示する';
+
+export const Game_3_3 = Template.bind({});
+Game_3_3.args = {
+  blockSize: blockSize_3_3,
+  puzzle: puzzle_3_3,
+  corrected: corrected_3_3,
+};
+Game_3_3.play = async ({ canvasElement }) => {
+  // Starts querying the component from its root element
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
+Game_3_3.storyName = '9x9の表示確認';
 
 // 以下フォントの検証 --------------------------------------
 
