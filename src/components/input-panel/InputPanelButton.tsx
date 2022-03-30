@@ -20,7 +20,7 @@ const InputPanelButton: React.FC<{
   const [fontSize, setFontSize] = useState('1rem');
   useLayoutEffect(() => {
     if (button.current?.offsetWidth) {
-      setFontSize(`${button.current.offsetWidth / 2}px`);
+      setFontSize(`${button.current.offsetWidth / 1.5}px`);
     }
   });
   return (

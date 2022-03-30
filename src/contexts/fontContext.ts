@@ -16,8 +16,8 @@ export function createFontFamilyValue(
 
 export const FontFamilyContext = createContext(
   createFontFamilyValue({
-    fixed: 'Anton',
-    inputButton: 'Quicksand',
-    normal: 'Quicksand',
+    fixed: 'Roboto,sans-serif',
+    inputButton: 'Roboto,sans-serif',
+    normal: 'Roboto,sans-serif',
   }),
 );

@@ -420,3 +420,23 @@ LondrinaShadow.decorators = [
     </FontFamilyContext.Provider>
   ),
 ];
+
+export const Roboto = Template.bind({});
+Roboto.args = Game_3_3.args;
+Roboto.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
+Roboto.decorators = [
+  Story => (
+    <FontFamilyContext.Provider
+      value={createFontFamilyValue({
+        normal: 'Roboto,sans-serif',
+        fixed: 'Roboto,sans-serif',
+        inputButton: 'Roboto,sans-serif',
+      })}
+    >
+      <Story />
+    </FontFamilyContext.Provider>
+  ),
+];

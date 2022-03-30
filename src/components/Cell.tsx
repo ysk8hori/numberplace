@@ -126,16 +126,17 @@ const AnswerLayer: React.FC<AnswerLayerProps> = ({ answer, fix }) => {
     () => (fix ? fontContext.fixed : fontContext.normal),
     [fix],
   );
+  const fontWeight = useMemo(() => (fix ? '700' : undefined), [fix]);
   useLayoutEffect(() => {
     if (box.current?.offsetWidth) {
-      setFontSize(`${box.current.offsetWidth / 2}px`);
+      setFontSize(`${box.current.offsetWidth / 1.3}px`);
     }
   }, [box.current?.offsetWidth]);
   return (
     <span
       ref={box}
       className="w-full h-full flex justify-center items-center select-none"
-      style={{ fontSize, fontFamily }}
+      style={{ fontSize, fontFamily, fontWeight }}
     >
       {answer}
     </span>
