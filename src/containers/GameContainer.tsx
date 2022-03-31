@@ -246,7 +246,7 @@ function useFill(
 function useFillByKeyboard(fill: Fill) {
   const fillByKeyboard = useCallback(
     (ev: KeyboardEvent) => {
-      if (ev.key.match(/[1-9]/)) {
+      if (ev.key.match(/^[1-9]$/)) {
         fill(ev.key);
       }
     },
