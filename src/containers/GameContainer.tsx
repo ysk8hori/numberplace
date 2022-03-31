@@ -233,10 +233,10 @@ function useFill(
 ) {
   return useCallback<Fill>(
     (answer: string) => {
-      const targetCell = puzzle.cells.find(
-        cell => !cell.isFix && isSamePos(cell.pos, selectedPos),
+      const targetCell = puzzle.cells.find(cell =>
+        isSamePos(cell.pos, selectedPos),
       );
-      if (!targetCell) return;
+      if (!targetCell || targetCell.isFix) return;
       // 扱える範囲の数字かどうかをチェックする
       const num = Number(answer);
       if (isNaN(num) || num < 1 || blockSize.height * blockSize.width < num) {
