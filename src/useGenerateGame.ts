@@ -4,6 +4,8 @@ import { BlockSize } from '@ysk8hori/numberplace-generator';
 import { useEffect, useState } from 'react';
 import { MyGame } from './utils/typeUtils';
 
+type Result = undefined | { puzzle: MyGame; corrected: MyGame };
+
 /**
  * ナンプレのゲームを生成する hooks
  *
@@ -14,22 +16,15 @@ import { MyGame } from './utils/typeUtils';
 export default function useGenerateGame(
   blockSize: BlockSize,
   count: number,
-): undefined | { puzzle: MyGame; corrected: MyGame } {
-  const [result, setResult] = useState<
-    undefined | { puzzle: MyGame; corrected: MyGame }
-  >(undefined);
+): Result {
+  const [result, setResult] = useState<Result>(undefined);
   useEffect(() => {
     // worker を生成
     const worker = new GenerateGameWorker();
     // ワーカーにゲーム生成を依頼
     worker.postMessage(blockSize);
     // ワーカーからゲーム生成結果が渡された際の処理を登録
-    worker.onmessage = ev => {
-      setResult({
-        puzzle: ev.data[0],
-        corrected: ev.data[1],
-      });
-    };
+    worker.onmessage = ({ data }) => setResult(data);
     return () => worker.terminate(); // ワーカーを破棄する
   }, [blockSize, count]);
   return result;
