@@ -11,7 +11,6 @@ import { isSamePos, moveX, moveY } from '../utils/positionUtils';
 import InputPanel from '../components/input-panel/InputPanel';
 import { MyGame } from '../utils/typeUtils';
 import Verifying from '../components/Verifying';
-import Spacer from '../components/atoms/Spacer';
 import MistakeNoticeModal from '../components/MistakeNoticeModal';
 import GameClearModal from '../components/GameClearModal';
 
