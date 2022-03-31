@@ -66,6 +66,7 @@ export default function GameContainer({
     return window.removeEventListener('resize', forceUpdate);
   }, [blockSize]);
   const fill = useFill(puzzle, selectedPos, forceUpdate, blockSize);
+  const del = useDelete(puzzle, selectedPos, forceUpdate);
   useFillByKeyboard(fill);
   useArrowSelector(selectedPos, blockSize, setSelectedPos);
   const checkAndUpdate = useCheckAndUpdate(
@@ -92,7 +93,7 @@ export default function GameContainer({
         />
       </div>
       <div className="mx-2 my-6">
-        <InputPanel blockSize={blockSize} onInput={fill} />
+        <InputPanel blockSize={blockSize} onInput={fill} onDelete={del} />
       </div>
       <div className="flex justify-center">
         <Verifying onStartChecking={() => checkAndUpdate(puzzle)} />
@@ -246,6 +247,23 @@ function useFill(
     },
     [puzzle, selectedPos, forceUpdate],
   );
+}
+
+type Delete = () => void;
+/** 入力済みかつ fix していない cell の内容をクリアする */
+function useDelete(
+  puzzle: MyGame,
+  selectedPos: readonly [number, number],
+  forceUpdate: React.DispatchWithoutAction,
+) {
+  return useCallback<Delete>(() => {
+    const targetCell = puzzle.cells.find(cell =>
+      isSamePos(cell.pos, selectedPos),
+    );
+    if (!targetCell || targetCell.isFix) return;
+    targetCell.answer = undefined;
+    forceUpdate();
+  }, [puzzle, selectedPos, forceUpdate]);
 }
 
 function useFillByKeyboard(fill: Fill) {

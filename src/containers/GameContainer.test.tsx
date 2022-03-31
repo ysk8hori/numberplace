@@ -171,6 +171,15 @@ describe('GameContainer', () => {
     userEvent.click(screen.getByRole('button', { name: '1' }));
     expect(screen.getByTestId('0,0')).toHaveTextContent('1');
   });
+  test('fix でない入力済みのセルは消去ボタンで空欄にできる', () => {
+    setup('2_2');
+    expect(screen.getByTestId('0,0')).toHaveTextContent('');
+    userEvent.click(screen.getByTestId('0,0'));
+    userEvent.click(screen.getByRole('button', { name: '2' }));
+    expect(screen.getByTestId('0,0')).toHaveTextContent('2');
+    userEvent.click(screen.getByRole('button', { name: '消す' }));
+    expect(screen.getByTestId('0,0')).toHaveTextContent('');
+  });
   test('「こたえあわせ」ボタンを押下したら答え合わせするかどうかの確認ダイアログを出す', () => {
     setup('2_3');
     expect(
