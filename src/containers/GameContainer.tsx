@@ -181,6 +181,7 @@ function useArrowSelector(
               size: blockSize.height * blockSize.width,
             }),
           );
+          ev.preventDefault();
           break;
         case 'ArrowUp':
           setSelectedPos(
@@ -190,6 +191,7 @@ function useArrowSelector(
               size: blockSize.height * blockSize.width,
             }),
           );
+          ev.preventDefault();
           break;
         case 'ArrowRight':
           setSelectedPos(
@@ -199,6 +201,7 @@ function useArrowSelector(
               size: blockSize.height * blockSize.width,
             }),
           );
+          ev.preventDefault();
           break;
         case 'ArrowLeft':
           setSelectedPos(
@@ -208,6 +211,7 @@ function useArrowSelector(
               size: blockSize.height * blockSize.width,
             }),
           );
+          ev.preventDefault();
           break;
       }
     },
