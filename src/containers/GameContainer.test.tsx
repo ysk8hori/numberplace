@@ -66,6 +66,15 @@ describe('GameContainer', () => {
     userEvent.keyboard('5');
     expect(screen.getByTestId('2,2')).not.toHaveTextContent('5');
   });
+  test('fix のセルはキーボード入力で上書きできない', () => {
+    setup('2_2');
+    expect(screen.getByTestId('1,0')).toHaveTextContent('4');
+    expect(screen.getByTestId('1,0')).toHaveAttribute('data-fix');
+    userEvent.click(screen.getByTestId('1,0'));
+    userEvent.keyboard('1');
+    expect(screen.getByTestId('1,0')).toHaveTextContent('4');
+    expect(screen.getByTestId('1,0')).toHaveAttribute('data-fix');
+  });
   test('親から受け取った puzzle の変更を行わない', () => {
     setup('2_2');
     expect(screen.getByTestId('2,2')).not.toHaveTextContent('1');
@@ -171,6 +180,15 @@ describe('GameContainer', () => {
     userEvent.click(screen.getByRole('button', { name: '1' }));
     expect(screen.getByTestId('0,0')).toHaveTextContent('1');
   });
+  test('fix のセルは入力パネルで上書きできない', () => {
+    setup('2_2');
+    expect(screen.getByTestId('1,0')).toHaveTextContent('4');
+    expect(screen.getByTestId('1,0')).toHaveAttribute('data-fix');
+    userEvent.click(screen.getByTestId('1,0'));
+    userEvent.click(screen.getByRole('button', { name: '1' }));
+    expect(screen.getByTestId('1,0')).toHaveTextContent('4');
+    expect(screen.getByTestId('1,0')).toHaveAttribute('data-fix');
+  });
   test('fix でない入力済みのセルは消去ボタンで空欄にできる', () => {
     setup('2_2');
     expect(screen.getByTestId('0,0')).toHaveTextContent('');
@@ -179,6 +197,15 @@ describe('GameContainer', () => {
     expect(screen.getByTestId('0,0')).toHaveTextContent('2');
     userEvent.click(screen.getByRole('button', { name: '消す' }));
     expect(screen.getByTestId('0,0')).toHaveTextContent('');
+  });
+  test('fix のセルは消去ボタンで空欄にできない', () => {
+    setup('2_2');
+    expect(screen.getByTestId('1,0')).toHaveTextContent('4');
+    expect(screen.getByTestId('1,0')).toHaveAttribute('data-fix');
+    userEvent.click(screen.getByTestId('1,0'));
+    userEvent.click(screen.getByRole('button', { name: '消す' }));
+    expect(screen.getByTestId('1,0')).toHaveTextContent('4');
+    expect(screen.getByTestId('1,0')).toHaveAttribute('data-fix');
   });
   test('「こたえあわせ」ボタンを押下したら答え合わせするかどうかの確認ダイアログを出す', () => {
     setup('2_3');
