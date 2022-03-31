@@ -13,6 +13,7 @@ import { MyGame } from '../utils/typeUtils';
 import Verifying from '../components/Verifying';
 import MistakeNoticeModal from '../components/MistakeNoticeModal';
 import GameClearModal from '../components/GameClearModal';
+import Quit from '../components/Quit';
 
 /**
  * ゲームの状態を保持し制御する。
@@ -32,6 +33,7 @@ import GameClearModal from '../components/GameClearModal';
  *   - 正解した Cell は変更不可とする
  *   - 間違いがある場合はその旨を知らせてゲームを続行する
  *   - 全問正解した場合はその旨を知らせる
+ * - 「ゲームをやめる」でメニューに戻る
  *
  * 以下を行わない。
  * - ゲームの生成
@@ -96,7 +98,8 @@ export default function GameContainer({
       <div className="mx-2 my-6">
         <InputPanel blockSize={blockSize} onInput={fill} onDelete={del} />
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center gap-8">
+        <Quit onQuit={() => onChangeSize?.()} />
         <Verifying onStartChecking={() => checkAndUpdate(puzzle)} />
       </div>
       <MistakeNoticeModal
