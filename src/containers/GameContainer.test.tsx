@@ -75,6 +75,24 @@ describe('GameContainer', () => {
     expect(screen.getByTestId('1,0')).toHaveTextContent('4');
     expect(screen.getByTestId('1,0')).toHaveAttribute('data-fix');
   });
+  test('fix していない入力済みのセルはキーボードの Backspace で空欄にできる', () => {
+    setup('2_2');
+    expect(screen.getByTestId('0,0')).not.toHaveAttribute('data-fix');
+    userEvent.click(screen.getByTestId('0,0'));
+    userEvent.keyboard('1');
+    expect(screen.getByTestId('0,0')).toHaveTextContent('1');
+    userEvent.keyboard('{Backspace}');
+    expect(screen.getByTestId('0,0')).toHaveTextContent('');
+  });
+  test('fix のセルはキーボードの Backspace で空欄にできない', () => {
+    setup('2_2');
+    expect(screen.getByTestId('1,0')).toHaveAttribute('data-fix');
+    expect(screen.getByTestId('1,0')).toHaveTextContent('4');
+    userEvent.click(screen.getByTestId('1,0'));
+    userEvent.keyboard('{Backspace}');
+    expect(screen.getByTestId('1,0')).toHaveAttribute('data-fix');
+    expect(screen.getByTestId('1,0')).toHaveTextContent('4');
+  });
   test('親から受け取った puzzle の変更を行わない', () => {
     setup('2_2');
     expect(screen.getByTestId('2,2')).not.toHaveTextContent('1');

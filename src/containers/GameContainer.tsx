@@ -66,8 +66,9 @@ export default function GameContainer({
     return window.removeEventListener('resize', forceUpdate);
   }, [blockSize]);
   const fill = useFill(puzzle, selectedPos, forceUpdate, blockSize);
-  const del = useDelete(puzzle, selectedPos, forceUpdate);
   useFillByKeyboard(fill);
+  const del = useDelete(puzzle, selectedPos, forceUpdate);
+  useDeleteByKeybord(del);
   useArrowSelector(selectedPos, blockSize, setSelectedPos);
   const checkAndUpdate = useCheckAndUpdate(
     corrected,
@@ -264,6 +265,21 @@ function useDelete(
     targetCell.answer = undefined;
     forceUpdate();
   }, [puzzle, selectedPos, forceUpdate]);
+}
+
+function useDeleteByKeybord(del: Delete) {
+  const delByKeyboard = useCallback(
+    ({ key }) => {
+      if (key === 'Backspace') {
+        del();
+      }
+    },
+    [del],
+  );
+  useEffect(() => {
+    window.addEventListener('keydown', delByKeyboard);
+    return () => window.removeEventListener('keydown', delByKeyboard);
+  });
 }
 
 function useFillByKeyboard(fill: Fill) {
