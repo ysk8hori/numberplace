@@ -57,6 +57,15 @@ describe('GameContainer', () => {
     userEvent.keyboard('1');
     expect(screen.getByTestId('2,2')).toHaveTextContent('1');
   });
+  test('キーボードから数字を入力しても問題が扱えない数字の場合は選択中セルに記入しない', () => {
+    setup('2_2');
+    expect(screen.getByTestId('2,2')).not.toHaveTextContent('0');
+    userEvent.click(screen.getByTestId('2,2'));
+    userEvent.keyboard('0');
+    expect(screen.getByTestId('2,2')).not.toHaveTextContent('0');
+    userEvent.keyboard('5');
+    expect(screen.getByTestId('2,2')).not.toHaveTextContent('5');
+  });
   test('親から受け取った puzzle の変更を行わない', () => {
     setup('2_2');
     expect(screen.getByTestId('2,2')).not.toHaveTextContent('1');

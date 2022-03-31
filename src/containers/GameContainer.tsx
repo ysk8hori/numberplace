@@ -66,7 +66,7 @@ export default function GameContainer({
     window.addEventListener('resize', forceUpdate);
     return window.removeEventListener('resize', forceUpdate);
   }, [blockSize]);
-  const fill = useFill(puzzle, selectedPos, forceUpdate);
+  const fill = useFill(puzzle, selectedPos, forceUpdate, blockSize);
   useFillByKeyboard(fill);
   useArrowSelector(selectedPos, blockSize, setSelectedPos);
   const checkAndUpdate = useCheckAndUpdate(
@@ -229,6 +229,7 @@ function useFill(
   puzzle: MyGame,
   selectedPos: readonly [number, number],
   forceUpdate: React.DispatchWithoutAction,
+  blockSize: BlockSize,
 ) {
   return useCallback<Fill>(
     (answer: string) => {
@@ -236,6 +237,11 @@ function useFill(
         cell => !cell.isFix && isSamePos(cell.pos, selectedPos),
       );
       if (!targetCell) return;
+      // 扱える範囲の数字かどうかをチェックする
+      const num = Number(answer);
+      if (isNaN(num) || num < 1 || blockSize.height * blockSize.width < num) {
+        return;
+      }
       targetCell.answer = answer;
       forceUpdate();
     },
