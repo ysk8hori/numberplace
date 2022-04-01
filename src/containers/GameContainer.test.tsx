@@ -182,6 +182,15 @@ describe('GameContainer', () => {
     userEvent.click(screen.getByRole('button', { name: '1' }));
     expect(screen.getByTestId('2,2')).toHaveTextContent('1');
   });
+  test.todo(
+    '規定回数入力済みの数字は input パネルのボタンが非活性になる',
+    () => {
+      setup('2_2'); // 2がはじめから3箇所に記入されている状態
+      userEvent.click(screen.getByTestId('0,0'));
+      userEvent.click(screen.getByRole('button', { name: '2' }));
+      expect(screen.getByRole('button', { name: '2' })).toBeDisabled();
+    },
+  );
   test('最初から記入済みのセルは上書きできない', () => {
     setup('2_2');
     expect(screen.getByTestId('0,1')).toHaveTextContent('2');
