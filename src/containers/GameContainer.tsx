@@ -35,6 +35,8 @@ import gameHolder from '../utils/gameHolder';
  *   - 間違いがある場合はその旨を知らせてゲームを続行する
  *   - 全問正解した場合はその旨を知らせる
  * - 「ゲームをやめる」でメニューに戻る
+ * - ゲーム開始時、入力時、入力削除時にゲームを保存する
+ * - ゲーム離脱時に保存したゲームを削除する
  *
  * 以下を行わない。
  * - ゲームの生成
@@ -58,8 +60,7 @@ export default function GameContainer({
   /** 他のサイズで遊ぶコールバック */
   onChangeSize?: () => void;
 }) {
-  const puzzle = usePuzzle(basePuzzle);
-  gameHolder.saveGame({ puzzle, corrected });
+  const puzzle = usePuzzle(basePuzzle, corrected);
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   const [hasMistake, setMistake] = useState(false);
   const [hasEmptycell, setEmptycell] = useState(false);
@@ -69,9 +70,9 @@ export default function GameContainer({
     window.addEventListener('resize', forceUpdate);
     return window.removeEventListener('resize', forceUpdate);
   }, [blockSize]);
-  const fill = useFill(puzzle, selectedPos, forceUpdate, blockSize);
+  const fill = useFill(puzzle, selectedPos, forceUpdate, blockSize, corrected);
   useFillByKeyboard(fill);
-  const del = useDelete(puzzle, selectedPos, forceUpdate);
+  const del = useDelete(puzzle, selectedPos, forceUpdate, blockSize, corrected);
   useDeleteByKeybord(del);
   useArrowSelector(selectedPos, blockSize, setSelectedPos);
   const checkAndUpdate = useCheckAndUpdate(
@@ -101,7 +102,7 @@ export default function GameContainer({
         <InputPanel blockSize={blockSize} onInput={fill} onDelete={del} />
       </div>
       <div className="flex justify-center gap-8">
-        <Quit onQuit={() => onChangeSize?.()} />
+        <Quit onQuit={() => (gameHolder.removeSavedGame(), onChangeSize?.())} />
         <Verifying onStartChecking={() => checkAndUpdate(puzzle)} />
       </div>
       <MistakeNoticeModal
@@ -112,7 +113,9 @@ export default function GameContainer({
       <GameClearModal
         gameClear={isGameClear}
         onRegenerate={() => (setGameClear(false), onRegenerate?.())}
-        onChangeSize={() => (setGameClear(false), onChangeSize?.())}
+        onChangeSize={() => (
+          setGameClear(false), gameHolder.removeSavedGame(), onChangeSize?.()
+        )}
       />
     </div>
   );
@@ -159,15 +162,16 @@ function useCheckAndUpdate(
 }
 
 /** ベースとなる puzzle をクローンして isFix を付与する */
-function usePuzzle(basePuzzle: MyGame) {
+function usePuzzle(basePuzzle: MyGame, corrected: MyGame) {
   return useMemo(() => {
     // basePuzzle をクローンする
     const puzzle = JSON.parse(JSON.stringify(basePuzzle)) as MyGame;
     puzzle.cells
       .filter(cell => cell.answer)
       .forEach(cell => (cell.isFix = true));
+    gameHolder.saveGame({ puzzle, corrected });
     return puzzle;
-  }, [basePuzzle]);
+  }, [basePuzzle, corrected]);
 }
 
 function useArrowSelector(
@@ -237,6 +241,7 @@ function useFill(
   selectedPos: readonly [number, number],
   forceUpdate: React.DispatchWithoutAction,
   blockSize: BlockSize,
+  corrected: MyGame,
 ) {
   return useCallback<Fill>(
     (answer: string) => {
@@ -250,9 +255,10 @@ function useFill(
         return;
       }
       targetCell.answer = answer;
+      gameHolder.saveGame({ puzzle, corrected });
       forceUpdate();
     },
-    [puzzle, selectedPos, forceUpdate],
+    [puzzle, selectedPos, forceUpdate, blockSize, corrected],
   );
 }
 
@@ -262,6 +268,8 @@ function useDelete(
   puzzle: MyGame,
   selectedPos: readonly [number, number],
   forceUpdate: React.DispatchWithoutAction,
+  blockSize: BlockSize,
+  corrected: MyGame,
 ) {
   return useCallback<Delete>(() => {
     const targetCell = puzzle.cells.find(cell =>
@@ -269,8 +277,9 @@ function useDelete(
     );
     if (!targetCell || targetCell.isFix) return;
     targetCell.answer = undefined;
+    gameHolder.saveGame({ puzzle, corrected });
     forceUpdate();
-  }, [puzzle, selectedPos, forceUpdate]);
+  }, [puzzle, selectedPos, forceUpdate, blockSize, corrected]);
 }
 
 function useDeleteByKeybord(del: Delete) {

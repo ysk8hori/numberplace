@@ -10,7 +10,6 @@ const gameHolder = {
   /** 保存してあるゲームを読み込む */
   loadGame: function (): { puzzle: MyGame; corrected: MyGame } | undefined {
     const game = localStorage.getItem(STORAGEKEY_GAME);
-    this.removeSavedGame();
     if (!game) return undefined;
     try {
       return JSON.parse(game);
