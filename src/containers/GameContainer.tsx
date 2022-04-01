@@ -14,6 +14,7 @@ import Verifying from '../components/Verifying';
 import MistakeNoticeModal from '../components/MistakeNoticeModal';
 import GameClearModal from '../components/GameClearModal';
 import Quit from '../components/Quit';
+import gameHolder from '../utils/gameHolder';
 
 /**
  * ゲームの状態を保持し制御する。
@@ -58,6 +59,7 @@ export default function GameContainer({
   onChangeSize?: () => void;
 }) {
   const puzzle = usePuzzle(basePuzzle);
+  gameHolder.saveGame({ puzzle, corrected });
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   const [hasMistake, setMistake] = useState(false);
   const [hasEmptycell, setEmptycell] = useState(false);
@@ -156,6 +158,7 @@ function useCheckAndUpdate(
   );
 }
 
+/** ベースとなる puzzle をクローンして isFix を付与する */
 function usePuzzle(basePuzzle: MyGame) {
   return useMemo(() => {
     // basePuzzle をクローンする
