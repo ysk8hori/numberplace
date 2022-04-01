@@ -2,7 +2,11 @@ import { BlockSize } from '@ysk8hori/numberplace-generator';
 import { MyGame } from './typeUtils';
 
 const STORAGEKEY_GAME = 'game';
-type SaveData = { puzzle: MyGame; corrected: MyGame; blockSize: BlockSize };
+export type SaveData = {
+  puzzle: MyGame;
+  corrected: MyGame;
+  blockSize: BlockSize;
+};
 
 const gameHolder = {
   /** ゲームを保存する */

@@ -1,7 +1,8 @@
 import './App.css';
 import GenerateGameContainer from './containers/GenerateGameContainer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrayItem } from './utils/typeUtils';
+import gameHolder, { SaveData } from './utils/gameHolder';
 
 /**
  * 現在のアプリのモード
@@ -32,6 +33,16 @@ function App() {
     height: 2,
     width: 3,
   });
+  const [saveData, setSaveData] = useState<SaveData | undefined>(undefined);
+  useEffect(() => {
+    const saveData = gameHolder.loadGame();
+    setSaveData(saveData);
+    if (saveData) {
+      // TODO: 保存可能なブロックサイズを制限する
+      setBlockSize(saveData.blockSize as ArrayItem<typeof blockSizeList>);
+      setMode('play');
+    }
+  }, [mode]);
 
   switch (mode) {
     case 'menu':
@@ -75,6 +86,7 @@ function App() {
           <GenerateGameContainer
             blockSize={blockSize}
             onChangeSize={() => setMode('menu')}
+            saveData={saveData}
           />
         </div>
       );

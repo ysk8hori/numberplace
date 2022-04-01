@@ -22,3 +22,10 @@ export function findCompletedNumbers(
     )
     .filter(exists);
 }
+
+export function markFixed(puzzle: MyGame) {
+  (puzzle as MyGame).cells
+    .filter(cell => cell.answer)
+    .forEach(cell => (cell.isFix = true));
+  return puzzle;
+}

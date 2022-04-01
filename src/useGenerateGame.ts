@@ -3,6 +3,7 @@ import GenerateGameWorker from './generateGame.worker?worker';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import { useEffect, useState } from 'react';
 import { MyGame } from './utils/typeUtils';
+import { SaveData } from './utils/gameHolder';
 
 type Result = undefined | { puzzle: MyGame; corrected: MyGame };
 
@@ -16,9 +17,14 @@ type Result = undefined | { puzzle: MyGame; corrected: MyGame };
 export default function useGenerateGame(
   blockSize: BlockSize,
   count: number,
+  saveData?: SaveData,
 ): Result {
   const [result, setResult] = useState<Result>(undefined);
   useEffect(() => {
+    if (saveData) {
+      setResult({ puzzle: saveData.puzzle, corrected: saveData.corrected });
+      return;
+    }
     // worker を生成
     const worker = new GenerateGameWorker();
     // ワーカーにゲーム生成を依頼
@@ -26,6 +32,6 @@ export default function useGenerateGame(
     // ワーカーからゲーム生成結果が渡された際の処理を登録
     worker.onmessage = ({ data }) => setResult(data);
     return () => worker.terminate(); // ワーカーを破棄する
-  }, [blockSize, count]);
+  }, [blockSize, count, saveData]);
   return result;
 }

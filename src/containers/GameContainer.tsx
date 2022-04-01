@@ -81,6 +81,7 @@ export default function GameContainer({
     setMistake,
     forceUpdate,
     setGameClear,
+    blockSize,
   );
   /** 次回の check で mistake や empty を検知できるようクリアするコールバック */
   const clearMistakeAndEmptyInfo = useCallback(() => {
@@ -112,7 +113,9 @@ export default function GameContainer({
       />
       <GameClearModal
         gameClear={isGameClear}
-        onRegenerate={() => (setGameClear(false), onRegenerate?.())}
+        onRegenerate={() => (
+          setGameClear(false), (gameHolder.removeSavedGame(), onRegenerate?.())
+        )}
         onChangeSize={() => (
           setGameClear(false), gameHolder.removeSavedGame(), onChangeSize?.()
         )}
@@ -134,6 +137,7 @@ function useCheckAndUpdate(
   setMistake: React.Dispatch<React.SetStateAction<boolean>>,
   forceUpdate: React.DispatchWithoutAction,
   setGameClear: React.Dispatch<React.SetStateAction<boolean>>,
+  blockSize: BlockSize,
 ) {
   return useCallback(
     (puzzle: MyGame) => {
@@ -153,11 +157,12 @@ function useCheckAndUpdate(
       });
 
       if (puzzle.cells.every(cell => cell.isFix)) setGameClear(true);
+      gameHolder.saveGame({ puzzle, corrected, blockSize });
 
       // fix を反映するために forceUpdate する
       forceUpdate();
     },
-    [corrected, setEmptycell, setMistake, forceUpdate],
+    [corrected, setEmptycell, setMistake, forceUpdate, blockSize],
   );
 }
 
@@ -170,9 +175,6 @@ function usePuzzle(
   return useMemo(() => {
     // basePuzzle をクローンする
     const puzzle = JSON.parse(JSON.stringify(basePuzzle)) as MyGame;
-    puzzle.cells
-      .filter(cell => cell.answer)
-      .forEach(cell => (cell.isFix = true));
     gameHolder.saveGame({ puzzle, corrected, blockSize });
     return puzzle;
   }, [basePuzzle, corrected, blockSize]);

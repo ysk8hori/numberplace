@@ -77,6 +77,23 @@ test('数字削除時に保存する', () => {
   ).toBeUndefined();
 });
 
+test('こたえあわせ後に保存する（fix が記録される）', () => {
+  const puzzle = JSON.parse(JSON.stringify(puzzle_2_2)) as MyGame;
+  const targetCell = puzzle.cells.find(cell => isSamePos(cell.pos, [2, 2]))!;
+  targetCell.answer = '1';
+  targetCell.isFix = true;
+  setup('2_2');
+  userEvent.click(screen.getByTestId('2,2'));
+  userEvent.keyboard('1');
+  userEvent.click(screen.getByRole('button', { name: 'こたえあわせ' }));
+  userEvent.click(screen.getByRole('button', { name: 'はい' }));
+  expect(gameHolder.loadGame()).toEqual({
+    puzzle,
+    corrected: corrected_2_2,
+    blockSize: blockSize_2_2,
+  });
+});
+
 test('ゲームクリア後に「ほかの おおきさで あそぶ」をクリックすると保存していたゲームを削除する', () => {
   setup('2_3');
   resolve_2_3({ finish: true });
@@ -85,6 +102,18 @@ test('ゲームクリア後に「ほかの おおきさで あそぶ」をクリ
   expect(gameHolder.loadGame()).toBeDefined();
   userEvent.click(
     screen.getByRole('button', { name: 'ほかの おおきさで あそぶ' }),
+  );
+  expect(gameHolder.loadGame()).toBeUndefined();
+});
+
+test('ゲームクリア後に「おなじ おおきさで あそぶ」をクリックすると保存していたゲームを削除する', () => {
+  setup('2_3');
+  resolve_2_3({ finish: true });
+  userEvent.click(screen.getByRole('button', { name: 'こたえあわせ' }));
+  userEvent.click(screen.getByRole('button', { name: 'はい' }));
+  expect(gameHolder.loadGame()).toBeDefined();
+  userEvent.click(
+    screen.getByRole('button', { name: 'おなじ おおきさで あそぶ' }),
   );
   expect(gameHolder.loadGame()).toBeUndefined();
 });
