@@ -1,14 +1,17 @@
+import { BlockSize } from '@ysk8hori/numberplace-generator';
 import { MyGame } from './typeUtils';
 
 const STORAGEKEY_GAME = 'game';
+type SaveData = { puzzle: MyGame; corrected: MyGame; blockSize: BlockSize };
+
 const gameHolder = {
   /** ゲームを保存する */
-  saveGame: function (params: { puzzle: MyGame; corrected: MyGame }) {
+  saveGame: function (params: SaveData) {
     localStorage.setItem(STORAGEKEY_GAME, JSON.stringify(params));
   },
 
   /** 保存してあるゲームを読み込む */
-  loadGame: function (): { puzzle: MyGame; corrected: MyGame } | undefined {
+  loadGame: function (): SaveData | undefined {
     const game = localStorage.getItem(STORAGEKEY_GAME);
     if (!game) return undefined;
     try {

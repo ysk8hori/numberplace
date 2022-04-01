@@ -60,7 +60,7 @@ export default function GameContainer({
   /** 他のサイズで遊ぶコールバック */
   onChangeSize?: () => void;
 }) {
-  const puzzle = usePuzzle(basePuzzle, corrected);
+  const puzzle = usePuzzle(basePuzzle, corrected, blockSize);
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   const [hasMistake, setMistake] = useState(false);
   const [hasEmptycell, setEmptycell] = useState(false);
@@ -162,16 +162,20 @@ function useCheckAndUpdate(
 }
 
 /** ベースとなる puzzle をクローンして isFix を付与する */
-function usePuzzle(basePuzzle: MyGame, corrected: MyGame) {
+function usePuzzle(
+  basePuzzle: MyGame,
+  corrected: MyGame,
+  blockSize: BlockSize,
+) {
   return useMemo(() => {
     // basePuzzle をクローンする
     const puzzle = JSON.parse(JSON.stringify(basePuzzle)) as MyGame;
     puzzle.cells
       .filter(cell => cell.answer)
       .forEach(cell => (cell.isFix = true));
-    gameHolder.saveGame({ puzzle, corrected });
+    gameHolder.saveGame({ puzzle, corrected, blockSize });
     return puzzle;
-  }, [basePuzzle, corrected]);
+  }, [basePuzzle, corrected, blockSize]);
 }
 
 function useArrowSelector(
@@ -255,7 +259,7 @@ function useFill(
         return;
       }
       targetCell.answer = answer;
-      gameHolder.saveGame({ puzzle, corrected });
+      gameHolder.saveGame({ puzzle, corrected, blockSize });
       forceUpdate();
     },
     [puzzle, selectedPos, forceUpdate, blockSize, corrected],
@@ -277,7 +281,7 @@ function useDelete(
     );
     if (!targetCell || targetCell.isFix) return;
     targetCell.answer = undefined;
-    gameHolder.saveGame({ puzzle, corrected });
+    gameHolder.saveGame({ puzzle, corrected, blockSize });
     forceUpdate();
   }, [puzzle, selectedPos, forceUpdate, blockSize, corrected]);
 }

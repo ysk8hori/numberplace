@@ -45,6 +45,7 @@ test('ゲーム開始時に isFix を付与したパズルを保存する', () =
   expect(gameHolder.loadGame()).toEqual({
     puzzle,
     corrected: corrected_2_2,
+    blockSize: blockSize_2_2,
   });
 });
 
