@@ -5,6 +5,12 @@ import InputPanelButton from './InputPanelButton';
 type Props = {
   /** ゲームのブロックサイズ */
   blockSize: BlockSize;
+  /**
+   * 入力が完了した数字のリスト（入力が完了した数字とは、
+   * 例えば BlockSize:{width:2, height:2} のサイズで
+   * 1 が 4 箇所に記入されている状態を「1の入力が完了した」と表現している）
+   */
+  completedNumbers?: string[];
   /** 入力ボタンを押下した際のイベント */
   onInput?: (buttonText: string) => void;
   /** 消去ボタンを押下した際のイベント */
@@ -20,9 +26,11 @@ type Props = {
  * - ボタン押下時に押下したボタンのテキストを callback で親へ通知する
  * - 入力ボタンが６個以上並ぶ場合は横２列になる
  * - 消去ボタンを表示する
+ * - 入力が完了した数字は入力不可とする
  */
 const InputPanel: React.FC<Props> = ({
   blockSize,
+  completedNumbers = [],
   onInput = () => undefined,
   onDelete = () => undefined,
   ...rest
@@ -33,14 +41,17 @@ const InputPanel: React.FC<Props> = ({
       new Array(9)
         .fill(true)
         .map((_, index) => ++index)
-        .map(buttonText => (
+        .map(buttonNumber => (
           <InputPanelButton
-            data-testid={`input_${buttonText}`}
-            onClick={() => onInput(buttonText.toString())}
-            disabled={size < buttonText}
-            key={buttonText}
+            data-testid={`input_${buttonNumber}`}
+            onClick={() => onInput(buttonNumber.toString())}
+            disabled={
+              size < buttonNumber ||
+              completedNumbers.includes(buttonNumber.toString())
+            }
+            key={buttonNumber}
           >
-            {buttonText}
+            {buttonNumber}
           </InputPanelButton>
         )),
     [size, onInput],

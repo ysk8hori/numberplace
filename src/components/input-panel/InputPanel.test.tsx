@@ -31,4 +31,17 @@ describe('InputPanel', () => {
     userEvent.click(screen.getByRole('button', { name: '消す' }));
     expect(onDelete).toHaveBeenCalledTimes(1);
   });
+  test('入力が完了した数字は入力不可とする', () => {
+    render(<InputPanel blockSize={blockSize_2_2} completedNumbers={['2']} />);
+    expect(screen.getByTestId('input_1')).toBeEnabled();
+    expect(screen.getByTestId('input_2')).toBeDisabled(); // 入力が完了している
+    expect(screen.getByTestId('input_3')).toBeEnabled();
+    expect(screen.getByTestId('input_4')).toBeEnabled();
+    expect(screen.getByTestId('input_5')).toBeDisabled();
+    expect(screen.getByTestId('input_6')).toBeDisabled();
+    expect(screen.getByTestId('input_7')).toBeDisabled();
+    expect(screen.getByTestId('input_8')).toBeDisabled();
+    expect(screen.getByTestId('input_9')).toBeDisabled();
+    expect(screen.getByTestId('btn_delete')).toBeEnabled();
+  });
 });
