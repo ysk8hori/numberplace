@@ -7,7 +7,7 @@ import {
   userEvent,
   puzzle_2_2 as puzzle,
   blockSize_2_2 as blockSize,
-} from '../utils/test-utils';
+} from '../../utils/test-utils';
 import GameBoard from './GameBoard';
 
 describe('GameBoard', () => {

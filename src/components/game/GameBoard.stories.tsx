@@ -4,7 +4,7 @@ import GameBoard from './GameBoard';
 import {
   blockSize_2_3 as blockSize,
   puzzle_2_3 as puzzle,
-} from '../utils/test-utils';
+} from '../../utils/test-utils';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import Modal from './atoms/Modal';
-import NeumorphismButton from './atoms/NeumorphismButton';
-import Spacer from './atoms/Spacer';
+import Modal from '../atoms/Modal';
+import NeumorphismButton from '../atoms/NeumorphismButton';
+import Spacer from '../atoms/Spacer';
 
 /**
  * 誤答がある旨を知らせるモーダル

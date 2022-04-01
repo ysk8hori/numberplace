@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 import { describe, test, it, expect, fn } from 'vitest';
-import { render, screen, userEvent } from '../utils/test-utils';
+import { render, screen, userEvent } from '../../utils/test-utils';
 import Cell from './Cell';
 
 describe('Cell', () => {

@@ -6,7 +6,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { FontFamilyContext } from '../contexts/fontContext';
+import { FontFamilyContext } from '../../contexts/fontContext';
 
 /**
  * マス目１つを表すコンポーネント。以下の特徴を持つ。

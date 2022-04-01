@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { BlockSize, Position } from '@ysk8hori/numberplace-generator';
 import Cell from './Cell';
-import { MyGame } from '../utils/typeUtils';
+import { MyGame } from '../../utils/typeUtils';
 
 type Props = {
   /** ナンプレの問題 */

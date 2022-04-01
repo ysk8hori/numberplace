@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 import { test, fn, expect } from 'vitest';
-import { render, screen, userEvent, waitFor } from '../utils/test-utils';
+import { render, screen, userEvent, waitFor } from '../../utils/test-utils';
 import Verifying from './Verifying';
 
 test('ボタンクリックでこたえあわせ確認モーダルを表示する', async () => {

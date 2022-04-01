@@ -6,14 +6,14 @@ import React, {
   useMemo,
 } from 'react';
 import { BlockSize, Position } from '@ysk8hori/numberplace-generator';
-import GameBoard from '../components/GameBoard';
+import GameBoard from '../components/game/GameBoard';
 import { isSamePos, moveX, moveY } from '../utils/positionUtils';
 import InputPanel from '../components/game/input-panel/InputPanel';
 import { MyGame } from '../utils/typeUtils';
-import Verifying from '../components/Verifying';
-import MistakeNoticeModal from '../components/MistakeNoticeModal';
-import GameClearModal from '../components/GameClearModal';
-import Quit from '../components/Quit';
+import Verifying from '../components/game/Verifying';
+import MistakeNoticeModal from '../components/game/MistakeNoticeModal';
+import GameClearModal from '../components/game/GameClearModal';
+import Quit from '../components/game/Quit';
 import gameHolder from '../utils/gameHolder';
 
 /**
