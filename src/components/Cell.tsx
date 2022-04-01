@@ -43,7 +43,7 @@ const Cell: React.FC<
   return (
     <div
       className={'relative aspect-square select-none'}
-      onClick={onSelect}
+      onMouseDown={onSelect}
       data-select={select}
       data-fix={fix}
       {...rest}
