@@ -5,8 +5,8 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { FontFamilyContext } from '../../contexts/fontContext';
-import NeumorphismButton from '../atoms/NeumorphismButton';
+import { FontFamilyContext } from '../../../contexts/fontContext';
+import NeumorphismButton from '../../atoms/NeumorphismButton';
 
 type Props = ComponentProps<typeof NeumorphismButton>;
 

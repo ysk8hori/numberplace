@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import React from 'react';
-import { describe, test, expect, fn } from 'vitest';
-import { render, screen, userEvent } from '../../utils/test-utils';
+import { describe, test, expect } from 'vitest';
+import { render, screen } from '../../../utils/test-utils';
 import InputPanelButton from './InputPanelButton';
 
 describe('InputPanelButton', () => {

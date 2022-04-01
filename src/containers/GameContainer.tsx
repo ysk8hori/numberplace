@@ -8,7 +8,7 @@ import React, {
 import { BlockSize, Position } from '@ysk8hori/numberplace-generator';
 import GameBoard from '../components/GameBoard';
 import { isSamePos, moveX, moveY } from '../utils/positionUtils';
-import InputPanel from '../components/input-panel/InputPanel';
+import InputPanel from '../components/game/input-panel/InputPanel';
 import { MyGame } from '../utils/typeUtils';
 import Verifying from '../components/Verifying';
 import MistakeNoticeModal from '../components/MistakeNoticeModal';

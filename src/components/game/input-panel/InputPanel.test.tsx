@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 import { describe, test, expect, fn } from 'vitest';
-import { render, screen, userEvent } from '../../utils/test-utils';
+import { render, screen, userEvent } from '../../../utils/test-utils';
 import InputPanel from './InputPanel';
-import { blockSize_2_2 } from '../../utils/test-utils';
+import { blockSize_2_2 } from '../../../utils/test-utils';
 
 describe('InputPanel', () => {
   test('その問題で入力する可能性のある数字のパネルと消去ボタンが押下可能', () => {
