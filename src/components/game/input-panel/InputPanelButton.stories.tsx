@@ -4,7 +4,7 @@ import InputPanelButton from './InputPanelButton';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'components/InputPanelButton',
+  title: 'components/game/input-panel/InputPanelButton',
   component: InputPanelButton,
   decorators: [
     Story => (

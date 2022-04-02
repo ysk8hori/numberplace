@@ -7,7 +7,7 @@ import sleep from '../../utils/sleep';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'components/Cell',
+  title: 'components/game/Cell',
   component: Cell,
   decorators: [
     Story => (

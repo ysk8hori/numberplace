@@ -4,7 +4,7 @@ import MistakeNoticeModal from './MistakeNoticeModal';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'components/MistakeNoticeModal',
+  title: 'components/game/MistakeNoticeModal',
   component: MistakeNoticeModal,
 } as ComponentMeta<typeof MistakeNoticeModal>;
 

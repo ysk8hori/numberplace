@@ -5,7 +5,7 @@ import { blockSize_2_2 } from '../../../utils/test-utils';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'components/InputPanel',
+  title: 'components/game/input-panel/InputPanel',
   component: InputPanel,
   decorators: [
     Story => (

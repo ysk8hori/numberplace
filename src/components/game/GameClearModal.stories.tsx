@@ -4,7 +4,7 @@ import GameClearModal from './GameClearModal';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'components/GameClearModal',
+  title: 'components/game/GameClearModal',
   component: GameClearModal,
 } as ComponentMeta<typeof GameClearModal>;
 
