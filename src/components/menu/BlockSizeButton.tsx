@@ -2,6 +2,7 @@ import { BlockSize } from '@ysk8hori/numberplace-generator';
 import clsx from 'clsx';
 import React, { useMemo } from 'react';
 import { MyGame } from '../../utils/typeUtils';
+import GlassCardButton from '../atoms/GlassCardButton';
 import GameBoard from '../game/GameBoard';
 
 type Props = React.ComponentProps<'button'> & {
@@ -34,9 +35,9 @@ function BlockSizeButton({ blockSize, className, ...rest }: Props) {
     [blockSize],
   );
   return (
-    <button className={clsx('block w-full', className)} {...rest}>
+    <GlassCardButton className={clsx('p-16', className)} {...rest}>
       {gameBoard}
-    </button>
+    </GlassCardButton>
   );
 }
 

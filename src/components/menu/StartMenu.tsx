@@ -37,12 +37,11 @@ function StartMenu({ onChoseBlockSize, className, ...rest }: Props) {
       </div>
       <div className={clsx('flex flex-col', className)} {...rest}>
         {blockSizeList.map(blockSize => (
-          <GlassCard className="m-16 p-16">
-            <BlockSizeButton
-              blockSize={blockSize}
-              onClick={() => onChoseBlockSize?.(blockSize)}
-            />
-          </GlassCard>
+          <BlockSizeButton
+            className="m-16"
+            blockSize={blockSize}
+            onClick={() => onChoseBlockSize?.(blockSize)}
+          />
         ))}
       </div>
     </div>
