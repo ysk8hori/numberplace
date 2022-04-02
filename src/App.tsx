@@ -3,6 +3,7 @@ import GenerateGameContainer from './containers/GenerateGameContainer';
 import { useEffect, useState } from 'react';
 import { ArrayItem } from './utils/typeUtils';
 import gameHolder, { SaveData } from './utils/gameHolder';
+import StartMenu from './components/menu/StartMenu';
 
 /**
  * 現在のアプリのモード
@@ -47,37 +48,11 @@ function App() {
   switch (mode) {
     case 'menu':
       return (
-        <div className="flex flex-col">
-          <h1>menu</h1>
-          <button
-            onClick={() => (
-              setBlockSize({ width: 3, height: 1 }), setMode('play')
-            )}
-          >
-            3x1
-          </button>
-          <button
-            onClick={() => (
-              setBlockSize({ width: 2, height: 2 }), setMode('play')
-            )}
-          >
-            2x2
-          </button>
-          <button
-            onClick={() => (
-              setBlockSize({ width: 3, height: 2 }), setMode('play')
-            )}
-          >
-            3x2
-          </button>
-          <button
-            onClick={() => (
-              setBlockSize({ width: 3, height: 3 }), setMode('play')
-            )}
-          >
-            3x3
-          </button>
-        </div>
+        <StartMenu
+          onChoseBlockSize={blockSize => (
+            setBlockSize(blockSize), setMode('play')
+          )}
+        />
       );
     case 'play':
     default:

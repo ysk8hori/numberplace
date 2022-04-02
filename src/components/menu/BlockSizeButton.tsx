@@ -24,7 +24,13 @@ function createGame(blockSize: BlockSize): MyGame {
 
 function BlockSizeButton({ blockSize, className, ...rest }: Props) {
   const gameBoard = useMemo(
-    () => <GameBoard blockSize={blockSize} puzzle={createGame(blockSize)} />,
+    () => (
+      <GameBoard
+        className="bg-white text-black"
+        blockSize={blockSize}
+        puzzle={createGame(blockSize)}
+      />
+    ),
     [blockSize],
   );
   return (

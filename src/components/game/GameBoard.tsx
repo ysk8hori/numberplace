@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { BlockSize, Position } from '@ysk8hori/numberplace-generator';
 import Cell from './Cell';
 import { MyGame } from '../../utils/typeUtils';
+import clsx from 'clsx';
 
 type Props = {
   /** ナンプレの問題 */
@@ -12,7 +13,7 @@ type Props = {
   onSelectCell?: (pos: Position) => void;
   /** 選択中セルの座標 */
   selectedPos?: Position;
-};
+} & React.ComponentProps<'div'>;
 
 /**
  * ナンプレのゲームを表示するゲームボード。以下の特徴を持つ。
@@ -30,21 +31,25 @@ const GameBoard: React.FC<Props> = ({
   blockSize,
   onSelectCell = () => undefined,
   selectedPos,
+  className: additionalClassName,
 }) => {
   const className = useMemo(
     () =>
-      [
-        'aspect-square',
-        'max-w-screen-sm',
-        'max-h-screen',
-        'grid',
-        generateGridColsClass(blockSize),
-        'box-border',
-        'border-t-2',
-        'border-t-black',
-        'border-l-2',
-        'border-l-black',
-      ].join(' '),
+      clsx(
+        [
+          'aspect-square',
+          'max-w-screen-sm',
+          'max-h-screen',
+          'grid',
+          generateGridColsClass(blockSize),
+          'box-border',
+          'border-t-2',
+          'border-t-black',
+          'border-l-2',
+          'border-l-black',
+        ],
+        additionalClassName,
+      ),
     [blockSize],
   );
   return (
