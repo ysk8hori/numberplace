@@ -3,6 +3,7 @@ import React from 'react';
 import { ArrayItem } from '../../utils/typeUtils';
 import GlassCard from '../atoms/GlassCard';
 import BlockSizeButton from './BlockSizeButton';
+import backgroundimg from '../../images/il12e.png';
 
 /**
  * 選択可能な BlockSize のリスト
@@ -27,17 +28,24 @@ type Props = {
 
 function StartMenu({ onChoseBlockSize, className, ...rest }: Props) {
   return (
-    <div className={clsx('flex flex-col', className)} {...rest}>
-      <h1>menu</h1>
-      {blockSizeList.map(blockSize => (
-        <GlassCard className="m-16 p-16">
-          <BlockSizeButton
-            blockSize={blockSize}
-            onClick={() => onChoseBlockSize?.(blockSize)}
-          />
-        </GlassCard>
-      ))}
-    </div>
+    <>
+      <div
+        className="w-screen h-screen bg-scroll bg-no-repeat bg-center bg-contain flex justify-center items-center"
+        style={{ backgroundImage: `url(${backgroundimg})` }}
+      >
+        <h1 style={{ color: '#7F7F7F' }}>Numberp</h1>
+      </div>
+      <div className={clsx('flex flex-col', className)} {...rest}>
+        {blockSizeList.map(blockSize => (
+          <GlassCard className="m-16 p-16">
+            <BlockSizeButton
+              blockSize={blockSize}
+              onClick={() => onChoseBlockSize?.(blockSize)}
+            />
+          </GlassCard>
+        ))}
+      </div>
+    </>
   );
 }
 
