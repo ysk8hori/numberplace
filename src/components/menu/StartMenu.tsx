@@ -28,9 +28,9 @@ type Props = {
 
 function StartMenu({ onChoseBlockSize, className, ...rest }: Props) {
   return (
-    <>
+    <div className="max-w-lg mx-auto">
       <div
-        className="w-screen h-screen bg-scroll bg-no-repeat bg-center bg-contain flex justify-center items-center"
+        className="h-screen bg-scroll bg-no-repeat bg-center bg-contain flex justify-center items-center"
         style={{ backgroundImage: `url(${backgroundimg})` }}
       >
         <h1 style={{ color: '#7F7F7F' }}>Numberp</h1>
@@ -45,7 +45,7 @@ function StartMenu({ onChoseBlockSize, className, ...rest }: Props) {
           </GlassCard>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 
