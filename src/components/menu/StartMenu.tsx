@@ -33,7 +33,7 @@ function StartMenu({ onChoseBlockSize, className, ...rest }: Props) {
         className="h-screen bg-scroll bg-no-repeat bg-center bg-contain flex justify-center items-center"
         style={{ backgroundImage: `url(${backgroundimg})` }}
       >
-        <h1 style={{ color: '#7F7F7F' }}>Numberp</h1>
+        <h1 style={{ color: '#7F7F7F' }}>numberp</h1>
       </div>
       <div className={clsx('flex flex-col', className)} {...rest}>
         {blockSizeList.map(blockSize => (
