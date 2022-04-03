@@ -1,24 +1,23 @@
-name: Build React on S3
+name: Deploy for main
 on:
   push:
-      branches:
-        - main
+    branches:
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@main  # リポジトリをチェックアウト
+        uses: actions/checkout@main # リポジトリをチェックアウト
 
       - name: Install Dependencies
         run: npm ci
 
       - name: Build
-        run: npm run build  # React ビルド
+        run: npm run build # React ビルド
 
-      - name: Deploy  # S3にデプロイ 
+      - name: Deploy # S3にデプロイ
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: aws s3 cp --recursive --region ap-northeast-1 build s3://numberp.net
-          
