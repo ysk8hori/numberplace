@@ -1,5 +1,5 @@
 import GameContainer from './GameContainer';
-import { useReducer } from 'react';
+import React, { useReducer } from 'react';
 import useGenerateGame from '../useGenerateGame';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import { SaveData } from '../utils/gameHolder';

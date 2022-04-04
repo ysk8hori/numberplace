@@ -1,6 +1,6 @@
 import './App.css';
 import GenerateGameContainer from './containers/GenerateGameContainer';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ArrayItem } from './utils/typeUtils';
 import gameHolder, { SaveData } from './utils/gameHolder';
 import StartMenu from './components/menu/StartMenu';
