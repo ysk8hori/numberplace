@@ -2,8 +2,7 @@ import '@testing-library/jest-dom';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import React from 'react';
 import ReactModal from 'react-modal';
-import { describe, test, expect, fn } from 'vitest';
-import { isSamePos } from '../utils/positionUtils';
+import { test, expect, fn } from 'vitest';
 import {
   render,
   screen,

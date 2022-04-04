@@ -6,7 +6,7 @@ import { BlockSize } from '@ysk8hori/numberplace-generator';
 /**
  * セーブデータなどからゲームをロードした際に、ゲーム生成処理を介さずにゲームプレイを可能とするコンテナ。
  */
-function GenerateGameContainer({
+function LoadGameContainer({
   puzzle,
   corrected,
   blockSize,
@@ -37,4 +37,4 @@ function GenerateGameContainer({
   );
 }
 
-export default GenerateGameContainer;
+export default LoadGameContainer;
