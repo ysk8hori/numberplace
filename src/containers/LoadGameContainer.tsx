@@ -4,9 +4,7 @@ import { MyGame } from '../utils/typeUtils';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 
 /**
- * セーブデータなどからゲームをロードした際に、ゲーム生成処理を介さずにゲームをプレイ可能とするコンテナ。
- * 
- * 本コンテナは、
+ * セーブデータなどからゲームをロードした際に、ゲーム生成処理を介さずにゲームプレイを可能とするコンテナ。
  */
 function GenerateGameContainer({
   puzzle,
