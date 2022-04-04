@@ -34,8 +34,16 @@ function BlockSizeButton({ blockSize, className, ...rest }: Props) {
     ),
     [blockSize],
   );
+  const label = useMemo(() => {
+    const sideLength = blockSize.height * blockSize.width;
+    return `${sideLength} かける ${sideLength} のサイズを選ぶ`;
+  }, [blockSize]);
   return (
-    <GlassCardButton className={clsx('p-16', className)} {...rest}>
+    <GlassCardButton
+      className={clsx('p-16', className)}
+      {...rest}
+      aria-label={label}
+    >
       {gameBoard}
     </GlassCardButton>
   );

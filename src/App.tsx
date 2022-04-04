@@ -1,36 +1,23 @@
 import './App.css';
 import GenerateGameContainer from './containers/GenerateGameContainer';
-import { useEffect, useState } from 'react';
-import { ArrayItem } from './utils/typeUtils';
+import React, { useEffect, useState } from 'react';
 import gameHolder, { SaveData } from './utils/gameHolder';
 import StartMenu from './components/menu/StartMenu';
+import LoadGameContainer from './containers/LoadGameContainer';
+import { BlockSize } from '@ysk8hori/numberplace-generator';
 
 /**
  * 現在のアプリのモード
  *
  * - menu : ユーザーが何をするかを選ぶスタートメニュー
- * - play : ナンプレを遊ぶ
+ * - generateAndPlay : 問題を生成して遊ぶ
+ * - loadAndPlay : 保存されていた問題などを読み込んで遊ぶ
  */
-type Mode = 'menu' | 'play';
-
-/**
- * 選択可能な BlockSize のリスト
- *
- * 以下の目的で設定している
- *
- * - ユーザーの選択肢を減らすことで遊びやすくする
- * - 大きすぎるサイズは負荷が高くクラッシュする場合があるので生成できないようにする
- */
-const blockSizeList = [
-  { height: 1, width: 3 } as const,
-  { height: 2, width: 2 } as const,
-  { height: 2, width: 3 } as const,
-  { height: 3, width: 3 } as const,
-];
+type Mode = 'menu' | 'loadAndPlay' | 'generateAndPlay';
 
 function App() {
   const [mode, setMode] = useState<Mode>('menu');
-  const [blockSize, setBlockSize] = useState<ArrayItem<typeof blockSizeList>>({
+  const [blockSize, setBlockSize] = useState<BlockSize>({
     height: 2,
     width: 3,
   });
@@ -39,23 +26,13 @@ function App() {
     const saveData = gameHolder.loadGame();
     setSaveData(saveData);
     if (saveData) {
-      // TODO: 保存可能なブロックサイズを制限する
-      setBlockSize(saveData.blockSize as ArrayItem<typeof blockSizeList>);
-      setMode('play');
+      setBlockSize(saveData.blockSize as BlockSize);
+      setMode('loadAndPlay');
     }
   }, [mode]);
 
   switch (mode) {
-    case 'menu':
-      return (
-        <StartMenu
-          onChoseBlockSize={blockSize => (
-            setBlockSize(blockSize), setMode('play')
-          )}
-        />
-      );
-    case 'play':
-    default:
+    case 'generateAndPlay':
       return (
         <div className="w-screen h-screen flex justify-center">
           <GenerateGameContainer
@@ -64,6 +41,29 @@ function App() {
             saveData={saveData}
           />
         </div>
+      );
+    case 'loadAndPlay':
+      return (
+        <div className="w-screen h-screen flex justify-center">
+          <LoadGameContainer
+            blockSize={saveData!.blockSize}
+            puzzle={saveData!.puzzle}
+            corrected={saveData!.corrected}
+            onChangeSize={() => setMode('menu')}
+            onRegenerate={blockSize => (
+              setBlockSize(blockSize), setMode('generateAndPlay')
+            )}
+          />
+        </div>
+      );
+    case 'menu':
+    default:
+      return (
+        <StartMenu
+          onChoseBlockSize={blockSize => (
+            setBlockSize(blockSize), setMode('generateAndPlay')
+          )}
+        />
       );
   }
 }
