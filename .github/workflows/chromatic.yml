@@ -1,13 +1,25 @@
-name: Deploy for test
+# .github/workflows/chromatic.yml
+
+# Workflow name
+name: 'Chromatic'
+
+# PR のオープンや更新と、main へのマージプッシュを契機にデプロイする
 on:
   pull_request:
     types: [opened, reopened, synchronize]
+  push:
+    branches:
+      - main
+
+# List of jobs
 jobs:
-  build:
+  chromatic-deployment:
+    # Operating System
     runs-on: ubuntu-latest
+    # Job steps
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v1
 
       - name: Use Node.js
         uses: actions/setup-node@v3
@@ -22,11 +34,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
-      - name: Build
-        run: npm run build
-
-      - name: Deploy
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: aws s3 sync ./dist s3://numberp.test --region ap-northeast-1 --delete
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
