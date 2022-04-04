@@ -1,4 +1,4 @@
-name: Deploy for test
+name: Pre Workflow
 on:
   pull_request:
     types: [opened, reopened, synchronize]
