@@ -38,7 +38,6 @@ function App() {
           <GenerateGameContainer
             blockSize={blockSize}
             onChangeSize={() => setMode('menu')}
-            saveData={saveData}
           />
         </div>
       );
