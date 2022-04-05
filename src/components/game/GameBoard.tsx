@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { BlockSize, Position } from '@ysk8hori/numberplace-generator';
-import Cell from './Cell';
+import Cell from './cell/Cell';
 import { MyGame } from '../../utils/typeUtils';
 import clsx from 'clsx';
 
