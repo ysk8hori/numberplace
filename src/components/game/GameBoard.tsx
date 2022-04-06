@@ -68,6 +68,8 @@ const GameBoard: React.FC<Props> = ({
           }
           onSelect={() => onSelectCell(cell.pos)}
           fix={cell.isFix}
+          blockSize={blockSize}
+          memoList={cell.memoList}
         />
       ))}
     </div>

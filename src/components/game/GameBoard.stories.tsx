@@ -5,6 +5,7 @@ import {
   blockSize_2_3 as blockSize,
   puzzle_2_3 as puzzle,
 } from '../../utils/test-utils';
+import { MyGame } from '../../utils/typeUtils';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -61,3 +62,17 @@ Small.decorators = [
     </div>
   ),
 ];
+
+export const HasMemo = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+HasMemo.args = {
+  puzzle: {
+    cells: (JSON.parse(JSON.stringify(puzzle)) as MyGame).cells.map(cell => {
+      cell.memoList = ['1', '2', '3', '4', '5', '6'];
+      return cell;
+    }),
+  },
+  blockSize,
+  selectedPos: [2, 2],
+};
+HasMemo.storyName = 'メモがある場合';

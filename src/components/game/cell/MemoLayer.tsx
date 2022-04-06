@@ -67,6 +67,7 @@ export default function MemoLayer({
         'max-w-screen-sm',
         'max-h-screen',
         'grid',
+        'items-center',
         generateGridColsClass(blockSize),
         'relative',
         'select-none',
