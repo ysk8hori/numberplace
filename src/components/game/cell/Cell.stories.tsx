@@ -4,6 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Cell from './Cell';
 import { within } from '@storybook/testing-library';
 import sleep from '../../../utils/sleep';
+import { blockSize_2_3 } from '../../../utils/test-utils';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -91,4 +92,10 @@ export const fix = Template.bind({});
 fix.args = {
   answer: '1',
   fix: true,
+};
+
+export const Memo = Template.bind({});
+Memo.args = {
+  blockSize: blockSize_2_3,
+  memoList: ['1', '2', '3', '4', '5', '6'],
 };

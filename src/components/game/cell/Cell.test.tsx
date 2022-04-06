@@ -1,7 +1,12 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 import { describe, test, it, expect, fn } from 'vitest';
-import { render, screen, userEvent } from '../../../utils/test-utils';
+import {
+  blockSize_2_2,
+  render,
+  screen,
+  userEvent,
+} from '../../../utils/test-utils';
 import Cell from './Cell';
 
 describe('Cell', () => {
@@ -28,5 +33,23 @@ describe('Cell', () => {
   test('変更できない Cell には data-fix 属性が付く', () => {
     render(<Cell data-testid="cell" fix />);
     expect(screen.getByTestId('cell')).toHaveAttribute('data-fix');
+  });
+  test('変更できない Cell には data-fix 属性が付く', () => {
+    render(<Cell data-testid="cell" fix />);
+    expect(screen.getByTestId('cell')).toHaveAttribute('data-fix');
+  });
+  test('Cell はメモした内容を表示する', () => {
+    render(<Cell blockSize={blockSize_2_2} memoList={['1', '4']} />);
+    expect(screen.getByText('1')).toBeInTheDocument();
+    expect(screen.queryByText('2')).not.toBeInTheDocument();
+    expect(screen.queryByText('3')).not.toBeInTheDocument();
+    expect(screen.getByText('4')).toBeInTheDocument();
+  });
+  test('Cell はメモより答えを優先して表示する', () => {
+    render(<Cell blockSize={blockSize_2_2} memoList={['1', '4']} answer="3" />);
+    expect(screen.queryByText('1')).not.toBeInTheDocument();
+    expect(screen.queryByText('2')).not.toBeInTheDocument();
+    expect(screen.queryByText('3')).toBeInTheDocument();
+    expect(screen.queryByText('4')).not.toBeInTheDocument();
   });
 });

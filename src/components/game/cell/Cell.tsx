@@ -7,6 +7,7 @@ import React, {
   useState,
 } from 'react';
 import { FontFamilyContext } from '../../../contexts/fontContext';
+import MemoLayer, { Props as MemoLayerProps } from './MemoLayer';
 
 /**
  * マス目１つを表すコンポーネント。以下の特徴を持つ。
@@ -18,28 +19,28 @@ import { FontFamilyContext } from '../../../contexts/fontContext';
  * - クリックできる（結果的に選択状態となる想定）
  * - 選択中の Cell が見た目でわかる
  * - 変更できない Cell が見た目でわかる
+ * - メモがある場合はメモを表示する
  *
  * 以下のことは行わない。
  *
  * - 自分のポジションを意識した処理
  */
-const Cell: React.FC<
-  { onSelect?: () => void } & AnswerLayerProps &
-    BorderLayerProps &
-    SelectLayerProps
-> = ({
+function Cell({
   onSelect = () => undefined,
   answer,
   fix,
   right,
   bottom,
   select,
+  blockSize,
+  memoList,
   ...rest
 }: PropsWithChildren<
   { onSelect?: () => void } & AnswerLayerProps &
     BorderLayerProps &
-    SelectLayerProps
->) => {
+    SelectLayerProps &
+    MemoLayerProps
+>) {
   return (
     <div
       className={'relative aspect-square select-none'}
@@ -48,12 +49,16 @@ const Cell: React.FC<
       data-fix={fix}
       {...rest}
     >
-      <AnswerLayer answer={answer} fix={fix} />
+      {answer ? (
+        <AnswerLayer answer={answer} fix={fix} />
+      ) : (
+        <MemoLayer blockSize={blockSize} memoList={memoList} />
+      )}
       <BorderLayer right={right} bottom={bottom} />
       <SelectLayer select={select} />
     </div>
   );
-};
+}
 
 type BorderLayerProps = {
   /** セルの右側のボーダーを太くする */ right?: boolean;
