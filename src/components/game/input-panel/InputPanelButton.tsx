@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React, {
   ComponentProps,
   useContext,
@@ -17,12 +18,13 @@ type Props = ComponentProps<typeof NeumorphismButton>;
  * - 押下可能な数字のパネルを表示する
  * - ボタンの大きさに合わせたフォントのサイズで表示する
  */
-const InputPanelButton: React.FC<Props> = ({
+function InputPanelButton({
   onClick,
   disabled,
   children,
+  className,
   ...rest
-}) => {
+}: Props) {
   const button = useRef<HTMLButtonElement>(null);
   const fontContext = useContext(FontFamilyContext);
   const [fontSize, setFontSize] = useState('1rem');
@@ -34,7 +36,7 @@ const InputPanelButton: React.FC<Props> = ({
   return (
     <NeumorphismButton
       ref={button}
-      className="aspect-square w-full h-full rounded-2xl"
+      className={clsx('aspect-square w-full h-full rounded-2xl', className)}
       style={{ fontSize, fontFamily: fontContext.inputButton }}
       onClick={onClick}
       disabled={disabled}
@@ -43,6 +45,6 @@ const InputPanelButton: React.FC<Props> = ({
       {children}
     </NeumorphismButton>
   );
-};
+}
 
 export default InputPanelButton;

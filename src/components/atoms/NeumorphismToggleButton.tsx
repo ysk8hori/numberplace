@@ -18,6 +18,7 @@ const ToggleLabel = styled.label`
   height: 100%;
   position: relative;
   display: flex;
+  justify-content: center;
   align-items: center;
   transition: 0.4s;
   box-sizing: border-box;
@@ -52,10 +53,11 @@ function NeumorphismToggleButton({
   onClick,
   checked,
   id = 'toggle',
+  'aria-label': ariaLabel,
 }: React.ComponentProps<'input'>) {
   return (
     <Base style={style}>
-      <ToggleInput id={id} {...{ onClick, checked }} />
+      <ToggleInput id={id} {...{ onClick, checked }} aria-label={ariaLabel} />
       <ToggleLabel htmlFor={id} className={className}>
         {children}
       </ToggleLabel>

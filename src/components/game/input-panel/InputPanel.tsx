@@ -1,5 +1,6 @@
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import React, { useMemo } from 'react';
+import ToggleMemoButton from './ToggleMemoButton';
 import InputPanelButton from './InputPanelButton';
 
 type Props = {
@@ -57,15 +58,17 @@ const InputPanel: React.FC<Props> = ({
     [size, onInput],
   );
   return (
-    <div className={`grid grid-cols-5 gap-4`} {...rest}>
+    <div className={`grid grid-cols-6 gap-4`} {...rest}>
       {buttons}
       <InputPanelButton
         data-testid={`btn_delete`}
         onClick={onDelete}
         aria-label="消す"
+        className="row-start-1 row-end-3"
       >
         X
       </InputPanelButton>
+      <ToggleMemoButton />
     </div>
   );
 };
