@@ -81,6 +81,7 @@ export default function MemoLayer({
         .map((_, i) => (++i).toString())
         .map(answerCandidate => (
           <MemoCell
+            key={answerCandidate}
             answerCandidate={answerCandidate}
             display={memoList?.includes(answerCandidate)}
           />
