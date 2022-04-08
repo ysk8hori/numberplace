@@ -25,6 +25,29 @@ describe('InputPanel', () => {
     userEvent.click(screen.getByRole('button', { name: '1' }));
     expect(onInput).toHaveBeenCalledWith('1');
   });
+  test('メモモードでボタン押下時に押下したボタンのテキストを onMemoInput で親へ通知する', () => {
+    const onInput = fn();
+    const onMemoInput = fn();
+    render(
+      <InputPanel
+        blockSize={blockSize_2_2}
+        onInput={onInput}
+        onMemoInput={onMemoInput}
+      />,
+    );
+    userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
+    userEvent.click(screen.getByRole('button', { name: '1' }));
+    expect(onInput).not.toBeCalled();
+    expect(onMemoInput).toHaveBeenCalledWith('1');
+
+    onInput.mockClear();
+    onMemoInput.mockClear();
+
+    userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
+    userEvent.click(screen.getByRole('button', { name: '1' }));
+    expect(onInput).toHaveBeenCalledWith('1');
+    expect(onMemoInput).not.toBeCalled();
+  });
   test('消去ボタン押下時には onDelete で親へ通知する', () => {
     const onDelete = fn();
     render(<InputPanel blockSize={blockSize_2_2} onDelete={onDelete} />);

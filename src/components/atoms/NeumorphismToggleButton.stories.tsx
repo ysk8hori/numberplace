@@ -26,11 +26,11 @@ export const Sample = () => {
   const [checked, toggle] = useReducer(checked => !checked, false);
   return (
     <div>
-      <p>checked の状態は親コンポーネントで管理する必要がある</p>
+      <p>defaultChecked の状態は親コンポーネントで管理する必要がある</p>
       <NeumorphismToggleButton
         className="aspect-square"
         style={{ width: '100px' }}
-        checked={checked}
+        defaultChecked={checked}
         onClick={toggle}
       >
         <TiPencil />

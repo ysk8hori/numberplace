@@ -21,14 +21,17 @@ Template.args = {
 export const Primary = Template.bind({});
 
 export const Sample = () => {
-  const [checked, toggle] = useReducer(checked => !checked, false);
+  const [defaultChecked, toggle] = useReducer(
+    defaultChecked => !defaultChecked,
+    false,
+  );
   return (
     <div>
-      <p>checked の状態は親コンポーネントで管理する必要がある</p>
+      <p>defaultChecked の状態は親コンポーネントで管理する必要がある</p>
       <div style={{ width: '100px' }} className="aspect-square">
         <ToggleMemoButton
           className="aspect-square"
-          checked={checked}
+          defaultChecked={defaultChecked}
           onClick={toggle}
         >
           <TiPencil />

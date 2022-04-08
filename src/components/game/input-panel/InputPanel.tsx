@@ -1,5 +1,5 @@
 import { BlockSize } from '@ysk8hori/numberplace-generator';
-import React, { useMemo } from 'react';
+import React, { useMemo, useReducer } from 'react';
 import ToggleMemoButton from './ToggleMemoButton';
 import InputPanelButton from './InputPanelButton';
 
@@ -16,6 +16,8 @@ type Props = {
   onInput?: (buttonText: string) => void;
   /** 消去ボタンを押下した際のイベント */
   onDelete?: () => void;
+  /** メモモードで入力ボタンを押下した際のイベント */
+  onMemoInput?: (buttonText: string) => void;
 };
 
 /**
@@ -28,15 +30,21 @@ type Props = {
  * - 入力ボタンが６個以上並ぶ場合は横２列になる
  * - 消去ボタンを表示する
  * - 入力が完了した数字は入力不可とする
+ * - トグルメモボタンでメモモードにできる
  */
 const InputPanel: React.FC<Props> = ({
   blockSize,
   completedNumbers = [],
   onInput = () => undefined,
   onDelete = () => undefined,
+  onMemoInput = () => undefined,
   ...rest
 }) => {
   const size = blockSize.height * blockSize.width;
+  const [isMemoMode, toggleMemoMode] = useReducer(
+    isMemoMode => !isMemoMode,
+    false,
+  );
   const buttons = useMemo(
     () =>
       new Array(9)
@@ -45,7 +53,9 @@ const InputPanel: React.FC<Props> = ({
         .map(buttonNumber => (
           <InputPanelButton
             data-testid={`input_${buttonNumber}`}
-            onClick={() => onInput(buttonNumber.toString())}
+            onClick={() =>
+              (isMemoMode ? onMemoInput : onInput)(buttonNumber.toString())
+            }
             disabled={
               size < buttonNumber ||
               completedNumbers.includes(buttonNumber.toString())
@@ -55,7 +65,7 @@ const InputPanel: React.FC<Props> = ({
             {buttonNumber}
           </InputPanelButton>
         )),
-    [size, onInput],
+    [size, onInput, isMemoMode],
   );
   return (
     <div className={`grid grid-cols-6 gap-4`} {...rest}>
@@ -68,7 +78,7 @@ const InputPanel: React.FC<Props> = ({
       >
         X
       </InputPanelButton>
-      <ToggleMemoButton />
+      <ToggleMemoButton defaultChecked={isMemoMode} onClick={toggleMemoMode} />
     </div>
   );
 };

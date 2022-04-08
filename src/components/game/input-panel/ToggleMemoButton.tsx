@@ -6,7 +6,7 @@ type Props = React.ComponentProps<typeof NeumorphismToggleButton>;
 
 export default function ToggleMemoButton({
   onClick,
-  checked,
+  defaultChecked,
   style,
   className,
 }: Props) {
@@ -21,7 +21,7 @@ export default function ToggleMemoButton({
     <div ref={box}>
       <NeumorphismToggleButton
         onClick={onClick}
-        checked={checked}
+        defaultChecked={defaultChecked}
         style={{ ...style, fontSize }}
         className={className}
         aria-label="メモ"
