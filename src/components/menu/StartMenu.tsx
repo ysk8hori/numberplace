@@ -3,7 +3,7 @@ import React from 'react';
 import { ArrayItem } from '../../utils/typeUtils';
 import GlassCard from '../atoms/GlassCard';
 import BlockSizeButton from './BlockSizeButton';
-import backgroundimg from '../../images/il12e.png';
+import backgroundimg from '../../images/il12e-min.png';
 
 /**
  * 選択可能な BlockSize のリスト
