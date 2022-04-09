@@ -2,7 +2,6 @@ import '@testing-library/jest-dom';
 import React from 'react';
 import ReactModal from 'react-modal';
 import { test, expect } from 'vitest';
-import { isSamePos } from '../utils/positionUtils';
 import {
   render,
   screen,
@@ -69,7 +68,17 @@ test('メモモードで入力済みセル上書き', () => {
   expect(screen.getByTestId('0,0')).toHaveTextContent('1');
   expect(screen.getByTestId('0,0-memo')).toHaveTextContent('1');
 });
-test.todo('メモ記入済みセルに通常入力で上書き');
+test('メモ記入済みセルに通常入力で上書き', () => {
+  setup('2_2');
+  expect(screen.getByTestId('0,0')).toHaveTextContent('');
+  userEvent.click(screen.getByTestId('0,0'));
+  userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
+  userEvent.click(screen.getByRole('button', { name: '1' }));
+  expect(screen.getByTestId('0,0-memo')).toHaveTextContent('1');
+  userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
+  userEvent.click(screen.getByRole('button', { name: '2' }));
+  expect(screen.getByTestId('0,0')).toHaveTextContent('2');
+});
 test.todo('メモモードで消去ボタン');
 
 test('fix のセルはメモ入力ボタンでメモを記入できない', () => {
