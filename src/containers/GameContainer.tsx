@@ -289,6 +289,7 @@ type InputMemo = (answerCandidate: string) => void;
  *
  * - メモモードで空欄セルにメモ記入
  * - メモモードでメモ済み数字と同じボタン押下でそのメモ数字を消す
+ * - ターゲットが通常入力済みセルの場合は通常入力していた値をクリアする
  *
  */
 function useInputMemo(
@@ -309,6 +310,8 @@ function useInputMemo(
       if (isNaN(num) || num < 1 || blockSize.height * blockSize.width < num) {
         return;
       }
+      // ターゲットが通常入力済みセルの場合は通常入力していた値をクリアする
+      targetCell.answer = undefined;
       // 記入済みの数字ならクリアし、未記入なら記入する
       if (!targetCell.memoList) targetCell.memoList = [];
       if (targetCell.memoList.includes(answerCandidate)) {
