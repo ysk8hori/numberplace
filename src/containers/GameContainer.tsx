@@ -346,6 +346,7 @@ function useDelete(
     );
     if (!targetCell || targetCell.isFix) return;
     targetCell.answer = undefined;
+    targetCell.memoList = undefined;
     gameHolder.saveGame({ puzzle, corrected, blockSize });
     forceUpdate();
   }, [puzzle, selectedPos, forceUpdate, blockSize, corrected]);

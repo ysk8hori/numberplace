@@ -79,7 +79,29 @@ test('メモ記入済みセルに通常入力で上書き', () => {
   userEvent.click(screen.getByRole('button', { name: '2' }));
   expect(screen.getByTestId('0,0')).toHaveTextContent('2');
 });
-test.todo('メモモードで消去ボタン');
+test('メモがある、かつメモモードで消去ボタンを押下するとメモをクリアする', () => {
+  setup('2_2');
+  expect(screen.getByTestId('0,0')).toHaveTextContent('');
+  userEvent.click(screen.getByTestId('0,0'));
+  userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
+  userEvent.click(screen.getByRole('button', { name: '1' }));
+  userEvent.click(screen.getByRole('button', { name: '2' }));
+  expect(screen.getByTestId('0,0-memo')).toHaveTextContent('12');
+  userEvent.click(screen.getByRole('button', { name: '消す' }));
+  expect(screen.getByTestId('0,0-memo')).toHaveTextContent('');
+});
+test('メモがある、かつ通常モードで消去ボタンを押下するとメモをクリアする', () => {
+  setup('2_2');
+  expect(screen.getByTestId('0,0')).toHaveTextContent('');
+  userEvent.click(screen.getByTestId('0,0'));
+  userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
+  userEvent.click(screen.getByRole('button', { name: '1' }));
+  userEvent.click(screen.getByRole('button', { name: '2' }));
+  userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
+  expect(screen.getByTestId('0,0-memo')).toHaveTextContent('12');
+  userEvent.click(screen.getByRole('button', { name: '消す' }));
+  expect(screen.getByTestId('0,0-memo')).toHaveTextContent('');
+});
 
 test('fix のセルはメモ入力ボタンでメモを記入できない', () => {
   setup('2_2');
