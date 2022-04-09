@@ -35,15 +35,28 @@ function setup(size: '2_2' | '2_3') {
   ReactModal.setAppElement(rendered.container);
 }
 
-test.todo('メモモードで空欄セルにメモ記入', () => {
+test('メモモードで空欄セルにメモ記入', () => {
   setup('2_2');
   expect(screen.getByTestId('0,0')).not.toHaveTextContent('1');
   expect(screen.getByTestId('0,0-memo')).not.toHaveTextContent('1');
   userEvent.click(screen.getByTestId('0,0'));
   userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
   userEvent.click(screen.getByRole('button', { name: '1' }));
-  // expect(screen.getByTestId('0,0')).toHaveTextContent('4');
   expect(screen.getByTestId('0,0-memo')).toHaveTextContent('1');
+});
+test('メモモードでメモ済み数字と同じボタン押下でそのメモ数字を消す', () => {
+  setup('2_2');
+  expect(screen.getByTestId('0,0')).not.toHaveTextContent('1');
+  expect(screen.getByTestId('0,0-memo')).not.toHaveTextContent('1');
+  userEvent.click(screen.getByTestId('0,0'));
+  userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
+  userEvent.click(screen.getByRole('button', { name: '1' }));
+  userEvent.click(screen.getByRole('button', { name: '2' }));
+  expect(screen.getByTestId('0,0-memo')).toHaveTextContent('1');
+  expect(screen.getByTestId('0,0-memo')).toHaveTextContent('2');
+  userEvent.click(screen.getByRole('button', { name: '1' }));
+  expect(screen.getByTestId('0,0-memo')).not.toHaveTextContent('1');
+  expect(screen.getByTestId('0,0-memo')).toHaveTextContent('2');
 });
 test.todo('メモモードで入力済みセル上書き');
 test.todo('メモ記入済みセルに通常入力で上書き');

@@ -17,14 +17,18 @@ export type Props = React.ComponentProps<'div'> & {
 
 function MemoCell({
   answerCandidate,
-  display,
+  memoList,
 }: {
   answerCandidate: string;
-  display?: boolean;
+  memoList?: string[];
 }) {
   const box = useRef<HTMLDivElement>(null);
   const [fontSize, setFontSize] = useState('1rem');
   const [lineHeight, setLineHeight] = useState('1rem');
+  const display = useMemo(
+    () => memoList?.includes(answerCandidate),
+    [memoList, answerCandidate],
+  );
   const fontContext = useContext(FontFamilyContext);
   const fontFamily = fontContext.normal;
   useLayoutEffect(() => {
@@ -79,14 +83,16 @@ export default function MemoLayer({
       Array(blockSize.width * blockSize.height)
         .fill(0)
         .map((_, i) => (++i).toString())
-        .map(answerCandidate => (
-          <MemoCell
-            key={answerCandidate}
-            answerCandidate={answerCandidate}
-            display={memoList?.includes(answerCandidate)}
-          />
-        )),
-    [blockSize],
+        .map(answerCandidate => {
+          return (
+            <MemoCell
+              key={answerCandidate}
+              answerCandidate={answerCandidate}
+              memoList={memoList}
+            />
+          );
+        }),
+    [blockSize, memoList],
   );
   return (
     <div className={className} {...rest}>

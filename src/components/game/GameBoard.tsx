@@ -60,7 +60,7 @@ const GameBoard: React.FC<Props> = ({
           key={JSON.stringify(cell.pos)}
           right={(cell.pos[0] + 1) % blockSize.width === 0}
           bottom={(cell.pos[1] + 1) % blockSize.height === 0}
-          data-testid={cell.pos}
+          data-testid={cell.pos.toString()}
           select={
             cell.pos[0] === selectedPos?.[0] && cell.pos[1] === selectedPos?.[1]
               ? true
