@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { BlockSize, Position } from '@ysk8hori/numberplace-generator';
-import Cell from './Cell';
+import Cell from './cell/Cell';
 import { MyGame } from '../../utils/typeUtils';
 import clsx from 'clsx';
 
@@ -60,7 +60,7 @@ const GameBoard: React.FC<Props> = ({
           key={JSON.stringify(cell.pos)}
           right={(cell.pos[0] + 1) % blockSize.width === 0}
           bottom={(cell.pos[1] + 1) % blockSize.height === 0}
-          data-testid={cell.pos}
+          data-testid={cell.pos.toString()}
           select={
             cell.pos[0] === selectedPos?.[0] && cell.pos[1] === selectedPos?.[1]
               ? true
@@ -68,6 +68,8 @@ const GameBoard: React.FC<Props> = ({
           }
           onSelect={() => onSelectCell(cell.pos)}
           fix={cell.isFix}
+          blockSize={blockSize}
+          memoList={cell.memoList}
         />
       ))}
     </div>

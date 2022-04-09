@@ -72,6 +72,13 @@ export default function GameContainer({
   }, [blockSize]);
   const fill = useFill(puzzle, selectedPos, forceUpdate, blockSize, corrected);
   useFillByKeyboard(fill);
+  const inputMemo = useInputMemo(
+    puzzle,
+    selectedPos,
+    forceUpdate,
+    blockSize,
+    corrected,
+  );
   const del = useDelete(puzzle, selectedPos, forceUpdate, blockSize, corrected);
   useDeleteByKeybord(del);
   useArrowSelector(selectedPos, blockSize, setSelectedPos);
@@ -100,7 +107,12 @@ export default function GameContainer({
         />
       </div>
       <div className="mx-2 my-6">
-        <InputPanel blockSize={blockSize} onInput={fill} onDelete={del} />
+        <InputPanel
+          blockSize={blockSize}
+          onInput={fill}
+          onMemoInput={inputMemo}
+          onDelete={del}
+        />
       </div>
       <div className="flex justify-center gap-8">
         <Quit onQuit={() => (gameHolder.removeSavedGame(), onChangeSize?.())} />
@@ -268,6 +280,57 @@ function useFill(
   );
 }
 
+type InputMemo = (answerCandidate: string) => void;
+
+/**
+ * メモ記入処理
+ *
+ * 実現すること
+ *
+ * - メモモードで空欄セルにメモ記入
+ * - メモモードでメモ済み数字と同じボタン押下でそのメモ数字を消す
+ * - ターゲットが通常入力済みセルの場合は通常入力していた値をクリアする
+ *
+ */
+function useInputMemo(
+  puzzle: MyGame,
+  selectedPos: readonly [number, number],
+  forceUpdate: React.DispatchWithoutAction,
+  blockSize: BlockSize,
+  corrected: MyGame,
+) {
+  return useCallback<InputMemo>(
+    (answerCandidate: string) => {
+      const targetCell = puzzle.cells.find(cell =>
+        isSamePos(cell.pos, selectedPos),
+      );
+      if (!targetCell || targetCell.isFix) return;
+      // 扱える範囲の数字かどうかをチェックする
+      const num = Number(answerCandidate);
+      if (isNaN(num) || num < 1 || blockSize.height * blockSize.width < num) {
+        return;
+      }
+      // ターゲットが通常入力済みセルの場合は通常入力していた値をクリアする
+      targetCell.answer = undefined;
+      // 記入済みの数字ならクリアし、未記入なら記入する
+      if (!targetCell.memoList) targetCell.memoList = [];
+      if (targetCell.memoList.includes(answerCandidate)) {
+        targetCell.memoList = targetCell.memoList.reduce((list, current) => {
+          if (current !== answerCandidate) list.push(current);
+          return list;
+        }, new Array<string>());
+      } else {
+        const list = Array.from(targetCell.memoList);
+        list.push(answerCandidate);
+        targetCell.memoList = list;
+      }
+      gameHolder.saveGame({ puzzle, corrected, blockSize });
+      forceUpdate();
+    },
+    [puzzle, selectedPos, forceUpdate, blockSize, corrected],
+  );
+}
+
 type Delete = () => void;
 /** 入力済みかつ fix していない cell の内容をクリアする */
 function useDelete(
@@ -283,6 +346,7 @@ function useDelete(
     );
     if (!targetCell || targetCell.isFix) return;
     targetCell.answer = undefined;
+    targetCell.memoList = undefined;
     gameHolder.saveGame({ puzzle, corrected, blockSize });
     forceUpdate();
   }, [puzzle, selectedPos, forceUpdate, blockSize, corrected]);

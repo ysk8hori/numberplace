@@ -7,5 +7,11 @@ export type ArrayItem<T extends Array<unknown>> = T extends Array<infer T2>
 
 /** アプリケーションで拡張したゲーム */
 export type MyGame = Pick<Game, 'toString'> & {
-  cells: Array<ArrayItem<Game['cells']> & { isFix?: boolean }>;
+  cells: Array<MyCell>;
+};
+
+/** アプリケーションで拡張したセル */
+export type MyCell = ArrayItem<Game['cells']> & {
+  isFix?: boolean;
+  memoList?: string[];
 };
