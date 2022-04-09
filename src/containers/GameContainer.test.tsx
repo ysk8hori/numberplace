@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 import ReactModal from 'react-modal';
-import { describe, test, expect } from 'vitest';
+import { test, expect } from 'vitest';
 import { isSamePos } from '../utils/positionUtils';
 import {
   render,
@@ -13,7 +13,6 @@ import {
   puzzle_2_3,
   blockSize_2_3,
   corrected_2_3,
-  resolve_2_3,
 } from '../utils/test-utils';
 import GameContainer from './GameContainer';
 

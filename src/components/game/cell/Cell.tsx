@@ -34,9 +34,10 @@ function Cell({
   select,
   blockSize,
   memoList,
+  'data-testid': dataTestid,
   ...rest
 }: PropsWithChildren<
-  { onSelect?: () => void } & AnswerLayerProps &
+  { onSelect?: () => void; 'data-testid'?: string } & AnswerLayerProps &
     BorderLayerProps &
     SelectLayerProps &
     MemoLayerProps
@@ -45,6 +46,7 @@ function Cell({
     <div
       className={'relative aspect-square select-none'}
       onMouseDown={onSelect}
+      data-testid={dataTestid}
       data-select={select}
       data-fix={fix}
       {...rest}
@@ -52,7 +54,11 @@ function Cell({
       {answer ? (
         <AnswerLayer answer={answer} fix={fix} />
       ) : (
-        <MemoLayer blockSize={blockSize} memoList={memoList} />
+        <MemoLayer
+          blockSize={blockSize}
+          memoList={memoList}
+          data-testid={`${dataTestid}-memo`}
+        />
       )}
       <BorderLayer right={right} bottom={bottom} />
       <SelectLayer select={select} />
