@@ -2,6 +2,7 @@ import { BlockSize } from '@ysk8hori/numberplace-generator';
 import React, { useMemo, useReducer } from 'react';
 import ToggleMemoButton from './ToggleMemoButton';
 import InputPanelButton from './InputPanelButton';
+import { FaEraser } from 'react-icons/fa';
 
 type Props = {
   /** ゲームのブロックサイズ */
@@ -76,7 +77,7 @@ const InputPanel: React.FC<Props> = ({
         aria-label="消す"
         className="row-start-1 row-end-3"
       >
-        X
+        <FaEraser />
       </InputPanelButton>
       <ToggleMemoButton defaultChecked={isMemoMode} onClick={toggleMemoMode} />
     </div>
