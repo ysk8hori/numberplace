@@ -24,8 +24,12 @@ export default function useGenerateGame(
     // ワーカーにゲーム生成を依頼
     worker.postMessage(blockSize);
     // ワーカーからゲーム生成結果が渡された際の処理を登録
-    worker.onmessage = ({ data }) => setResult(data);
-    return () => worker.terminate(); // ワーカーを破棄する
+    worker.onmessage = ({ data }) => {
+      worker.terminate(); // ワーカーを破棄する
+      setResult(data);
+    };
+    // return () => worker.terminate(); // ワーカーを破棄する
   }, [blockSize, count]);
+
   return result;
 }
