@@ -40,7 +40,7 @@ function BlockSizeButton({ blockSize, className, ...rest }: Props) {
   }, [blockSize]);
   return (
     <GlassCardButton
-      className={clsx('p-16', className)}
+      className={clsx('p-16 aspect-square', className)}
       {...rest}
       aria-label={label}
     >

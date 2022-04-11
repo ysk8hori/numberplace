@@ -7,6 +7,13 @@ import BlockSizeButton from './BlockSizeButton';
 export default {
   title: 'components/menu/BlockSizeButton',
   component: BlockSizeButton,
+  decorators: [
+    Story => (
+      <div style={{ width: '400px', height: '400px', display: 'flex' }}>
+        <Story />
+      </div>
+    ),
+  ],
 } as ComponentMeta<typeof BlockSizeButton>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
