@@ -2,11 +2,20 @@ import { BlockSize } from '@ysk8hori/numberplace-generator';
 import clsx from 'clsx';
 import React, { useMemo } from 'react';
 import { MyGame } from '../../utils/typeUtils';
+import GlassCard from '../atoms/GlassCard';
 import GlassCardButton from '../atoms/GlassCardButton';
 import GameBoard from '../game/GameBoard';
+import {
+  IoIosArrowDropleftCircle,
+  IoIosArrowDroprightCircle,
+} from 'react-icons/io';
+import { VscTriangleLeft, VscTriangleRight } from 'react-icons/vsc';
+import styled from 'styled-components';
 
-type Props = React.ComponentProps<'button'> & {
+type Props = {
   blockSize: BlockSize;
+  onClick: () => void;
+  className: string;
 };
 
 function createGame(blockSize: BlockSize): MyGame {
@@ -23,7 +32,13 @@ function createGame(blockSize: BlockSize): MyGame {
   };
 }
 
-function BlockSizeButton({ blockSize, className, ...rest }: Props) {
+const GameBoardButton = styled.button`
+  display: block;
+  width: calc(100% - 8rem);
+  margin-right: auto;
+  margin-left: auto;
+`;
+function BlockSizeButton({ blockSize, onClick, className }: Props) {
   const gameBoard = useMemo(
     () => (
       <GameBoard
@@ -39,13 +54,25 @@ function BlockSizeButton({ blockSize, className, ...rest }: Props) {
     return `${sideLength} かける ${sideLength} のサイズを選ぶ`;
   }, [blockSize]);
   return (
-    <GlassCardButton
-      className={clsx('p-16 aspect-square', className)}
-      {...rest}
-      aria-label={label}
+    <GlassCard
+      className={clsx(
+        'p-0 aspect-square flex flex-col items-stretch',
+        className,
+      )}
     >
-      {gameBoard}
-    </GlassCardButton>
+      <div className="flex flex-row h-16 justify-center items-center text-gray-500">
+        <button className="h-full">
+          <VscTriangleLeft className="text-3xl w-16" />
+        </button>
+        <div className="flex-grow text-center">difficulty</div>
+        <button className="h-full">
+          <VscTriangleRight className="text-3xl w-16" />
+        </button>
+      </div>
+      <GameBoardButton aria-label={label} onClick={onClick}>
+        {gameBoard}
+      </GameBoardButton>
+    </GlassCard>
   );
 }
 

@@ -7,13 +7,6 @@ import BlockSizeButton from './BlockSizeButton';
 export default {
   title: 'components/menu/BlockSizeButton',
   component: BlockSizeButton,
-  decorators: [
-    Story => (
-      <div style={{ width: '400px', height: '400px', display: 'flex' }}>
-        <Story />
-      </div>
-    ),
-  ],
 } as ComponentMeta<typeof BlockSizeButton>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
@@ -25,3 +18,21 @@ export const Primary = Template.bind({});
 Primary.args = {
   blockSize: { width: 2, height: 3 },
 };
+Primary.decorators = [
+  Story => (
+    <div style={{ width: '400px', height: '400px', display: 'flex' }}>
+      <Story />
+    </div>
+  ),
+];
+export const IPhone13 = Template.bind({});
+IPhone13.args = {
+  blockSize: { width: 3, height: 3 },
+};
+IPhone13.decorators = [
+  Story => (
+    <div style={{ width: '280px', height: '280px', display: 'flex' }}>
+      <Story />
+    </div>
+  ),
+];
