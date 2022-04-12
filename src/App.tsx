@@ -62,8 +62,10 @@ function App() {
     default:
       return (
         <StartMenu
-          onChoseBlockSize={blockSize => (
-            setBlockSize(blockSize), setMode('generateAndPlay')
+          onChoseBlockSize={(blockSize, difficulty) => (
+            setBlockSize(blockSize),
+            setDifficulty(difficulty),
+            setMode('generateAndPlay')
           )}
         />
       );
