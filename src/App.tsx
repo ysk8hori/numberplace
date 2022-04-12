@@ -21,6 +21,8 @@ function App() {
     height: 2,
     width: 3,
   });
+  // todo difficulty は localstorage で保持して使う
+  const [difficulty, setDifficulty] = useState<number>(9);
   const [saveData, setSaveData] = useState<SaveData | undefined>(undefined);
   useEffect(() => {
     const saveData = gameHolder.loadGame();
@@ -38,7 +40,7 @@ function App() {
           <GenerateGameContainer
             blockSize={blockSize}
             onChangeSize={() => setMode('menu')}
-            difficulty={9}
+            difficulty={difficulty}
           />
         </div>
       );
