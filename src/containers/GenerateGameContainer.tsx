@@ -13,7 +13,7 @@ function GenerateGameContainer({
 }) {
   const [count, forceUpdate] = useReducer(x => x + 1, 0);
 
-  const result = useGenerateGame(blockSize, count);
+  const result = useGenerateGame({ blockSize, count, difficulty: 9 });
   if (!result) {
     return <div>loading</div>;
   }

@@ -13,16 +13,21 @@ type Result = undefined | { puzzle: MyGame; corrected: MyGame };
  * @param count ゲームを再生成するたびにインクリメントされる値
  * @returns ゲーム生成結果
  */
-export default function useGenerateGame(
-  blockSize: BlockSize,
-  count: number,
-): Result {
+export default function useGenerateGame({
+  blockSize,
+  count,
+  difficulty,
+}: {
+  blockSize: BlockSize;
+  count: number;
+  difficulty: number;
+}): Result {
   const [result, setResult] = useState<Result>(undefined);
   useEffect(() => {
     // worker を生成
     const worker = new GenerateGameWorker();
     // ワーカーにゲーム生成を依頼
-    worker.postMessage({ blockSize, difficulty: 5 });
+    worker.postMessage({ blockSize, difficulty });
     // ワーカーからゲーム生成結果が渡された際の処理を登録
     worker.onmessage = ({ data }) => {
       worker.terminate(); // ワーカーを破棄する

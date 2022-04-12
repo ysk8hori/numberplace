@@ -59,7 +59,9 @@ test('ゲーム生成してゲームクリア後に「おなじ おおきさで 
   // useGenerateGame の実行回数をメモしておく
   const times = generateTimes();
   // useGenerateGame が最後に呼ばれた際の第一引数が blockSize_2_3 であることを確認する
-  expect(calledWith()).toEqual(blockSize_2_3);
+  expect(calledWith()).toEqual(
+    expect.objectContaining({ blockSize: blockSize_2_3 }),
+  );
   expect(
     await screen.findByRole('button', { name: 'こたえあわせ' }),
   ).toBeInTheDocument();
@@ -72,7 +74,9 @@ test('ゲーム生成してゲームクリア後に「おなじ おおきさで 
   // useGenerateGame の実行回数が増えていることを確認する
   expect(generateTimes()).greaterThan(times);
   // useGenerateGame が最後に呼ばれた際の第一引数が blockSize_2_3 であることを確認する
-  expect(calledWith()).toEqual(blockSize_2_3);
+  expect(calledWith()).toEqual(
+    expect.objectContaining({ blockSize: blockSize_2_3 }),
+  );
 });
 
 test('ゲームロードしてゲームクリア後に「おなじ おおきさで あそぶ」をクリックするとおなじおおきさのゲームを生成する', async () => {
@@ -96,5 +100,7 @@ test('ゲームロードしてゲームクリア後に「おなじ おおきさ�
   // useGenerateGame は実行される
   expect(generateTimes()).greaterThanOrEqual(1);
   // useGenerateGame が最後に呼ばれた際の第一引数が blockSize_2_3 であることを確認する
-  expect(calledWith()).toEqual(blockSize_2_3);
+  expect(calledWith()).toEqual(
+    expect.objectContaining({ blockSize: blockSize_2_3 }),
+  );
 });
