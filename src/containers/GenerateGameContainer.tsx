@@ -5,15 +5,17 @@ import { BlockSize } from '@ysk8hori/numberplace-generator';
 
 function GenerateGameContainer({
   blockSize,
+  difficulty,
   onChangeSize,
 }: {
   blockSize: BlockSize;
+  difficulty: number;
   /** 他のサイズで遊ぶコールバック */
   onChangeSize?: () => void;
 }) {
   const [count, forceUpdate] = useReducer(x => x + 1, 0);
 
-  const result = useGenerateGame({ blockSize, count, difficulty: 9 });
+  const result = useGenerateGame({ blockSize, count, difficulty });
   if (!result) {
     return <div>loading</div>;
   }

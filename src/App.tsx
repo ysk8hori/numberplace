@@ -38,6 +38,7 @@ function App() {
           <GenerateGameContainer
             blockSize={blockSize}
             onChangeSize={() => setMode('menu')}
+            difficulty={9}
           />
         </div>
       );
