@@ -22,7 +22,7 @@ export default function useGenerateGame(
     // worker を生成
     const worker = new GenerateGameWorker();
     // ワーカーにゲーム生成を依頼
-    worker.postMessage(blockSize);
+    worker.postMessage({ blockSize, difficulty: 5 });
     // ワーカーからゲーム生成結果が渡された際の処理を登録
     worker.onmessage = ({ data }) => {
       worker.terminate(); // ワーカーを破棄する
