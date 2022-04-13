@@ -46,7 +46,7 @@ export function difficultyAdjustment({
   return newPuzzle;
 }
 
-type DifficultyName = 'easy' | 'normal' | 'hard';
+type Difficulty = 'easy' | 'normal' | 'hard';
 
 /**
  * 問題のレベル
@@ -54,69 +54,69 @@ type DifficultyName = 'easy' | 'normal' | 'hard';
  */
 type Level = {
   blockSize: BlockSize;
-  difficultyName: DifficultyName;
-  difficulty: number;
+  difficulty: Difficulty;
+  maxEmptyCount: number;
 };
 
 const levels: Level[] = [
   {
     blockSize: { width: 3, height: 1 },
-    difficultyName: 'easy',
-    difficulty: 1,
+    difficulty: 'easy',
+    maxEmptyCount: 1,
   },
   {
     blockSize: { width: 3, height: 1 },
-    difficultyName: 'normal',
-    difficulty: 2,
+    difficulty: 'normal',
+    maxEmptyCount: 2,
   },
   {
     blockSize: { width: 3, height: 1 },
-    difficultyName: 'hard',
-    difficulty: 3,
+    difficulty: 'hard',
+    maxEmptyCount: 3,
   },
   {
     blockSize: { width: 2, height: 2 },
-    difficultyName: 'easy',
-    difficulty: 2,
+    difficulty: 'easy',
+    maxEmptyCount: 2,
   },
   {
     blockSize: { width: 2, height: 2 },
-    difficultyName: 'normal',
-    difficulty: 3,
+    difficulty: 'normal',
+    maxEmptyCount: 3,
   },
   {
     blockSize: { width: 2, height: 2 },
-    difficultyName: 'hard',
-    difficulty: 4,
+    difficulty: 'hard',
+    maxEmptyCount: 4,
   },
   {
     blockSize: { width: 3, height: 2 },
-    difficultyName: 'easy',
-    difficulty: 2,
+    difficulty: 'easy',
+    maxEmptyCount: 2,
   },
   {
     blockSize: { width: 3, height: 2 },
-    difficultyName: 'normal',
-    difficulty: 4,
+    difficulty: 'normal',
+    maxEmptyCount: 4,
   },
   {
     blockSize: { width: 3, height: 2 },
-    difficultyName: 'hard',
-    difficulty: 6,
+    difficulty: 'hard',
+    maxEmptyCount: 6,
   },
   {
     blockSize: { width: 3, height: 3 },
-    difficultyName: 'easy',
-    difficulty: 5,
+    difficulty: 'easy',
+    maxEmptyCount: 5,
   },
   {
     blockSize: { width: 3, height: 3 },
-    difficultyName: 'normal',
-    difficulty: 7,
+    difficulty: 'normal',
+    maxEmptyCount: 7,
   },
   {
     blockSize: { width: 3, height: 3 },
-    difficultyName: 'hard',
-    difficulty: 9,
+    difficulty: 'hard',
+    maxEmptyCount: 9,
   },
 ];
