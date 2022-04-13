@@ -12,17 +12,20 @@ import { collectCellsByAnswer, error, shuffle } from './utils';
  * @returns 与えられた puzzle とは別のインスタンスの MyGame。難易度調整済み。
  */
 export function difficultyAdjustment({
-  /** 難易度調整対象のパズル。本関数はこれをクローンして難易度調整したものをリターンする。 */
   puzzle,
-  /** 難易度調整対象のパズルの解答 */
   corrected,
-  /** 難易度。最小値は 1 とし、最大値は対象のパズルのサイズ（blockSize.width*blockSize.height）とする。  */
   difficulty,
+  blockSize,
 }: {
+  /** 難易度調整対象のパズル。本関数はこれをクローンして難易度調整したものをリターンする。 */
   puzzle: MyGame;
+  /** 難易度調整対象のパズルの解答 */
   corrected: MyGame;
-  difficulty: number;
+  /** 難易度。最小値は 1 とし、最大値は対象のパズルのサイズ（blockSize.width*blockSize.height）とする。  */
+  difficulty: Difficulty;
+  blockSize: BlockSize;
 }): MyGame {
+  const maxEmptyCount = getLevel({ blockSize, difficulty }).maxEmptyCount;
   const newPuzzle = {
     cells: JSON.parse(JSON.stringify(puzzle.cells)) as MyGame['cells'],
   };
@@ -35,7 +38,10 @@ export function difficultyAdjustment({
   const correctedEmptyCellsMap = collectCellsByAnswer(correctedEmptyCells);
   for (const correctedEmptyCellsByNum of correctedEmptyCellsMap.values()) {
     while (
-      !(correctedEmptyCellsByNum.length <= (difficulty < 0 ? 0 : difficulty))
+      !(
+        correctedEmptyCellsByNum.length <=
+        (maxEmptyCount < 0 ? 0 : maxEmptyCount)
+      )
     ) {
       const cell = correctedEmptyCellsByNum.pop()!;
       const emptyCell = emptyCells.find(emptyCell =>

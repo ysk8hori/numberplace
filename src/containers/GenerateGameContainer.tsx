@@ -2,6 +2,7 @@ import GameContainer from './GameContainer';
 import React, { useReducer } from 'react';
 import useGenerateGame from '../useGenerateGame';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
+import { Difficulty } from '../utils/difficulty';
 
 function GenerateGameContainer({
   blockSize,
@@ -9,7 +10,7 @@ function GenerateGameContainer({
   onChangeSize,
 }: {
   blockSize: BlockSize;
-  difficulty: number;
+  difficulty: Difficulty;
   /** 他のサイズで遊ぶコールバック */
   onChangeSize?: () => void;
 }) {

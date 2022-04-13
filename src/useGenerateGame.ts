@@ -3,6 +3,7 @@ import GenerateGameWorker from './generateGame.worker?worker';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import { useEffect, useState } from 'react';
 import { MyGame } from './utils/typeUtils';
+import { Difficulty } from './utils/difficulty';
 
 type Result = undefined | { puzzle: MyGame; corrected: MyGame };
 
@@ -20,7 +21,7 @@ export default function useGenerateGame({
 }: {
   blockSize: BlockSize;
   count: number;
-  difficulty: number;
+  difficulty: Difficulty;
 }): Result {
   const [result, setResult] = useState<Result>(undefined);
   useEffect(() => {
