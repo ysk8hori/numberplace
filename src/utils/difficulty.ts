@@ -4,6 +4,18 @@ import { isSamePos } from './positionUtils';
 import { MyGame } from './typeUtils';
 import { collectCellsByAnswer, error, shuffle } from './utils';
 
+export type Difficulty = 'easy' | 'normal' | 'hard';
+
+/**
+ * 問題のレベル
+ * @see utils/README.md
+ */
+export type Level = {
+  blockSize: BlockSize;
+  difficulty: Difficulty;
+  maxEmptyCount: number;
+};
+
 /**
  * パズルの難易度を変更する
  *
@@ -53,17 +65,21 @@ export function difficultyAdjustment({
   return newPuzzle;
 }
 
-export type Difficulty = 'easy' | 'normal' | 'hard';
-
-/**
- * 問題のレベル
- * @see utils/README.md
- */
-export type Level = {
+export function getLevel({
+  blockSize,
+  difficulty,
+}: {
   blockSize: BlockSize;
   difficulty: Difficulty;
-  maxEmptyCount: number;
-};
+}): Level {
+  return (
+    levels.find(
+      level =>
+        isSameBlockSize(level.blockSize, blockSize) &&
+        level.difficulty === difficulty,
+    ) ?? error('選択できない BlockSize と Difficulty です。')
+  );
+}
 
 export const levels: Level[] = [
   {
@@ -127,19 +143,3 @@ export const levels: Level[] = [
     maxEmptyCount: 9,
   },
 ];
-
-export function getLevel({
-  blockSize,
-  difficulty,
-}: {
-  blockSize: BlockSize;
-  difficulty: Difficulty;
-}): Level {
-  return (
-    levels.find(
-      level =>
-        isSameBlockSize(level.blockSize, blockSize) &&
-        level.difficulty === difficulty,
-    ) ?? error('選択できない BlockSize と Difficulty です。')
-  );
-}
