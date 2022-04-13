@@ -51,3 +51,7 @@ export function collectCellsByAnswer(
     return map;
   }, new Map<string, MyCell[]>());
 }
+
+export function error(...args: ConstructorParameters<ErrorConstructor>): never {
+  throw new Error(...args);
+}

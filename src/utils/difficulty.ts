@@ -1,7 +1,8 @@
 import { BlockSize } from '@ysk8hori/numberplace-generator';
+import { isSameBlockSize } from './blockUtils';
 import { isSamePos } from './positionUtils';
 import { MyGame } from './typeUtils';
-import { collectCellsByAnswer, shuffle } from './utils';
+import { collectCellsByAnswer, error, shuffle } from './utils';
 
 /**
  * パズルの難易度を変更する
@@ -46,19 +47,19 @@ export function difficultyAdjustment({
   return newPuzzle;
 }
 
-type Difficulty = 'easy' | 'normal' | 'hard';
+export type Difficulty = 'easy' | 'normal' | 'hard';
 
 /**
  * 問題のレベル
  * @see utils/README.md
  */
-type Level = {
+export type Level = {
   blockSize: BlockSize;
   difficulty: Difficulty;
   maxEmptyCount: number;
 };
 
-const levels: Level[] = [
+export const levels: Level[] = [
   {
     blockSize: { width: 3, height: 1 },
     difficulty: 'easy',
@@ -120,3 +121,19 @@ const levels: Level[] = [
     maxEmptyCount: 9,
   },
 ];
+
+export function getLevel({
+  blockSize,
+  difficulty,
+}: {
+  blockSize: BlockSize;
+  difficulty: Difficulty;
+}): Level {
+  return (
+    levels.find(
+      level =>
+        isSameBlockSize(level.blockSize, blockSize) &&
+        level.difficulty === difficulty,
+    ) ?? error('選択できない BlockSize と Difficulty です。')
+  );
+}
