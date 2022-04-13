@@ -1,3 +1,4 @@
+import { BlockSize } from '@ysk8hori/numberplace-generator';
 import { isSamePos } from './positionUtils';
 import { MyGame } from './typeUtils';
 import { collectCellsByAnswer, shuffle } from './utils';
@@ -44,3 +45,78 @@ export function difficultyAdjustment({
   }
   return newPuzzle;
 }
+
+type DifficultyName = 'easy' | 'normal' | 'hard';
+
+/**
+ * 問題のレベル
+ * @see utils/README.md
+ */
+type Level = {
+  blockSize: BlockSize;
+  difficultyName: DifficultyName;
+  difficulty: number;
+};
+
+const levels: Level[] = [
+  {
+    blockSize: { width: 3, height: 1 },
+    difficultyName: 'easy',
+    difficulty: 1,
+  },
+  {
+    blockSize: { width: 3, height: 1 },
+    difficultyName: 'normal',
+    difficulty: 2,
+  },
+  {
+    blockSize: { width: 3, height: 1 },
+    difficultyName: 'hard',
+    difficulty: 3,
+  },
+  {
+    blockSize: { width: 2, height: 2 },
+    difficultyName: 'easy',
+    difficulty: 2,
+  },
+  {
+    blockSize: { width: 2, height: 2 },
+    difficultyName: 'normal',
+    difficulty: 3,
+  },
+  {
+    blockSize: { width: 2, height: 2 },
+    difficultyName: 'hard',
+    difficulty: 4,
+  },
+  {
+    blockSize: { width: 3, height: 2 },
+    difficultyName: 'easy',
+    difficulty: 2,
+  },
+  {
+    blockSize: { width: 3, height: 2 },
+    difficultyName: 'normal',
+    difficulty: 4,
+  },
+  {
+    blockSize: { width: 3, height: 2 },
+    difficultyName: 'hard',
+    difficulty: 6,
+  },
+  {
+    blockSize: { width: 3, height: 3 },
+    difficultyName: 'easy',
+    difficulty: 5,
+  },
+  {
+    blockSize: { width: 3, height: 3 },
+    difficultyName: 'normal',
+    difficulty: 7,
+  },
+  {
+    blockSize: { width: 3, height: 3 },
+    difficultyName: 'hard',
+    difficulty: 9,
+  },
+];
