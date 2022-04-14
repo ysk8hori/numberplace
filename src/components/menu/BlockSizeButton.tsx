@@ -1,6 +1,6 @@
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import clsx from 'clsx';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { MyGame } from '../../utils/typeUtils';
 import GlassCard from '../atoms/GlassCard';
 import GlassCardButton from '../atoms/GlassCardButton';
@@ -11,10 +11,12 @@ import {
 } from 'react-icons/io';
 import { VscTriangleLeft, VscTriangleRight } from 'react-icons/vsc';
 import styled from 'styled-components';
+import { Difficulty } from '../../utils/difficulty';
+import DifficultySelector from './DifficultySelector';
 
 type Props = {
   blockSize: BlockSize;
-  onClick: () => void;
+  onClick: (args: { difficulty: Difficulty }) => void;
   className: string;
 };
 
@@ -53,6 +55,7 @@ function BlockSizeButton({ blockSize, onClick, className }: Props) {
     const sideLength = blockSize.height * blockSize.width;
     return `${sideLength} かける ${sideLength} のサイズを選ぶ`;
   }, [blockSize]);
+  const [difficulty, setDifficulty] = useState<Difficulty>('normal');
   return (
     <GlassCard
       className={clsx(
@@ -60,16 +63,15 @@ function BlockSizeButton({ blockSize, onClick, className }: Props) {
         className,
       )}
     >
-      <div className="flex flex-row h-16 justify-center items-center text-gray-500">
-        <button className="h-full">
-          <VscTriangleLeft className="text-3xl w-16" />
-        </button>
-        <div className="flex-grow text-center">difficulty</div>
-        <button className="h-full">
-          <VscTriangleRight className="text-3xl w-16" />
-        </button>
-      </div>
-      <GameBoardButton aria-label={label} onClick={onClick}>
+      <DifficultySelector
+        difficulty={difficulty}
+        blockSize={blockSize}
+        onSelect={setDifficulty}
+      />
+      <GameBoardButton
+        aria-label={label}
+        onClick={() => onClick({ difficulty })}
+      >
         {gameBoard}
       </GameBoardButton>
     </GlassCard>

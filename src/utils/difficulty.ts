@@ -127,12 +127,12 @@ const levels: Level[] = [
   {
     blockSize: { width: 2, height: 2 },
     difficulty: 'easy',
-    maxEmptyCount: 2,
+    maxEmptyCount: 1,
   },
   {
     blockSize: { width: 2, height: 2 },
     difficulty: 'normal',
-    maxEmptyCount: 3,
+    maxEmptyCount: 2,
   },
   {
     blockSize: { width: 2, height: 2 },

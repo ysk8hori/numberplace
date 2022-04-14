@@ -41,7 +41,9 @@ function StartMenu({ onChoseBlockSize, className, ...rest }: Props) {
             key={JSON.stringify(blockSize)}
             className="m-16"
             blockSize={blockSize}
-            onClick={() => onChoseBlockSize?.(blockSize, 'hard')}
+            onClick={({ difficulty }) =>
+              onChoseBlockSize?.(blockSize, difficulty)
+            }
           />
         ))}
       </div>
