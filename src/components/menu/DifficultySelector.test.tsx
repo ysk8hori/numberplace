@@ -13,24 +13,24 @@ it('左矢印クリックすると与えた難易度をデクリメントした�
   const onSelect = fn();
   render(
     <DifficultySelector
-      difficulty={2}
+      difficulty={'normal'}
       blockSize={blockSize_2_2}
       onSelect={onSelect}
     />,
   );
   userEvent.click(screen.getByRole('button', { name: '易しくする' }));
-  expect(onSelect).toHaveBeenCalledWith(1);
+  expect(onSelect).toHaveBeenCalledWith('easy');
 });
 
 it('右矢印クリックすると与えた難易度をインクリメントした値を onSelect で通知する', async () => {
   const onSelect = fn();
   render(
     <DifficultySelector
-      difficulty={2}
+      difficulty={'normal'}
       blockSize={blockSize_2_2}
       onSelect={onSelect}
     />,
   );
   userEvent.click(screen.getByRole('button', { name: '難しくする' }));
-  expect(onSelect).toHaveBeenCalledWith(3);
+  expect(onSelect).toHaveBeenCalledWith('hard');
 });
