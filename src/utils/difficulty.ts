@@ -77,11 +77,38 @@ export function getLevel({
       level =>
         isSameBlockSize(level.blockSize, blockSize) &&
         level.difficulty === difficulty,
-    ) ?? error('選択できない BlockSize と Difficulty です。')
+    ) ?? error('未定義の BlockSize と Difficulty です。')
   );
 }
 
-export const levels: Level[] = [
+export function decrement(current: {
+  difficulty: Difficulty;
+  blockSize: BlockSize;
+}): Level {
+  const currentLevel = getLevel(current);
+  const myLevels = levels
+    .filter(level => isSameBlockSize(level.blockSize, current.blockSize))
+    .sort((a, b) => b.maxEmptyCount - a.maxEmptyCount);
+  return (
+    myLevels.find(level => level.maxEmptyCount < currentLevel.maxEmptyCount) ??
+    currentLevel
+  );
+}
+export function increment(current: {
+  difficulty: Difficulty;
+  blockSize: BlockSize;
+}): Level {
+  const currentLevel = getLevel(current);
+  const myLevels = levels
+    .filter(level => isSameBlockSize(level.blockSize, current.blockSize))
+    .sort((a, b) => a.maxEmptyCount - b.maxEmptyCount);
+  return (
+    myLevels.find(level => currentLevel.maxEmptyCount < level.maxEmptyCount) ??
+    currentLevel
+  );
+}
+
+const levels: Level[] = [
   {
     blockSize: { width: 3, height: 1 },
     difficulty: 'easy',
