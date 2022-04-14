@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import React from 'react';
 import { ArrayItem } from '../../utils/typeUtils';
-import GlassCard from '../atoms/GlassCard';
 import BlockSizeButton from './BlockSizeButton';
 import backgroundimg from '../../images/il12e-min.png';
+import { Difficulty } from '../../utils/difficulty';
 
 /**
  * 選択可能な BlockSize のリスト
@@ -23,7 +23,7 @@ const blockSizeList = [
 type MyBlockSize = ArrayItem<typeof blockSizeList>;
 
 type Props = {
-  onChoseBlockSize?: (blockSize: MyBlockSize) => void;
+  onChoseBlockSize?: (blockSize: MyBlockSize, difficulty: Difficulty) => void;
 } & React.ComponentProps<'div'>;
 
 function StartMenu({ onChoseBlockSize, className, ...rest }: Props) {
@@ -41,7 +41,9 @@ function StartMenu({ onChoseBlockSize, className, ...rest }: Props) {
             key={JSON.stringify(blockSize)}
             className="m-16"
             blockSize={blockSize}
-            onClick={() => onChoseBlockSize?.(blockSize)}
+            onClick={({ difficulty }) =>
+              onChoseBlockSize?.(blockSize, difficulty)
+            }
           />
         ))}
       </div>

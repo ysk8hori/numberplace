@@ -18,3 +18,21 @@ export const Primary = Template.bind({});
 Primary.args = {
   blockSize: { width: 2, height: 3 },
 };
+Primary.decorators = [
+  Story => (
+    <div style={{ width: '400px', height: '400px', display: 'flex' }}>
+      <Story />
+    </div>
+  ),
+];
+export const IPhone13 = Template.bind({});
+IPhone13.args = {
+  blockSize: { width: 3, height: 3 },
+};
+IPhone13.decorators = [
+  Story => (
+    <div style={{ width: '280px', height: '280px', display: 'flex' }}>
+      <Story />
+    </div>
+  ),
+];

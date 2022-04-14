@@ -1,12 +1,23 @@
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import clsx from 'clsx';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { MyGame } from '../../utils/typeUtils';
+import GlassCard from '../atoms/GlassCard';
 import GlassCardButton from '../atoms/GlassCardButton';
 import GameBoard from '../game/GameBoard';
+import {
+  IoIosArrowDropleftCircle,
+  IoIosArrowDroprightCircle,
+} from 'react-icons/io';
+import { VscTriangleLeft, VscTriangleRight } from 'react-icons/vsc';
+import styled from 'styled-components';
+import { Difficulty } from '../../utils/difficulty';
+import DifficultySelector from './DifficultySelector';
 
-type Props = React.ComponentProps<'button'> & {
+type Props = {
   blockSize: BlockSize;
+  onClick: (args: { difficulty: Difficulty }) => void;
+  className: string;
 };
 
 function createGame(blockSize: BlockSize): MyGame {
@@ -23,7 +34,13 @@ function createGame(blockSize: BlockSize): MyGame {
   };
 }
 
-function BlockSizeButton({ blockSize, className, ...rest }: Props) {
+const GameBoardButton = styled.button`
+  display: block;
+  width: calc(100% - 8rem);
+  margin-right: auto;
+  margin-left: auto;
+`;
+function BlockSizeButton({ blockSize, onClick, className }: Props) {
   const gameBoard = useMemo(
     () => (
       <GameBoard
@@ -38,14 +55,26 @@ function BlockSizeButton({ blockSize, className, ...rest }: Props) {
     const sideLength = blockSize.height * blockSize.width;
     return `${sideLength} かける ${sideLength} のサイズを選ぶ`;
   }, [blockSize]);
+  const [difficulty, setDifficulty] = useState<Difficulty>('normal');
   return (
-    <GlassCardButton
-      className={clsx('p-16', className)}
-      {...rest}
-      aria-label={label}
+    <GlassCard
+      className={clsx(
+        'p-0 aspect-square flex flex-col items-stretch',
+        className,
+      )}
     >
-      {gameBoard}
-    </GlassCardButton>
+      <DifficultySelector
+        difficulty={difficulty}
+        blockSize={blockSize}
+        onSelect={setDifficulty}
+      />
+      <GameBoardButton
+        aria-label={label}
+        onClick={() => onClick({ difficulty })}
+      >
+        {gameBoard}
+      </GameBoardButton>
+    </GlassCard>
   );
 }
 
