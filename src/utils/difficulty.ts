@@ -169,4 +169,34 @@ const levels: Level[] = [
     difficulty: 'hard',
     maxEmptyCount: 9,
   },
+  {
+    blockSize: { width: 4, height: 3 },
+    difficulty: 'easy',
+    maxEmptyCount: 6,
+  },
+  {
+    blockSize: { width: 4, height: 3 },
+    difficulty: 'normal',
+    maxEmptyCount: 9,
+  },
+  {
+    blockSize: { width: 4, height: 3 },
+    difficulty: 'hard',
+    maxEmptyCount: 12,
+  },
+  {
+    blockSize: { width: 4, height: 4 },
+    difficulty: 'easy',
+    maxEmptyCount: 10,
+  },
+  {
+    blockSize: { width: 4, height: 4 },
+    difficulty: 'normal',
+    maxEmptyCount: 13,
+  },
+  {
+    blockSize: { width: 4, height: 4 },
+    difficulty: 'hard',
+    maxEmptyCount: 16,
+  },
 ];

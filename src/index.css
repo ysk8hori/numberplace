@@ -53,3 +53,15 @@ code {
 .grid-cols-wrap-9 {
   @apply grid-cols-9;
 }
+.grid-cols-wrap-10 {
+  @apply grid-cols-10;
+}
+.grid-cols-wrap-11 {
+  @apply grid-cols-11;
+}
+.grid-cols-wrap-12 {
+  @apply grid-cols-12;
+}
+.grid-cols-wrap-16 {
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+}

@@ -18,6 +18,8 @@ const blockSizeList = [
   { height: 2, width: 2 } as const,
   { height: 2, width: 3 } as const,
   { height: 3, width: 3 } as const,
+  { height: 3, width: 4 } as const,
+  { height: 4, width: 4 } as const,
 ];
 
 type MyBlockSize = ArrayItem<typeof blockSizeList>;
