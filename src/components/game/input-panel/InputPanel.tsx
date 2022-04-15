@@ -48,7 +48,7 @@ const InputPanel: React.FC<Props> = ({
   );
   const buttons = useMemo(
     () =>
-      new Array(9)
+      new Array(9 < size ? size : 9)
         .fill(true)
         .map((_, index) => ++index)
         .map(buttonNumber => (
