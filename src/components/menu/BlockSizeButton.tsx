@@ -3,13 +3,7 @@ import clsx from 'clsx';
 import React, { useMemo, useState } from 'react';
 import { MyGame } from '../../utils/typeUtils';
 import GlassCard from '../atoms/GlassCard';
-import GlassCardButton from '../atoms/GlassCardButton';
 import GameBoard from '../game/GameBoard';
-import {
-  IoIosArrowDropleftCircle,
-  IoIosArrowDroprightCircle,
-} from 'react-icons/io';
-import { VscTriangleLeft, VscTriangleRight } from 'react-icons/vsc';
 import styled from 'styled-components';
 import { Difficulty } from '../../utils/difficulty';
 import DifficultySelector from './DifficultySelector';
@@ -18,6 +12,7 @@ type Props = {
   blockSize: BlockSize;
   onClick: (args: { difficulty: Difficulty }) => void;
   className: string;
+  cross?: boolean;
 };
 
 function createGame(blockSize: BlockSize): MyGame {
@@ -40,21 +35,24 @@ const GameBoardButton = styled.button`
   margin-right: auto;
   margin-left: auto;
 `;
-function BlockSizeButton({ blockSize, onClick, className }: Props) {
+function BlockSizeButton({ blockSize, onClick, className, cross }: Props) {
   const gameBoard = useMemo(
     () => (
       <GameBoard
         className="bg-white text-black"
         blockSize={blockSize}
         puzzle={createGame(blockSize)}
+        cross={cross}
       />
     ),
     [blockSize],
   );
   const label = useMemo(() => {
     const sideLength = blockSize.height * blockSize.width;
-    return `${sideLength} かける ${sideLength} のサイズを選ぶ`;
-  }, [blockSize]);
+    return `${sideLength} かける ${sideLength}${
+      cross ? ' クロス' : ''
+    } のサイズを選ぶ`;
+  }, [blockSize, cross]);
   const [difficulty, setDifficulty] = useState<Difficulty>('normal');
   return (
     <GlassCard

@@ -36,3 +36,16 @@ IPhone13.decorators = [
     </div>
   ),
 ];
+
+export const Cross = Template.bind({});
+Cross.args = {
+  blockSize: { width: 3, height: 3 },
+  cross: true,
+};
+Cross.decorators = [
+  Story => (
+    <div style={{ width: '280px', height: '280px', display: 'flex' }}>
+      <Story />
+    </div>
+  ),
+];
