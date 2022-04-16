@@ -57,7 +57,11 @@ function NeumorphismToggleButton({
 }: React.ComponentProps<'input'>) {
   return (
     <Base style={style}>
-      <ToggleInput id={id} {...{ onClick, defaultChecked }} aria-label={ariaLabel} />
+      <ToggleInput
+        id={id}
+        {...{ onClick, defaultChecked }}
+        aria-label={ariaLabel}
+      />
       <ToggleLabel htmlFor={id} className={className}>
         {children}
       </ToggleLabel>
