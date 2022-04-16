@@ -63,6 +63,12 @@ const GameBoard: React.FC<Props> = ({
       .fill(0)
       .map((_, i) => [i, i]);
   }, [cross, blockSize]);
+  const uprightDownleftPosList: Position[] = useMemo(() => {
+    if (!cross) return new Array<Position>();
+    return new Array(blockSize.height * blockSize.width)
+      .fill(0)
+      .map((_, i) => [i, blockSize.height * blockSize.width - 1 - i]);
+  }, [cross, blockSize]);
   return (
     <div className={className}>
       {puzzle.cells.map(cell => (
@@ -83,6 +89,9 @@ const GameBoard: React.FC<Props> = ({
           memoList={cell.memoList}
           upleftDownright={
             !!upleftDownrightPosList.find(pos => isSamePos(cell.pos, pos))
+          }
+          uprightDownleft={
+            !!uprightDownleftPosList.find(pos => isSamePos(cell.pos, pos))
           }
         />
       ))}
