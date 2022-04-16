@@ -48,6 +48,7 @@ export default function GameContainer({
   blockSize,
   onRegenerate,
   onChangeSize,
+  cross,
 }: {
   /** ナンプレの問題 */
   puzzle: MyGame;
@@ -59,6 +60,8 @@ export default function GameContainer({
   onRegenerate?: () => void;
   /** 他のサイズで遊ぶコールバック */
   onChangeSize?: () => void;
+  /** ゲームタイプがクロスかどうか */
+  cross?: boolean;
 }) {
   const puzzle = usePuzzle(basePuzzle, corrected, blockSize);
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
@@ -104,6 +107,7 @@ export default function GameContainer({
           blockSize={blockSize}
           selectedPos={selectedPos}
           onSelectCell={setSelectedPos}
+          cross={cross}
         />
       </div>
       <div className="mx-2 my-6">

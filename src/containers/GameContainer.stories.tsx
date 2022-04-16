@@ -118,3 +118,17 @@ Game_3_3.play = async ({ canvasElement }) => {
   await resolve_2_3(canvas);
 };
 Game_3_3.storyName = '9x9の表示確認';
+
+export const Game_3_3_cross = Template.bind({});
+Game_3_3_cross.args = {
+  blockSize: blockSize_3_3,
+  puzzle: puzzle_3_3,
+  corrected: corrected_3_3,
+  cross: true,
+};
+Game_3_3_cross.play = async ({ canvasElement }) => {
+  // Starts querying the component from its root element
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
+Game_3_3_cross.storyName = '9x9クロスの表示確認';
