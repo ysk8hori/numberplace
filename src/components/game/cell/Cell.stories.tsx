@@ -99,3 +99,11 @@ Memo.args = {
   blockSize: blockSize_2_3,
   memoList: ['1', '2', '3', '4', '5', '6'],
 };
+
+export const AdditionalGroup1 = Template.bind({});
+AdditionalGroup1.args = {
+  answer: '1',
+  select: true,
+  upleftDownright: true,
+  uprightDownleft: true,
+};

@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React, {
   PropsWithChildren,
   useContext,
@@ -21,6 +22,9 @@ import MemoLayer, { Props as MemoLayerProps } from './MemoLayer';
  * - 変更できない Cell が見た目でわかる
  * - answer がない場合はメモレイヤーを表示する
  *   - メモがある場合はメモを表示する
+ * - 特殊なグループに属する場合はグレーを濃くする
+ *   - upleft-downright
+ *   - upright-downleft
  *
  * 以下のことは行わない。
  *
@@ -36,12 +40,15 @@ function Cell({
   blockSize,
   memoList,
   'data-testid': dataTestid,
+  upleftDownright,
+  uprightDownleft,
   ...rest
 }: PropsWithChildren<
   { onSelect?: () => void; 'data-testid'?: string } & AnswerLayerProps &
     BorderLayerProps &
     SelectLayerProps &
-    MemoLayerProps
+    MemoLayerProps &
+    AdditionalGroupLayerProps
 >) {
   return (
     <div
@@ -54,6 +61,10 @@ function Cell({
     >
       <BorderLayer right={right} bottom={bottom} />
       <SelectLayer select={select} />
+      <AdditionalGroupLayer
+        upleftDownright={upleftDownright}
+        uprightDownleft={uprightDownleft}
+      />
       {answer ? (
         <AnswerLayer answer={answer} fix={fix} />
       ) : (
@@ -66,6 +77,38 @@ function Cell({
     </div>
   );
 }
+
+type AdditionalGroupLayerProps = {
+  /** 左上から右下にかけての斜めのグループに属するか */
+  upleftDownright?: boolean;
+  /** 右上から左下にかけての斜めのグループに属するか */
+  uprightDownleft?: boolean;
+};
+
+/**
+ * cell の背景色を表示するレイヤー。
+ *
+ * - 黒を opacity でグレーにする
+ * - 属する AdditionalGroup の数に応じて濃くする。
+ */
+const AdditionalGroupLayer: React.FC<AdditionalGroupLayerProps> = ({
+  upleftDownright,
+  uprightDownleft,
+}) => {
+  const bgcolorStyle = useMemo(() => {
+    return {
+      backgroundColor: `rgba(0,0,0,${
+        ([upleftDownright, uprightDownleft].filter(Boolean).length * 10) / 100
+      })`,
+    };
+  }, [upleftDownright, uprightDownleft]);
+  return (
+    <div
+      className={clsx('w-full h-full absolute top-0 left-0')}
+      style={bgcolorStyle}
+    ></div>
+  );
+};
 
 type BorderLayerProps = {
   /** セルの右側のボーダーを太くする */ right?: boolean;
