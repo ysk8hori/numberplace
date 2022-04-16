@@ -95,18 +95,20 @@ const AdditionalGroupLayer: React.FC<AdditionalGroupLayerProps> = ({
   upleftDownright,
   uprightDownleft,
 }) => {
-  const bgcolorStyle = useMemo(() => {
-    return {
-      backgroundColor: `rgba(0,0,0,${
-        ([upleftDownright, uprightDownleft].filter(Boolean).length * 10) / 100
-      })`,
-    };
+  const bg = useMemo(() => {
+    if (upleftDownright && uprightDownleft) {
+      return 'bg-indigo-500/20';
+    }
+    if (upleftDownright) {
+      return 'bg-orange-500/20';
+    }
+    if (uprightDownleft) {
+      return 'bg-sky-500/20';
+    }
+    return 'bg-transparent';
   }, [upleftDownright, uprightDownleft]);
   return (
-    <div
-      className={clsx('w-full h-full absolute top-0 left-0')}
-      style={bgcolorStyle}
-    ></div>
+    <div className={clsx('w-full h-full absolute top-0 left-0', bg)}></div>
   );
 };
 

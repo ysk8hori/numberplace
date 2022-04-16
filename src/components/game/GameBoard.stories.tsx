@@ -4,6 +4,7 @@ import GameBoard from './GameBoard';
 import {
   blockSize_2_3 as blockSize,
   puzzle_2_3 as puzzle,
+  puzzle_3_3,
 } from '../../utils/test-utils';
 import { MyGame } from '../../utils/typeUtils';
 
@@ -77,11 +78,20 @@ HasMemo.args = {
 };
 HasMemo.storyName = 'メモがある場合';
 
-export const Cross = Template.bind({});
+export const Cross6 = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Cross.args = {
+Cross6.args = {
   puzzle,
   blockSize,
+  selectedPos: [2, 2],
+  cross: true,
+  className: 'bg-white',
+};
+export const Cross9 = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Cross9.args = {
+  puzzle: puzzle_3_3,
+  blockSize: { width: 3, height: 3 },
   selectedPos: [2, 2],
   cross: true,
   className: 'bg-white',
