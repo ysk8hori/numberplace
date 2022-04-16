@@ -76,3 +76,13 @@ HasMemo.args = {
   selectedPos: [2, 2],
 };
 HasMemo.storyName = 'メモがある場合';
+
+export const Cross = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Cross.args = {
+  puzzle,
+  blockSize,
+  selectedPos: [2, 2],
+  cross: true,
+  className: 'bg-white',
+};
