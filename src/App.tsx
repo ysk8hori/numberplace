@@ -6,6 +6,7 @@ import StartMenu from './components/menu/StartMenu';
 import LoadGameContainer from './containers/LoadGameContainer';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import { Difficulty } from './utils/difficulty';
+import { GameType } from '@ysk8hori/numberplace-generator/dist/core/types';
 
 /**
  * 現在のアプリのモード
@@ -22,6 +23,7 @@ function App() {
     height: 2,
     width: 3,
   });
+  const [cross, setCross] = useState(false);
   // todo difficulty は localstorage で保持して使う
   const [difficulty, setDifficulty] = useState<Difficulty>('easy');
   const [saveData, setSaveData] = useState<SaveData | undefined>(undefined);
@@ -42,6 +44,7 @@ function App() {
             blockSize={blockSize}
             onChangeSize={() => setMode('menu')}
             difficulty={difficulty}
+            cross={cross}
           />
         </div>
       );
@@ -63,8 +66,9 @@ function App() {
     default:
       return (
         <StartMenu
-          onChoseBlockSize={(blockSize, difficulty) => (
+          onChoseBlockSize={(blockSize, difficulty, options) => (
             setBlockSize(blockSize),
+            setCross(!!options?.cross),
             setDifficulty(difficulty),
             setMode('generateAndPlay')
           )}
