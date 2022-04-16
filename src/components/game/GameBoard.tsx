@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { BlockSize, Position } from '@ysk8hori/numberplace-generator';
 import Cell from './cell/Cell';
-import { MyCell, MyGame } from '../../utils/typeUtils';
+import { MyGame } from '../../utils/typeUtils';
 import clsx from 'clsx';
 import { isSamePos } from '../../utils/positionUtils';
 
