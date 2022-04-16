@@ -52,6 +52,8 @@ function Cell({
       data-fix={fix}
       {...rest}
     >
+      <BorderLayer right={right} bottom={bottom} />
+      <SelectLayer select={select} />
       {answer ? (
         <AnswerLayer answer={answer} fix={fix} />
       ) : (
@@ -61,8 +63,6 @@ function Cell({
           data-testid={`${dataTestid}-memo`}
         />
       )}
-      <BorderLayer right={right} bottom={bottom} />
-      <SelectLayer select={select} />
     </div>
   );
 }
@@ -147,7 +147,7 @@ const AnswerLayer: React.FC<AnswerLayerProps> = ({ answer, fix }) => {
   return (
     <span
       ref={box}
-      className="w-full h-full flex justify-center items-center select-none"
+      className="absolute top-0 left-0 w-full h-full flex justify-center items-center select-none"
       style={{ fontSize, fontFamily, fontWeight }}
     >
       {answer}
