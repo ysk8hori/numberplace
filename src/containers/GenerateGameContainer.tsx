@@ -3,6 +3,7 @@ import React, { useReducer } from 'react';
 import useGenerateGame from '../useGenerateGame';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import { Difficulty } from '../utils/difficulty';
+import SelfBuildingSquareSpinner from '../components/atoms/SelfBuildingSquareSpinner';
 
 function GenerateGameContainer({
   blockSize,
@@ -19,10 +20,12 @@ function GenerateGameContainer({
   const result = useGenerateGame({ blockSize, count, difficulty });
   if (result.isGenerating) {
     return (
-      <>
-        <div>loading</div>
-        <button onClick={result.cancel}>cancel</button>
-      </>
+      <div className="flex flex-col justify-center items-center">
+        <SelfBuildingSquareSpinner />
+        <div>
+          <button onClick={result.cancel}>cancel</button>
+        </div>
+      </div>
     );
   }
 
