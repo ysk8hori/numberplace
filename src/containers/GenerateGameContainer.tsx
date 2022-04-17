@@ -17,8 +17,13 @@ function GenerateGameContainer({
   const [count, forceUpdate] = useReducer(x => x + 1, 0);
 
   const result = useGenerateGame({ blockSize, count, difficulty });
-  if (!result) {
-    return <div>loading</div>;
+  if (result.isGenerating) {
+    return (
+      <>
+        <div>loading</div>
+        <button onClick={result.cancel}>cancel</button>
+      </>
+    );
   }
 
   return (
