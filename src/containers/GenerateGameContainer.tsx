@@ -15,7 +15,7 @@ function GenerateGameContainer({
   /** 他のサイズで遊ぶコールバック */
   onChangeSize?: () => void;
 }) {
-  const [count, forceUpdate] = useReducer(x => x + 1, 0);
+  const [count, forceUpdate] = useReducer((x: number) => x + 1, 0);
 
   const result = useGenerateGame({ blockSize, count, difficulty });
   if (result.isGenerating) {
