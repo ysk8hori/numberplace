@@ -61,9 +61,9 @@ export default function GameContainer({
   /** 他のサイズで遊ぶコールバック */
   onChangeSize?: () => void;
   /** ゲームタイプがクロスかどうか */
-  cross?: boolean;
+  cross: boolean;
 }) {
-  const puzzle = usePuzzle(basePuzzle, corrected, blockSize);
+  const puzzle = usePuzzle(basePuzzle, corrected, blockSize, cross);
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   const [hasMistake, setMistake] = useState(false);
   const [hasEmptycell, setEmptycell] = useState(false);
@@ -73,7 +73,14 @@ export default function GameContainer({
     window.addEventListener('resize', forceUpdate);
     return window.removeEventListener('resize', forceUpdate);
   }, [blockSize]);
-  const fill = useFill(puzzle, selectedPos, forceUpdate, blockSize, corrected);
+  const fill = useFill(
+    puzzle,
+    selectedPos,
+    forceUpdate,
+    blockSize,
+    corrected,
+    cross,
+  );
   useFillByKeyboard(fill);
   const inputMemo = useInputMemo(
     puzzle,
@@ -81,8 +88,16 @@ export default function GameContainer({
     forceUpdate,
     blockSize,
     corrected,
+    cross,
   );
-  const del = useDelete(puzzle, selectedPos, forceUpdate, blockSize, corrected);
+  const del = useDelete(
+    puzzle,
+    selectedPos,
+    forceUpdate,
+    blockSize,
+    corrected,
+    cross,
+  );
   useDeleteByKeybord(del);
   useArrowSelector(selectedPos, blockSize, setSelectedPos);
   const checkAndUpdate = useCheckAndUpdate(
@@ -92,6 +107,7 @@ export default function GameContainer({
     forceUpdate,
     setGameClear,
     blockSize,
+    cross,
   );
   /** 次回の check で mistake や empty を検知できるようクリアするコールバック */
   const clearMistakeAndEmptyInfo = useCallback(() => {
@@ -154,6 +170,7 @@ function useCheckAndUpdate(
   forceUpdate: React.DispatchWithoutAction,
   setGameClear: React.Dispatch<React.SetStateAction<boolean>>,
   blockSize: BlockSize,
+  cross: boolean,
 ) {
   return useCallback(
     (puzzle: MyGame) => {
@@ -173,12 +190,12 @@ function useCheckAndUpdate(
       });
 
       if (puzzle.cells.every(cell => cell.isFix)) setGameClear(true);
-      gameHolder.saveGame({ puzzle, corrected, blockSize });
+      gameHolder.saveGame({ puzzle, corrected, blockSize, cross });
 
       // fix を反映するために forceUpdate する
       forceUpdate();
     },
-    [corrected, setEmptycell, setMistake, forceUpdate, blockSize],
+    [corrected, setEmptycell, setMistake, forceUpdate, blockSize, cross],
   );
 }
 
@@ -187,13 +204,14 @@ function usePuzzle(
   basePuzzle: MyGame,
   corrected: MyGame,
   blockSize: BlockSize,
+  cross: boolean,
 ) {
   return useMemo(() => {
     // basePuzzle をクローンする
     const puzzle = JSON.parse(JSON.stringify(basePuzzle)) as MyGame;
-    gameHolder.saveGame({ puzzle, corrected, blockSize });
+    gameHolder.saveGame({ puzzle, corrected, blockSize, cross });
     return puzzle;
-  }, [basePuzzle, corrected, blockSize]);
+  }, [basePuzzle, corrected, blockSize, cross]);
 }
 
 function useArrowSelector(
@@ -264,6 +282,7 @@ function useFill(
   forceUpdate: React.DispatchWithoutAction,
   blockSize: BlockSize,
   corrected: MyGame,
+  cross: boolean,
 ) {
   return useCallback<Fill>(
     (answer: string) => {
@@ -277,10 +296,10 @@ function useFill(
         return;
       }
       targetCell.answer = answer;
-      gameHolder.saveGame({ puzzle, corrected, blockSize });
+      gameHolder.saveGame({ puzzle, corrected, blockSize, cross });
       forceUpdate();
     },
-    [puzzle, selectedPos, forceUpdate, blockSize, corrected],
+    [puzzle, selectedPos, forceUpdate, blockSize, corrected, cross],
   );
 }
 
@@ -302,6 +321,7 @@ function useInputMemo(
   forceUpdate: React.DispatchWithoutAction,
   blockSize: BlockSize,
   corrected: MyGame,
+  cross: boolean,
 ) {
   return useCallback<InputMemo>(
     (answerCandidate: string) => {
@@ -328,10 +348,10 @@ function useInputMemo(
         list.push(answerCandidate);
         targetCell.memoList = list;
       }
-      gameHolder.saveGame({ puzzle, corrected, blockSize });
+      gameHolder.saveGame({ puzzle, corrected, blockSize, cross });
       forceUpdate();
     },
-    [puzzle, selectedPos, forceUpdate, blockSize, corrected],
+    [puzzle, selectedPos, forceUpdate, blockSize, corrected, cross],
   );
 }
 
@@ -343,6 +363,7 @@ function useDelete(
   forceUpdate: React.DispatchWithoutAction,
   blockSize: BlockSize,
   corrected: MyGame,
+  cross: boolean,
 ) {
   return useCallback<Delete>(() => {
     const targetCell = puzzle.cells.find(cell =>
@@ -351,9 +372,9 @@ function useDelete(
     if (!targetCell || targetCell.isFix) return;
     targetCell.answer = undefined;
     targetCell.memoList = undefined;
-    gameHolder.saveGame({ puzzle, corrected, blockSize });
+    gameHolder.saveGame({ puzzle, corrected, blockSize, cross });
     forceUpdate();
-  }, [puzzle, selectedPos, forceUpdate, blockSize, corrected]);
+  }, [puzzle, selectedPos, forceUpdate, blockSize, corrected, cross]);
 }
 
 function useDeleteByKeybord(del: Delete) {

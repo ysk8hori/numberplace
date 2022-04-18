@@ -31,6 +31,7 @@ function App() {
     setSaveData(saveData);
     if (saveData) {
       setBlockSize(saveData.blockSize as BlockSize);
+      setCross(!!saveData.cross);
       setMode('loadAndPlay');
     }
   }, [mode]);
@@ -58,6 +59,7 @@ function App() {
             onRegenerate={blockSize => (
               setBlockSize(blockSize), setMode('generateAndPlay')
             )}
+            cross={cross}
           />
         </div>
       );

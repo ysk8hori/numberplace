@@ -11,7 +11,7 @@ function GenerateGameContainer({
   blockSize,
   difficulty,
   onChangeSize,
-  cross,
+  cross = false,
 }: {
   blockSize: BlockSize;
   difficulty: Difficulty;

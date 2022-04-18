@@ -12,6 +12,7 @@ function LoadGameContainer({
   blockSize,
   onChangeSize,
   onRegenerate,
+  cross = false,
 }: {
   /** ナンプレの問題 */
   puzzle: MyGame;
@@ -23,6 +24,7 @@ function LoadGameContainer({
   onChangeSize?: () => void;
   /** 同じサイズで遊ぶコールバック */
   onRegenerate?: (blockSize: BlockSize) => void;
+  cross?: boolean;
 }) {
   return (
     <div className="grow flex justify-center">
@@ -32,6 +34,7 @@ function LoadGameContainer({
         blockSize={blockSize}
         onRegenerate={() => onRegenerate?.(blockSize)}
         onChangeSize={onChangeSize}
+        cross={cross}
       />
     </div>
   );

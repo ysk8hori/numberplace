@@ -6,6 +6,7 @@ export type SaveData = {
   puzzle: MyGame;
   corrected: MyGame;
   blockSize: BlockSize;
+  cross?: boolean;
 };
 
 const gameHolder = {
