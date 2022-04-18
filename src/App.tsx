@@ -22,6 +22,7 @@ function App() {
     height: 2,
     width: 3,
   });
+  const [cross, setCross] = useState(false);
   // todo difficulty は localstorage で保持して使う
   const [difficulty, setDifficulty] = useState<Difficulty>('easy');
   const [saveData, setSaveData] = useState<SaveData | undefined>(undefined);
@@ -30,6 +31,7 @@ function App() {
     setSaveData(saveData);
     if (saveData) {
       setBlockSize(saveData.blockSize as BlockSize);
+      setCross(!!saveData.cross);
       setMode('loadAndPlay');
     }
   }, [mode]);
@@ -42,6 +44,7 @@ function App() {
             blockSize={blockSize}
             onChangeSize={() => setMode('menu')}
             difficulty={difficulty}
+            cross={cross}
           />
         </div>
       );
@@ -56,6 +59,7 @@ function App() {
             onRegenerate={blockSize => (
               setBlockSize(blockSize), setMode('generateAndPlay')
             )}
+            cross={cross}
           />
         </div>
       );
@@ -63,8 +67,9 @@ function App() {
     default:
       return (
         <StartMenu
-          onChoseBlockSize={(blockSize, difficulty) => (
+          onChoseBlockSize={(blockSize, difficulty, options) => (
             setBlockSize(blockSize),
+            setCross(!!options?.cross),
             setDifficulty(difficulty),
             setMode('generateAndPlay')
           )}

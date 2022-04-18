@@ -3,6 +3,7 @@ import { BlockSize, Position } from '@ysk8hori/numberplace-generator';
 import Cell from './cell/Cell';
 import { MyGame } from '../../utils/typeUtils';
 import clsx from 'clsx';
+import { isSamePos } from '../../utils/positionUtils';
 
 type Props = {
   /** ナンプレの問題 */
@@ -13,6 +14,8 @@ type Props = {
   onSelectCell?: (pos: Position) => void;
   /** 選択中セルの座標 */
   selectedPos?: Position;
+  /** ゲームタイプ：クロス */
+  cross?: boolean;
 } & React.ComponentProps<'div'>;
 
 /**
@@ -24,6 +27,7 @@ type Props = {
  * - 選択したセルをコールバックで親へ伝えられる
  * - 選択中のセルを指定できる
  * - 変更不可であることをセルに指定できる
+ * - cross を指定した場合、斜めグループを表現する
  *
  */
 const GameBoard: React.FC<Props> = ({
@@ -32,6 +36,7 @@ const GameBoard: React.FC<Props> = ({
   onSelectCell = () => undefined,
   selectedPos,
   className: additionalClassName,
+  cross,
 }) => {
   const className = useMemo(
     () =>
@@ -52,6 +57,18 @@ const GameBoard: React.FC<Props> = ({
       ),
     [blockSize],
   );
+  const upleftDownrightPosList: Position[] = useMemo(() => {
+    if (!cross) return new Array<Position>();
+    return new Array(blockSize.height * blockSize.width)
+      .fill(0)
+      .map((_, i) => [i, i]);
+  }, [cross, blockSize]);
+  const uprightDownleftPosList: Position[] = useMemo(() => {
+    if (!cross) return new Array<Position>();
+    return new Array(blockSize.height * blockSize.width)
+      .fill(0)
+      .map((_, i) => [i, blockSize.height * blockSize.width - 1 - i]);
+  }, [cross, blockSize]);
   return (
     <div className={className}>
       {puzzle.cells.map(cell => (
@@ -70,11 +87,26 @@ const GameBoard: React.FC<Props> = ({
           fix={cell.isFix}
           blockSize={blockSize}
           memoList={cell.memoList}
+          upleftDownright={
+            !!upleftDownrightPosList.find(pos => isSamePos(cell.pos, pos))
+          }
+          uprightDownleft={
+            !!uprightDownleftPosList.find(pos => isSamePos(cell.pos, pos))
+          }
         />
       ))}
     </div>
   );
 };
+
+// function addUpleftDownright(
+//   cross:boolean,
+//   cell: MyCell,
+//   blockSize:BlockSize
+// ): MyCell & { upleftDownright?: boolean } {
+//   if (!cross) return cell;
+//   return {...cell, upleftDownright:}
+// }
 
 /**
  * gird-cols-n の tailwind クラスを決定する。
