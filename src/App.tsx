@@ -6,7 +6,6 @@ import StartMenu from './components/menu/StartMenu';
 import LoadGameContainer from './containers/LoadGameContainer';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import { Difficulty } from './utils/difficulty';
-import { GameType } from '@ysk8hori/numberplace-generator/dist/core/types';
 
 /**
  * 現在のアプリのモード

@@ -1,5 +1,8 @@
-import { BlockSize, generateGame } from '@ysk8hori/numberplace-generator';
-import { GameType } from '@ysk8hori/numberplace-generator/dist/core/types';
+import {
+  BlockSize,
+  GameType,
+  generateGame,
+} from '@ysk8hori/numberplace-generator';
 import { Difficulty, difficultyAdjustment } from './utils/difficulty';
 import { markFixed } from './utils/utils';
 
