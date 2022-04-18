@@ -18,9 +18,7 @@ onmessage = ev => {
     blockSize,
   });
   markFixed(puzzle);
-  // 関数を含んでいるとエラーとなるので関数を除外している
   postMessage({
-    // puzzle: { cells: puzzle.cells },
     puzzle: puzzle,
     corrected: { cells: corrected.cells },
   });
