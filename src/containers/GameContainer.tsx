@@ -48,7 +48,7 @@ export default function GameContainer({
   blockSize,
   onRegenerate,
   onChangeSize,
-  cross,
+  cross = false,
 }: {
   /** ナンプレの問題 */
   puzzle: MyGame;
@@ -61,7 +61,7 @@ export default function GameContainer({
   /** 他のサイズで遊ぶコールバック */
   onChangeSize?: () => void;
   /** ゲームタイプがクロスかどうか */
-  cross: boolean;
+  cross?: boolean;
 }) {
   const puzzle = usePuzzle(basePuzzle, corrected, blockSize, cross);
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
