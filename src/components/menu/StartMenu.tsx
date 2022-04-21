@@ -20,6 +20,8 @@ const gameList = [
   { blockSize: { height: 2, width: 3 }, cross: true },
   { blockSize: { height: 3, width: 3 } },
   { blockSize: { height: 3, width: 3 }, cross: true },
+  { blockSize: { height: 3, width: 3 }, hyper: true },
+  { blockSize: { height: 3, width: 3 }, hyper: true, cross: true },
   { blockSize: { height: 3, width: 4 } },
   { blockSize: { height: 3, width: 4 }, cross: true },
   { blockSize: { height: 4, width: 4 } },
@@ -30,7 +32,7 @@ type Props = {
   onChoseBlockSize?: (
     blockSize: BlockSize,
     difficulty: Difficulty,
-    options?: { cross?: boolean },
+    options?: { cross?: boolean; hyper?: boolean },
   ) => void;
 } & React.ComponentProps<'div'>;
 
@@ -44,15 +46,16 @@ function StartMenu({ onChoseBlockSize, className, ...rest }: Props) {
         <h1 style={{ color: '#7F7F7F' }}>numberp</h1>
       </div>
       <div className={clsx('flex flex-col', className)} {...rest}>
-        {gameList.map(({ blockSize, cross }) => (
+        {gameList.map(({ blockSize, cross, hyper }) => (
           <BlockSizeButton
-            key={JSON.stringify({ blockSize, cross })}
+            key={JSON.stringify({ blockSize, cross, hyper })}
             className="m-16"
             blockSize={blockSize}
             onClick={({ difficulty }) =>
-              onChoseBlockSize?.(blockSize, difficulty, { cross })
+              onChoseBlockSize?.(blockSize, difficulty, { cross, hyper })
             }
             cross={cross}
+            hyper={hyper}
           />
         ))}
       </div>
