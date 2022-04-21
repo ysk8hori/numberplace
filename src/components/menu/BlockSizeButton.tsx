@@ -13,6 +13,7 @@ type Props = {
   onClick: (args: { difficulty: Difficulty }) => void;
   className: string;
   cross?: boolean;
+  hyper?: boolean;
 };
 
 function createGame(blockSize: BlockSize): MyGame {
@@ -35,7 +36,13 @@ const GameBoardButton = styled.button`
   margin-right: auto;
   margin-left: auto;
 `;
-function BlockSizeButton({ blockSize, onClick, className, cross }: Props) {
+function BlockSizeButton({
+  blockSize,
+  onClick,
+  className,
+  cross,
+  hyper,
+}: Props) {
   const gameBoard = useMemo(
     () => (
       <GameBoard
@@ -43,16 +50,17 @@ function BlockSizeButton({ blockSize, onClick, className, cross }: Props) {
         blockSize={blockSize}
         puzzle={createGame(blockSize)}
         cross={cross}
+        hyper={hyper}
       />
     ),
     [blockSize],
   );
   const label = useMemo(() => {
     const sideLength = blockSize.height * blockSize.width;
-    return `${sideLength} かける ${sideLength}${
+    return `${sideLength} かける ${sideLength}${hyper ? ' ハイパー' : ''}${
       cross ? ' クロス' : ''
     } のサイズを選ぶ`;
-  }, [blockSize, cross]);
+  }, [blockSize, cross, hyper]);
   const [difficulty, setDifficulty] = useState<Difficulty>('normal');
   return (
     <GlassCard

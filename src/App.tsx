@@ -23,6 +23,7 @@ function App() {
     width: 3,
   });
   const [cross, setCross] = useState(false);
+  const [hyper, setHyper] = useState(false);
   // todo difficulty は localstorage で保持して使う
   const [difficulty, setDifficulty] = useState<Difficulty>('easy');
   const [saveData, setSaveData] = useState<SaveData | undefined>(undefined);
@@ -32,6 +33,7 @@ function App() {
     if (saveData) {
       setBlockSize(saveData.blockSize as BlockSize);
       setCross(!!saveData.cross);
+      setHyper(!!saveData.hyper);
       setMode('loadAndPlay');
     }
   }, [mode]);
@@ -45,6 +47,7 @@ function App() {
             onChangeSize={() => setMode('menu')}
             difficulty={difficulty}
             cross={cross}
+            hyper={hyper}
           />
         </div>
       );
@@ -60,6 +63,7 @@ function App() {
               setBlockSize(blockSize), setMode('generateAndPlay')
             )}
             cross={cross}
+            hyper={hyper}
           />
         </div>
       );
@@ -70,6 +74,7 @@ function App() {
           onChoseBlockSize={(blockSize, difficulty, options) => (
             setBlockSize(blockSize),
             setCross(!!options?.cross),
+            setHyper(!!options?.hyper),
             setDifficulty(difficulty),
             setMode('generateAndPlay')
           )}

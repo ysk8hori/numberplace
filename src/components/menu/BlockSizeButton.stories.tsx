@@ -49,3 +49,30 @@ Cross.decorators = [
     </div>
   ),
 ];
+
+export const Hyper = Template.bind({});
+Hyper.args = {
+  blockSize: { width: 3, height: 3 },
+  hyper: true,
+};
+Hyper.decorators = [
+  Story => (
+    <div style={{ width: '280px', height: '280px', display: 'flex' }}>
+      <Story />
+    </div>
+  ),
+];
+
+export const HyperCross = Template.bind({});
+HyperCross.args = {
+  blockSize: { width: 3, height: 3 },
+  cross: true,
+  hyper: true,
+};
+HyperCross.decorators = [
+  Story => (
+    <div style={{ width: '280px', height: '280px', display: 'flex' }}>
+      <Story />
+    </div>
+  ),
+];

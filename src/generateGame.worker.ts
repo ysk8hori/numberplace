@@ -7,12 +7,15 @@ import { Difficulty, difficultyAdjustment } from './utils/difficulty';
 import { markFixed } from './utils/utils';
 
 onmessage = ev => {
-  const { blockSize, difficulty, cross } = ev.data as {
+  const { blockSize, difficulty, cross, hyper } = ev.data as {
     blockSize: BlockSize;
     difficulty: Difficulty;
     cross: boolean | undefined;
+    hyper: boolean | undefined;
   };
-  const gameTypes: GameType[] = [cross ? 'cross' : 'standard'];
+  const gameTypes: GameType[] = [];
+  if (cross) gameTypes.push('cross');
+  if (hyper) gameTypes.push('hyper');
   const [tempPuzzle, corrected] = generateGame(blockSize, { gameTypes });
   const puzzle = difficultyAdjustment({
     puzzle: tempPuzzle,

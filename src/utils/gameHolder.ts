@@ -7,6 +7,7 @@ export type SaveData = {
   corrected: MyGame;
   blockSize: BlockSize;
   cross?: boolean;
+  hyper?: boolean;
 };
 
 const gameHolder = {

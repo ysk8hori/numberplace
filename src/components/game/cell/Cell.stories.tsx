@@ -100,10 +100,36 @@ Memo.args = {
   memoList: ['1', '2', '3', '4', '5', '6'],
 };
 
-export const AdditionalGroup1 = Template.bind({});
-AdditionalGroup1.args = {
+export const UpleftDownright = Template.bind({});
+UpleftDownright.args = {
+  answer: '1',
+  select: true,
+  upleftDownright: true,
+  uprightDownleft: false,
+  hyper: false,
+};
+export const UprightDownleft = Template.bind({});
+UprightDownleft.args = {
+  answer: '1',
+  select: true,
+  upleftDownright: false,
+  uprightDownleft: true,
+  hyper: false,
+};
+export const Both = Template.bind({});
+Both.args = {
   answer: '1',
   select: true,
   upleftDownright: true,
   uprightDownleft: true,
+  hyper: false,
+};
+Both.storyName = 'クロスの交差点';
+export const Hyper = Template.bind({});
+Hyper.args = {
+  answer: '1',
+  select: true,
+  upleftDownright: false,
+  uprightDownleft: false,
+  hyper: true,
 };

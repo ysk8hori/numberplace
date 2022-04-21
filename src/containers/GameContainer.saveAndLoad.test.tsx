@@ -47,6 +47,7 @@ test('ゲーム開始時に isFix を付与したパズルを保存する', () =
     corrected: corrected_2_2,
     blockSize: blockSize_2_2,
     cross: false,
+    hyper: false,
   });
 });
 
@@ -93,6 +94,7 @@ test('こたえあわせ後に保存する（fix が記録される）', () => {
     corrected: corrected_2_2,
     blockSize: blockSize_2_2,
     cross: false,
+    hyper: false,
   });
 });
 

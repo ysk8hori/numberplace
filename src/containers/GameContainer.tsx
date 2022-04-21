@@ -49,6 +49,7 @@ export default function GameContainer({
   onRegenerate,
   onChangeSize,
   cross = false,
+  hyper = false,
 }: {
   /** ナンプレの問題 */
   puzzle: MyGame;
@@ -62,8 +63,10 @@ export default function GameContainer({
   onChangeSize?: () => void;
   /** ゲームタイプがクロスかどうか */
   cross?: boolean;
+  /** ゲームタイプがHYPERかどうか */
+  hyper?: boolean;
 }) {
-  const puzzle = usePuzzle(basePuzzle, corrected, blockSize, cross);
+  const puzzle = usePuzzle(basePuzzle, corrected, blockSize, cross, hyper);
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   const [hasMistake, setMistake] = useState(false);
   const [hasEmptycell, setEmptycell] = useState(false);
@@ -80,6 +83,7 @@ export default function GameContainer({
     blockSize,
     corrected,
     cross,
+    hyper,
   );
   useFillByKeyboard(fill);
   const inputMemo = useInputMemo(
@@ -89,6 +93,7 @@ export default function GameContainer({
     blockSize,
     corrected,
     cross,
+    hyper,
   );
   const del = useDelete(
     puzzle,
@@ -97,6 +102,7 @@ export default function GameContainer({
     blockSize,
     corrected,
     cross,
+    hyper,
   );
   useDeleteByKeybord(del);
   useArrowSelector(selectedPos, blockSize, setSelectedPos);
@@ -108,6 +114,7 @@ export default function GameContainer({
     setGameClear,
     blockSize,
     cross,
+    hyper,
   );
   /** 次回の check で mistake や empty を検知できるようクリアするコールバック */
   const clearMistakeAndEmptyInfo = useCallback(() => {
@@ -124,6 +131,7 @@ export default function GameContainer({
           selectedPos={selectedPos}
           onSelectCell={setSelectedPos}
           cross={cross}
+          hyper={hyper}
         />
       </div>
       <div className="mx-2 my-6">
@@ -171,6 +179,7 @@ function useCheckAndUpdate(
   setGameClear: React.Dispatch<React.SetStateAction<boolean>>,
   blockSize: BlockSize,
   cross: boolean,
+  hyper: boolean,
 ) {
   return useCallback(
     (puzzle: MyGame) => {
@@ -190,12 +199,12 @@ function useCheckAndUpdate(
       });
 
       if (puzzle.cells.every(cell => cell.isFix)) setGameClear(true);
-      gameHolder.saveGame({ puzzle, corrected, blockSize, cross });
+      gameHolder.saveGame({ puzzle, corrected, blockSize, cross, hyper });
 
       // fix を反映するために forceUpdate する
       forceUpdate();
     },
-    [corrected, setEmptycell, setMistake, forceUpdate, blockSize, cross],
+    [corrected, setEmptycell, setMistake, forceUpdate, blockSize, cross, hyper],
   );
 }
 
@@ -205,13 +214,14 @@ function usePuzzle(
   corrected: MyGame,
   blockSize: BlockSize,
   cross: boolean,
+  hyper: boolean,
 ) {
   return useMemo(() => {
     // basePuzzle をクローンする
     const puzzle = JSON.parse(JSON.stringify(basePuzzle)) as MyGame;
-    gameHolder.saveGame({ puzzle, corrected, blockSize, cross });
+    gameHolder.saveGame({ puzzle, corrected, blockSize, cross, hyper });
     return puzzle;
-  }, [basePuzzle, corrected, blockSize, cross]);
+  }, [basePuzzle, corrected, blockSize, cross, hyper]);
 }
 
 function useArrowSelector(
@@ -283,6 +293,7 @@ function useFill(
   blockSize: BlockSize,
   corrected: MyGame,
   cross: boolean,
+  hyper: boolean,
 ) {
   return useCallback<Fill>(
     (answer: string) => {
@@ -296,10 +307,10 @@ function useFill(
         return;
       }
       targetCell.answer = answer;
-      gameHolder.saveGame({ puzzle, corrected, blockSize, cross });
+      gameHolder.saveGame({ puzzle, corrected, blockSize, cross, hyper });
       forceUpdate();
     },
-    [puzzle, selectedPos, forceUpdate, blockSize, corrected, cross],
+    [puzzle, selectedPos, forceUpdate, blockSize, corrected, cross, hyper],
   );
 }
 
@@ -322,6 +333,7 @@ function useInputMemo(
   blockSize: BlockSize,
   corrected: MyGame,
   cross: boolean,
+  hyper: boolean,
 ) {
   return useCallback<InputMemo>(
     (answerCandidate: string) => {
@@ -348,10 +360,10 @@ function useInputMemo(
         list.push(answerCandidate);
         targetCell.memoList = list;
       }
-      gameHolder.saveGame({ puzzle, corrected, blockSize, cross });
+      gameHolder.saveGame({ puzzle, corrected, blockSize, cross, hyper });
       forceUpdate();
     },
-    [puzzle, selectedPos, forceUpdate, blockSize, corrected, cross],
+    [puzzle, selectedPos, forceUpdate, blockSize, corrected, cross, hyper],
   );
 }
 
@@ -364,6 +376,7 @@ function useDelete(
   blockSize: BlockSize,
   corrected: MyGame,
   cross: boolean,
+  hyper: boolean,
 ) {
   return useCallback<Delete>(() => {
     const targetCell = puzzle.cells.find(cell =>
@@ -372,9 +385,9 @@ function useDelete(
     if (!targetCell || targetCell.isFix) return;
     targetCell.answer = undefined;
     targetCell.memoList = undefined;
-    gameHolder.saveGame({ puzzle, corrected, blockSize, cross });
+    gameHolder.saveGame({ puzzle, corrected, blockSize, hyper });
     forceUpdate();
-  }, [puzzle, selectedPos, forceUpdate, blockSize, corrected, cross]);
+  }, [puzzle, selectedPos, forceUpdate, blockSize, corrected, hyper]);
 }
 
 function useDeleteByKeybord(del: Delete) {

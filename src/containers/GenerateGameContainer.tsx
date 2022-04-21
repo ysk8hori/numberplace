@@ -12,18 +12,26 @@ function GenerateGameContainer({
   difficulty,
   onChangeSize,
   cross = false,
+  hyper = false,
 }: {
   blockSize: BlockSize;
   difficulty: Difficulty;
   /** 他のサイズで遊ぶコールバック */
   onChangeSize?: () => void;
   cross?: boolean;
+  hyper?: boolean;
 }) {
   const [count, forceUpdate] = useReducer((x: number) => x + 1, 0);
   const [showCancel, setShowCancel] = useState(false);
   setTimeout(() => setShowCancel(true), 3000);
 
-  const result = useGenerateGame({ blockSize, count, difficulty, cross });
+  const result = useGenerateGame({
+    blockSize,
+    count,
+    difficulty,
+    cross,
+    hyper,
+  });
   if (result.isGenerating) {
     return (
       <div className="max-w-lg mx-auto flex flex-col justify-center items-center gap-5">
@@ -38,7 +46,7 @@ function GenerateGameContainer({
         </HiddenBox>
         <HiddenBox className={showCancel ? 'visible' : undefined}>
           <p>
-            大きいサイズのゲームはゲームの生成に時間がかかる場合があります。ゲームが生成されない場合はキャンセルし、他の大きさで遊んでください。
+            ゲームの生成に時間がかかる場合があります。ゲームが生成されない場合はキャンセルし、他の大きさで遊んでください。
           </p>
         </HiddenBox>
       </div>
@@ -54,6 +62,7 @@ function GenerateGameContainer({
         onRegenerate={forceUpdate}
         onChangeSize={onChangeSize}
         cross={cross}
+        hyper={hyper}
       />
     </div>
   );
