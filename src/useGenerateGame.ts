@@ -25,11 +25,13 @@ export default function useGenerateGame({
   count,
   difficulty,
   cross,
+  hyper,
 }: {
   blockSize: BlockSize;
   count: number;
   difficulty: Difficulty;
   cross?: boolean;
+  hyper?: boolean;
 }): Result {
   // worker を生成
   const [worker, setWorker] = useState<Worker | undefined>();
@@ -46,7 +48,7 @@ export default function useGenerateGame({
   useEffect(() => {
     if (!worker) return;
     // ワーカーにゲーム生成を依頼
-    worker.postMessage({ blockSize, difficulty, cross });
+    worker.postMessage({ blockSize, difficulty, cross, hyper });
     // ワーカーからゲーム生成結果が渡された際の処理を登録
     worker.onmessage = ({ data }) => {
       worker.terminate(); // ワーカーを破棄する
