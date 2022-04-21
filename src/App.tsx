@@ -74,6 +74,7 @@ function App() {
           onChoseBlockSize={(blockSize, difficulty, options) => (
             setBlockSize(blockSize),
             setCross(!!options?.cross),
+            setHyper(!!options?.hyper),
             setDifficulty(difficulty),
             setMode('generateAndPlay')
           )}
