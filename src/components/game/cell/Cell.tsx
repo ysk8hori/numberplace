@@ -22,9 +22,10 @@ import MemoLayer, { Props as MemoLayerProps } from './MemoLayer';
  * - 変更できない Cell が見た目でわかる
  * - answer がない場合はメモレイヤーを表示する
  *   - メモがある場合はメモを表示する
- * - 特殊なグループに属する場合はグレーを濃くする
+ * - 特殊なグループに属する場合は着色する
  *   - upleft-downright
  *   - upright-downleft
+ *   - hyper
  *
  * 以下のことは行わない。
  *
@@ -42,13 +43,16 @@ function Cell({
   'data-testid': dataTestid,
   upleftDownright,
   uprightDownleft,
+  hyper,
   ...rest
 }: PropsWithChildren<
   { onSelect?: () => void; 'data-testid'?: string } & AnswerLayerProps &
     BorderLayerProps &
     SelectLayerProps &
     MemoLayerProps &
-    AdditionalGroupLayerProps
+    UpleftDownrightGroupLayerProps &
+    UprightDownleftGroupLayerProps &
+    HyperGroupLayerProps
 >) {
   return (
     <div
@@ -60,11 +64,10 @@ function Cell({
       {...rest}
     >
       <BorderLayer right={right} bottom={bottom} />
+      <UpleftDownrightGroupLayer upleftDownright={upleftDownright} />
+      <UprightDownleftGroupLayer uprightDownleft={uprightDownleft} />
+      <HyperGroupLayer hyper={hyper} />
       <SelectLayer select={select} />
-      <AdditionalGroupLayer
-        upleftDownright={upleftDownright}
-        uprightDownleft={uprightDownleft}
-      />
       {answer ? (
         <AnswerLayer answer={answer} fix={fix} />
       ) : (
@@ -78,9 +81,52 @@ function Cell({
   );
 }
 
-type AdditionalGroupLayerProps = {
+type HyperGroupLayerProps = {
+  /** hyper のグループに属するか */
+  hyper?: boolean;
+};
+
+/**
+ * cell の背景色を表示するレイヤー。
+ *
+ * - 黒を opacity でグレーにする
+ * - 属する HyperGroup の数に応じて濃くする。
+ */
+const HyperGroupLayer: React.FC<HyperGroupLayerProps> = ({ hyper }) => {
+  const bg = useMemo(() => {
+    if (hyper) {
+      return 'bg-emerald-400/20';
+    }
+    return 'bg-transparent';
+  }, [hyper]);
+  return (
+    <div className={clsx('w-full h-full absolute top-0 left-0', bg)}></div>
+  );
+};
+
+type UpleftDownrightGroupLayerProps = {
   /** 左上から右下にかけての斜めのグループに属するか */
   upleftDownright?: boolean;
+};
+
+/**
+ * cell の背景色を表示するレイヤー。
+ */
+const UpleftDownrightGroupLayer: React.FC<UpleftDownrightGroupLayerProps> = ({
+  upleftDownright,
+}) => {
+  const bg = useMemo(() => {
+    if (upleftDownright) {
+      return 'bg-pink-500/20';
+    }
+    return 'bg-transparent';
+  }, [upleftDownright]);
+  return (
+    <div className={clsx('w-full h-full absolute top-0 left-0', bg)}></div>
+  );
+};
+
+type UprightDownleftGroupLayerProps = {
   /** 右上から左下にかけての斜めのグループに属するか */
   uprightDownleft?: boolean;
 };
@@ -91,22 +137,15 @@ type AdditionalGroupLayerProps = {
  * - 黒を opacity でグレーにする
  * - 属する AdditionalGroup の数に応じて濃くする。
  */
-const AdditionalGroupLayer: React.FC<AdditionalGroupLayerProps> = ({
-  upleftDownright,
+const UprightDownleftGroupLayer: React.FC<UprightDownleftGroupLayerProps> = ({
   uprightDownleft,
 }) => {
   const bg = useMemo(() => {
-    if (upleftDownright && uprightDownleft) {
-      return 'bg-indigo-500/20';
-    }
-    if (upleftDownright) {
-      return 'bg-orange-500/20';
-    }
     if (uprightDownleft) {
       return 'bg-sky-500/20';
     }
     return 'bg-transparent';
-  }, [upleftDownright, uprightDownleft]);
+  }, [uprightDownleft]);
   return (
     <div className={clsx('w-full h-full absolute top-0 left-0', bg)}></div>
   );
