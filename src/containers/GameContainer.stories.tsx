@@ -132,3 +132,32 @@ Game_3_3_cross.play = async ({ canvasElement }) => {
   await resolve_2_3(canvas);
 };
 Game_3_3_cross.storyName = '9x9クロスの表示確認';
+
+export const Game_3_3_hyper = Template.bind({});
+Game_3_3_hyper.args = {
+  blockSize: blockSize_3_3,
+  puzzle: puzzle_3_3,
+  corrected: corrected_3_3,
+  hyper: true,
+};
+Game_3_3_hyper.play = async ({ canvasElement }) => {
+  // Starts querying the component from its root element
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
+Game_3_3_hyper.storyName = '9x9HYPERの表示確認';
+
+export const Game_3_3_hyper_cross = Template.bind({});
+Game_3_3_hyper_cross.args = {
+  blockSize: blockSize_3_3,
+  puzzle: puzzle_3_3,
+  corrected: corrected_3_3,
+  cross: true,
+  hyper: true,
+};
+Game_3_3_hyper_cross.play = async ({ canvasElement }) => {
+  // Starts querying the component from its root element
+  const canvas = within(canvasElement);
+  await resolve_2_3(canvas);
+};
+Game_3_3_hyper_cross.storyName = '9x9HYPERxCROSSの表示確認';
