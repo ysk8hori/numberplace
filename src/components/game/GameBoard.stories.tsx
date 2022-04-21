@@ -96,3 +96,24 @@ Cross9.args = {
   cross: true,
   className: 'bg-white',
 };
+
+export const Hyper = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Hyper.args = {
+  puzzle: puzzle_3_3,
+  blockSize: { width: 3, height: 3 },
+  selectedPos: [2, 2],
+  hyper: true,
+  className: 'bg-white',
+};
+
+export const HyperCross = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+HyperCross.args = {
+  puzzle: puzzle_3_3,
+  blockSize: { width: 3, height: 3 },
+  selectedPos: [2, 2],
+  hyper: true,
+  cross: true,
+  className: 'bg-white',
+};
