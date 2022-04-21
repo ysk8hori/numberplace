@@ -46,7 +46,7 @@ function GenerateGameContainer({
         </HiddenBox>
         <HiddenBox className={showCancel ? 'visible' : undefined}>
           <p>
-            大きいサイズのゲームはゲームの生成に時間がかかる場合があります。ゲームが生成されない場合はキャンセルし、他の大きさで遊んでください。
+            ゲームの生成に時間がかかる場合があります。ゲームが生成されない場合はキャンセルし、他の大きさで遊んでください。
           </p>
         </HiddenBox>
       </div>
