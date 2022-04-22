@@ -1,11 +1,20 @@
+import GenerateGameWorker from '../generateGame.worker?worker';
 import GameContainer from './GameContainer';
-import React, { useReducer, useState } from 'react';
-import useGenerateGame from '../useGenerateGame';
+import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import { Difficulty } from '../utils/difficulty';
 import SelfBuildingSquareSpinner from '../components/atoms/SelfBuildingSquareSpinner';
 import NeumorphismButton from '../components/atoms/NeumorphismButton';
 import styled from 'styled-components';
+import { MyGame } from '../utils/typeUtils';
+
+type Result =
+  | {
+      /** ゲームの生成をキャンセルする */
+      cancel: () => void;
+      isGenerating: true;
+    }
+  | { puzzle: MyGame; corrected: MyGame; isGenerating?: false };
 
 function GenerateGameContainer({
   blockSize,
@@ -25,13 +34,39 @@ function GenerateGameContainer({
   const [showCancel, setShowCancel] = useState(false);
   setTimeout(() => setShowCancel(true), 3000);
 
-  const result = useGenerateGame({
-    blockSize,
-    count,
-    difficulty,
-    cross,
-    hyper,
-  });
+  // worker を生成
+  const [worker, setWorker] = useState<Worker | undefined>();
+  // 生成をキャンセルするコールバック
+  const cancel = useCallback(() => {
+    worker?.terminate();
+  }, [count, worker]);
+  const [result, setResult] = useState<Result>({ cancel, isGenerating: true });
+
+  useEffect(() => {
+    setWorker(new GenerateGameWorker());
+  }, [blockSize, count]);
+
+  useEffect(() => {
+    if (!worker) return;
+    // ワーカーにゲーム生成を依頼
+    worker.postMessage({ blockSize, difficulty, cross, hyper });
+    // ワーカーからゲーム生成結果が渡された際の処理を登録
+    worker.onmessage = ({ data }) => {
+      worker.terminate(); // ワーカーを破棄する
+      // setWorker(undefined);
+      setResult(data);
+    };
+    // ワーカーにゲーム生成を依頼
+    worker.postMessage({ blockSize, difficulty });
+  }, [count, worker]);
+
+  useEffect(() => {
+    if (result.isGenerating) {
+      // 初回は worker がない状態で cancel コールバックが生成され cancel が機能しないので、
+      // worker ありで cancel が生成され直したら result を更新する。
+      setResult({ cancel, isGenerating: true });
+    }
+  }, [cancel]);
   if (result.isGenerating) {
     return (
       <div className="max-w-lg mx-auto flex flex-col justify-center items-center gap-5">
