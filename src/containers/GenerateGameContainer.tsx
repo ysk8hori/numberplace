@@ -1,6 +1,12 @@
 import GenerateGameWorker from '../generateGame.worker?worker';
 import GameContainer from './GameContainer';
-import React, { useCallback, useEffect, useReducer, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useReducer,
+  useState,
+} from 'react';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import { Difficulty } from '../utils/difficulty';
 import SelfBuildingSquareSpinner from '../components/atoms/SelfBuildingSquareSpinner';
@@ -35,7 +41,10 @@ function GenerateGameContainer({
   setTimeout(() => setShowCancel(true), 3000);
 
   // worker を生成
-  const [worker, setWorker] = useState<Worker | undefined>();
+  const worker = useMemo(() => {
+    console.log('Generate Worker');
+    return new GenerateGameWorker();
+  }, []);
   // 生成をキャンセルするコールバック
   const cancel = useCallback(() => {
     worker?.terminate();
@@ -43,17 +52,11 @@ function GenerateGameContainer({
   const [result, setResult] = useState<Result>({ cancel, isGenerating: true });
 
   useEffect(() => {
-    setWorker(new GenerateGameWorker());
-  }, [blockSize, count]);
-
-  useEffect(() => {
     if (!worker) return;
     // ワーカーにゲーム生成を依頼
     worker.postMessage({ blockSize, difficulty, cross, hyper });
     // ワーカーからゲーム生成結果が渡された際の処理を登録
     worker.onmessage = ({ data }) => {
-      worker.terminate(); // ワーカーを破棄する
-      // setWorker(undefined);
       setResult(data);
     };
     // ワーカーにゲーム生成を依頼
@@ -67,6 +70,15 @@ function GenerateGameContainer({
       setResult({ cancel, isGenerating: true });
     }
   }, [cancel]);
+
+  // worker の 破棄を行う useEffect
+  useEffect(() => {
+    return () => {
+      console.log('worker terminate');
+      worker.terminate();
+    };
+  }, [blockSize, difficulty]);
+
   if (result.isGenerating) {
     return (
       <div className="max-w-lg mx-auto flex flex-col justify-center items-center gap-5">
