@@ -37,8 +37,11 @@ function GenerateGameContainer({
   hyper?: boolean;
 }) {
   const [count, forceUpdate] = useReducer((x: number) => x + 1, 0);
+
   const [showCancel, setShowCancel] = useState(false);
-  setTimeout(() => setShowCancel(true), 3000);
+  useEffect(() => {
+    setTimeout(() => setShowCancel(true), 3000);
+  });
 
   // worker を生成
   const worker = useWorker(blockSize, difficulty);
