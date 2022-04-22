@@ -1,11 +1,9 @@
 import GameContainer from './GameContainer';
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useReducer } from 'react';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import { Difficulty } from '../utils/difficulty';
-import SelfBuildingSquareSpinner from '../components/atoms/SelfBuildingSquareSpinner';
-import NeumorphismButton from '../components/atoms/NeumorphismButton';
-import styled from 'styled-components';
 import useGenerateGame from '../useGenerateGame';
+import Generating from '../components/other/Generating';
 
 function GenerateGameContainer({
   blockSize,
@@ -23,12 +21,6 @@ function GenerateGameContainer({
 }) {
   const [count, forceUpdate] = useReducer((x: number) => x + 1, 0);
 
-  const [showCancel, setShowCancel] = useState(false);
-  useEffect(() => {
-    const id = setTimeout(() => setShowCancel(true), 3000);
-    return () => clearTimeout(id);
-  });
-
   const result = useGenerateGame({
     blockSize,
     count,
@@ -38,24 +30,7 @@ function GenerateGameContainer({
   });
 
   if (result.isGenerating) {
-    return (
-      <div className="max-w-lg mx-auto flex flex-col justify-center items-center gap-5">
-        <SelfBuildingSquareSpinner />
-        <HiddenBox className={showCancel ? 'visible' : undefined}>
-          <NeumorphismButton
-            onClick={() => (result.cancel(), onChangeSize?.())}
-            className="rounded-full px-5 py-1"
-          >
-            キャンセル
-          </NeumorphismButton>
-        </HiddenBox>
-        <HiddenBox className={showCancel ? 'visible' : undefined}>
-          <p>
-            ゲームの生成に時間がかかる場合があります。ゲームが生成されない場合はキャンセルし、他の大きさで遊んでください。
-          </p>
-        </HiddenBox>
-      </div>
-    );
+    return <Generating cancel={() => (result.cancel(), onChangeSize?.())} />;
   }
 
   return (
@@ -72,16 +47,5 @@ function GenerateGameContainer({
     </div>
   );
 }
-
-const HiddenBox = styled.div`
-  visibility: hidden;
-  opacity: 0;
-  transition-property: opacity visibility;
-  transition-duration: 0.5s;
-  &.visible {
-    visibility: visible;
-    opacity: 1;
-  }
-`;
 
 export default GenerateGameContainer;
