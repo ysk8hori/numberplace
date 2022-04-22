@@ -1,11 +1,11 @@
 import GameContainer from './GameContainer';
-import React, { useReducer, useState } from 'react';
-import useGenerateGame from '../useGenerateGame';
+import React, { useEffect, useReducer, useState } from 'react';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import { Difficulty } from '../utils/difficulty';
 import SelfBuildingSquareSpinner from '../components/atoms/SelfBuildingSquareSpinner';
 import NeumorphismButton from '../components/atoms/NeumorphismButton';
 import styled from 'styled-components';
+import useGenerateGame from '../useGenerateGame';
 
 function GenerateGameContainer({
   blockSize,
@@ -22,8 +22,12 @@ function GenerateGameContainer({
   hyper?: boolean;
 }) {
   const [count, forceUpdate] = useReducer((x: number) => x + 1, 0);
+
   const [showCancel, setShowCancel] = useState(false);
-  setTimeout(() => setShowCancel(true), 3000);
+  useEffect(() => {
+    const id = setTimeout(() => setShowCancel(true), 3000);
+    return () => clearTimeout(id);
+  });
 
   const result = useGenerateGame({
     blockSize,
@@ -32,6 +36,7 @@ function GenerateGameContainer({
     cross,
     hyper,
   });
+
   if (result.isGenerating) {
     return (
       <div className="max-w-lg mx-auto flex flex-col justify-center items-center gap-5">
