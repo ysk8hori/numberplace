@@ -41,10 +41,8 @@ function GenerateGameContainer({
   setTimeout(() => setShowCancel(true), 3000);
 
   // worker を生成
-  const worker = useMemo(() => {
-    console.log('Generate Worker');
-    return new GenerateGameWorker();
-  }, []);
+  const worker = useWorker(blockSize, difficulty);
+
   // 生成をキャンセルするコールバック
   const cancel = useCallback(() => {
     worker?.terminate();
@@ -70,14 +68,6 @@ function GenerateGameContainer({
       setResult({ cancel, isGenerating: true });
     }
   }, [cancel]);
-
-  // worker の 破棄を行う useEffect
-  useEffect(() => {
-    return () => {
-      console.log('worker terminate');
-      worker.terminate();
-    };
-  }, [blockSize, difficulty]);
 
   if (result.isGenerating) {
     return (
@@ -127,3 +117,18 @@ const HiddenBox = styled.div`
 `;
 
 export default GenerateGameContainer;
+function useWorker(blockSize: BlockSize, difficulty: string) {
+  const worker = useMemo(() => {
+    console.log('Generate Worker');
+    return new GenerateGameWorker();
+  }, []);
+
+  // worker の 破棄を行う useEffect
+  useEffect(() => {
+    return () => {
+      console.log('worker terminate');
+      worker.terminate();
+    };
+  }, [blockSize, difficulty]);
+  return worker;
+}
