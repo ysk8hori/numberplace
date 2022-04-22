@@ -25,7 +25,8 @@ function GenerateGameContainer({
 
   const [showCancel, setShowCancel] = useState(false);
   useEffect(() => {
-    setTimeout(() => setShowCancel(true), 3000);
+    const id = setTimeout(() => setShowCancel(true), 3000);
+    return () => clearTimeout(id);
   });
 
   const result = useGenerateGame({
