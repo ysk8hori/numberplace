@@ -46,7 +46,8 @@ function GenerateGameContainer({
   // 生成をキャンセルするコールバック
   const cancel = useCallback(() => {
     worker?.terminate();
-  }, [count, worker]);
+  }, [worker]);
+
   const [result, setResult] = useState<Result>({ cancel, isGenerating: true });
 
   useEffect(() => {
@@ -60,14 +61,6 @@ function GenerateGameContainer({
     // ワーカーにゲーム生成を依頼
     worker.postMessage({ blockSize, difficulty });
   }, [count, worker]);
-
-  useEffect(() => {
-    if (result.isGenerating) {
-      // 初回は worker がない状態で cancel コールバックが生成され cancel が機能しないので、
-      // worker ありで cancel が生成され直したら result を更新する。
-      setResult({ cancel, isGenerating: true });
-    }
-  }, [cancel]);
 
   if (result.isGenerating) {
     return (
