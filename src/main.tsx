@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import ReactModal from 'react-modal';
+import { registerSW } from 'virtual:pwa-register';
+
+registerSW();
 
 ReactDOM.render(
   <React.StrictMode>
