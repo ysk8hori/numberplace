@@ -51,15 +51,12 @@ function GenerateGameContainer({
   const [result, setResult] = useState<Result>({ cancel, isGenerating: true });
 
   useEffect(() => {
-    if (!worker) return;
     // ワーカーにゲーム生成を依頼
     worker.postMessage({ blockSize, difficulty, cross, hyper });
     // ワーカーからゲーム生成結果が渡された際の処理を登録
     worker.onmessage = ({ data }) => {
       setResult(data);
     };
-    // ワーカーにゲーム生成を依頼
-    worker.postMessage({ blockSize, difficulty });
   }, [count, worker]);
 
   if (result.isGenerating) {
