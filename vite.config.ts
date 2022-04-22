@@ -28,6 +28,12 @@ export default defineConfig({
         background_color: '#ffffff',
         display: 'standalone',
       },
+      registerType: 'autoUpdate',
+      includeAssets: ['*.png'],
+      // devOptions: {
+      //   enabled: true,
+      //   /* other options */
+      // },
     }),
   ],
 });
