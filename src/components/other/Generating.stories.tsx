@@ -6,6 +6,9 @@ import Generating from './Generating';
 export default {
   title: 'components/other/Generating',
   component: Generating,
+  parameters: {
+    chromatic: { pauseAnimationAtEnd: true },
+  },
 } as ComponentMeta<typeof Generating>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
