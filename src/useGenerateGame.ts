@@ -58,6 +58,7 @@ export default function useGenerateGame({
   }, [worker]);
 
   const [result, setResult] = useState<Result>({ cancel, isGenerating: true });
+  useEffect(() => setResult({ cancel, isGenerating: true }), [count]);
 
   useEffect(() => {
     // ワーカーにゲーム生成を依頼
