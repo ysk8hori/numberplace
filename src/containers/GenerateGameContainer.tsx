@@ -1,26 +1,11 @@
-import GenerateGameWorker from '../generateGame.worker?worker';
 import GameContainer from './GameContainer';
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useReducer,
-  useState,
-} from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import { Difficulty } from '../utils/difficulty';
 import SelfBuildingSquareSpinner from '../components/atoms/SelfBuildingSquareSpinner';
 import NeumorphismButton from '../components/atoms/NeumorphismButton';
 import styled from 'styled-components';
-import { MyGame } from '../utils/typeUtils';
-
-type Result =
-  | {
-      /** ゲームの生成をキャンセルする */
-      cancel: () => void;
-      isGenerating: true;
-    }
-  | { puzzle: MyGame; corrected: MyGame; isGenerating?: false };
+import useGenerateGame from '../useGenerateGame';
 
 function GenerateGameContainer({
   blockSize,
@@ -43,24 +28,13 @@ function GenerateGameContainer({
     setTimeout(() => setShowCancel(true), 3000);
   });
 
-  // worker を生成
-  const worker = useWorker(blockSize, difficulty);
-
-  // 生成をキャンセルするコールバック
-  const cancel = useCallback(() => {
-    worker?.terminate();
-  }, [worker]);
-
-  const [result, setResult] = useState<Result>({ cancel, isGenerating: true });
-
-  useEffect(() => {
-    // ワーカーにゲーム生成を依頼
-    worker.postMessage({ blockSize, difficulty, cross, hyper });
-    // ワーカーからゲーム生成結果が渡された際の処理を登録
-    worker.onmessage = ({ data }) => {
-      setResult(data);
-    };
-  }, [count, worker]);
+  const result = useGenerateGame({
+    blockSize,
+    count,
+    difficulty,
+    cross,
+    hyper,
+  });
 
   if (result.isGenerating) {
     return (
@@ -110,18 +84,3 @@ const HiddenBox = styled.div`
 `;
 
 export default GenerateGameContainer;
-function useWorker(blockSize: BlockSize, difficulty: string) {
-  const worker = useMemo(() => {
-    console.log('Generate Worker');
-    return new GenerateGameWorker();
-  }, []);
-
-  // worker の 破棄を行う useEffect
-  useEffect(() => {
-    return () => {
-      console.log('worker terminate');
-      worker.terminate();
-    };
-  }, [blockSize, difficulty]);
-  return worker;
-}
