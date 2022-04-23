@@ -16,3 +16,8 @@ ReactDOM.render(
 
 // @see https://reactcommunity.org/react-modal/examples/set_app_element/
 ReactModal.setAppElement('#root');
+
+window.onerror = (_ev, _src, _lineno, _colno, error) => {
+  console.log(error);
+  location.reload();
+};
