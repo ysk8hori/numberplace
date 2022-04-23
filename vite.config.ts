@@ -29,11 +29,9 @@ export default defineConfig({
         display: 'standalone',
       },
       registerType: 'autoUpdate',
-      includeAssets: ['*.png'],
-      // devOptions: {
-      //   enabled: true,
-      //   /* other options */
-      // },
+      workbox: {
+        globPatterns: ['assets/*.png'],
+      },
     }),
   ],
 });
