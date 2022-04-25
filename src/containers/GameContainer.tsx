@@ -3,7 +3,7 @@ import React, {
   useEffect,
   useState,
   useReducer,
-  ComponentProps,
+  useMemo,
 } from 'react';
 import { BlockSize, Position } from '@ysk8hori/numberplace-generator';
 import GameBoard from '../components/game/GameBoard';
@@ -15,7 +15,6 @@ import MistakeNoticeModal from '../components/game/MistakeNoticeModal';
 import GameClearModal from '../components/game/GameClearModal';
 import Quit from '../components/game/Quit';
 import gameHolder from '../utils/gameHolder';
-import InputNoticeLayer from '../components/game/InputNoticeLayer';
 
 /** basePuzzle をクローンする */
 function clone(basePuzzle: MyGame): MyGame {
@@ -78,9 +77,6 @@ export default function GameContainer({
   const [hasMistake, setMistake] = useState(false);
   const [hasEmptycell, setEmptycell] = useState(false);
   const [isGameClear, setGameClear] = useState(false);
-  const [beforeAfter, setBeforeAfter] = useState<
-    ComponentProps<typeof InputNoticeLayer>['beforeAfter']
-  >([undefined, undefined]);
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   useEffect(() => {
     window.addEventListener('resize', forceUpdate);
@@ -95,7 +91,6 @@ export default function GameContainer({
     cross,
     hyper,
     setPuzzle,
-    setBeforeAfter,
   );
   useFillByKeyboard(fill);
   const inputMemo = useInputMemo(
@@ -108,7 +103,17 @@ export default function GameContainer({
     hyper,
     setPuzzle,
   );
-  useDeleteByKeybord(fill);
+  const del = useDelete(
+    puzzle,
+    selectedPos,
+    forceUpdate,
+    blockSize,
+    corrected,
+    cross,
+    hyper,
+    setPuzzle,
+  );
+  useDeleteByKeybord(del);
   useArrowSelector(selectedPos, blockSize, setSelectedPos);
   const checkAndUpdate = useCheckAndUpdate(
     corrected,
@@ -148,11 +153,7 @@ export default function GameContainer({
 
   return (
     <div className="max-w-xl grow">
-      <div className="shadow-xl m-2 bg-white relative">
-        <InputNoticeLayer
-          className="absolute top-0 left-0"
-          beforeAfter={beforeAfter}
-        />
+      <div className="shadow-xl m-2 bg-white">
         <GameBoard
           puzzle={puzzle}
           blockSize={blockSize}
@@ -167,7 +168,7 @@ export default function GameContainer({
           blockSize={blockSize}
           onInput={fill}
           onMemoInput={inputMemo}
-          onDelete={() => fill()}
+          onDelete={del}
           completedNumbers={completeNumbers}
         />
       </div>
@@ -293,7 +294,7 @@ function useArrowSelector(
   });
 }
 
-type Fill = (answer?: string | undefined) => void;
+type Fill = (answer: string) => void;
 
 function useFill(
   _puzzle: MyGame,
@@ -304,27 +305,14 @@ function useFill(
   cross: boolean,
   hyper: boolean,
   setPuzzle: React.Dispatch<React.SetStateAction<MyGame>>,
-  setBeforeAfter: React.Dispatch<
-    React.SetStateAction<[string | undefined, string | undefined] | undefined>
-  >,
 ) {
   return useCallback<Fill>(
-    (answer?: string | undefined) => {
+    (answer: string) => {
       const puzzle = clone(_puzzle);
       const targetCell = puzzle.cells.find(cell =>
         isSamePos(cell.pos, selectedPos),
       );
       if (!targetCell || targetCell.isFix) return;
-      const before = targetCell.answer;
-      if (answer === undefined) {
-        targetCell.answer = answer;
-        targetCell.memoList = undefined;
-        gameHolder.saveGame({ puzzle, corrected, blockSize, cross, hyper });
-        setBeforeAfter([before, answer]);
-        setPuzzle(puzzle);
-        forceUpdate();
-        return;
-      }
       // 扱える範囲の数字かどうかをチェックする
       const num = Number(answer);
       if (isNaN(num) || num < 1 || blockSize.height * blockSize.width < num) {
@@ -332,7 +320,6 @@ function useFill(
       }
       targetCell.answer = answer;
       gameHolder.saveGame({ puzzle, corrected, blockSize, cross, hyper });
-      setBeforeAfter([before, answer]);
       setPuzzle(puzzle);
       forceUpdate();
     },
@@ -420,14 +407,40 @@ function useInputMemo(
   );
 }
 
-function useDeleteByKeybord(fill: Fill) {
+type Delete = () => void;
+/** 入力済みかつ fix していない cell の内容をクリアする */
+function useDelete(
+  _puzzle: MyGame,
+  selectedPos: readonly [number, number],
+  forceUpdate: React.DispatchWithoutAction,
+  blockSize: BlockSize,
+  corrected: MyGame,
+  cross: boolean,
+  hyper: boolean,
+  setPuzzle: React.Dispatch<React.SetStateAction<MyGame>>,
+) {
+  return useCallback<Delete>(() => {
+    const puzzle = clone(_puzzle);
+    const targetCell = puzzle.cells.find(cell =>
+      isSamePos(cell.pos, selectedPos),
+    );
+    if (!targetCell || targetCell.isFix) return;
+    targetCell.answer = undefined;
+    targetCell.memoList = undefined;
+    gameHolder.saveGame({ puzzle, corrected, blockSize, cross, hyper });
+    setPuzzle(puzzle);
+    forceUpdate();
+  }, [_puzzle, selectedPos, forceUpdate, blockSize, corrected, cross, hyper]);
+}
+
+function useDeleteByKeybord(del: Delete) {
   const delByKeyboard = useCallback(
     ({ key }) => {
       if (key === 'Backspace') {
-        fill();
+        del();
       }
     },
-    [fill],
+    [del],
   );
   useEffect(() => {
     window.addEventListener('keydown', delByKeyboard);
