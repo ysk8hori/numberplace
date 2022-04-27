@@ -7,11 +7,11 @@ import {
   blockSize_2_3 as blockSize,
   puzzle_2_2,
   puzzle_2_3 as puzzle,
-  corrected_2_3,
-  corrected_2_2,
+  solved_2_3,
+  solved_2_2,
   blockSize_3_3,
   puzzle_3_3,
-  corrected_3_3,
+  solved_3_3,
 } from '../utils/test-utils';
 import { resolve_2_3 } from '../utils/storybookUtils';
 import {
@@ -39,7 +39,7 @@ const Template: ComponentStory<typeof GameContainer> = args => (
 );
 Template.args = {
   puzzle,
-  corrected: corrected_2_3,
+  solved: solved_2_3,
   blockSize,
 };
 
@@ -51,7 +51,7 @@ export const Primary_2_2 = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary_2_2.args = {
   puzzle: puzzle_2_2,
-  corrected: corrected_2_2,
+  solved: solved_2_2,
   blockSize: blockSize_2_2,
 };
 
@@ -110,7 +110,7 @@ export const Game_3_3 = Template.bind({});
 Game_3_3.args = {
   blockSize: blockSize_3_3,
   puzzle: puzzle_3_3,
-  corrected: corrected_3_3,
+  solved: solved_3_3,
 };
 Game_3_3.play = async ({ canvasElement }) => {
   // Starts querying the component from its root element
@@ -123,7 +123,7 @@ export const Game_3_3_cross = Template.bind({});
 Game_3_3_cross.args = {
   blockSize: blockSize_3_3,
   puzzle: puzzle_3_3,
-  corrected: corrected_3_3,
+  solved: solved_3_3,
   cross: true,
 };
 Game_3_3_cross.play = async ({ canvasElement }) => {
@@ -137,7 +137,7 @@ export const Game_3_3_hyper = Template.bind({});
 Game_3_3_hyper.args = {
   blockSize: blockSize_3_3,
   puzzle: puzzle_3_3,
-  corrected: corrected_3_3,
+  solved: solved_3_3,
   hyper: true,
 };
 Game_3_3_hyper.play = async ({ canvasElement }) => {
@@ -151,7 +151,7 @@ export const Game_3_3_hyper_cross = Template.bind({});
 Game_3_3_hyper_cross.args = {
   blockSize: blockSize_3_3,
   puzzle: puzzle_3_3,
-  corrected: corrected_3_3,
+  solved: solved_3_3,
   cross: true,
   hyper: true,
 };

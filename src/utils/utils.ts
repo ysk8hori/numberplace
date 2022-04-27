@@ -41,9 +41,9 @@ export function shuffle<T>(array: T[]): T[] {
 }
 
 export function collectCellsByAnswer(
-  correctedEmptyCells: MyCell[],
+  solvedEmptyCells: MyCell[],
 ): Map<string, MyCell[]> {
-  return correctedEmptyCells.reduce((map, cell) => {
+  return solvedEmptyCells.reduce((map, cell) => {
     if (!map.has(cell.answer!)) {
       map.set(cell.answer!, []);
     }

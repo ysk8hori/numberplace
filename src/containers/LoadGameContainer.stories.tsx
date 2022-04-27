@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import LoadGameContainer from './LoadGameContainer';
-import { blockSize_2_2, puzzle_2_2, corrected_2_2 } from '../utils/test-utils';
+import { blockSize_2_2, puzzle_2_2, solved_2_2 } from '../utils/test-utils';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -22,7 +22,7 @@ const Template: ComponentStory<typeof LoadGameContainer> = args => (
 );
 Template.args = {
   puzzle: puzzle_2_2,
-  corrected: corrected_2_2,
+  solved: solved_2_2,
   blockSize: blockSize_2_2,
 };
 

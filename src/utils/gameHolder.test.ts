@@ -1,6 +1,6 @@
 import { it, expect, beforeEach } from 'vitest';
 import gameHolder from './gameHolder';
-import { blockSize_2_2, corrected_2_2, puzzle_2_2 } from './test-utils';
+import { blockSize_2_2, solved_2_2, puzzle_2_2 } from './test-utils';
 
 beforeEach(() => {
   // ゲームの保存状態を初期化する
@@ -10,13 +10,13 @@ beforeEach(() => {
 it('ゲームを保存して取得できる', () => {
   gameHolder.saveGame({
     puzzle: puzzle_2_2,
-    corrected: corrected_2_2,
+    solved: solved_2_2,
     blockSize: blockSize_2_2,
   });
   const savedGame = gameHolder.loadGame();
   expect(savedGame).toEqual({
     puzzle: puzzle_2_2,
-    corrected: corrected_2_2,
+    solved: solved_2_2,
     blockSize: blockSize_2_2,
   });
 });

@@ -8,7 +8,7 @@ import { BlockSize } from '@ysk8hori/numberplace-generator';
  */
 function LoadGameContainer({
   puzzle,
-  corrected,
+  solved,
   blockSize,
   onChangeSize,
   onRegenerate,
@@ -18,7 +18,7 @@ function LoadGameContainer({
   /** ナンプレの問題 */
   puzzle: MyGame;
   /** ナンプレの答え */
-  corrected: MyGame;
+  solved: MyGame;
   /** ナンプレのブロックのサイズ */
   blockSize: BlockSize;
   /** 他のサイズで遊ぶコールバック */
@@ -32,7 +32,7 @@ function LoadGameContainer({
     <div className="grow flex justify-center">
       <GameContainer
         puzzle={puzzle}
-        corrected={corrected}
+        solved={solved}
         blockSize={blockSize}
         onRegenerate={() => onRegenerate?.(blockSize)}
         onChangeSize={onChangeSize}

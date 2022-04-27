@@ -7,11 +7,11 @@ import {
   screen,
   userEvent,
   puzzle_2_2,
-  corrected_2_2,
+  solved_2_2,
   blockSize_2_2,
   puzzle_2_3,
   blockSize_2_3,
-  corrected_2_3,
+  solved_2_3,
   resolve_2_3,
 } from '../utils/test-utils';
 import GameContainer from './GameContainer';
@@ -21,13 +21,13 @@ function setup(size: '2_2' | '2_3') {
     size === '2_2' ? (
       <GameContainer
         puzzle={puzzle_2_2}
-        corrected={corrected_2_2}
+        solved={solved_2_2}
         blockSize={blockSize_2_2}
       />
     ) : (
       <GameContainer
         puzzle={puzzle_2_3}
-        corrected={corrected_2_3}
+        solved={solved_2_3}
         blockSize={blockSize_2_3}
       />
     ),

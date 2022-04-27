@@ -4,7 +4,7 @@ import { MyGame } from './typeUtils';
 const STORAGEKEY_GAME = 'game';
 export type SaveData = {
   puzzle: MyGame;
-  corrected: MyGame;
+  solved: MyGame;
   blockSize: BlockSize;
   cross?: boolean;
   hyper?: boolean;
