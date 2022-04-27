@@ -11,7 +11,7 @@ type Result =
       cancel: () => void;
       isGenerating: true;
     }
-  | { puzzle: MyGame; corrected: MyGame; isGenerating?: false };
+  | { puzzle: MyGame; solved: MyGame; isGenerating?: false };
 
 function useWorker(blockSize: BlockSize, difficulty: string) {
   const worker = useMemo(() => {

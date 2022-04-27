@@ -50,7 +50,7 @@ function clone(basePuzzle: MyGame): MyGame {
  */
 export default function GameContainer({
   puzzle: basePuzzle,
-  corrected,
+  solved,
   blockSize,
   onRegenerate,
   onChangeSize,
@@ -60,7 +60,7 @@ export default function GameContainer({
   /** ナンプレの問題 */
   puzzle: MyGame;
   /** ナンプレの答え */
-  corrected: MyGame;
+  solved: MyGame;
   /** ナンプレのブロックのサイズ */
   blockSize: BlockSize;
   /** 同じサイズで遊ぶコールバック */
@@ -73,7 +73,7 @@ export default function GameContainer({
   hyper?: boolean;
 }) {
   const [puzzle, setPuzzle] = useState(() => clone(basePuzzle));
-  gameHolder.saveGame({ puzzle, corrected, blockSize, cross, hyper });
+  gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   const [hasMistake, setMistake] = useState(false);
   const [hasEmptycell, setEmptycell] = useState(false);
@@ -91,7 +91,7 @@ export default function GameContainer({
     selectedPos,
     forceUpdate,
     blockSize,
-    corrected,
+    solved,
     cross,
     hyper,
     setPuzzle,
@@ -103,7 +103,7 @@ export default function GameContainer({
     selectedPos,
     forceUpdate,
     blockSize,
-    corrected,
+    solved,
     cross,
     hyper,
     setPuzzle,
@@ -111,7 +111,7 @@ export default function GameContainer({
   useDeleteByKeybord(fill);
   useArrowSelector(selectedPos, blockSize, setSelectedPos);
   const checkAndUpdate = useCheckAndUpdate(
-    corrected,
+    solved,
     setEmptycell,
     setMistake,
     forceUpdate,
@@ -191,13 +191,13 @@ export default function GameContainer({
 
 /**
  *
- * @param corrected 問題の答え
+ * @param solved 問題の答え
  * @param setEmptycell check した結果、空欄セルがある場合に true を指定する
  * @param setMistake check した結果、間違えのセルがある場合に true を指定する
  * @param forceUpdate チェック後に fix を反映する
  */
 function useCheckAndUpdate(
-  corrected: MyGame,
+  solved: MyGame,
   setEmptycell: React.Dispatch<React.SetStateAction<boolean>>,
   setMistake: React.Dispatch<React.SetStateAction<boolean>>,
   forceUpdate: React.DispatchWithoutAction,
@@ -208,13 +208,13 @@ function useCheckAndUpdate(
 ) {
   return useCallback(
     (puzzle: MyGame) => {
-      corrected.cells.forEach(correctedCell => {
+      solved.cells.forEach(solvedCell => {
         const targetCell = puzzle.cells.find(cell =>
-          isSamePos(correctedCell.pos, cell.pos),
+          isSamePos(solvedCell.pos, cell.pos),
         )!;
         // 空欄セルがあるか
         if (!targetCell.answer) return setEmptycell(true);
-        if (correctedCell.answer === targetCell.answer) {
+        if (solvedCell.answer === targetCell.answer) {
           // 正解している cell は fix する
           targetCell.isFix = true;
         } else {
@@ -224,12 +224,12 @@ function useCheckAndUpdate(
       });
 
       if (puzzle.cells.every(cell => cell.isFix)) setGameClear(true);
-      gameHolder.saveGame({ puzzle, corrected, blockSize, cross, hyper });
+      gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
 
       // fix を反映するために forceUpdate する
       forceUpdate();
     },
-    [corrected, setEmptycell, setMistake, forceUpdate, blockSize, cross, hyper],
+    [solved, setEmptycell, setMistake, forceUpdate, blockSize, cross, hyper],
   );
 }
 
@@ -300,7 +300,7 @@ function useFill(
   selectedPos: readonly [number, number],
   forceUpdate: React.DispatchWithoutAction,
   blockSize: BlockSize,
-  corrected: MyGame,
+  solved: MyGame,
   cross: boolean,
   hyper: boolean,
   setPuzzle: React.Dispatch<React.SetStateAction<MyGame>>,
@@ -319,7 +319,7 @@ function useFill(
       if (answer === undefined) {
         targetCell.answer = answer;
         targetCell.memoList = undefined;
-        gameHolder.saveGame({ puzzle, corrected, blockSize, cross, hyper });
+        gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
         setBeforeAfter([before, answer]);
         setPuzzle(puzzle);
         forceUpdate();
@@ -331,7 +331,7 @@ function useFill(
         return;
       }
       targetCell.answer = answer;
-      gameHolder.saveGame({ puzzle, corrected, blockSize, cross, hyper });
+      gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
       setBeforeAfter([before, answer]);
       setPuzzle(puzzle);
       forceUpdate();
@@ -341,7 +341,7 @@ function useFill(
       selectedPos,
       forceUpdate,
       blockSize,
-      corrected,
+      solved,
       cross,
       hyper,
       setPuzzle,
@@ -366,7 +366,7 @@ function useInputMemo(
   selectedPos: readonly [number, number],
   forceUpdate: React.DispatchWithoutAction,
   blockSize: BlockSize,
-  corrected: MyGame,
+  solved: MyGame,
   cross: boolean,
   hyper: boolean,
   setPuzzle: React.Dispatch<React.SetStateAction<MyGame>>,
@@ -399,7 +399,7 @@ function useInputMemo(
       }
       gameHolder.saveGame({
         puzzle,
-        corrected,
+        solved,
         blockSize,
         cross,
         hyper,
@@ -412,7 +412,7 @@ function useInputMemo(
       selectedPos,
       forceUpdate,
       blockSize,
-      corrected,
+      solved,
       cross,
       hyper,
       setPuzzle,

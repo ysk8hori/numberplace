@@ -9,7 +9,7 @@ import {
   userEvent,
   puzzle_2_3,
   blockSize_2_3,
-  corrected_2_3,
+  solved_2_3,
   resolve_2_3,
 } from './utils/test-utils';
 import App from './App';
@@ -19,7 +19,7 @@ import { MyGame } from './utils/typeUtils';
 
 vi.mock('./useGenerateGame', () => ({
   default: fn(() => {
-    return { puzzle: puzzle_2_3, corrected: corrected_2_3 };
+    return { puzzle: puzzle_2_3, solved: solved_2_3 };
   }),
 }));
 
@@ -27,7 +27,7 @@ function spy(): SpyInstanceFn<
   [BlockSize, number],
   {
     puzzle: MyGame;
-    corrected: MyGame;
+    solved: MyGame;
   }
 > {
   return useGenerateGame as any;
@@ -82,7 +82,7 @@ test('ゲーム生成してゲームクリア後に「おなじ おおきさで 
 test('ゲームロードしてゲームクリア後に「おなじ おおきさで あそぶ」をクリックするとおなじおおきさのゲームを生成する', async () => {
   gameHolder.saveGame({
     blockSize: blockSize_2_3,
-    corrected: corrected_2_3,
+    solved: solved_2_3,
     puzzle: puzzle_2_3,
   });
   setup();

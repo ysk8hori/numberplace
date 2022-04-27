@@ -57,7 +57,7 @@ function App() {
           <LoadGameContainer
             blockSize={saveData!.blockSize}
             puzzle={saveData!.puzzle}
-            corrected={saveData!.corrected}
+            solved={saveData!.solved}
             onChangeSize={() => setMode('menu')}
             onRegenerate={blockSize => (
               setBlockSize(blockSize), setMode('generateAndPlay')

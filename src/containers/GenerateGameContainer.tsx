@@ -37,7 +37,7 @@ function GenerateGameContainer({
     <div className="w-screen h-screen flex justify-center">
       <GameContainer
         puzzle={result.puzzle}
-        corrected={result.corrected}
+        solved={result.solved}
         blockSize={blockSize}
         onRegenerate={forceUpdate}
         onChangeSize={onChangeSize}

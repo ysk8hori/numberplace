@@ -16,16 +16,16 @@ onmessage = ev => {
   const gameTypes: GameType[] = [];
   if (cross) gameTypes.push('cross');
   if (hyper) gameTypes.push('hyper');
-  const [tempPuzzle, corrected] = generateGame(blockSize, { gameTypes });
+  const [tempPuzzle, solved] = generateGame(blockSize, { gameTypes });
   const puzzle = difficultyAdjustment({
     puzzle: tempPuzzle,
-    corrected,
+    solved,
     difficulty,
     blockSize,
   });
   markFixed(puzzle);
   postMessage({
     puzzle: puzzle,
-    corrected: { cells: corrected.cells },
+    solved: { cells: solved.cells },
   });
 };

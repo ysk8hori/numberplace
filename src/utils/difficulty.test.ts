@@ -1,12 +1,12 @@
 import { it, expect } from 'vitest';
 import { difficultyAdjustment } from './difficulty';
-import { corrected_3_3, puzzle_3_3, blockSize_3_3 } from './test-utils';
+import { solved_3_3, puzzle_3_3, blockSize_3_3 } from './test-utils';
 import { collectCellsByAnswer } from './utils';
 
 it('9x9 の問題で難易度 hard を指定すると引数で渡した puzzle に変更がない状態で返却される', () => {
   const puzzle = difficultyAdjustment({
     puzzle: puzzle_3_3,
-    corrected: corrected_3_3,
+    solved: solved_3_3,
     difficulty: 'hard',
     blockSize: blockSize_3_3,
   });
@@ -25,7 +25,7 @@ it('9x9 の問題で難易度 hard を指定すると引数で渡した puzzle �
 it('9x9 の問題で難易度 normal を指定すると、各数字が少なくとも 2 箇所ずつ埋められた問題が返却される', () => {
   const puzzle = difficultyAdjustment({
     puzzle: puzzle_3_3,
-    corrected: corrected_3_3,
+    solved: solved_3_3,
     difficulty: 'normal',
     blockSize: blockSize_3_3,
   });
@@ -43,7 +43,7 @@ it('9x9 の問題で難易度 normal を指定すると、各数字が少なく�
 it('9x9 の問題で難易度 easy を指定すると、各数字が少なくとも 4 箇所ずつ埋められた問題が返却される', () => {
   const puzzle = difficultyAdjustment({
     puzzle: puzzle_3_3,
-    corrected: corrected_3_3,
+    solved: solved_3_3,
     difficulty: 'easy',
     blockSize: blockSize_3_3,
   });

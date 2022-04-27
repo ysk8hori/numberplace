@@ -25,14 +25,14 @@ export type Level = {
  */
 export function difficultyAdjustment({
   puzzle,
-  corrected,
+  solved,
   difficulty,
   blockSize,
 }: {
   /** 難易度調整対象のパズル。本関数はこれをクローンして難易度調整したものをリターンする。 */
   puzzle: MyGame;
   /** 難易度調整対象のパズルの解答 */
-  corrected: MyGame;
+  solved: MyGame;
   /** 難易度。最小値は 1 とし、最大値は対象のパズルのサイズ（blockSize.width*blockSize.height）とする。  */
   difficulty: Difficulty;
   blockSize: BlockSize;
@@ -42,20 +42,17 @@ export function difficultyAdjustment({
     cells: JSON.parse(JSON.stringify(puzzle.cells)) as MyGame['cells'],
   };
   const emptyCells = newPuzzle.cells.filter(cell => !cell.answer);
-  const correctedEmptyCells = shuffle(
-    (JSON.parse(JSON.stringify(corrected.cells)) as MyGame['cells']).filter(
-      cell => emptyCells.some(empty => isSamePos(cell.pos, empty.pos)),
+  const solvedEmptyCells = shuffle(
+    (JSON.parse(JSON.stringify(solved.cells)) as MyGame['cells']).filter(cell =>
+      emptyCells.some(empty => isSamePos(cell.pos, empty.pos)),
     ),
   );
-  const correctedEmptyCellsMap = collectCellsByAnswer(correctedEmptyCells);
-  for (const correctedEmptyCellsByNum of correctedEmptyCellsMap.values()) {
+  const solvedEmptyCellsMap = collectCellsByAnswer(solvedEmptyCells);
+  for (const solvedEmptyCellsByNum of solvedEmptyCellsMap.values()) {
     while (
-      !(
-        correctedEmptyCellsByNum.length <=
-        (maxEmptyCount < 0 ? 0 : maxEmptyCount)
-      )
+      !(solvedEmptyCellsByNum.length <= (maxEmptyCount < 0 ? 0 : maxEmptyCount))
     ) {
-      const cell = correctedEmptyCellsByNum.pop()!;
+      const cell = solvedEmptyCellsByNum.pop()!;
       const emptyCell = emptyCells.find(emptyCell =>
         isSamePos(cell.pos, emptyCell.pos),
       )!;

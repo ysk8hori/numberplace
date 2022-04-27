@@ -8,11 +8,11 @@ import {
   screen,
   userEvent,
   puzzle_2_2,
-  corrected_2_2,
+  solved_2_2,
   blockSize_2_2,
   puzzle_2_3,
   blockSize_2_3,
-  corrected_2_3,
+  solved_2_3,
   resolve_2_3,
 } from '../utils/test-utils';
 import LoadGameContainer from './LoadGameContainer';
@@ -24,14 +24,14 @@ function setup({
   size: '2_2' | '2_3';
   onRegenerate?: (blockSize: BlockSize) => undefined;
 }) {
-  const [puzzle, corrected, blockSize] =
+  const [puzzle, solved, blockSize] =
     size === '2_2'
-      ? [puzzle_2_2, corrected_2_2, blockSize_2_2]
-      : [puzzle_2_3, corrected_2_3, blockSize_2_3];
+      ? [puzzle_2_2, solved_2_2, blockSize_2_2]
+      : [puzzle_2_3, solved_2_3, blockSize_2_3];
   const rendered = render(
     <LoadGameContainer
       puzzle={puzzle}
-      corrected={corrected}
+      solved={solved}
       blockSize={blockSize}
       onRegenerate={onRegenerate}
     />,
