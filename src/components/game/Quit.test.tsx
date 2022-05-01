@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import React from 'react';
-import { test, fn, expect } from 'vitest';
+import { test, vi, expect } from 'vitest';
 import { render, screen, userEvent, waitFor } from '../../utils/test-utils';
 import Quit from './Quit';
 
@@ -31,7 +31,7 @@ test('モーダルの「はい」ボタンを押下するとモーダルを閉�
 });
 
 test('モーダルの「はい」ボタンを押下すると onQuit イベントが実行される', async () => {
-  const onQuit = fn();
+  const onQuit = vi.fn();
   render(<Quit onQuit={onQuit} />);
   userEvent.click(screen.getByRole('button', { name: 'ゲームをやめる' }));
   expect(await screen.findByRole('dialog', { name: 'ゲームをやめる確認' }));

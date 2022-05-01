@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import React from 'react';
-import { test, fn, expect } from 'vitest';
-import { render, screen, userEvent, waitFor } from '../../utils/test-utils';
+import { test, expect } from 'vitest';
+import { render, screen } from '../../utils/test-utils';
 import MistakeNoticeModal from './MistakeNoticeModal';
 
 test('mistake も emptycell も渡さない場合は何も表示しない', async () => {

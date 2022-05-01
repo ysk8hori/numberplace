@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import React from 'react';
-import { describe, test, expect, fn } from 'vitest';
+import { describe, test, expect, vi } from 'vitest';
 import { render, screen, userEvent } from '../../../utils/test-utils';
 import InputPanel from './InputPanel';
 import { blockSize_2_2 } from '../../../utils/test-utils';
@@ -20,14 +20,14 @@ describe('InputPanel', () => {
     expect(screen.getByTestId('btn_delete')).toBeEnabled();
   });
   test('ボタン押下時に押下したボタンのテキストを callback で親へ通知する', () => {
-    const onInput = fn();
+    const onInput = vi.fn();
     render(<InputPanel blockSize={blockSize_2_2} onInput={onInput} />);
     userEvent.click(screen.getByRole('button', { name: '1' }));
     expect(onInput).toHaveBeenCalledWith('1');
   });
   test('メモモードでボタン押下時に押下したボタンのテキストを onMemoInput で親へ通知する', () => {
-    const onInput = fn();
-    const onMemoInput = fn();
+    const onInput = vi.fn();
+    const onMemoInput = vi.fn();
     render(
       <InputPanel
         blockSize={blockSize_2_2}
@@ -49,7 +49,7 @@ describe('InputPanel', () => {
     expect(onMemoInput).not.toBeCalled();
   });
   test('消去ボタン押下時には onDelete で親へ通知する', () => {
-    const onDelete = fn();
+    const onDelete = vi.fn();
     render(<InputPanel blockSize={blockSize_2_2} onDelete={onDelete} />);
     userEvent.click(screen.getByRole('button', { name: '消す' }));
     expect(onDelete).toHaveBeenCalledTimes(1);

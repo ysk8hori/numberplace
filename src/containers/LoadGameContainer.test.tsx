@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import React from 'react';
 import ReactModal from 'react-modal';
-import { test, expect, fn } from 'vitest';
+import { test, expect, vi } from 'vitest';
 import {
   render,
   screen,
@@ -40,7 +40,7 @@ function setup({
 }
 
 test('ゲームクリア後に「おなじ おおきさで あそぶ」をクリックすると onRegenerate に blockSize が引数で渡されてコールバックされる', () => {
-  const onRegenerate = fn();
+  const onRegenerate = vi.fn();
   setup({ size: '2_3', onRegenerate });
   resolve_2_3({ finish: true });
   userEvent.click(screen.getByRole('button', { name: 'こたえあわせ' }));
