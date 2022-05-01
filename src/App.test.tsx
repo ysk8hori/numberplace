@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import React from 'react';
 import ReactModal from 'react-modal';
-import { test, expect, fn, vi, SpyInstanceFn } from 'vitest';
+import { test, expect,  vi, SpyInstanceFn } from 'vitest';
 import {
   render,
   screen,
@@ -18,7 +18,7 @@ import gameHolder from './utils/gameHolder';
 import { MyGame } from './utils/typeUtils';
 
 vi.mock('./useGenerateGame', () => ({
-  default: fn(() => {
+  default: vi.fn(() => {
     return { puzzle: puzzle_2_3, solved: solved_2_3 };
   }),
 }));
