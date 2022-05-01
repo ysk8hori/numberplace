@@ -1,5 +1,19 @@
 {
-  "extends": [
-    "config:base"
+  "extends": ["config:base"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "labels": ["UPDATE-MINOR&PATCH"],
+      "excludePackageNames": ["typescript"]
+    },
+    {
+      "matchPackageNames": [
+        "react",
+        "@types/react",
+        "react-dom",
+        "@types/react-dom"
+      ],
+      "groupName": "react"
+    }
   ]
 }
