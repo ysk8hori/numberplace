@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import React from 'react';
-import { describe, test, fn, expect } from 'vitest';
+import { describe, test, vi, expect } from 'vitest';
 import {
   render,
   screen,
@@ -35,7 +35,7 @@ describe('GameBoard', () => {
     expect(screen.getByTestId('3,3')).toHaveTextContent('');
   });
   test('選択したセルをコールバックで親へ伝えられる', () => {
-    const onSelectCell = fn();
+    const onSelectCell = vi.fn();
     render(
       <GameBoard
         puzzle={puzzle}
@@ -49,7 +49,7 @@ describe('GameBoard', () => {
     expect(onSelectCell).toHaveBeenCalledWith([3, 3]);
   });
   test('選択したセルをコールバックで親へ伝えられる', () => {
-    const onSelectCell = fn();
+    const onSelectCell = vi.fn();
     render(
       <GameBoard
         puzzle={puzzle}

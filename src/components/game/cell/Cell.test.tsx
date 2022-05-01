@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import React from 'react';
-import { describe, test, it, expect, fn } from 'vitest';
+import { describe, test, expect, vi } from 'vitest';
 import {
   blockSize_2_2,
   render,
@@ -19,7 +19,7 @@ describe('Cell', () => {
     expect(screen.queryByText(/[0-9]/)).not.toBeInTheDocument();
   });
   test('Cell は click 可能である', () => {
-    const onSelect = fn();
+    const onSelect = vi.fn();
     render(<Cell answer={'2'} onSelect={onSelect} />);
     userEvent.click(screen.getByText('2'));
     expect(onSelect).toHaveBeenCalled();

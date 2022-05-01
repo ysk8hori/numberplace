@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import React from 'react';
-import { test, fn, expect } from 'vitest';
+import { it, vi, expect } from 'vitest';
 import {
   render,
   screen,
@@ -10,7 +10,7 @@ import {
 import DifficultySelector from './DifficultySelector';
 
 it('左矢印クリックすると与えた難易度をデクリメントした値を onSelect で通知する', async () => {
-  const onSelect = fn();
+  const onSelect = vi.fn();
   render(
     <DifficultySelector
       difficulty={'normal'}
@@ -23,7 +23,7 @@ it('左矢印クリックすると与えた難易度をデクリメントした�
 });
 
 it('右矢印クリックすると与えた難易度をインクリメントした値を onSelect で通知する', async () => {
-  const onSelect = fn();
+  const onSelect = vi.fn();
   render(
     <DifficultySelector
       difficulty={'normal'}

@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import React from 'react';
-import { test, fn, expect } from 'vitest';
+import { test, vi, expect } from 'vitest';
 import { render, screen, userEvent, waitFor } from '../../utils/test-utils';
 import GameClearModal from './GameClearModal';
 
@@ -17,7 +17,7 @@ test('game clear すると表示する', async () => {
 });
 
 test('おなじおおきさであそぶ押下コールバックが呼ばれる', async () => {
-  const onRegenerate = fn();
+  const onRegenerate = vi.fn();
   render(<GameClearModal gameClear onRegenerate={onRegenerate} />);
   userEvent.click(
     screen.getByRole('button', { name: 'おなじ おおきさで あそぶ' }),
@@ -26,7 +26,7 @@ test('おなじおおきさであそぶ押下コールバックが呼ばれる',
 });
 
 test('ほかのおおきさであそぶ押下コールバックが呼ばれる', async () => {
-  const onChangeSize = fn();
+  const onChangeSize = vi.fn();
   render(<GameClearModal gameClear onChangeSize={onChangeSize} />);
   userEvent.click(
     screen.getByRole('button', { name: 'ほかの おおきさで あそぶ' }),
