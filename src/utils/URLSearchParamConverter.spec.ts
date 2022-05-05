@@ -1,0 +1,38 @@
+import { describe, expect, test } from 'vitest';
+import { puzzleToString } from './URLSearchParamConverter';
+
+export const puzzle_2_3 = {
+  ...JSON.parse(
+    '{"cells":[{"pos":[0,0]},{"pos":[1,0],"answer":"2"},{"pos":[2,0]},{"pos":[3,0],"answer":"4"},{"pos":[4,0],"answer":"3"},{"pos":[5,0],"answer":"5"},{"pos":[0,1],"answer":"4"},{"pos":[1,1]},{"pos":[2,1]},{"pos":[3,1]},{"pos":[4,1]},{"pos":[5,1],"answer":"1"},{"pos":[0,2],"answer":"3"},{"pos":[1,2]},{"pos":[2,2]},{"pos":[3,2],"answer":"2"},{"pos":[4,2]},{"pos":[5,2]},{"pos":[0,3]},{"pos":[1,3],"answer":"1"},{"pos":[2,3],"answer":"6"},{"pos":[3,3]},{"pos":[4,3]},{"pos":[5,3]},{"pos":[0,4]},{"pos":[1,4]},{"pos":[2,4],"answer":"2"},{"pos":[3,4]},{"pos":[4,4]},{"pos":[5,4],"answer":"4"},{"pos":[0,5]},{"pos":[1,5],"answer":"6"},{"pos":[2,5],"answer":"4"},{"pos":[3,5]},{"pos":[4,5],"answer":"5"},{"pos":[5,5]}]}',
+  ),
+};
+
+describe('puzzleToString', () => {
+  test('puzzle_2_3', () => {
+    expect(puzzleToString({ puzzle: puzzle_2_3 })).toEqual(
+      ' 2 435|4    1|3  2| 16|  2  4| 64 5',
+    );
+  });
+  test('puzzle_2_3 comma', () => {
+    expect(
+      puzzleToString({
+        puzzle: puzzle_2_3,
+        colSplitter: ',',
+        rowSplitter: '\n',
+        empty: '',
+      }),
+    ).toEqual(',2,,4,3,5\n4,,,,,1\n3,,,2\n,1,6\n,,2,,,4\n,6,4,,5');
+  });
+  test('puzzle_2_3 urlencode', () => {
+    expect(
+      encodeURI(
+        puzzleToString({
+          puzzle: puzzle_2_3,
+          colSplitter: ',',
+          rowSplitter: '|',
+          empty: '',
+        }),
+      ),
+    ).toEqual(',2,,4,3,5%7C4,,,,,1%7C3,,,2%7C,1,6%7C,,2,,,4%7C,6,4,,5');
+  });
+});
