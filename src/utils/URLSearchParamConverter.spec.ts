@@ -14,38 +14,14 @@ describe('puzzleToString', () => {
       ' 2 435|4    1|3  2| 16|  2  4| 64 5',
     );
   });
-  test('puzzle_2_3 comma', () => {
-    expect(
-      puzzleToString({
-        puzzle: puzzle_2_3,
-        colSplitter: ',',
-        rowSplitter: '\n',
-        empty: '',
-      }),
-    ).toEqual(',2,,4,3,5\n4,,,,,1\n3,,,2\n,1,6\n,,2,,,4\n,6,4,,5');
-  });
-  test('puzzle_2_3 urlencode', () => {
-    expect(
-      encodeURI(
-        puzzleToString({
-          puzzle: puzzle_2_3,
-          colSplitter: ',',
-          rowSplitter: '|',
-          empty: '',
-        }),
-      ),
-    ).toEqual(',2,,4,3,5%7C4,,,,,1%7C3,,,2%7C,1,6%7C,,2,,,4%7C,6,4,,5');
-  });
   test('puzzle_4_4 urlencode', () => {
     expect(
-      encodeURI(
-        puzzleToString({
-          puzzle: puzzle_4_4,
-          colSplitter: '',
-          rowSplitter: 'n',
-          empty: 'x',
-        }),
-      ),
+      puzzleToString({
+        puzzle: puzzle_4_4,
+        colSplitter: '',
+        rowSplitter: 'n',
+        empty: 'x',
+      }),
     ).toEqual(
       '70dxexxxxxx452nx8xcx972xxdxxx3nxxxxxxxxx5n9xx6xx3xxxxxx1bn2xxxxxxxxxx5xxxanxx173xx8xx6x9enxxx3xefxxa0xx8x4nxxa87xx9x1nfxxx5xxxxx8xxx4nxxx2dxxxxxxx89xenbaxxx2xxxx5x3xf6n3c8xxx4xbx7xxxd1nxxxxxx2cxxxxx0xdnxxxxxxxax3xx1cnxxbxxxx4xxexxxx2n1d298xx6acf',
     );
