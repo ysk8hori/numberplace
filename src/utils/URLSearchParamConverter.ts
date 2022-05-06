@@ -63,6 +63,13 @@ export function puzzleToString({
         }, new Array<string>())
         // 後ろのカラムから追加して逆になっていた順序を元に戻す
         .reverse()
+        .map(answer => {
+          // 16進数文字にする。16は0にする。
+          const num = parseInt(answer, 10);
+          if (isNaN(num)) return answer;
+          if (num === 16) return '0';
+          return num.toString(16);
+        })
         .join(colSplitter),
     )
     .join(rowSplitter);
