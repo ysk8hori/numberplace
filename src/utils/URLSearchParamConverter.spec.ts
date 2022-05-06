@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
+import { Result } from './Result';
 import { puzzle_4_4 } from './test-utils';
-import { puzzleToString } from './URLSearchParamConverter';
+import { puzzleToString, stringToPuzzle } from './URLSearchParamConverter';
 
 export const puzzle_2_3 = {
   ...JSON.parse(
@@ -25,5 +26,19 @@ describe('puzzleToString', () => {
     ).toEqual(
       '70dxexxxxxx452nx8xcx972xxdxxx3nxxxxxxxxx5n9xx6xx3xxxxxx1bn2xxxxxxxxxx5xxxanxx173xx8xx6x9enxxx3xefxxa0xx8x4nxxa87xx9x1nfxxx5xxxxx8xxx4nxxx2dxxxxxxx89xenbaxxx2xxxx5x3xf6n3c8xxx4xbx7xxxd1nxxxxxx2cxxxxx0xdnxxxxxxxax3xx1cnxxbxxxx4xxexxxx2n1d298xx6acf',
     );
+  });
+});
+
+describe('stringToPuzzle', () => {
+  test('不正なサイズのパズル（小さい）', () => {
+    const result = stringToPuzzle({ puzzleStr: '1234|1234|1234' });
+    expect(result.status).toEqual('invalid_size');
+  });
+  test('不正なサイズのパズル（大きい）', () => {
+    const result = stringToPuzzle({
+      puzzleStr:
+        '1234|1234|1234|1234|1234|1234|1234|1234|1234|1234|1234|1234|1234|1234|1234|1234|1234',
+    });
+    expect(result.status).toEqual('invalid_size');
   });
 });

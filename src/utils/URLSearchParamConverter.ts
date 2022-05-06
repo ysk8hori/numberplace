@@ -1,4 +1,5 @@
 import { BlockSize, Cell } from '@ysk8hori/numberplace-generator';
+import { Result } from './Result';
 import { MyGame } from './typeUtils';
 
 export function toParam({
@@ -16,7 +17,7 @@ export function toParam({
 }
 
 /**
- * puzzle を文字列に変換する
+ * puzzle を文字列に変換する。URL エンコードはしない。
  *
  * ## 変換ルール
  *
@@ -73,4 +74,24 @@ export function puzzleToString({
         .join(colSplitter),
     )
     .join(rowSplitter);
+}
+
+type FailureStatus = 'invalid_size' | 'not_implemented';
+
+export function stringToPuzzle({
+  puzzleStr,
+  rowSplitter = '|',
+  colSplitter = '',
+  empty = ' ',
+}: {
+  puzzleStr: string;
+  rowSplitter?: string;
+  colSplitter?: string;
+  empty?: string;
+}): Result<FailureStatus> {
+  const size = puzzleStr.split(rowSplitter);
+  if (size.length < 4 || 16 < size.length) {
+    return Result.create('invalid_size');
+  }
+  return Result.create('not_implemented');
 }
