@@ -1,4 +1,5 @@
 import { BlockSize, Cell } from '@ysk8hori/numberplace-generator';
+import { isSamePos } from './positionUtils';
 import { Result } from './Result';
 import { MyGame } from './typeUtils';
 
@@ -76,7 +77,7 @@ export function puzzleToString({
     .join(rowSplitter);
 }
 
-type FailureStatus = 'invalid_size' | 'not_implemented';
+type FailureStatus = 'invalid_size' | 'not_implemented' | 'invalid_answer';
 
 export function stringToPuzzle({
   puzzleStr,
@@ -88,10 +89,49 @@ export function stringToPuzzle({
   rowSplitter?: string;
   colSplitter?: string;
   empty?: string;
-}): Result<FailureStatus> {
-  const size = puzzleStr.split(rowSplitter);
-  if (size.length < 4 || 16 < size.length) {
+}):
+  | Result<FailureStatus>
+  | Result<
+      'success',
+      {
+        cells: Cell[];
+      }
+    > {
+  const rowsStr = puzzleStr.split(rowSplitter);
+  if (rowsStr.length < 4 || 16 < rowsStr.length) {
     return Result.create('invalid_size');
   }
-  return Result.create('not_implemented');
+  /** 注：rowsAnswers での answer はまだ16進の文字 */
+  const rowsAnswers = rowsStr.map(rowStr => rowStr.split(colSplitter));
+  if (
+    !rowsAnswers.every(answers =>
+      answers.every(a => a === empty || !isNaN(parseInt(a, 16))),
+    )
+  ) {
+    return Result.create('invalid_answer');
+  }
+  const cells = Array(rowsStr.length)
+    .fill(0)
+    .map((_, y) =>
+      Array(rowsStr.length)
+        .fill(0)
+        .map((_, x) => {
+          const cell: Cell = {
+            pos: [x, y],
+            answer: undefined,
+          };
+          return cell;
+        }),
+    )
+    .flat();
+  rowsAnswers.forEach((answers, y) =>
+    answers.forEach((a, x) => {
+      let answer = a === empty ? undefined : parseInt(a, 16);
+      if (answer === 0) answer = 16;
+      cells.find(cell => isSamePos(cell.pos, [x, y]))!.answer =
+        answer?.toString();
+    }),
+  );
+
+  return Result.create('success', { cells });
 }

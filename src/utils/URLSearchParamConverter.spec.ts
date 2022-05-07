@@ -1,5 +1,4 @@
 import { describe, expect, test } from 'vitest';
-import { Result } from './Result';
 import { puzzle_4_4 } from './test-utils';
 import { puzzleToString, stringToPuzzle } from './URLSearchParamConverter';
 
@@ -15,7 +14,7 @@ describe('puzzleToString', () => {
       ' 2 435|4    1|3  2| 16|  2  4| 64 5',
     );
   });
-  test('puzzle_4_4 urlencode', () => {
+  test('puzzle_4_4', () => {
     expect(
       puzzleToString({
         puzzle: puzzle_4_4,
@@ -40,5 +39,41 @@ describe('stringToPuzzle', () => {
         '1234|1234|1234|1234|1234|1234|1234|1234|1234|1234|1234|1234|1234|1234|1234|1234|1234',
     });
     expect(result.status).toEqual('invalid_size');
+  });
+  test('不正な答えを含むパズル', () => {
+    const result = stringToPuzzle({
+      puzzleStr: '1234|1234|1234|123v',
+    });
+    expect(result.status).toEqual('invalid_answer');
+  });
+  test('puzzle_4_4', () => {
+    const result = stringToPuzzle({
+      puzzleStr:
+        '70dxexxxxxx452nx8xcx972xxdxxx3nxxxxxxxxx5n9xx6xx3xxxxxx1bn2xxxxxxxxxx5xxxanxx173xx8xx6x9enxxx3xefxxa0xx8x4nxxa87xx9x1nfxxx5xxxxx8xxx4nxxx2dxxxxxxx89xenbaxxx2xxxx5x3xf6n3c8xxx4xbx7xxxd1nxxxxxx2cxxxxx0xdnxxxxxxxax3xx1cnxxbxxxx4xxexxxx2n1d298xx6acf',
+      colSplitter: '',
+      rowSplitter: 'n',
+      empty: 'x',
+    });
+    if (result.status === 'success') {
+      expect(result.data.cells.length).toBe(puzzle_4_4.cells.length);
+      result.data.cells.forEach((cell, i) =>
+        expect(puzzle_4_4.cells[i]).toEqual(cell),
+      );
+    } else {
+      fail();
+    }
+  });
+  test('puzzle_2_3', () => {
+    const result = stringToPuzzle({
+      puzzleStr: ' 2 435|4    1|3  2| 16|  2  4| 64 5',
+    });
+    if (result.status === 'success') {
+      expect(result.data.cells.length).toBe(puzzle_2_3.cells.length);
+      result.data.cells.forEach((cell, i) =>
+        expect(puzzle_2_3.cells[i]).toEqual(cell),
+      );
+    } else {
+      fail();
+    }
   });
 });
