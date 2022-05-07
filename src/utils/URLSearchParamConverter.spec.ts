@@ -1,6 +1,10 @@
 import { describe, expect, test } from 'vitest';
 import { puzzle_4_4 } from './test-utils';
-import { puzzleToString, stringToPuzzle } from './URLSearchParamConverter';
+import {
+  puzzleToString,
+  stringToPuzzle,
+  toSearchParam,
+} from './URLSearchParamConverter';
 
 export const puzzle_2_3 = {
   ...JSON.parse(
@@ -75,5 +79,28 @@ describe('stringToPuzzle', () => {
     } else {
       fail();
     }
+  });
+});
+
+describe('toSearchParam', () => {
+  test('puzzle_2_3', () => {
+    const params = toSearchParam({
+      puzzle: puzzle_2_3,
+      blockSize: { height: 2, width: 3 },
+    });
+    expect(params.get('v')).toEqual('1');
+    expect(params.get('p')).toEqual('x2x435n4xxxx1n3xx2nx16nxx2xx4nx64x5');
+    expect(params.get('w')).toEqual('3');
+    expect(params.get('h')).toEqual('2');
+    expect(params.get('t')).toBeNull();
+  });
+  test('hyper cross', () => {
+    const params = toSearchParam({
+      puzzle: puzzle_2_3,
+      blockSize: { height: 2, width: 3 },
+      cross: true,
+      hyper: true,
+    });
+    expect(params.get('t')).toEqual('ch');
   });
 });

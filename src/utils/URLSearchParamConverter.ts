@@ -3,7 +3,7 @@ import { isSamePos } from './positionUtils';
 import { Result } from './Result';
 import { MyGame } from './typeUtils';
 
-export function toParam({
+export function toSearchParam({
   puzzle,
   blockSize,
   cross,
@@ -14,7 +14,19 @@ export function toParam({
   cross?: boolean;
   hyper?: boolean;
 }) {
-  // ざっくりとした version 情報も載せる
+  const param: Record<string, string> = {};
+  // ざっくりとした version 情報も一応載せる
+  param.v = '1';
+  param.p = puzzleToString({
+    puzzle,
+    colSplitter: '',
+    rowSplitter: 'n',
+    empty: 'x',
+  });
+  param.w = blockSize.width.toString();
+  param.h = blockSize.height.toString();
+  if (cross || hyper) param.t = (cross ? 'c' : '') + (hyper ? 'h' : '');
+  return new URLSearchParams(param);
 }
 
 /**
@@ -110,6 +122,7 @@ export function stringToPuzzle({
   ) {
     return Result.create('invalid_answer');
   }
+  // 全てのセルを作る
   const cells = Array(rowsStr.length)
     .fill(0)
     .map((_, y) =>
@@ -124,6 +137,7 @@ export function stringToPuzzle({
         }),
     )
     .flat();
+  // セルに答えを転写する
   rowsAnswers.forEach((answers, y) =>
     answers.forEach((a, x) => {
       let answer = a === empty ? undefined : parseInt(a, 16);
