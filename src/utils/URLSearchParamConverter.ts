@@ -3,30 +3,82 @@ import { isSamePos } from './positionUtils';
 import { Result } from './Result';
 import { MyGame } from './typeUtils';
 
-export function toSearchParam({
+type PuzzleInfo = {
+  puzzle: Pick<MyGame, 'cells'>;
+  blockSize: BlockSize;
+  cross?: boolean;
+  hyper?: boolean;
+};
+
+const SPLITTER = { colSplitter: '', rowSplitter: 'n', empty: 'x' };
+
+export function toURLSearchParam({
   puzzle,
   blockSize,
   cross,
   hyper,
-}: {
-  puzzle: MyGame;
-  blockSize: BlockSize;
-  cross?: boolean;
-  hyper?: boolean;
-}) {
+}: PuzzleInfo) {
   const param: Record<string, string> = {};
   // ざっくりとした version 情報も一応載せる
   param.v = '1';
   param.p = puzzleToString({
     puzzle,
-    colSplitter: '',
-    rowSplitter: 'n',
-    empty: 'x',
+    ...SPLITTER,
   });
   param.w = blockSize.width.toString();
   param.h = blockSize.height.toString();
   if (cross || hyper) param.t = (cross ? 'c' : '') + (hyper ? 'h' : '');
   return new URLSearchParams(param);
+}
+
+type FromURLSearchParamsFailureStatus =
+  | 'not_implemented'
+  | 'invalid_size'
+  | 'invalid_answer'
+  | 'invalid_puzzle';
+
+export function fromURLSearchParams(
+  param: URLSearchParams,
+): Result<FromURLSearchParamsFailureStatus> | Result<'success', PuzzleInfo> {
+  const widthStr = param.get('w');
+  const heightStr = param.get('h');
+  if (widthStr === null || heightStr === null) {
+    return Result.create('invalid_size');
+  }
+  const width = parseFloat(widthStr);
+  const height = parseFloat(heightStr);
+  if (
+    isNaN(width) ||
+    isNaN(height) ||
+    !Number.isInteger(width) ||
+    !Number.isInteger(height) ||
+    width <= 0 ||
+    height <= 0 ||
+    width * height < 3 ||
+    16 < width * height
+  ) {
+    return Result.create('invalid_size');
+  }
+
+  // version は特に使用していない。今後、URLパラメータの仕様を変更したくなった際には使用する。
+  // const version = param.get('v');
+
+  const typesStr = param.get('t');
+  const cross = typesStr?.includes('c');
+  const hyper = typesStr?.includes('h');
+
+  const puzzleStr = param.get('p');
+  if (!puzzleStr) return Result.create('invalid_puzzle');
+  const result = stringToPuzzle({ puzzleStr, ...SPLITTER });
+  if (result.status !== 'success') {
+    return Result.create('invalid_puzzle');
+  }
+  return Result.create('success', {
+    puzzle: result.data,
+    blockSize: { width, height },
+    cross,
+    hyper,
+  });
 }
 
 /**
@@ -89,7 +141,10 @@ export function puzzleToString({
     .join(rowSplitter);
 }
 
-type FailureStatus = 'invalid_size' | 'not_implemented' | 'invalid_answer';
+type StringToPuzzleFailureStatus =
+  | 'invalid_size'
+  | 'not_implemented'
+  | 'invalid_answer';
 
 export function stringToPuzzle({
   puzzleStr,
@@ -102,7 +157,7 @@ export function stringToPuzzle({
   colSplitter?: string;
   empty?: string;
 }):
-  | Result<FailureStatus>
+  | Result<StringToPuzzleFailureStatus>
   | Result<
       'success',
       {

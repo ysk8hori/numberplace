@@ -1,9 +1,10 @@
 import { describe, expect, test } from 'vitest';
 import { puzzle_4_4 } from './test-utils';
 import {
+  fromURLSearchParams,
   puzzleToString,
   stringToPuzzle,
-  toSearchParam,
+  toURLSearchParam,
 } from './URLSearchParamConverter';
 
 export const puzzle_2_3 = {
@@ -82,9 +83,9 @@ describe('stringToPuzzle', () => {
   });
 });
 
-describe('toSearchParam', () => {
+describe('toURLSearchParam', () => {
   test('puzzle_2_3', () => {
-    const params = toSearchParam({
+    const params = toURLSearchParam({
       puzzle: puzzle_2_3,
       blockSize: { height: 2, width: 3 },
     });
@@ -95,12 +96,103 @@ describe('toSearchParam', () => {
     expect(params.get('t')).toBeNull();
   });
   test('hyper cross', () => {
-    const params = toSearchParam({
+    const params = toURLSearchParam({
       puzzle: puzzle_2_3,
       blockSize: { height: 2, width: 3 },
       cross: true,
       hyper: true,
     });
     expect(params.get('t')).toEqual('ch');
+  });
+});
+
+describe('fromURLSearchParams', () => {
+  test('invalid_size（wなし）', () => {
+    const params = new URLSearchParams({ h: '3' });
+    const result = fromURLSearchParams(params);
+    expect(result.status).toEqual('invalid_size');
+  });
+  test('invalid_size（hなし）', () => {
+    const params = new URLSearchParams({ w: '3' });
+    const result = fromURLSearchParams(params);
+    expect(result.status).toEqual('invalid_size');
+  });
+  test('invalid_size（w数字じゃない）', () => {
+    const params = new URLSearchParams({ w: 'a', h: '1' });
+    const result = fromURLSearchParams(params);
+    expect(result.status).toEqual('invalid_size');
+  });
+  test('invalid_size（h数字じゃない）', () => {
+    const params = new URLSearchParams({ w: '1', h: '1a' });
+    const result = fromURLSearchParams(params);
+    expect(result.status).toEqual('invalid_size');
+  });
+  test('invalid_size（w整数じゃない）', () => {
+    const params = new URLSearchParams({ w: '3', h: '1.1' });
+    const result = fromURLSearchParams(params);
+    expect(result.status).toEqual('invalid_size');
+  });
+  test('invalid_size（h正の整数じゃない）', () => {
+    const params = new URLSearchParams({ w: '-3', h: '-5' });
+    const result = fromURLSearchParams(params);
+    expect(result.status).toEqual('invalid_size');
+  });
+  test('invalid_size（w数字じゃない）', () => {
+    const params = new URLSearchParams({ w: 'a', h: '1' });
+    const result = fromURLSearchParams(params);
+    expect(result.status).toEqual('invalid_size');
+  });
+  test('invalid_size（h数字じゃない）', () => {
+    const params = new URLSearchParams({ w: '1', h: '1a' });
+    const result = fromURLSearchParams(params);
+    expect(result.status).toEqual('invalid_size');
+  });
+  test('invalid_size（小さい）', () => {
+    const params = new URLSearchParams({ w: '1', h: '2' });
+    const result = fromURLSearchParams(params);
+    expect(result.status).toEqual('invalid_size');
+  });
+  test('invalid_size（大きい）', () => {
+    const params = new URLSearchParams({ w: '17', h: '1' });
+    const result = fromURLSearchParams(params);
+    expect(result.status).toEqual('invalid_size');
+  });
+  test('invalid_puzzle', () => {
+    const puzzleInfo = {
+      puzzle: puzzle_2_3,
+      blockSize: { height: 2, width: 3 },
+    };
+    const params = toURLSearchParam(puzzleInfo);
+    params.set('p', 'foo');
+    const result = fromURLSearchParams(params);
+    expect(result.status).toEqual('invalid_puzzle');
+  });
+  test('puzzle_2_3', () => {
+    const puzzleInfo = {
+      puzzle: puzzle_2_3,
+      blockSize: { height: 2, width: 3 },
+    };
+    const params = toURLSearchParam(puzzleInfo);
+    const result = fromURLSearchParams(params);
+    if (result.status === 'success') {
+      expect(result.data).toEqual(puzzleInfo);
+    } else {
+      fail();
+    }
+  });
+  test('puzzle_2_3', () => {
+    const puzzleInfo = {
+      puzzle: puzzle_2_3,
+      blockSize: { height: 2, width: 3 },
+      cross: true,
+      hyper: true,
+    };
+    const params = toURLSearchParam(puzzleInfo);
+    const result = fromURLSearchParams(params);
+    if (result.status === 'success') {
+      expect(result.data).toEqual(puzzleInfo);
+    } else {
+      fail();
+    }
   });
 });
