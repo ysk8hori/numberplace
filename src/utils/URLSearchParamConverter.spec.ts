@@ -45,6 +45,12 @@ describe('stringToPuzzle', () => {
     });
     expect(result.status).toEqual('invalid_size');
   });
+  test('不正なサイズのパズル（1行の長さが大きすぎる）', () => {
+    const result = stringToPuzzle({
+      puzzleStr: '1234|1234|1234|12345',
+    });
+    expect(result.status).toEqual('invalid_size');
+  });
   test('不正な答えを含むパズル', () => {
     const result = stringToPuzzle({
       puzzleStr: '1234|1234|1234|123v',
@@ -157,7 +163,7 @@ describe('fromURLSearchParams', () => {
     const result = fromURLSearchParams(params);
     expect(result.status).toEqual('invalid_size');
   });
-  test('invalid_puzzle', () => {
+  test('invalid_puzzle(puzzle が不正な文字列)', () => {
     const puzzleInfo = {
       puzzle: puzzle_2_3,
       blockSize: { height: 2, width: 3 },

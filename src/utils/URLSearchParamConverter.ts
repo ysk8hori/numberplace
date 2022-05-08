@@ -177,6 +177,10 @@ export function stringToPuzzle({
   ) {
     return Result.create('invalid_answer');
   }
+  if (rowsAnswers.some(answers => rowsAnswers.length < answers.length)) {
+    // 行の数を超える列数がある場合は不正なサイズ
+    return Result.create('invalid_size');
+  }
   // 全てのセルを作る
   const cells = Array(rowsStr.length)
     .fill(0)
