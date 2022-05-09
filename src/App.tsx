@@ -4,8 +4,13 @@ import React, { useEffect, useState } from 'react';
 import gameHolder, { SaveData } from './utils/gameHolder';
 import StartMenu from './components/menu/StartMenu';
 import LoadGameContainer from './containers/LoadGameContainer';
-import { BlockSize } from '@ysk8hori/numberplace-generator';
+import {
+  analyzeGame,
+  BlockSize,
+  GameType,
+} from '@ysk8hori/numberplace-generator';
 import { Difficulty } from './utils/difficulty';
+import { fromURLSearchParams } from './utils/URLSearchParamConverter';
 
 /**
  * 現在のアプリのモード
@@ -27,6 +32,30 @@ function App() {
   // todo difficulty は localstorage で保持して使う
   const [difficulty, setDifficulty] = useState<Difficulty>('easy');
   const [saveData, setSaveData] = useState<SaveData | undefined>(undefined);
+  useEffect(() => {
+    if (!location.search) return;
+
+    const params = new URLSearchParams(location.search);
+    history.replaceState('', '', '/');
+    const result = fromURLSearchParams(params);
+    if (result.status !== 'success') {
+      console.log(result.status);
+      return;
+    }
+
+    const gameTypes: GameType[] = [];
+    if (result.data.cross) gameTypes.push('cross');
+    if (result.data.hyper) gameTypes.push('hyper');
+    const analyzeResult = analyzeGame({
+      ...result.data,
+      option: { gameTypes },
+    });
+    if (analyzeResult.status !== 'solved') {
+      console.log(analyzeResult.status);
+      return;
+    }
+    gameHolder.saveGame({ ...result.data, solved: analyzeResult.solved });
+  }, [location.search]);
   useEffect(() => {
     const saveData = gameHolder.loadGame();
     setSaveData(saveData);
