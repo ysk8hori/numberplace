@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import { useFontSize } from '../../utility-hooks/useFontSize';
+import { getSvg } from '../../utils/numberUtils';
 
 export type Props = {
   beforeAfter?: [string | undefined, string | undefined];
@@ -11,7 +11,6 @@ export type Props = {
  * ユーザーに、入力前の値と入力後の値を通知するパネル
  */
 const InputNoticeLayer: React.FC<Props> = ({ beforeAfter, className }) => {
-  const { boxRef, fontSize } = useFontSize();
   const [class0, setClass0] = useState('hidden');
   const [class1, setClass1] = useState('hidden');
   if (!beforeAfter) {
@@ -42,15 +41,23 @@ const InputNoticeLayer: React.FC<Props> = ({ beforeAfter, className }) => {
   }, [beforeAfter]);
 
   return (
-    <div
-      ref={boxRef}
-      className={clsx('w-full h-full aspect-square', className)}
-      style={{ fontSize }}
-    >
-      <BeforeAfter className={class0}>{beforeAfter[0]}</BeforeAfter>
-      <BeforeAfter className={class1}>{beforeAfter[1]}</BeforeAfter>
-      {/* <BeforeAfter className="slideOut">{beforeAfter[0]}</BeforeAfter>
-      <BeforeAfter className="slideIn">{beforeAfter[1]}</BeforeAfter> */}
+    <div className={clsx('w-full h-full aspect-square', className)}>
+      <BeforeAfter className={class0}>
+        <img
+          src={getSvg({ answer: beforeAfter[0] })}
+          alt={`before answer ${beforeAfter[0]}`}
+          className="select-none"
+          style={{ width: '80%', height: '80%' }}
+        ></img>
+      </BeforeAfter>
+      <BeforeAfter className={class1}>
+        <img
+          src={getSvg({ answer: beforeAfter[1] })}
+          alt={`before answer ${beforeAfter[1]}`}
+          className="select-none"
+          style={{ width: '80%', height: '80%' }}
+        ></img>
+      </BeforeAfter>
     </div>
   );
 };
