@@ -8,6 +8,24 @@ import React, {
   useState,
 } from 'react';
 import { FontFamilyContext } from '../../../contexts/fontContext';
+import svg1 from '../../../images/numbers/1.svg';
+import svg2 from '../../../images/numbers/2.svg';
+import svg3 from '../../../images/numbers/3.svg';
+import svg4 from '../../../images/numbers/4.svg';
+import svg5 from '../../../images/numbers/5.svg';
+import svg6 from '../../../images/numbers/6.svg';
+import svg7 from '../../../images/numbers/7.svg';
+import svg8 from '../../../images/numbers/8.svg';
+import svg9 from '../../../images/numbers/9.svg';
+import svg10 from '../../../images/numbers/10.svg';
+import svg11 from '../../../images/numbers/11.svg';
+import svg12 from '../../../images/numbers/12.svg';
+import svg13 from '../../../images/numbers/13.svg';
+import svg14 from '../../../images/numbers/14.svg';
+import svg15 from '../../../images/numbers/15.svg';
+import svg16 from '../../../images/numbers/16.svg';
+import question from '../../../images/numbers/question.svg';
+import { getSvg } from '../../../utils/numberUtils';
 
 export type Props = React.ComponentProps<'div'> & {
   memoList?: string[];
@@ -22,32 +40,24 @@ function MemoCell({
   answerCandidate: string;
   memoList?: string[];
 }) {
-  const box = useRef<HTMLDivElement>(null);
-  const [fontSize, setFontSize] = useState('1rem');
-  const [lineHeight, setLineHeight] = useState('1rem');
+  const numberImage = useMemo(
+    () => getSvg({ answer: answerCandidate }),
+    [answerCandidate],
+  );
   const display = useMemo(
     () => memoList?.includes(answerCandidate),
     [memoList, answerCandidate],
   );
-  const fontContext = useContext(FontFamilyContext);
-  const fontFamily = fontContext.normal;
-  useLayoutEffect(() => {
-    if (box.current?.offsetWidth) {
-      setFontSize(`${box.current.offsetWidth / 1.3}px`);
-    }
-  }, [box.current?.offsetWidth]);
-  useLayoutEffect(() => {
-    if (box.current?.offsetHeight) {
-      setLineHeight(`${box.current.offsetHeight / 1.3}px`);
-    }
-  }, [box.current?.offsetHeight]);
   return (
-    <div
-      ref={box}
-      style={{ fontFamily, fontSize, lineHeight }}
-      className="aspect-square text-center"
-    >
-      {display && answerCandidate}
+    <div className="aspect-square">
+      {display && (
+        <img
+          src={numberImage}
+          alt={`answer candidate ${answerCandidate}`}
+          className="select-none"
+          style={{ width: '80%', height: '80%' }}
+        ></img>
+      )}
     </div>
   );
 }

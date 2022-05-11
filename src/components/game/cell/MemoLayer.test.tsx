@@ -7,16 +7,16 @@ import { blockSize_2_2 } from '../../../utils/test-utils';
 
 test('MemoLayer はメモした内容を表示する', () => {
   render(<MemoLayer blockSize={blockSize_2_2} memoList={['1', '4']} />);
-  expect(screen.getByText('1')).toBeInTheDocument();
-  expect(screen.queryByText('2')).not.toBeInTheDocument();
-  expect(screen.queryByText('3')).not.toBeInTheDocument();
-  expect(screen.getByText('4')).toBeInTheDocument();
+  expect(screen.getByAltText('answer candidate 1')).toBeInTheDocument();
+  expect(screen.queryByAltText('answer candidate 2')).not.toBeInTheDocument();
+  expect(screen.queryByAltText('answer candidate 3')).not.toBeInTheDocument();
+  expect(screen.getByAltText('answer candidate 4')).toBeInTheDocument();
 });
 
 test('MemoLayer はメモがなければ何も表示しない', () => {
   render(<MemoLayer blockSize={blockSize_2_2} memoList={[]} />);
-  expect(screen.queryByText('1')).not.toBeInTheDocument();
-  expect(screen.queryByText('2')).not.toBeInTheDocument();
-  expect(screen.queryByText('3')).not.toBeInTheDocument();
-  expect(screen.queryByText('4')).not.toBeInTheDocument();
+  expect(screen.queryByAltText('answer candidate 1')).not.toBeInTheDocument();
+  expect(screen.queryByAltText('answer candidate 2')).not.toBeInTheDocument();
+  expect(screen.queryByAltText('answer candidate 3')).not.toBeInTheDocument();
+  expect(screen.queryByAltText('answer candidate 4')).not.toBeInTheDocument();
 });
