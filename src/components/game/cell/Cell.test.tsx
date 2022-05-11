@@ -12,16 +12,16 @@ import Cell from './Cell';
 describe('Cell', () => {
   test('Cell は answer を表示する', () => {
     render(<Cell answer={'2'} />);
-    expect(screen.getByText('2')).toBeInTheDocument();
+    expect(screen.getByAltText('answer 2')).toBeInTheDocument();
   });
   test('Cell は answer がない場合は空欄になる', () => {
     render(<Cell answer={undefined} />);
-    expect(screen.queryByText(/[0-9]/)).not.toBeInTheDocument();
+    expect(screen.queryByAltText(/[0-9]/)).not.toBeInTheDocument();
   });
   test('Cell は click 可能である', () => {
     const onSelect = vi.fn();
     render(<Cell answer={'2'} onSelect={onSelect} />);
-    userEvent.click(screen.getByText('2'));
+    userEvent.click(screen.getByAltText('answer 2'));
     expect(onSelect).toHaveBeenCalled();
   });
   test('選択中の Cell には data-select 属性が付く', () => {
@@ -40,16 +40,16 @@ describe('Cell', () => {
   });
   test('Cell はメモした内容を表示する', () => {
     render(<Cell blockSize={blockSize_2_2} memoList={['1', '4']} />);
-    expect(screen.getByText('1')).toBeInTheDocument();
-    expect(screen.queryByText('2')).not.toBeInTheDocument();
-    expect(screen.queryByText('3')).not.toBeInTheDocument();
-    expect(screen.getByText('4')).toBeInTheDocument();
+    expect(screen.getByAltText('answer candidate 1')).toBeInTheDocument();
+    expect(screen.queryByAltText('answer candidate 2')).not.toBeInTheDocument();
+    expect(screen.queryByAltText('answer candidate 3')).not.toBeInTheDocument();
+    expect(screen.getByAltText('answer candidate 4')).toBeInTheDocument();
   });
   test('Cell はメモより答えを優先して表示する', () => {
     render(<Cell blockSize={blockSize_2_2} memoList={['1', '4']} answer="3" />);
-    expect(screen.queryByText('1')).not.toBeInTheDocument();
-    expect(screen.queryByText('2')).not.toBeInTheDocument();
-    expect(screen.queryByText('3')).toBeInTheDocument();
-    expect(screen.queryByText('4')).not.toBeInTheDocument();
+    expect(screen.queryByAltText('answer candidate 1')).not.toBeInTheDocument();
+    expect(screen.queryByAltText('answer candidate 2')).not.toBeInTheDocument();
+    expect(screen.queryByAltText('answer 3')).toBeInTheDocument();
+    expect(screen.queryByAltText('answer candidate 4')).not.toBeInTheDocument();
   });
 });

@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import './ScalingSquaresSpinner.css';
 
 function Spinner() {

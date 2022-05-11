@@ -3,6 +3,7 @@ import React, { useMemo, useReducer } from 'react';
 import ToggleMemoButton from './ToggleMemoButton';
 import InputPanelButton from './InputPanelButton';
 import { FaEraser } from 'react-icons/fa';
+import { getSvg } from '../../../utils/numberUtils';
 
 type Props = {
   /** ゲームのブロックサイズ */
@@ -62,8 +63,15 @@ const InputPanel: React.FC<Props> = ({
               completedNumbers.includes(buttonNumber.toString())
             }
             key={buttonNumber}
+            aria-label={buttonNumber}
+            className="flex justify-center items-center"
           >
-            {buttonNumber}
+            <img
+              src={getSvg({ answer: buttonNumber.toString() })}
+              alt={`button ${buttonNumber}`}
+              className="select-none"
+              style={{ width: '60%', height: '60%' }}
+            ></img>
           </InputPanelButton>
         )),
     [size, onInput, isMemoMode],

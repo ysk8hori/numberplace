@@ -1,13 +1,6 @@
 import clsx from 'clsx';
-import React, {
-  PropsWithChildren,
-  useContext,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import { FontFamilyContext } from '../../../contexts/fontContext';
+import React, { PropsWithChildren, useMemo } from 'react';
+import { getSvg } from '../../../utils/numberUtils';
 import MemoLayer, { Props as MemoLayerProps } from './MemoLayer';
 
 /**
@@ -61,6 +54,7 @@ function Cell({
       data-testid={dataTestid}
       data-select={select}
       data-fix={fix}
+      data-answer={answer}
       {...rest}
     >
       <BorderLayer right={right} bottom={bottom} />
@@ -75,6 +69,7 @@ function Cell({
           blockSize={blockSize}
           memoList={memoList}
           data-testid={`${dataTestid}-memo`}
+          data-memo={memoList}
         />
       )}
     </div>
@@ -215,27 +210,16 @@ type AnswerLayerProps = {
  * 答えを表示するレイヤー。
  */
 const AnswerLayer: React.FC<AnswerLayerProps> = ({ answer, fix }) => {
-  const box = useRef<HTMLDivElement>(null);
-  const [fontSize, setFontSize] = useState('1rem');
-  const fontContext = useContext(FontFamilyContext);
-  const fontFamily = useMemo(
-    () => (fix ? fontContext.fixed : fontContext.normal),
-    [fix],
-  );
-  const fontWeight = useMemo(() => (fix ? '700' : undefined), [fix]);
-  useLayoutEffect(() => {
-    if (box.current?.offsetWidth) {
-      setFontSize(`${box.current.offsetWidth / 1.3}px`);
-    }
-  }, [box.current?.offsetWidth]);
+  const numberImage = useMemo(() => getSvg({ answer, fix }), [answer, fix]);
   return (
-    <span
-      ref={box}
-      className="absolute top-0 left-0 w-full h-full flex justify-center items-center select-none"
-      style={{ fontSize, fontFamily, fontWeight }}
-    >
-      {answer}
-    </span>
+    <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center select-none">
+      <img
+        src={numberImage}
+        alt={`answer ${answer}`}
+        className="select-none"
+        style={{ width: '80%', height: '80%' }}
+      ></img>
+    </div>
   );
 };
 

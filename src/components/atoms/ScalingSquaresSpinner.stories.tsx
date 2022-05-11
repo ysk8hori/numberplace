@@ -1,6 +1,5 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import backgroundimg from '../../images/11-g-90.png';
 
 import ScalingSquaresSpinner from './ScalingSquaresSpinner';
 
@@ -11,7 +10,7 @@ export default {
 } as ComponentMeta<typeof ScalingSquaresSpinner>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof ScalingSquaresSpinner> = args => (
+const Template: ComponentStory<typeof ScalingSquaresSpinner> = _ => (
   <ScalingSquaresSpinner />
 );
 

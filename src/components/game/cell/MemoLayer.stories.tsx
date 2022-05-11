@@ -2,8 +2,6 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import MemoLayer from './MemoLayer';
-import { within } from '@storybook/testing-library';
-import sleep from '../../../utils/sleep';
 import {
   blockSize_2_2,
   blockSize_2_3,

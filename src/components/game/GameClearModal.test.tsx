@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 import { test, vi, expect } from 'vitest';
-import { render, screen, userEvent, waitFor } from '../../utils/test-utils';
+import { render, screen, userEvent } from '../../utils/test-utils';
 import GameClearModal from './GameClearModal';
 
 test('game clear していない場合は何も表示しない', async () => {

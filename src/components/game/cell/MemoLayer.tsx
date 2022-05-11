@@ -1,13 +1,7 @@
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import clsx from 'clsx';
-import React, {
-  useContext,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import { FontFamilyContext } from '../../../contexts/fontContext';
+import React, { useMemo } from 'react';
+import { getSvg } from '../../../utils/numberUtils';
 
 export type Props = React.ComponentProps<'div'> & {
   memoList?: string[];
@@ -22,32 +16,24 @@ function MemoCell({
   answerCandidate: string;
   memoList?: string[];
 }) {
-  const box = useRef<HTMLDivElement>(null);
-  const [fontSize, setFontSize] = useState('1rem');
-  const [lineHeight, setLineHeight] = useState('1rem');
+  const numberImage = useMemo(
+    () => getSvg({ answer: answerCandidate }),
+    [answerCandidate],
+  );
   const display = useMemo(
     () => memoList?.includes(answerCandidate),
     [memoList, answerCandidate],
   );
-  const fontContext = useContext(FontFamilyContext);
-  const fontFamily = fontContext.normal;
-  useLayoutEffect(() => {
-    if (box.current?.offsetWidth) {
-      setFontSize(`${box.current.offsetWidth / 1.3}px`);
-    }
-  }, [box.current?.offsetWidth]);
-  useLayoutEffect(() => {
-    if (box.current?.offsetHeight) {
-      setLineHeight(`${box.current.offsetHeight / 1.3}px`);
-    }
-  }, [box.current?.offsetHeight]);
   return (
-    <div
-      ref={box}
-      style={{ fontFamily, fontSize, lineHeight }}
-      className="aspect-square text-center"
-    >
-      {display && answerCandidate}
+    <div className="aspect-square">
+      {display && (
+        <img
+          src={numberImage}
+          alt={`answer candidate ${answerCandidate}`}
+          className="select-none"
+          style={{ width: '80%', height: '80%' }}
+        ></img>
+      )}
     </div>
   );
 }

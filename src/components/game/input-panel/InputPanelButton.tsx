@@ -1,12 +1,5 @@
 import clsx from 'clsx';
-import React, {
-  ComponentProps,
-  useContext,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
-import { FontFamilyContext } from '../../../contexts/fontContext';
+import React, { ComponentProps } from 'react';
 import NeumorphismButton from '../../atoms/NeumorphismButton';
 
 type Props = ComponentProps<typeof NeumorphismButton>;
@@ -25,19 +18,9 @@ function InputPanelButton({
   className,
   ...rest
 }: Props) {
-  const button = useRef<HTMLButtonElement>(null);
-  const fontContext = useContext(FontFamilyContext);
-  const [fontSize, setFontSize] = useState('1rem');
-  useLayoutEffect(() => {
-    if (button.current?.offsetWidth) {
-      setFontSize(`${button.current.offsetWidth / 1.5}px`);
-    }
-  });
   return (
     <NeumorphismButton
-      ref={button}
       className={clsx('aspect-square w-full h-full rounded-2xl', className)}
-      style={{ fontSize, fontFamily: fontContext.inputButton }}
       onClick={onClick}
       disabled={disabled}
       {...rest}

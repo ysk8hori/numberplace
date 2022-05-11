@@ -14,25 +14,25 @@ describe('GameBoard', () => {
   test('GameBoard は 全ての cell を答えとともに表示する', () => {
     render(<GameBoard puzzle={puzzle} blockSize={blockSize} />);
     // 1行目
-    expect(screen.getByTestId('0,0')).toHaveTextContent('');
-    expect(screen.getByTestId('1,0')).toHaveTextContent('4');
-    expect(screen.getByTestId('2,0')).toHaveTextContent('');
-    expect(screen.getByTestId('3,0')).toHaveTextContent('2');
+    expect(screen.getByTestId('0,0')).not.toHaveAttribute('data-answer');
+    expect(screen.getByTestId('1,0')).toHaveAttribute('data-answer', '4');
+    expect(screen.getByTestId('2,0')).not.toHaveAttribute('data-answer');
+    expect(screen.getByTestId('3,0')).toHaveAttribute('data-answer', '2');
     // 2行目
-    expect(screen.getByTestId('0,1')).toHaveTextContent('2');
-    expect(screen.getByTestId('1,1')).toHaveTextContent('');
-    expect(screen.getByTestId('2,1')).toHaveTextContent('4');
-    expect(screen.getByTestId('3,1')).toHaveTextContent('');
+    expect(screen.getByTestId('0,1')).toHaveAttribute('data-answer', '2');
+    expect(screen.getByTestId('1,1')).not.toHaveAttribute('data-answer');
+    expect(screen.getByTestId('2,1')).toHaveAttribute('data-answer', '4');
+    expect(screen.getByTestId('3,1')).not.toHaveAttribute('data-answer');
     // 3行目
-    expect(screen.getByTestId('0,2')).toHaveTextContent('3');
-    expect(screen.getByTestId('1,2')).toHaveTextContent('');
-    expect(screen.getByTestId('2,2')).toHaveTextContent('');
-    expect(screen.getByTestId('3,2')).toHaveTextContent('4');
+    expect(screen.getByTestId('0,2')).toHaveAttribute('data-answer', '3');
+    expect(screen.getByTestId('1,2')).not.toHaveAttribute('data-answer');
+    expect(screen.getByTestId('2,2')).not.toHaveAttribute('data-answer');
+    expect(screen.getByTestId('3,2')).toHaveAttribute('data-answer', '4');
     // 4行目
-    expect(screen.getByTestId('0,3')).toHaveTextContent('');
-    expect(screen.getByTestId('1,3')).toHaveTextContent('');
-    expect(screen.getByTestId('2,3')).toHaveTextContent('2');
-    expect(screen.getByTestId('3,3')).toHaveTextContent('');
+    expect(screen.getByTestId('0,3')).not.toHaveAttribute('data-answer');
+    expect(screen.getByTestId('1,3')).not.toHaveAttribute('data-answer');
+    expect(screen.getByTestId('2,3')).toHaveAttribute('data-answer', '2');
+    expect(screen.getByTestId('3,3')).not.toHaveAttribute('data-answer');
   });
   test('選択したセルをコールバックで親へ伝えられる', () => {
     const onSelectCell = vi.fn();

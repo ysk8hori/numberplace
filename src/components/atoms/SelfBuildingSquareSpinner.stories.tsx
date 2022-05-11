@@ -1,6 +1,5 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import backgroundimg from '../../images/11-g-90.png';
 
 import SelfBuildingSquareSpinner from './SelfBuildingSquareSpinner';
 
