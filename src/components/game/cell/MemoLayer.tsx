@@ -1,30 +1,6 @@
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import clsx from 'clsx';
-import React, {
-  useContext,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import { FontFamilyContext } from '../../../contexts/fontContext';
-import svg1 from '../../../images/numbers/1.svg';
-import svg2 from '../../../images/numbers/2.svg';
-import svg3 from '../../../images/numbers/3.svg';
-import svg4 from '../../../images/numbers/4.svg';
-import svg5 from '../../../images/numbers/5.svg';
-import svg6 from '../../../images/numbers/6.svg';
-import svg7 from '../../../images/numbers/7.svg';
-import svg8 from '../../../images/numbers/8.svg';
-import svg9 from '../../../images/numbers/9.svg';
-import svg10 from '../../../images/numbers/10.svg';
-import svg11 from '../../../images/numbers/11.svg';
-import svg12 from '../../../images/numbers/12.svg';
-import svg13 from '../../../images/numbers/13.svg';
-import svg14 from '../../../images/numbers/14.svg';
-import svg15 from '../../../images/numbers/15.svg';
-import svg16 from '../../../images/numbers/16.svg';
-import question from '../../../images/numbers/question.svg';
+import React, { useMemo } from 'react';
 import { getSvg } from '../../../utils/numberUtils';
 
 export type Props = React.ComponentProps<'div'> & {

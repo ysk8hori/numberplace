@@ -14,10 +14,6 @@ import {
   solved_3_3,
 } from '../utils/test-utils';
 import { resolve_2_3 } from '../utils/storybookUtils';
-import {
-  createFontFamilyValue,
-  FontFamilyContext,
-} from '../contexts/fontContext';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import ReactModal from 'react-modal';
 
