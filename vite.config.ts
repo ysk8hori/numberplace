@@ -30,7 +30,7 @@ export default defineConfig({
       },
       registerType: 'autoUpdate',
       workbox: {
-        globPatterns: ['assets/*.png'],
+        globPatterns: ['*/*.*', '*.*'],
       },
     }),
   ],
