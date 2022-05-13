@@ -85,7 +85,7 @@ const InputPanel: React.FC<Props> = ({
         aria-label="消す"
         className="row-start-1 row-end-3"
       >
-        <FaEraser />
+        <FaEraser style={{ width: '60%', height: '60%' }} />
       </InputPanelButton>
       <ToggleMemoButton defaultChecked={isMemoMode} onClick={toggleMemoMode} />
     </div>
