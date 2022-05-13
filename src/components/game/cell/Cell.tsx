@@ -217,7 +217,7 @@ const AnswerLayer: React.FC<AnswerLayerProps> = ({ answer, fix }) => {
         src={numberImage}
         alt={`answer ${answer}`}
         className="select-none"
-        style={{ width: '80%', height: '80%' }}
+        style={{ width: '70%', height: '70%' }}
       ></img>
     </div>
   );

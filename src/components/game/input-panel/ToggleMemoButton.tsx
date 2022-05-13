@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import NeumorphismToggleButton from '../../atoms/NeumorphismToggleButton';
 import { TiPencil } from 'react-icons/ti';
+import clsx from 'clsx';
 
 type Props = React.ComponentProps<typeof NeumorphismToggleButton>;
 
@@ -10,24 +11,15 @@ export default function ToggleMemoButton({
   style,
   className,
 }: Props) {
-  const box = useRef<HTMLDivElement>(null);
-  const [fontSize, setFontSize] = useState('1rem');
-  useLayoutEffect(() => {
-    if (box.current?.offsetWidth) {
-      setFontSize(`${box.current.offsetWidth / 1.5}px`);
-    }
-  });
   return (
-    <div ref={box}>
-      <NeumorphismToggleButton
-        onClick={onClick}
-        defaultChecked={defaultChecked}
-        style={{ ...style, fontSize }}
-        className={className}
-        aria-label="メモ"
-      >
-        <TiPencil />
-      </NeumorphismToggleButton>
-    </div>
+    <NeumorphismToggleButton
+      onClick={onClick}
+      defaultChecked={defaultChecked}
+      style={{ ...style }}
+      className={clsx('aspect-square w-full h-full rounded-2xl', className)}
+      aria-label="メモ"
+    >
+      <TiPencil style={{ width: '60%', height: '60%' }} />
+    </NeumorphismToggleButton>
   );
 }
