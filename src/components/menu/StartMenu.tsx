@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 import BlockSizeButton from './BlockSizeButton';
-import backgroundimg from '../../images/il12e-min.png';
+import backgroundimg from '../../images/top.svg';
 import { Difficulty } from '../../utils/difficulty';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 
@@ -42,9 +42,7 @@ function StartMenu({ onChoseBlockSize, className, ...rest }: Props) {
       <div
         className="h-screen bg-scroll bg-no-repeat bg-center bg-contain flex justify-center items-center"
         style={{ backgroundImage: `url(${backgroundimg})` }}
-      >
-        <h1 style={{ color: '#7F7F7F' }}>numberp</h1>
-      </div>
+      ></div>
       <div className={clsx('flex flex-col', className)} {...rest}>
         {gameList.map(({ blockSize, cross, hyper }) => (
           <BlockSizeButton
