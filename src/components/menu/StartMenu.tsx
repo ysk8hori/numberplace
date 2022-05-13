@@ -39,10 +39,9 @@ type Props = {
 function StartMenu({ onChoseBlockSize, className, ...rest }: Props) {
   return (
     <div className="max-w-lg mx-auto">
-      <div
-        className="h-screen bg-scroll bg-no-repeat bg-center bg-contain flex justify-center items-center"
-        style={{ backgroundImage: `url(${backgroundimg})` }}
-      ></div>
+      <div className="h-screen flex justify-center items-center">
+        <img src={backgroundimg} alt="numberp" role="heading" aria-level={1} />
+      </div>
       <div className={clsx('flex flex-col', className)} {...rest}>
         {gameList.map(({ blockSize, cross, hyper }) => (
           <BlockSizeButton
