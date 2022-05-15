@@ -41,7 +41,12 @@ const InputNoticeLayer: React.FC<Props> = ({ beforeAfter, className }) => {
   }, [beforeAfter]);
 
   return (
-    <div className={clsx('w-full h-full aspect-square', className)}>
+    <div
+      className={clsx(
+        'w-full h-full aspect-square overflow-x-hidden',
+        className,
+      )}
+    >
       <BeforeAfter className={class0}>
         <AnswerImage answer={beforeAfter[0]} />
       </BeforeAfter>
@@ -52,14 +57,15 @@ const InputNoticeLayer: React.FC<Props> = ({ beforeAfter, className }) => {
   );
 };
 
-const AnswerImage: React.FC<{ answer?: string }> = ({ answer }) => (
-  <img
-    src={getSvg({ answer })}
-    alt={`before answer ${answer}`}
-    className="select-none"
-    style={{ width: '80%', height: '80%', opacity: '0.3' }}
-  ></img>
-);
+const AnswerImage: React.FC<{ answer?: string }> = ({ answer }) =>
+  answer ? (
+    <img
+      src={getSvg({ answer })}
+      alt={`before answer ${answer}`}
+      className="select-none"
+      style={{ width: '80%', height: '80%', opacity: '0.4' }}
+    ></img>
+  ) : null;
 
 const BeforeAfter: React.FC<React.ComponentProps<'div'>> = ({
   className,
