@@ -77,7 +77,7 @@ code {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-200vw);
+    transform: translateX(-100%);
   }
 }
 
@@ -92,7 +92,7 @@ code {
 
 @keyframes slideIn {
   0% {
-    transform: translateX(100vw);
+    transform: translateX(100%);
   }
   30% {
     transform: translateX(0px);
@@ -116,10 +116,10 @@ code {
 
 @keyframes slideInLate {
   0% {
-    transform: translateX(100vw);
+    transform: translateX(100%);
   }
   50% {
-    transform: translateX(100vw);
+    transform: translateX(100%);
   }
   70% {
     transform: translateX(0px);
