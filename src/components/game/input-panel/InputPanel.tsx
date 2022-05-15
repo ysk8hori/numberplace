@@ -83,7 +83,7 @@ const InputPanel: React.FC<Props> = ({
         data-testid={`btn_delete`}
         onClick={onDelete}
         aria-label="消す"
-        className="row-start-1 row-end-3"
+        className="row-start-1 row-end-3 flex justify-center items-center"
       >
         <FaEraser style={{ width: '60%', height: '60%' }} />
       </InputPanelButton>

@@ -16,10 +16,13 @@ export default function ToggleMemoButton({
       onClick={onClick}
       defaultChecked={defaultChecked}
       style={{ ...style }}
-      className={clsx('aspect-square w-full h-full rounded-2xl', className)}
+      className={clsx(
+        'aspect-square w-full h-full rounded-2xl flex justify-center items-center',
+        className,
+      )}
       aria-label="メモ"
     >
-      <TiPencil style={{ width: '60%', height: '60%' }} />
+      <TiPencil style={{ width: '80%', height: '80%' }} />
     </NeumorphismToggleButton>
   );
 }
