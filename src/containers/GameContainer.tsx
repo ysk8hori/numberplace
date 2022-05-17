@@ -84,7 +84,7 @@ export default function GameContainer({
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   useEffect(() => {
     window.addEventListener('resize', forceUpdate);
-    return window.removeEventListener('resize', forceUpdate);
+    return () => window.removeEventListener('resize', forceUpdate);
   }, [blockSize]);
   const fill = useFill(
     puzzle,
@@ -126,25 +126,7 @@ export default function GameContainer({
     setMistake(false);
   }, [setEmptycell, setMistake]);
 
-  const completeNumbers = Array.from(
-    puzzle.cells
-      .map(c => c.answer)
-      .filter(function (answer: string | undefined): answer is string {
-        return !!answer;
-      })
-      .reduce((p, current) => {
-        if (p.has(current)) {
-          const count = p.get(current)! + 1;
-          p.set(current, count);
-        } else {
-          p.set(current, 1);
-        }
-        return p;
-      }, new Map<string, number>())
-      .entries(),
-  )
-    .filter(([_answer, count]) => count >= blockSize.height * blockSize.width)
-    .map(([answer, _count]) => answer);
+  const completeNumbers = getCompleteNumbers(puzzle, blockSize);
 
   return (
     <div className="max-w-xl grow">
@@ -187,6 +169,28 @@ export default function GameContainer({
       />
     </div>
   );
+}
+
+function getCompleteNumbers(puzzle: MyGame, blockSize: BlockSize) {
+  return Array.from(
+    puzzle.cells
+      .map(c => c.answer)
+      .filter(function (answer: string | undefined): answer is string {
+        return !!answer;
+      })
+      .reduce((p, current) => {
+        if (p.has(current)) {
+          const count = p.get(current)! + 1;
+          p.set(current, count);
+        } else {
+          p.set(current, 1);
+        }
+        return p;
+      }, new Map<string, number>())
+      .entries(),
+  )
+    .filter(([_answer, count]) => count >= blockSize.height * blockSize.width)
+    .map(([answer, _count]) => answer);
 }
 
 /**
