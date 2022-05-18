@@ -11,9 +11,9 @@
         "react",
         "@types/react",
         "react-dom",
-        "@types/react-dom",
-        "testing-library"
+        "@types/react-dom"
       ],
+      "matchPackagePatterns": ["@testing-library.*"],
       "groupName": "react"
     }
   ]
