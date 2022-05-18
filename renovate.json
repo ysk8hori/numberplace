@@ -11,7 +11,8 @@
         "react",
         "@types/react",
         "react-dom",
-        "@types/react-dom"
+        "@types/react-dom",
+        "testing-library"
       ],
       "groupName": "react"
     }
