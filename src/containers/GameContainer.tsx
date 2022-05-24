@@ -426,7 +426,7 @@ function useInputMemo(
 
 function useDeleteByKeybord(fill: Fill) {
   const delByKeyboard = useCallback(
-    ({ key }) => {
+    ({ key }: KeyboardEvent) => {
       if (key === 'Backspace') {
         fill();
       }
