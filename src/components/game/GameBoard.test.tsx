@@ -34,7 +34,7 @@ describe('GameBoard', () => {
     expect(screen.getByTestId('2,3')).toHaveAttribute('data-answer', '2');
     expect(screen.getByTestId('3,3')).not.toHaveAttribute('data-answer');
   });
-  test('選択したセルをコールバックで親へ伝えられる', () => {
+  test('選択したセルをコールバックで親へ伝えられる', async () => {
     const onSelectCell = vi.fn();
     render(
       <GameBoard
@@ -43,12 +43,12 @@ describe('GameBoard', () => {
         onSelectCell={onSelectCell}
       />,
     );
-    userEvent.click(screen.getByTestId('0,1'));
+    await userEvent.click(screen.getByTestId('0,1'));
     expect(onSelectCell).toHaveBeenCalledWith([0, 1]);
-    userEvent.click(screen.getByTestId('3,3'));
+    await userEvent.click(screen.getByTestId('3,3'));
     expect(onSelectCell).toHaveBeenCalledWith([3, 3]);
   });
-  test('選択したセルをコールバックで親へ伝えられる', () => {
+  test('選択したセルをコールバックで親へ伝えられる', async () => {
     const onSelectCell = vi.fn();
     render(
       <GameBoard
@@ -57,9 +57,9 @@ describe('GameBoard', () => {
         onSelectCell={onSelectCell}
       />,
     );
-    userEvent.click(screen.getByTestId('0,1'));
+    await userEvent.click(screen.getByTestId('0,1'));
     expect(onSelectCell).toHaveBeenCalledWith([0, 1]);
-    userEvent.click(screen.getByTestId('3,3'));
+    await userEvent.click(screen.getByTestId('3,3'));
     expect(onSelectCell).toHaveBeenCalledWith([3, 3]);
   });
   test('選択中のセルを指定できる', () => {

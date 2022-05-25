@@ -18,7 +18,7 @@ it('左矢印クリックすると与えた難易度をデクリメントした�
       onSelect={onSelect}
     />,
   );
-  userEvent.click(screen.getByRole('button', { name: '易しくする' }));
+  await userEvent.click(screen.getByRole('button', { name: '易しくする' }));
   expect(onSelect).toHaveBeenCalledWith('easy');
 });
 
@@ -31,6 +31,6 @@ it('右矢印クリックすると与えた難易度をインクリメントし�
       onSelect={onSelect}
     />,
   );
-  userEvent.click(screen.getByRole('button', { name: '難しくする' }));
+  await userEvent.click(screen.getByRole('button', { name: '難しくする' }));
   expect(onSelect).toHaveBeenCalledWith('hard');
 });
