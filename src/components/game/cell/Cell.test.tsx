@@ -18,10 +18,10 @@ describe('Cell', () => {
     render(<Cell answer={undefined} />);
     expect(screen.queryByAltText(/[0-9]/)).not.toBeInTheDocument();
   });
-  test('Cell は click 可能である', () => {
+  test('Cell は click 可能である', async () => {
     const onSelect = vi.fn();
     render(<Cell answer={'2'} onSelect={onSelect} />);
-    userEvent.click(screen.getByAltText('answer 2'));
+    await userEvent.click(screen.getByAltText('answer 2'));
     expect(onSelect).toHaveBeenCalled();
   });
   test('選択中の Cell には data-select 属性が付く', () => {

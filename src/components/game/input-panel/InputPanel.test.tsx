@@ -19,13 +19,13 @@ describe('InputPanel', () => {
     expect(screen.getByTestId('input_9')).toBeDisabled();
     expect(screen.getByTestId('btn_delete')).toBeEnabled();
   });
-  test('ボタン押下時に押下したボタンのテキストを callback で親へ通知する', () => {
+  test('ボタン押下時に押下したボタンのテキストを callback で親へ通知する', async () => {
     const onInput = vi.fn();
     render(<InputPanel blockSize={blockSize_2_2} onInput={onInput} />);
-    userEvent.click(screen.getByRole('button', { name: '1' }));
+    await userEvent.click(screen.getByRole('button', { name: '1' }));
     expect(onInput).toHaveBeenCalledWith('1');
   });
-  test('メモモードでボタン押下時に押下したボタンのテキストを onMemoInput で親へ通知する', () => {
+  test('メモモードでボタン押下時に押下したボタンのテキストを onMemoInput で親へ通知する', async () => {
     const onInput = vi.fn();
     const onMemoInput = vi.fn();
     render(
@@ -35,23 +35,23 @@ describe('InputPanel', () => {
         onMemoInput={onMemoInput}
       />,
     );
-    userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
-    userEvent.click(screen.getByRole('button', { name: '1' }));
+    await userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
+    await userEvent.click(screen.getByRole('button', { name: '1' }));
     expect(onInput).not.toBeCalled();
     expect(onMemoInput).toHaveBeenCalledWith('1');
 
     onInput.mockClear();
     onMemoInput.mockClear();
 
-    userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
-    userEvent.click(screen.getByRole('button', { name: '1' }));
+    await userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
+    await userEvent.click(screen.getByRole('button', { name: '1' }));
     expect(onInput).toHaveBeenCalledWith('1');
     expect(onMemoInput).not.toBeCalled();
   });
-  test('消去ボタン押下時には onDelete で親へ通知する', () => {
+  test('消去ボタン押下時には onDelete で親へ通知する', async () => {
     const onDelete = vi.fn();
     render(<InputPanel blockSize={blockSize_2_2} onDelete={onDelete} />);
-    userEvent.click(screen.getByRole('button', { name: '消す' }));
+    await userEvent.click(screen.getByRole('button', { name: '消す' }));
     expect(onDelete).toHaveBeenCalledTimes(1);
   });
   test('入力が完了した数字は入力不可とする', () => {

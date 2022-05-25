@@ -34,90 +34,90 @@ function setup(size: '2_2' | '2_3') {
   ReactModal.setAppElement(rendered.container);
 }
 
-test('メモモードで入力パネルから空欄セルにメモを記入できる', () => {
+test('メモモードで入力パネルから空欄セルにメモを記入できる', async () => {
   setup('2_2');
   expect(screen.getByTestId('0,0')).not.toHaveTextContent('1');
   expect(screen.getByTestId('0,0-memo')).not.toHaveTextContent('1');
-  userEvent.click(screen.getByTestId('0,0'));
-  userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
-  userEvent.click(screen.getByRole('button', { name: '1' }));
+  await userEvent.click(screen.getByTestId('0,0'));
+  await userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
+  await userEvent.click(screen.getByRole('button', { name: '1' }));
   expect(screen.getByTestId('0,0-memo')).toHaveAttribute('data-memo', '1');
 });
-test.todo('メモモードでキーボードから空欄セルにメモを記入できる', () => {
+test.todo('メモモードでキーボードから空欄セルにメモを記入できる', async () => {
   setup('2_2');
   expect(screen.getByTestId('0,0')).not.toHaveTextContent('1');
   expect(screen.getByTestId('0,0-memo')).not.toHaveTextContent('1');
-  userEvent.click(screen.getByTestId('0,0'));
-  userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
-  userEvent.keyboard('1');
+  await userEvent.click(screen.getByTestId('0,0'));
+  await userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
+  await userEvent.keyboard('1');
   expect(screen.getByTestId('0,0-memo')).toHaveAttribute('data-memo', '1');
 });
-test('メモモードでメモ済み数字と同じボタン押下でそのメモ数字を消す', () => {
+test('メモモードでメモ済み数字と同じボタン押下でそのメモ数字を消す', async () => {
   setup('2_2');
   expect(screen.getByTestId('0,0')).not.toHaveTextContent('1');
   expect(screen.getByTestId('0,0-memo')).not.toHaveTextContent('1');
-  userEvent.click(screen.getByTestId('0,0'));
-  userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
-  userEvent.click(screen.getByRole('button', { name: '1' }));
-  userEvent.click(screen.getByRole('button', { name: '2' }));
+  await userEvent.click(screen.getByTestId('0,0'));
+  await userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
+  await userEvent.click(screen.getByRole('button', { name: '1' }));
+  await userEvent.click(screen.getByRole('button', { name: '2' }));
   expect(screen.getByTestId('0,0-memo')).toHaveAttribute('data-memo', '1,2');
-  userEvent.click(screen.getByRole('button', { name: '1' }));
+  await userEvent.click(screen.getByRole('button', { name: '1' }));
   expect(screen.getByTestId('0,0-memo')).not.toHaveTextContent('1');
   expect(screen.getByTestId('0,0-memo')).toHaveAttribute('data-memo', '2');
 });
-test('メモモードで入力済みセル上書き', () => {
+test('メモモードで入力済みセル上書き', async () => {
   setup('2_2');
   expect(screen.getByTestId('0,0')).not.toHaveAttribute('data-answer');
-  userEvent.click(screen.getByTestId('0,0'));
-  userEvent.click(screen.getByRole('button', { name: '2' }));
+  await userEvent.click(screen.getByTestId('0,0'));
+  await userEvent.click(screen.getByRole('button', { name: '2' }));
   expect(screen.getByTestId('0,0')).toHaveAttribute('data-answer', '2');
-  userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
-  userEvent.click(screen.getByRole('button', { name: '1' }));
+  await userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
+  await userEvent.click(screen.getByRole('button', { name: '1' }));
   expect(screen.getByTestId('0,0')).not.toHaveAttribute('data-answer');
   expect(screen.getByTestId('0,0-memo')).toHaveAttribute('data-memo', '1');
 });
-test('メモ記入済みセルに通常入力で上書き', () => {
+test('メモ記入済みセルに通常入力で上書き', async () => {
   setup('2_2');
   expect(screen.getByTestId('0,0')).not.toHaveAttribute('data-answer');
-  userEvent.click(screen.getByTestId('0,0'));
-  userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
-  userEvent.click(screen.getByRole('button', { name: '1' }));
+  await userEvent.click(screen.getByTestId('0,0'));
+  await userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
+  await userEvent.click(screen.getByRole('button', { name: '1' }));
   expect(screen.getByTestId('0,0-memo')).toHaveAttribute('data-memo', '1');
-  userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
-  userEvent.click(screen.getByRole('button', { name: '2' }));
+  await userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
+  await userEvent.click(screen.getByRole('button', { name: '2' }));
   expect(screen.getByTestId('0,0')).toHaveAttribute('data-answer', '2');
 });
-test('メモがある、かつメモモードで消去ボタンを押下するとメモをクリアする', () => {
+test('メモがある、かつメモモードで消去ボタンを押下するとメモをクリアする', async () => {
   setup('2_2');
   expect(screen.getByTestId('0,0')).not.toHaveAttribute('data-answer');
-  userEvent.click(screen.getByTestId('0,0'));
-  userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
-  userEvent.click(screen.getByRole('button', { name: '1' }));
-  userEvent.click(screen.getByRole('button', { name: '2' }));
+  await userEvent.click(screen.getByTestId('0,0'));
+  await userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
+  await userEvent.click(screen.getByRole('button', { name: '1' }));
+  await userEvent.click(screen.getByRole('button', { name: '2' }));
   expect(screen.getByTestId('0,0-memo')).toHaveAttribute('data-memo', '1,2');
-  userEvent.click(screen.getByRole('button', { name: '消す' }));
+  await userEvent.click(screen.getByRole('button', { name: '消す' }));
   expect(screen.getByTestId('0,0-memo')).not.toHaveAttribute('data-memo');
 });
-test('メモがある、かつ通常モードで消去ボタンを押下するとメモをクリアする', () => {
+test('メモがある、かつ通常モードで消去ボタンを押下するとメモをクリアする', async () => {
   setup('2_2');
   expect(screen.getByTestId('0,0')).not.toHaveAttribute('data-answer');
-  userEvent.click(screen.getByTestId('0,0'));
-  userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
-  userEvent.click(screen.getByRole('button', { name: '1' }));
-  userEvent.click(screen.getByRole('button', { name: '2' }));
-  userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
+  await userEvent.click(screen.getByTestId('0,0'));
+  await userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
+  await userEvent.click(screen.getByRole('button', { name: '1' }));
+  await userEvent.click(screen.getByRole('button', { name: '2' }));
+  await userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
   expect(screen.getByTestId('0,0-memo')).toHaveAttribute('data-memo', '1,2');
-  userEvent.click(screen.getByRole('button', { name: '消す' }));
+  await userEvent.click(screen.getByRole('button', { name: '消す' }));
   expect(screen.getByTestId('0,0-memo')).not.toHaveAttribute('data-memo');
 });
 
-test('fix のセルはメモ入力ボタンでメモを記入できない', () => {
+test('fix のセルはメモ入力ボタンでメモを記入できない', async () => {
   setup('2_2');
   expect(screen.getByTestId('1,0')).toHaveAttribute('data-answer', '4');
   expect(screen.getByTestId('1,0')).toHaveAttribute('data-fix');
-  userEvent.click(screen.getByTestId('1,0'));
-  userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
-  userEvent.click(screen.getByRole('button', { name: '1' }));
+  await userEvent.click(screen.getByTestId('1,0'));
+  await userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
+  await userEvent.click(screen.getByRole('button', { name: '1' }));
   expect(screen.getByTestId('1,0')).toHaveAttribute('data-answer', '4');
   expect(screen.getByTestId('1,0')).toHaveAttribute('data-fix');
 });
