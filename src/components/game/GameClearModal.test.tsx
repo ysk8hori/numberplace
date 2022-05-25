@@ -19,7 +19,7 @@ test('game clear すると表示する', async () => {
 test('おなじおおきさであそぶ押下コールバックが呼ばれる', async () => {
   const onRegenerate = vi.fn();
   render(<GameClearModal gameClear onRegenerate={onRegenerate} />);
-  userEvent.click(
+  await userEvent.click(
     screen.getByRole('button', { name: 'おなじ おおきさで あそぶ' }),
   );
   expect(onRegenerate).toHaveBeenCalled();
@@ -28,7 +28,7 @@ test('おなじおおきさであそぶ押下コールバックが呼ばれる',
 test('ほかのおおきさであそぶ押下コールバックが呼ばれる', async () => {
   const onChangeSize = vi.fn();
   render(<GameClearModal gameClear onChangeSize={onChangeSize} />);
-  userEvent.click(
+  await userEvent.click(
     screen.getByRole('button', { name: 'ほかの おおきさで あそぶ' }),
   );
   expect(onChangeSize).toHaveBeenCalled();
