@@ -23,14 +23,15 @@ vi.mock('./useGenerateGame', () => ({
   }),
 }));
 
-function spy(): SpyInstanceFn<
+type SpyReturns = SpyInstanceFn<
   [BlockSize, number],
   {
     puzzle: MyGame;
     solved: MyGame;
   }
-> {
-  return useGenerateGame as any;
+>;
+function spy(): SpyReturns {
+  return useGenerateGame as unknown as SpyReturns;
 }
 
 function generateTimes() {

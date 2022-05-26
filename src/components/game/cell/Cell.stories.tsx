@@ -88,8 +88,8 @@ Select.args = {
   answer: '1',
   select: true,
 };
-export const fix = Template.bind({});
-fix.args = {
+export const Fix = Template.bind({});
+Fix.args = {
   answer: '1',
   fix: true,
 };
