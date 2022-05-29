@@ -6,16 +6,16 @@ import React, {
   ComponentProps,
 } from 'react';
 import { BlockSize, Position } from '@ysk8hori/numberplace-generator';
-import GameBoard from '../components/game/GameBoard';
-import { isSamePos, moveX, moveY } from '../utils/positionUtils';
-import InputPanel from '../components/game/input-panel/InputPanel';
-import { MyGame } from '../utils/typeUtils';
-import Verifying from '../components/game/Verifying';
-import MistakeNoticeModal from '../components/game/MistakeNoticeModal';
-import GameClearModal from '../components/game/GameClearModal';
-import Quit from '../components/game/Quit';
-import gameHolder from '../utils/gameHolder';
-import InputNoticeLayer from '../components/game/InputNoticeLayer';
+import { isSamePos, moveX, moveY } from '../../utils/positionUtils';
+import { MyGame } from '../../utils/typeUtils';
+import gameHolder from '../../utils/gameHolder';
+import GameBoard from '../../components/game/GameBoard';
+import InputPanel from '../../components/game/input-panel/InputPanel';
+import Verifying from '../../components/game/Verifying';
+import MistakeNoticeModal from '../../components/game/MistakeNoticeModal';
+import GameClearModal from '../../components/game/GameClearModal';
+import Quit from '../../components/game/Quit';
+import InputNoticeLayer from '../../components/game/InputNoticeLayer';
 
 /** basePuzzle をクローンする */
 function clone(basePuzzle: MyGame): MyGame {

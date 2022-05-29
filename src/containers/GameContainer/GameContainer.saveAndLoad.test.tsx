@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import React from 'react';
 import ReactModal from 'react-modal';
 import { test, expect } from 'vitest';
-import { isSamePos } from '../utils/positionUtils';
+import { isSamePos } from '../../utils/positionUtils';
 import {
   render,
   screen,
@@ -14,10 +14,10 @@ import {
   blockSize_2_3,
   solved_2_3,
   resolve_2_3,
-} from '../utils/test-utils';
-import GameContainer from './GameContainer';
-import gameHolder from '../utils/gameHolder';
-import { MyGame } from '../utils/typeUtils';
+} from '../../utils/test-utils';
+import GameContainer from '.';
+import gameHolder from '../../utils/gameHolder';
+import { MyGame } from '../../utils/typeUtils';
 
 function setup(size: '2_2' | '2_3') {
   const rendered = render(

@@ -1,5 +1,5 @@
 import './App.css';
-import GenerateGameContainer from './containers/GenerateGameContainer';
+import GenerateGameContainer from './containers/GenerateGameContainer/GenerateGameContainer';
 import React, { useEffect, useState } from 'react';
 import gameHolder, { SaveData } from './utils/gameHolder';
 import StartMenu from './components/menu/StartMenu';
