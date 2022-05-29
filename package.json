@@ -27,7 +27,7 @@
     "react-dom": "18.1.0",
     "react-icons": "4.3.1",
     "react-modal": "3.15.1",
-    "usehooks-ts": "^2.5.3"
+    "usehooks-ts": "2.5.3"
   },
   "devDependencies": {
     "@babel/core": "7.18.2",
