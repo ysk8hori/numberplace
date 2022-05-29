@@ -12,7 +12,7 @@ import {
   blockSize_3_3,
   puzzle_3_3,
   solved_3_3,
-} from '../utils/test-utils';
+} from '../utils/samples';
 import { resolve_2_3 } from '../utils/storybookUtils';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import ReactModal from 'react-modal';

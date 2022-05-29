@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Cell from './Cell';
 import { within } from '@storybook/testing-library';
 import sleep from '../../../utils/sleep';
-import { blockSize_2_3 } from '../../../utils/test-utils';
+import { blockSize_2_3 } from '../../../utils/samples';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

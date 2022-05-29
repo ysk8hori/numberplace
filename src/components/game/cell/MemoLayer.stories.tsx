@@ -6,7 +6,7 @@ import {
   blockSize_2_2,
   blockSize_2_3,
   blockSize_3_3,
-} from '../../../utils/test-utils';
+} from '../../../utils/samples';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
