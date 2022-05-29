@@ -82,10 +82,6 @@ export default function GameContainer({
     ComponentProps<typeof InputNoticeLayer>['beforeAfter']
   >([undefined, undefined]);
   const [, forceUpdate] = useReducer(x => x + 1, 0);
-  useEffect(() => {
-    window.addEventListener('resize', forceUpdate);
-    return () => window.removeEventListener('resize', forceUpdate);
-  }, [blockSize]);
   const fill = useFill(
     puzzle,
     selectedPos,
