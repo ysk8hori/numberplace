@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import InputPanel from './InputPanel';
-import { blockSize_2_2 } from '../../../utils/test-utils';
+import { blockSize_2_2 } from '../../../utils/samples';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
