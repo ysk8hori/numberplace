@@ -1,6 +1,6 @@
 import React from 'react';
-import GameContainer from './GameContainer';
-import { MyGame } from '../utils/typeUtils';
+import GameContainer from '../GameContainer';
+import { MyGame } from '../../utils/typeUtils';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 
 /**

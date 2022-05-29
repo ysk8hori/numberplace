@@ -3,12 +3,12 @@ import {
   GameType,
   generateGame,
 } from '@ysk8hori/numberplace-generator';
-import { Difficulty, difficultyAdjustment } from './utils/difficulty';
+import { Difficulty, difficultyAdjustment } from '../../../utils/difficulty';
 import {
   puzzleToString,
   toURLSearchParam,
-} from './utils/URLSearchParamConverter';
-import { markFixed } from './utils/utils';
+} from '../../../utils/URLSearchParamConverter';
+import { markFixed } from '../../../utils/utils';
 
 onmessage = ev => {
   const { blockSize, difficulty, cross, hyper } = ev.data as {

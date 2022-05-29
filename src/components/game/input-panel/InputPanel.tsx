@@ -3,7 +3,7 @@ import React, { useMemo, useReducer } from 'react';
 import ToggleMemoButton from './ToggleMemoButton';
 import InputPanelButton from './InputPanelButton';
 import { FaEraser } from 'react-icons/fa';
-import { getSvg } from '../../../utils/numberUtils';
+import { getSvg } from '../utils/numberUtils';
 
 type Props = {
   /** ゲームのブロックサイズ */

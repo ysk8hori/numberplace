@@ -14,8 +14,8 @@ import {
   blockSize_2_3,
   solved_2_3,
   resolve_2_3,
-} from '../utils/test-utils';
-import LoadGameContainer from './LoadGameContainer';
+} from '../../utils/test-utils';
+import LoadGameContainer from '.';
 
 function setup({
   size,

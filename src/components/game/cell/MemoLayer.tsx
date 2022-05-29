@@ -1,7 +1,7 @@
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import clsx from 'clsx';
 import React, { useMemo } from 'react';
-import { getSvg } from '../../../utils/numberUtils';
+import { getSvg } from '../utils/numberUtils';
 
 export type Props = React.ComponentProps<'div'> & {
   memoList?: string[];

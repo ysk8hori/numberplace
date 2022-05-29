@@ -1,5 +1,5 @@
 import './App.css';
-import GenerateGameContainer from './containers/GenerateGameContainer';
+import GenerateGameContainer from './containers/GenerateGameContainer/GenerateGameContainer';
 import React, { useEffect, useState } from 'react';
 import gameHolder, { SaveData } from './utils/gameHolder';
 import StartMenu from './components/menu/StartMenu';
@@ -11,6 +11,7 @@ import {
 } from '@ysk8hori/numberplace-generator';
 import { Difficulty } from './utils/difficulty';
 import { fromURLSearchParams } from './utils/URLSearchParamConverter';
+import { useLocalStorage } from 'usehooks-ts';
 
 /**
  * 現在のアプリのモード
@@ -29,8 +30,10 @@ function App() {
   });
   const [cross, setCross] = useState(false);
   const [hyper, setHyper] = useState(false);
-  // todo difficulty は localstorage で保持して使う
-  const [difficulty, setDifficulty] = useState<Difficulty>('easy');
+  const [difficulty, setDifficulty] = useLocalStorage<Difficulty>(
+    'difficulty',
+    'normal',
+  );
   const [saveData, setSaveData] = useState<SaveData | undefined>(undefined);
   useEffect(() => {
     if (!location.search) return;

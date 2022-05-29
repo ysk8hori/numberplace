@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import { getSvg } from '../../utils/numberUtils';
+import { getSvg } from './utils/numberUtils';
 
 export type Props = {
   beforeAfter?: [string | undefined, string | undefined];

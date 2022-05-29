@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React, { PropsWithChildren, useMemo } from 'react';
-import { getSvg } from '../../../utils/numberUtils';
+import { getSvg } from '../utils/numberUtils';
 import MemoLayer, { Props as MemoLayerProps } from './MemoLayer';
 
 /**

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import LoadGameContainer from './LoadGameContainer';
-import { blockSize_2_2, puzzle_2_2, solved_2_2 } from '../utils/samples';
+import LoadGameContainer from '.';
+import { blockSize_2_2, puzzle_2_2, solved_2_2 } from '../../utils/samples';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export

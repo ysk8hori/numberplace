@@ -1,9 +1,9 @@
-import GameContainer from './GameContainer';
+import GameContainer from '../GameContainer';
 import React, { useReducer } from 'react';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
-import { Difficulty } from '../utils/difficulty';
-import useGenerateGame from '../useGenerateGame';
-import Generating from '../components/other/Generating';
+import { Difficulty } from '../../utils/difficulty';
+import useGenerateGame from './utils/useGenerateGame';
+import Generating from '../../components/other/Generating';
 
 function GenerateGameContainer({
   blockSize,

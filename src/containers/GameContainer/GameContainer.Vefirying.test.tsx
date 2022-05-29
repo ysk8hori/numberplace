@@ -13,8 +13,8 @@ import {
   blockSize_2_3,
   solved_2_3,
   resolve_2_3,
-} from '../utils/test-utils';
-import GameContainer from './GameContainer';
+} from '../../utils/test-utils';
+import GameContainer from '.';
 
 function setup(size: '2_2' | '2_3') {
   const rendered = render(
