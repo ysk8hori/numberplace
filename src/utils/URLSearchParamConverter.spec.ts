@@ -123,16 +123,6 @@ describe('fromURLSearchParams', () => {
     const result = fromURLSearchParams(params);
     expect(result.status).toEqual('invalid_size');
   });
-  test('invalid_size（w数字じゃない）', () => {
-    const params = new URLSearchParams({ w: 'a', h: '1' });
-    const result = fromURLSearchParams(params);
-    expect(result.status).toEqual('invalid_size');
-  });
-  test('invalid_size（h数字じゃない）', () => {
-    const params = new URLSearchParams({ w: '1', h: '1a' });
-    const result = fromURLSearchParams(params);
-    expect(result.status).toEqual('invalid_size');
-  });
   test('invalid_size（w整数じゃない）', () => {
     const params = new URLSearchParams({ w: '3', h: '1.1' });
     const result = fromURLSearchParams(params);
