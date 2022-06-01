@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'vitest';
-import { puzzle_4_4 } from './test-utils';
+import { puzzle_4_4 as puzzle_4_4_nofix } from './test-utils';
+import { MyGame } from './typeUtils';
 import {
   fromURLSearchParams,
   puzzleToString,
@@ -7,11 +8,23 @@ import {
   toURLSearchParam,
 } from './URLSearchParamConverter';
 
-export const puzzle_2_3 = {
+export const puzzle_2_3: MyGame = {
   ...JSON.parse(
     '{"cells":[{"pos":[0,0]},{"pos":[1,0],"answer":"2"},{"pos":[2,0]},{"pos":[3,0],"answer":"4"},{"pos":[4,0],"answer":"3"},{"pos":[5,0],"answer":"5"},{"pos":[0,1],"answer":"4"},{"pos":[1,1]},{"pos":[2,1]},{"pos":[3,1]},{"pos":[4,1]},{"pos":[5,1],"answer":"1"},{"pos":[0,2],"answer":"3"},{"pos":[1,2]},{"pos":[2,2]},{"pos":[3,2],"answer":"2"},{"pos":[4,2]},{"pos":[5,2]},{"pos":[0,3]},{"pos":[1,3],"answer":"1"},{"pos":[2,3],"answer":"6"},{"pos":[3,3]},{"pos":[4,3]},{"pos":[5,3]},{"pos":[0,4]},{"pos":[1,4]},{"pos":[2,4],"answer":"2"},{"pos":[3,4]},{"pos":[4,4]},{"pos":[5,4],"answer":"4"},{"pos":[0,5]},{"pos":[1,5],"answer":"6"},{"pos":[2,5],"answer":"4"},{"pos":[3,5]},{"pos":[4,5],"answer":"5"},{"pos":[5,5]}]}',
   ),
 };
+const puzzle_4_4 = {
+  cells: puzzle_4_4_nofix.cells.map(c => ({
+    ...c,
+    isFix: c.answer ? true : undefined,
+  })),
+};
+
+beforeAll(() => {
+  puzzle_2_3.cells.forEach(c => {
+    if (c.answer) c.isFix = true;
+  });
+});
 
 describe('puzzleToString', () => {
   test('puzzle_2_3', () => {
@@ -176,9 +189,9 @@ describe('fromURLSearchParams', () => {
       fail();
     }
   });
-  test('puzzle_2_3', () => {
+  test('puzzle_2_3 cross hyper', () => {
     const puzzleInfo = {
-      puzzle: puzzle_2_3,
+      puzzle: puzzle_2_3, // これは cross hyper の問題ではないがURLからの解析には成功する
       blockSize: { height: 2, width: 3 },
       cross: true,
       hyper: true,

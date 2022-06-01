@@ -1,7 +1,7 @@
 import { BlockSize, Cell } from '@ysk8hori/numberplace-generator';
 import { isSamePos } from './positionUtils';
 import { Result } from './Result';
-import { MyGame } from './typeUtils';
+import { MyCell, MyGame } from './typeUtils';
 
 type PuzzleInfo = {
   puzzle: Pick<MyGame, 'cells'>;
@@ -188,7 +188,7 @@ export function stringToPuzzle({
       Array(rowsStr.length)
         .fill(0)
         .map((_, x) => {
-          const cell: Cell = {
+          const cell: MyCell = {
             pos: [x, y],
             answer: undefined,
           };
@@ -199,10 +199,13 @@ export function stringToPuzzle({
   // セルに答えを転写する
   rowsAnswers.forEach((answers, y) =>
     answers.forEach((a, x) => {
-      let answer = a === empty ? undefined : parseInt(a, 16);
+      if (a === empty) return;
+      let answer = parseInt(a, 16);
       if (answer === 0) answer = 16;
-      cells.find(cell => isSamePos(cell.pos, [x, y]))!.answer =
-        answer?.toString();
+      const cell = cells.find(cell => isSamePos(cell.pos, [x, y]));
+      if (!cell) return;
+      cell.answer = answer?.toString();
+      cell.isFix = true;
     }),
   );
 
