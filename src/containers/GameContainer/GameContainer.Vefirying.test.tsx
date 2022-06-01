@@ -40,7 +40,7 @@ test('「答え合わせ」ボタンを押下したら答え合わせするか�
   expect(
     screen.queryByRole('dialog', { name: /答え合わせの確認/ }),
   ).not.toBeInTheDocument();
-  await userEvent.click(screen.getByRole('button', { name: '答え合わせ' }));
+  await userEvent.click(screen.getByRole('button', { name: '答え 合わせ' }));
   expect(
     screen.queryByRole('dialog', { name: /答え合わせの確認/ }),
   ).toBeInTheDocument();
@@ -55,7 +55,7 @@ test('「答え合わせ」によって正しい Cell のみ fix する', async 
   expect(screen.getByTestId('1,0')).toHaveAttribute('data-fix'); // fix 済みセル
   expect(screen.getByTestId('2,0')).not.toHaveAttribute('data-fix'); // 未記入セル
   expect(screen.getByTestId('1,1')).not.toHaveAttribute('data-fix'); // 誤答を記入したセル
-  await userEvent.click(screen.getByRole('button', { name: '答え合わせ' }));
+  await userEvent.click(screen.getByRole('button', { name: '答え 合わせ' }));
   await userEvent.click(screen.getByRole('button', { name: 'はい' }));
   expect(screen.getByTestId('0,0')).toHaveAttribute('data-fix'); // 正答を記入したセルは fix する
   expect(screen.getByTestId('1,0')).toHaveAttribute('data-fix'); // fix 済みセル
@@ -72,7 +72,7 @@ test('「答え合わせ」によって誤りのセルや空欄のセルがあ�
   expect(screen.getByTestId('1,0')).toHaveAttribute('data-fix'); // fix 済みセル
   expect(screen.getByTestId('2,0')).not.toHaveAttribute('data-fix'); // 未記入セル
   expect(screen.getByTestId('1,1')).not.toHaveAttribute('data-fix'); // 誤答を記入したセル
-  await userEvent.click(screen.getByRole('button', { name: '答え合わせ' }));
+  await userEvent.click(screen.getByRole('button', { name: '答え 合わせ' }));
   await userEvent.click(screen.getByRole('button', { name: 'はい' }));
   expect(
     screen.getByRole('dialog', { name: '不正解です' }),
@@ -88,13 +88,13 @@ test('誤りのセルや空欄のセルがある状態で「答え合わせ」�
   expect(screen.getByTestId('1,0')).toHaveAttribute('data-fix'); // fix 済みセル
   expect(screen.getByTestId('2,0')).not.toHaveAttribute('data-fix'); // 未記入セル
   expect(screen.getByTestId('1,1')).not.toHaveAttribute('data-fix'); // 誤答を記入したセル
-  await userEvent.click(screen.getByRole('button', { name: '答え合わせ' }));
+  await userEvent.click(screen.getByRole('button', { name: '答え 合わせ' }));
   await userEvent.click(screen.getByRole('button', { name: 'はい' }));
   expect(
     screen.getByRole('dialog', { name: '不正解です' }),
   ).toBeInTheDocument();
   await userEvent.click(screen.getByRole('button', { name: 'OK' }));
-  await userEvent.click(screen.getByRole('button', { name: '答え合わせ' }));
+  await userEvent.click(screen.getByRole('button', { name: '答え 合わせ' }));
   await userEvent.click(screen.getByRole('button', { name: 'はい' }));
   expect(
     screen.getByRole('dialog', { name: '不正解です' }),
@@ -105,7 +105,7 @@ test.todo(
   async () => {
     setup('2_3');
     resolve_2_3({ finish: true });
-    await userEvent.click(screen.getByRole('button', { name: '答え合わせ' }));
+    await userEvent.click(screen.getByRole('button', { name: '答え 合わせ' }));
     await userEvent.click(screen.getByRole('button', { name: 'はい' }));
     expect(await screen.findByRole('dialog', { name: 'クリア' }));
   },

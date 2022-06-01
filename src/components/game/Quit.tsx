@@ -23,7 +23,9 @@ const Quit: React.FC<{
         onClick={() => open()}
         className="p-4 rounded-full text-2xl"
       >
-        ゲームをやめる
+        ゲームを
+        <br />
+        やめる
       </NeumorphismButton>
       <Modal isOpen={isOpen} contentLabel="ゲームをやめる確認">
         <p className="text-center">ゲームをやめますか？</p>

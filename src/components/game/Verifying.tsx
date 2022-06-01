@@ -23,7 +23,9 @@ const Verifying: React.FC<{
         onClick={() => open()}
         className="p-4 rounded-full text-2xl"
       >
-        答え合わせ
+        答え
+        <br />
+        合わせ
       </NeumorphismButton>
       <Modal isOpen={isOpen} contentLabel="答え合わせの確認">
         <p className="text-center">答え合わせ しますか？</p>

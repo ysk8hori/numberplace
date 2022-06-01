@@ -66,10 +66,10 @@ test.todo(
       expect.objectContaining({ blockSize: blockSize_2_3 }),
     );
     expect(
-      await screen.findByRole('button', { name: '答え合わせ' }),
+      await screen.findByRole('button', { name: '答え 合わせ' }),
     ).toBeInTheDocument();
     resolve_2_3({ finish: true });
-    await userEvent.click(screen.getByRole('button', { name: '答え合わせ' }));
+    await userEvent.click(screen.getByRole('button', { name: '答え 合わせ' }));
     await userEvent.click(screen.getByRole('button', { name: 'はい' }));
     await userEvent.click(
       screen.getByRole('button', { name: 'おなじ おおきさで あそぶ' }),
@@ -94,12 +94,12 @@ test.todo(
     });
     setup();
     expect(
-      await screen.findByRole('button', { name: '答え合わせ' }),
+      await screen.findByRole('button', { name: '答え 合わせ' }),
     ).toBeInTheDocument();
     // useGenerateGame は呼ばれない
     expect(generateTimes()).toBe(0);
     resolve_2_3({ finish: true });
-    await userEvent.click(screen.getByRole('button', { name: '答え合わせ' }));
+    await userEvent.click(screen.getByRole('button', { name: '答え 合わせ' }));
     await userEvent.click(screen.getByRole('button', { name: 'はい' }));
     await userEvent.click(
       screen.getByRole('button', { name: 'おなじ おおきさで あそぶ' }),
@@ -117,7 +117,7 @@ test('URL に パズルの情報がある場合はそれをプレイできる ht
   history.pushState('', '', '/?v=1&p=x45x3nxxx5nxx2nnxxxx1n&w=3&h=2&t=c');
   setup();
   expect(
-    await screen.findByRole('button', { name: '答え合わせ' }),
+    await screen.findByRole('button', { name: '答え 合わせ' }),
   ).toBeInTheDocument();
   expect(location.search).toEqual(''); // URLSearchParams はクリアされている
 });
@@ -156,7 +156,7 @@ test('セーブデータがあり URL に 不正なパズルの情報がある�
   history.pushState('', '', '/?v=1&p=foo&w=3&h=2&t=c');
   setup();
   expect(
-    await screen.findByRole('button', { name: '答え合わせ' }),
+    await screen.findByRole('button', { name: '答え 合わせ' }),
   ).toBeInTheDocument();
   expect(location.search).toEqual(''); // URLSearchParams はクリアされている
 });
