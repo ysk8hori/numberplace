@@ -23,7 +23,7 @@ const MistakeNoticeModal: React.FC<{
   return (
     <Modal isOpen={!!isOpen} contentLabel="不正解です">
       {mistake && <p className="text-center">間違いがあります</p>}
-      {emptycell && <p className="text-center">ぜんぶ こたえてね</p>}
+      {emptycell && <p className="text-center">全ての答えを記入してください</p>}
       <Spacer h={3} />
       <div className="w-60 flex justify-center">
         <NeumorphismButton

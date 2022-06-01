@@ -26,14 +26,14 @@ test('emptycell を渡すとモーダルに「間違いがあります」を表�
   render(<MistakeNoticeModal emptycell />);
   expect(
     screen.queryByRole('dialog', { name: '不正解です' }),
-  ).toHaveTextContent('ぜんぶ こたえてね');
+  ).toHaveTextContent('全ての答えを記入してください');
 });
-test('mistake と emptycell を両方渡すとモーダルに「間違いがあります」と「ぜんぶ こたえてね」を表示する', async () => {
+test('mistake と emptycell を両方渡すとモーダルに「間違いがあります」と「全ての答えを記入してください」を表示する', async () => {
   render(<MistakeNoticeModal mistake emptycell />);
   expect(
     screen.queryByRole('dialog', { name: '不正解です' }),
   ).toHaveTextContent('間違いがあります');
   expect(
     screen.queryByRole('dialog', { name: '不正解です' }),
-  ).toHaveTextContent('ぜんぶ こたえてね');
+  ).toHaveTextContent('全ての答えを記入してください');
 });
