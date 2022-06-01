@@ -34,10 +34,6 @@ describe('Cell', () => {
     render(<Cell data-testid="cell" fix />);
     expect(screen.getByTestId('cell')).toHaveAttribute('data-fix');
   });
-  test('変更できない Cell には data-fix 属性が付く', () => {
-    render(<Cell data-testid="cell" fix />);
-    expect(screen.getByTestId('cell')).toHaveAttribute('data-fix');
-  });
   test('Cell はメモした内容を表示する', () => {
     render(<Cell blockSize={blockSize_2_2} memoList={['1', '4']} />);
     expect(screen.getByAltText('answer candidate 1')).toBeInTheDocument();
