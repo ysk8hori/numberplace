@@ -4,14 +4,14 @@ import NeumorphismButton from '../atoms/NeumorphismButton';
 import Spacer from '../atoms/Spacer';
 
 /**
- * こたえあわせボタンとモーダル
+ * 答え合わせボタンとモーダル
  *
- * - 「こたえあわせ」ボタンを押下したら答え合わせするかどうかの確認モーダルを出す
+ * - 「答え合わせ」ボタンを押下したら答え合わせするかどうかの確認モーダルを出す
  * - モーダルの「いいえ」ボタンを押下でモーダルが閉じる
- * - モーダルの「はい」ボタンを押下でモーダルを閉じこたえあわせ開始コールバックを実行する
+ * - モーダルの「はい」ボタンを押下でモーダルを閉じ答え合わせ開始コールバックを実行する
  */
 const Verifying: React.FC<{
-  /** こたえあわせ開始コールバック */
+  /** 答え合わせ開始コールバック */
   onStartChecking?: () => void;
 }> = ({ onStartChecking }) => {
   const [isOpen, setOpenState] = useState(false);
@@ -23,10 +23,10 @@ const Verifying: React.FC<{
         onClick={() => open()}
         className="p-4 rounded-full text-2xl"
       >
-        こたえあわせ
+        答え合わせ
       </NeumorphismButton>
       <Modal isOpen={isOpen} contentLabel="答え合わせの確認">
-        <p className="text-center">こたえあわせ しますか？</p>
+        <p className="text-center">答え合わせ しますか？</p>
         <Spacer h={3} />
         <div className="w-60 flex justify-between">
           <NeumorphismButton
