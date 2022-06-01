@@ -22,7 +22,7 @@ const MistakeNoticeModal: React.FC<{
   const close = useCallback(() => setOpenState(false), [setOpenState]);
   return (
     <Modal isOpen={!!isOpen} contentLabel="不正解です">
-      {mistake && <p className="text-center">まちがいが あるよ</p>}
+      {mistake && <p className="text-center">間違いがあります</p>}
       {emptycell && <p className="text-center">ぜんぶ こたえてね</p>}
       <Spacer h={3} />
       <div className="w-60 flex justify-center">
