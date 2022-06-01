@@ -46,7 +46,7 @@ test.todo(
     const onRegenerate = vi.fn();
     setup({ size: '2_3', onRegenerate });
     resolve_2_3({ finish: true });
-    await userEvent.click(screen.getByRole('button', { name: 'こたえあわせ' }));
+    await userEvent.click(screen.getByRole('button', { name: '答え合わせ' }));
     await userEvent.click(screen.getByRole('button', { name: 'はい' }));
     await userEvent.click(
       screen.getByRole('button', { name: 'おなじ おおきさで あそぶ' }),

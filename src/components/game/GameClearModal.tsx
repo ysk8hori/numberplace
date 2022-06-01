@@ -31,7 +31,7 @@ const GameClearModal: React.FC<{
           onClick={() => close()}
           className="p-2 rounded-lg w-full font-black"
         >
-          おなじ
+          同じ
           <br />
           もんだいを
           <br />
@@ -41,21 +41,21 @@ const GameClearModal: React.FC<{
           onClick={() => (close(), onRegenerate?.())}
           className="p-2 rounded-lg w-full font-black"
         >
-          おなじ
+          同じ
           <br />
-          おおきさで
+          大きさで
           <br />
-          あそぶ
+          遊ぶ
         </NeumorphismButton>
         <NeumorphismButton
           onClick={() => (close(), onChangeSize?.())}
           className="p-2 rounded-lg w-full font-black"
         >
-          ほかの
+          他の
           <br />
-          おおきさで
+          大きさで
           <br />
-          あそぶ
+          遊ぶ
         </NeumorphismButton>
       </div>
     </Modal>

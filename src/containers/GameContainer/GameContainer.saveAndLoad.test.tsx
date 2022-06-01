@@ -79,7 +79,7 @@ test('数字削除時に保存する', async () => {
   ).toBeUndefined();
 });
 
-test('こたえあわせ後に保存する（fix が記録される）', async () => {
+test('答え合わせ後に保存する（fix が記録される）', async () => {
   const puzzle = JSON.parse(JSON.stringify(puzzle_2_2)) as MyGame;
   const targetCell = puzzle.cells.find(cell => isSamePos(cell.pos, [2, 2]))!;
   targetCell.answer = '1';
@@ -87,7 +87,7 @@ test('こたえあわせ後に保存する（fix が記録される）', async (
   setup('2_2');
   await userEvent.click(screen.getByTestId('2,2'));
   await userEvent.keyboard('1');
-  await userEvent.click(screen.getByRole('button', { name: 'こたえあわせ' }));
+  await userEvent.click(screen.getByRole('button', { name: '答え 合わせ' }));
   await userEvent.click(screen.getByRole('button', { name: 'はい' }));
   expect(gameHolder.loadGame()).toEqual({
     puzzle,
@@ -104,7 +104,7 @@ test.todo(
   async () => {
     setup('2_3');
     resolve_2_3({ finish: true });
-    await userEvent.click(screen.getByRole('button', { name: 'こたえあわせ' }));
+    await userEvent.click(screen.getByRole('button', { name: '答え 合わせ' }));
     await userEvent.click(screen.getByRole('button', { name: 'はい' }));
     expect(gameHolder.loadGame()).toBeDefined();
     await userEvent.click(
@@ -120,7 +120,7 @@ test.todo(
   async () => {
     setup('2_3');
     resolve_2_3({ finish: true });
-    await userEvent.click(screen.getByRole('button', { name: 'こたえあわせ' }));
+    await userEvent.click(screen.getByRole('button', { name: '答え 合わせ' }));
     await userEvent.click(screen.getByRole('button', { name: 'はい' }));
     expect(gameHolder.loadGame()).toBeDefined();
     await userEvent.click(
@@ -132,7 +132,9 @@ test.todo(
 
 test('ゲームをやめると保存していたゲームを削除する', async () => {
   setup('2_2');
-  await userEvent.click(screen.getByRole('button', { name: 'ゲームをやめる' }));
+  await userEvent.click(
+    screen.getByRole('button', { name: 'ゲームを やめる' }),
+  );
   expect(gameHolder.loadGame()).toBeDefined();
   await userEvent.click(screen.getByRole('button', { name: 'はい' }));
   expect(gameHolder.loadGame()).toBeUndefined();

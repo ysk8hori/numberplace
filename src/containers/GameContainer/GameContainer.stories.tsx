@@ -84,10 +84,10 @@ Resolved.play = async ({ canvasElement }) => {
   // Starts querying the component from its root element
   ReactModal.setAppElement(canvasElement);
   const canvas = within(canvasElement);
-  await userEvent.click(canvas.getByRole('button', { name: 'こたえあわせ' }));
+  await userEvent.click(canvas.getByRole('button', { name: '答え合わせ' }));
 };
 Resolved.storyName =
-  '「こたえあわせ」ボタンを押下したら答え合わせするかどうかの確認ダイアログを出す';
+  '「答え合わせ」ボタンを押下したら答え合わせするかどうかの確認ダイアログを出す';
 
 export const ClearModal = Template.bind({});
 
@@ -97,7 +97,7 @@ ClearModal.play = async ({ canvasElement }) => {
   // モーダルが canvasElement の外に描画されモーダル内の要素が取れないので body を canvas にしないと動かない
   const canvas = within(canvasElement.parentElement!);
   await resolve_2_3(canvas, { finish: true });
-  await userEvent.click(canvas.getByRole('button', { name: 'こたえあわせ' }));
+  await userEvent.click(canvas.getByRole('button', { name: '答え合わせ' }));
   await userEvent.click(canvas.getByRole('button', { name: 'はい' }));
 };
 ClearModal.storyName = 'クリア時にはクリアモーダルを表示する';
