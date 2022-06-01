@@ -16,20 +16,20 @@ test('game clear すると表示する', async () => {
   expect(screen.queryByRole('dialog', { name: 'クリア' })).toBeInTheDocument();
 });
 
-test('おなじおおきさであそぶ押下コールバックが呼ばれる', async () => {
+test('同じ大きさで遊ぶ押下コールバックが呼ばれる', async () => {
   const onRegenerate = vi.fn();
   render(<GameClearModal gameClear onRegenerate={onRegenerate} />);
   await userEvent.click(
-    screen.getByRole('button', { name: 'おなじ おおきさで あそぶ' }),
+    screen.getByRole('button', { name: '同じ 大きさで 遊ぶ' }),
   );
   expect(onRegenerate).toHaveBeenCalled();
 });
 
-test('ほかのおおきさであそぶ押下コールバックが呼ばれる', async () => {
+test('他の大きさで遊ぶ押下コールバックが呼ばれる', async () => {
   const onChangeSize = vi.fn();
   render(<GameClearModal gameClear onChangeSize={onChangeSize} />);
   await userEvent.click(
-    screen.getByRole('button', { name: 'ほかの おおきさで あそぶ' }),
+    screen.getByRole('button', { name: '他の 大きさで 遊ぶ' }),
   );
   expect(onChangeSize).toHaveBeenCalled();
 });
