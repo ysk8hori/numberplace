@@ -63,6 +63,6 @@
     "use-interval": "1.4.0",
     "vite": "2.9.9",
     "vite-plugin-pwa": "0.12.0",
-    "vitest": "0.13.1"
+    "vitest": "0.14.1"
   }
 }
