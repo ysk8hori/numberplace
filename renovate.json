@@ -1,5 +1,6 @@
 {
   "extends": ["config:base"],
+  "schedule": ["after 10pm and before 5am every weekend"],
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch"],
@@ -16,5 +17,6 @@
       "matchPackagePatterns": ["@testing-library.*"],
       "groupName": "react"
     }
-  ]
+  ],
+  "automerge": true
 }
