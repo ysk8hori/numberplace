@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import React from 'react';
 import ReactModal from 'react-modal';
-import { test, expect, vi, SpyInstanceFn } from 'vitest';
+import { test, expect, vi, SpyInstance } from 'vitest';
 import {
   render,
   screen,
@@ -23,7 +23,7 @@ vi.mock('./containers/GenerateGameContainer/utils/useGenerateGame', () => ({
   }),
 }));
 
-function spy(): SpyInstanceFn<
+function spy(): SpyInstance<
   [BlockSize, number],
   {
     puzzle: MyGame;
