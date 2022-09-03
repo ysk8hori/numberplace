@@ -62,7 +62,7 @@
     "typescript": "4.8.2",
     "use-interval": "1.4.0",
     "vite": "3.0.9",
-    "vite-plugin-pwa": "0.12.3",
+    "vite-plugin-pwa": "0.12.6",
     "vitest": "0.22.1"
   }
 }
