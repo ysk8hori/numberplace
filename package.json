@@ -1,7 +1,7 @@
 {
   "name": "numberplace",
   "private": true,
-  "version": "1.3.4",
+  "version": "1.4.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -21,7 +21,7 @@
     "@sentry/react": "7.12.1",
     "@sentry/tracing": "7.12.1",
     "@types/react-modal": "3.13.1",
-    "@ysk8hori/numberplace-generator": "^2.5.5",
+    "@ysk8hori/numberplace-generator": "^2.7.0",
     "clsx": "1.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
