@@ -46,7 +46,7 @@ function StartMenu({ onChoseBlockSize, className, ...rest }: Props) {
         {gameList.map(({ blockSize, cross, hyper }) => (
           <BlockSizeButton
             key={JSON.stringify({ blockSize, cross, hyper })}
-            className="m-16"
+            className="my-16"
             blockSize={blockSize}
             onClick={({ difficulty }) =>
               onChoseBlockSize?.(blockSize, difficulty, { cross, hyper })

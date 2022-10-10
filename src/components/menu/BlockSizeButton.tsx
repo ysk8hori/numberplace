@@ -63,7 +63,7 @@ function BlockSizeButton({
   }, [blockSize, cross, hyper]);
   const [difficulty, setDifficulty] = useState<Difficulty>('normal');
   return (
-    <GlassCard
+    <div
       className={clsx(
         'p-0 aspect-square flex flex-col items-stretch',
         className,
@@ -80,7 +80,7 @@ function BlockSizeButton({
       >
         {gameBoard}
       </GameBoardButton>
-    </GlassCard>
+    </div>
   );
 }
 

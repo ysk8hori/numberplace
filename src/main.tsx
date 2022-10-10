@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
 import ReactModal from 'react-modal';
@@ -19,11 +19,11 @@ Sentry.init({
 
 registerSW();
 
-ReactDOM.render(
+const root = createRoot(document.getElementById('root')!);
+root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById('root'),
 );
 
 // @see https://reactcommunity.org/react-modal/examples/set_app_element/
