@@ -19,14 +19,19 @@ function InputPanelButton({
   ...rest
 }: Props) {
   return (
-    <NeumorphismButton
-      className={clsx('aspect-square w-full h-full rounded-2xl', className)}
+    <button
+      className={clsx(
+        'aspect-square w-full h-full rounded-lg border',
+        disabled ? 'border-gray-300' : 'border-gray-500',
+        disabled ? 'text-gray-300' : 'text-gray-800',
+        className,
+      )}
       onClick={onClick}
       disabled={disabled}
       {...rest}
     >
       {children}
-    </NeumorphismButton>
+    </button>
   );
 }
 

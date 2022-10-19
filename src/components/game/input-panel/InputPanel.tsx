@@ -1,9 +1,11 @@
 import { BlockSize } from '@ysk8hori/numberplace-generator';
-import React, { useMemo, useReducer } from 'react';
+import React, { useCallback, useMemo, useReducer } from 'react';
 import ToggleMemoButton from './ToggleMemoButton';
 import InputPanelButton from './InputPanelButton';
 import { FaEraser } from 'react-icons/fa';
 import { getSvg } from '../utils/numberUtils';
+import { Icon } from '../../atoms/Icon';
+import colors from 'tailwindcss/colors';
 
 type Props = {
   /** ゲームのブロックサイズ */
@@ -53,31 +55,20 @@ const InputPanel: React.FC<Props> = ({
         .fill(true)
         .map((_, index) => ++index)
         .map(buttonNumber => (
-          <InputPanelButton
-            data-testid={`input_${buttonNumber}`}
-            onClick={() =>
-              (isMemoMode ? onMemoInput : onInput)(buttonNumber.toString())
-            }
-            disabled={
-              size < buttonNumber ||
-              completedNumbers.includes(buttonNumber.toString())
-            }
-            key={buttonNumber}
-            aria-label={buttonNumber}
-            className="flex justify-center items-center"
-          >
-            <img
-              src={getSvg({ answer: buttonNumber.toString() })}
-              alt={`button ${buttonNumber}`}
-              className="select-none"
-              style={{ width: '60%', height: '60%' }}
-            ></img>
-          </InputPanelButton>
+          <NumberButton
+            blockSize={blockSize}
+            completedNumbers={completedNumbers}
+            onInput={onInput}
+            onMemoInput={onMemoInput}
+            buttonNumber={buttonNumber}
+            isMemoMode={isMemoMode}
+            size={size}
+          />
         )),
     [size, onInput, isMemoMode],
   );
   return (
-    <div className={`grid grid-cols-6 gap-4`} {...rest}>
+    <div className={`grid grid-cols-6 gap-1`} {...rest}>
       {buttons}
       <InputPanelButton
         data-testid={`btn_delete`}
@@ -93,3 +84,42 @@ const InputPanel: React.FC<Props> = ({
 };
 
 export default InputPanel;
+
+function NumberButton({
+  onMemoInput,
+  onInput,
+  completedNumbers,
+  buttonNumber,
+  isMemoMode,
+  size,
+}: Required<Omit<Props, 'onDelete'>> & {
+  buttonNumber: number;
+  isMemoMode: boolean;
+  size: number;
+}) {
+  const onClick = useCallback(
+    () => (isMemoMode ? onMemoInput : onInput)(buttonNumber.toString()),
+    [isMemoMode, onMemoInput, onInput, buttonNumber],
+  );
+  const disabled = useMemo(
+    () =>
+      size < buttonNumber || completedNumbers.includes(buttonNumber.toString()),
+    [size, buttonNumber, completedNumbers],
+  );
+  return (
+    <InputPanelButton
+      data-testid={`input_${buttonNumber}`}
+      onClick={onClick}
+      disabled={disabled}
+      key={buttonNumber}
+      aria-label={buttonNumber}
+      className="flex justify-center items-center"
+    >
+      <Icon
+        src={getSvg({ answer: buttonNumber.toString() })}
+        color={disabled ? colors.gray['300'] : colors.gray['800']}
+        style={{ width: '60%', height: '60%' }}
+      />
+    </InputPanelButton>
+  );
+}
