@@ -26,7 +26,7 @@ const ToggleLabel = styled.label`
   padding: 8px;
   transition: box-shadow 0.3s;
   ${ToggleInput}:checked + && {
-    background: radial-gradient(yellow 10px, rgba(255, 255, 255, 0) 40%);
+    background: radial-gradient(yellow 20px, rgba(255, 255, 255, 0) 60%);
   }
 `;
 
