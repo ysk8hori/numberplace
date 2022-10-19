@@ -49,27 +49,18 @@ const InputPanel: React.FC<Props> = ({
     isMemoMode => !isMemoMode,
     false,
   );
-  const buttons = useMemo(
-    () =>
-      new Array(9 < size ? size : 9)
-        .fill(true)
-        .map((_, index) => ++index)
-        .map(buttonNumber => (
-          <NumberButton
-            blockSize={blockSize}
-            completedNumbers={completedNumbers}
-            onInput={onInput}
-            onMemoInput={onMemoInput}
-            buttonNumber={buttonNumber}
-            isMemoMode={isMemoMode}
-            size={size}
-          />
-        )),
-    [size, onInput, isMemoMode],
-  );
+  const numberButtonProps = {
+    blockSize,
+    size,
+    completedNumbers,
+    onInput,
+    onMemoInput,
+    isMemoMode,
+  };
+
   return (
     <div className={`grid grid-cols-6 gap-1`} {...rest}>
-      {buttons}
+      <NumberButtons {...numberButtonProps} />
       <InputPanelButton
         data-testid={`btn_delete`}
         onClick={onDelete}
@@ -84,6 +75,42 @@ const InputPanel: React.FC<Props> = ({
 };
 
 export default InputPanel;
+
+function NumberButtons({
+  size,
+  blockSize,
+  completedNumbers,
+  onInput,
+  onMemoInput,
+  isMemoMode,
+}: {
+  blockSize: BlockSize;
+  size: number;
+  completedNumbers: string[];
+  onInput: (buttonText: string) => void;
+  onMemoInput: (buttonText: string) => void;
+  isMemoMode: boolean;
+}) {
+  return (
+    <>
+      {new Array(9 < size ? size : 9)
+        .fill(true)
+        .map((_, index) => ++index)
+        .map(buttonNumber => (
+          <NumberButton
+            key={buttonNumber}
+            blockSize={blockSize}
+            completedNumbers={completedNumbers}
+            onInput={onInput}
+            onMemoInput={onMemoInput}
+            buttonNumber={buttonNumber}
+            isMemoMode={isMemoMode}
+            size={size}
+          />
+        ))}
+    </>
+  );
+}
 
 function NumberButton({
   onMemoInput,
@@ -111,7 +138,6 @@ function NumberButton({
       data-testid={`input_${buttonNumber}`}
       onClick={onClick}
       disabled={disabled}
-      key={buttonNumber}
       aria-label={buttonNumber}
       className="flex justify-center items-center"
     >
