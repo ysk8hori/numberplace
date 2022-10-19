@@ -22,6 +22,7 @@ function InputPanelButton({
     <button
       className={clsx(
         'aspect-square w-full h-full rounded-lg border',
+        !disabled && 'bg-gray-100 active:bg-gray-200 hover:bg-gray-300',
         disabled ? 'border-gray-300' : 'border-gray-500',
         disabled ? 'text-gray-300' : 'text-gray-800',
         className,
