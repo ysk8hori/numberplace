@@ -51,7 +51,7 @@
     "@vitest/ui": "latest",
     "autoprefixer": "10.4.12",
     "babel-loader": "8.2.5",
-    "chromatic": "6.10.2",
+    "chromatic": "6.10.5",
     "eslint": "8.25.0",
     "eslint-config-prettier": "8.5.0",
     "jsdom": "latest",
