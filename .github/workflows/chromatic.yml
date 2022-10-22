@@ -6,6 +6,8 @@ name: 'Chromatic'
 # PR のオープンや更新と、main へのマージプッシュを契機にデプロイする
 on:
   pull_request:
+    branches:
+      - main
     types: [opened, reopened, synchronize]
   push:
     branches:

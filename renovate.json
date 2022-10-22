@@ -1,5 +1,6 @@
 {
   "extends": ["config:base"],
+  "baseBranches": ["develop"],
   "schedule": ["after 10pm and before 5am every weekend"],
   "packageRules": [
     {
