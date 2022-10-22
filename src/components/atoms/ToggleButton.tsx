@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -22,15 +23,10 @@ const ToggleLabel = styled.label`
   align-items: center;
   transition: 0.4s;
   box-sizing: border-box;
-  border-radius: 16px;
   padding: 8px;
-  box-shadow: -2px -2px 5px rgba(255, 255, 255, 1),
-    3px 3px 5px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s;
   ${ToggleInput}:checked + && {
-    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1),
-      inset -3px -3px 5px rgba(255, 255, 255, 1);
-    background: radial-gradient(yellow 10px, rgba(255, 255, 255, 0) 40%);
+    background: radial-gradient(yellow 20px, rgba(255, 255, 255, 0) 60%);
   }
 `;
 
@@ -45,7 +41,7 @@ const Base = styled.div`
  * - チェック状態は親が管理する必要がある
  * - 大きさ程度なら親から class や style で指定可能
  */
-function NeumorphismToggleButton({
+function ToggleButton({
   children,
   type: _,
   className,
@@ -62,10 +58,16 @@ function NeumorphismToggleButton({
         {...{ onClick, defaultChecked }}
         aria-label={ariaLabel}
       />
-      <ToggleLabel htmlFor={id} className={className}>
+      <ToggleLabel
+        htmlFor={id}
+        className={clsx(
+          'aspect-square w-full h-full border border-gray-800 rounded-lg flex justify-center items-center',
+          className,
+        )}
+      >
         {children}
       </ToggleLabel>
     </Base>
   );
 }
-export default NeumorphismToggleButton;
+export default ToggleButton;

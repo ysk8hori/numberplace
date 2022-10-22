@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Modal from '../atoms/Modal';
-import NeumorphismButton from '../atoms/NeumorphismButton';
-import Spacer from '../atoms/Spacer';
+import Button from '../atoms/Button';
 
 /**
  * クリアした旨を知らせるモーダル
@@ -25,19 +24,8 @@ const GameClearModal: React.FC<{
   return (
     <Modal isOpen={!!isOpen} contentLabel="クリア">
       <p className="text-center">クリア！</p>
-      <Spacer h={3} />
       <div className="grid grid-cols-2 justify-center gap-8">
-        {/* <NeumorphismButton
-          onClick={() => close()}
-          className="p-2 rounded-lg w-full font-black"
-        >
-          同じ
-          <br />
-          もんだいを
-          <br />
-          あそぶ
-        </NeumorphismButton> */}
-        <NeumorphismButton
+        <Button
           onClick={() => (close(), onRegenerate?.())}
           className="p-2 rounded-lg w-full font-black"
         >
@@ -46,8 +34,8 @@ const GameClearModal: React.FC<{
           大きさで
           <br />
           遊ぶ
-        </NeumorphismButton>
-        <NeumorphismButton
+        </Button>
+        <Button
           onClick={() => (close(), onChangeSize?.())}
           className="p-2 rounded-lg w-full font-black"
         >
@@ -56,7 +44,7 @@ const GameClearModal: React.FC<{
           大きさで
           <br />
           遊ぶ
-        </NeumorphismButton>
+        </Button>
       </div>
     </Modal>
   );

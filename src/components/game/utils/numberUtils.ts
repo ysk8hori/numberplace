@@ -75,6 +75,6 @@ export function getSvg({
     case '?':
       return question;
     default:
-      return undefined;
+      throw new Error(`不正なアイコンを指定しています。 ${answer}`);
   }
 }

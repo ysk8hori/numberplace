@@ -1,9 +1,11 @@
 import { BlockSize } from '@ysk8hori/numberplace-generator';
-import React, { useMemo, useReducer } from 'react';
+import React, { useCallback, useMemo, useReducer } from 'react';
 import ToggleMemoButton from './ToggleMemoButton';
-import InputPanelButton from './InputPanelButton';
 import { FaEraser } from 'react-icons/fa';
 import { getSvg } from '../utils/numberUtils';
+import { Icon } from '../../atoms/Icon';
+import colors from 'tailwindcss/colors';
+import Button from '../../atoms/Button';
 
 type Props = {
   /** ゲームのブロックサイズ */
@@ -47,49 +49,103 @@ const InputPanel: React.FC<Props> = ({
     isMemoMode => !isMemoMode,
     false,
   );
-  const buttons = useMemo(
-    () =>
-      new Array(9 < size ? size : 9)
-        .fill(true)
-        .map((_, index) => ++index)
-        .map(buttonNumber => (
-          <InputPanelButton
-            data-testid={`input_${buttonNumber}`}
-            onClick={() =>
-              (isMemoMode ? onMemoInput : onInput)(buttonNumber.toString())
-            }
-            disabled={
-              size < buttonNumber ||
-              completedNumbers.includes(buttonNumber.toString())
-            }
-            key={buttonNumber}
-            aria-label={buttonNumber}
-            className="flex justify-center items-center"
-          >
-            <img
-              src={getSvg({ answer: buttonNumber.toString() })}
-              alt={`button ${buttonNumber}`}
-              className="select-none"
-              style={{ width: '60%', height: '60%' }}
-            ></img>
-          </InputPanelButton>
-        )),
-    [size, onInput, isMemoMode],
-  );
+  const numberButtonProps = {
+    blockSize,
+    size,
+    completedNumbers,
+    onInput,
+    onMemoInput,
+    isMemoMode,
+  };
+
   return (
-    <div className={`grid grid-cols-6 gap-4`} {...rest}>
-      {buttons}
-      <InputPanelButton
+    <div className={`grid grid-cols-6 gap-1`} {...rest}>
+      <NumberButtons {...numberButtonProps} />
+      <Button
         data-testid={`btn_delete`}
         onClick={onDelete}
         aria-label="消す"
         className="row-start-1 row-end-3 flex justify-center items-center"
       >
         <FaEraser style={{ width: '60%', height: '60%' }} />
-      </InputPanelButton>
+      </Button>
       <ToggleMemoButton defaultChecked={isMemoMode} onClick={toggleMemoMode} />
     </div>
   );
 };
 
 export default InputPanel;
+
+function NumberButtons({
+  size,
+  blockSize,
+  completedNumbers,
+  onInput,
+  onMemoInput,
+  isMemoMode,
+}: {
+  blockSize: BlockSize;
+  size: number;
+  completedNumbers: string[];
+  onInput: (buttonText: string) => void;
+  onMemoInput: (buttonText: string) => void;
+  isMemoMode: boolean;
+}) {
+  return (
+    <>
+      {new Array(9 < size ? size : 9)
+        .fill(true)
+        .map((_, index) => ++index)
+        .map(buttonNumber => (
+          <NumberButton
+            key={buttonNumber}
+            blockSize={blockSize}
+            completedNumbers={completedNumbers}
+            onInput={onInput}
+            onMemoInput={onMemoInput}
+            buttonNumber={buttonNumber}
+            isMemoMode={isMemoMode}
+            size={size}
+          />
+        ))}
+    </>
+  );
+}
+
+function NumberButton({
+  onMemoInput,
+  onInput,
+  completedNumbers,
+  buttonNumber,
+  isMemoMode,
+  size,
+}: Required<Omit<Props, 'onDelete'>> & {
+  buttonNumber: number;
+  isMemoMode: boolean;
+  size: number;
+}) {
+  const onClick = useCallback(
+    () => (isMemoMode ? onMemoInput : onInput)(buttonNumber.toString()),
+    [isMemoMode, onMemoInput, onInput, buttonNumber],
+  );
+  const disabled = useMemo(
+    () =>
+      size < buttonNumber || completedNumbers.includes(buttonNumber.toString()),
+    [size, buttonNumber, completedNumbers],
+  );
+  return (
+    <Button
+      data-testid={`input_${buttonNumber}`}
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={buttonNumber.toString()}
+      className="flex justify-center items-center aspect-square"
+    >
+      <Icon
+        src={getSvg({ answer: buttonNumber.toString() })}
+        color={disabled ? colors.gray['300'] : colors.gray['800']}
+        style={{ width: '60%', height: '60%' }}
+      />
+    </Button>
+  );
+}

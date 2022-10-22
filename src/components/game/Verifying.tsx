@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import Modal from '../atoms/Modal';
-import NeumorphismButton from '../atoms/NeumorphismButton';
-import Spacer from '../atoms/Spacer';
+import Button from '../atoms/Button';
 
 /**
  * 答え合わせボタンとモーダル
@@ -19,30 +18,21 @@ const Verifying: React.FC<{
   const close = useCallback(() => setOpenState(false), [setOpenState]);
   return (
     <>
-      <NeumorphismButton
-        onClick={() => open()}
-        className="p-4 rounded-full text-2xl"
-      >
-        答え
-        <br />
-        合わせ
-      </NeumorphismButton>
+      <Button onClick={() => open()} className="p-4 rounded-2xl text-2xl">
+        答え合わせ
+      </Button>
       <Modal isOpen={isOpen} contentLabel="答え合わせの確認">
         <p className="text-center">答え合わせ しますか？</p>
-        <Spacer h={3} />
-        <div className="w-60 flex justify-between">
-          <NeumorphismButton
-            onClick={() => close()}
-            className="p-2 rounded-full w-2/5 font-black"
-          >
+        <div className="w-60 flex gap-4 justify-center">
+          <Button onClick={() => close()} className="p-2 w-2/5 font-black">
             いいえ
-          </NeumorphismButton>
-          <NeumorphismButton
+          </Button>
+          <Button
             onClick={() => (close(), onStartChecking?.())}
-            className="p-2 rounded-full w-2/5 ml-auto font-black"
+            className="p-2 w-2/5 font-black"
           >
             はい
-          </NeumorphismButton>
+          </Button>
         </div>
       </Modal>
     </>

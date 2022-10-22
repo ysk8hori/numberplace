@@ -1,18 +1,18 @@
 import React, { useReducer } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import NeumorphismToggleButton from './NeumorphismToggleButton';
+import ToggleButton from './ToggleButton';
 import { TiPencil } from 'react-icons/ti';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'components/atoms/NeumorphismToggleButton',
-  component: NeumorphismToggleButton,
-} as ComponentMeta<typeof NeumorphismToggleButton>;
+  title: 'components/atoms/ToggleButton',
+  component: ToggleButton,
+} as ComponentMeta<typeof ToggleButton>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof NeumorphismToggleButton> = args => (
-  <NeumorphismToggleButton {...args}></NeumorphismToggleButton>
+const Template: ComponentStory<typeof ToggleButton> = args => (
+  <ToggleButton {...args}></ToggleButton>
 );
 Template.args = {
   onClick: undefined,
@@ -27,14 +27,14 @@ export const Sample = () => {
   return (
     <div>
       <p>defaultChecked の状態は親コンポーネントで管理する必要がある</p>
-      <NeumorphismToggleButton
+      <ToggleButton
         className="aspect-square"
         style={{ width: '100px' }}
         defaultChecked={checked}
         onClick={toggle}
       >
-        <TiPencil />
-      </NeumorphismToggleButton>
+        <TiPencil style={{ width: '80%', height: '80%' }} />
+      </ToggleButton>
     </div>
   );
 };
