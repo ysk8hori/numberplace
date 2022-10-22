@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import NeumorphismButton from '../atoms/NeumorphismButton';
+import Button from '../atoms/Button';
 import SelfBuildingSquareSpinner from '../atoms/SelfBuildingSquareSpinner';
 
 /**
@@ -17,12 +17,9 @@ export default function Generating({ cancel }: { cancel?: () => void }) {
     <div className="max-w-lg mx-auto flex flex-col justify-center items-center gap-5">
       <SelfBuildingSquareSpinner />
       <HiddenBox className={showCancel ? 'visible' : undefined}>
-        <NeumorphismButton
-          onClick={() => cancel?.()}
-          className="rounded-full px-5 py-1"
-        >
+        <Button onClick={() => cancel?.()} className="px-5 py-1">
           キャンセル
-        </NeumorphismButton>
+        </Button>
       </HiddenBox>
       <HiddenBox className={showCancel ? 'visible' : undefined}>
         <p>

@@ -87,7 +87,7 @@ test('答え合わせ後に保存する（fix が記録される）', async () =
   setup('2_2');
   await userEvent.click(screen.getByTestId('2,2'));
   await userEvent.keyboard('1');
-  await userEvent.click(screen.getByRole('button', { name: '答え 合わせ' }));
+  await userEvent.click(screen.getByRole('button', { name: '答え合わせ' }));
   await userEvent.click(screen.getByRole('button', { name: 'はい' }));
   expect(gameHolder.loadGame()).toEqual({
     puzzle,
@@ -104,7 +104,7 @@ test.todo(
   async () => {
     setup('2_3');
     resolve_2_3({ finish: true });
-    await userEvent.click(screen.getByRole('button', { name: '答え 合わせ' }));
+    await userEvent.click(screen.getByRole('button', { name: '答え合わせ' }));
     await userEvent.click(screen.getByRole('button', { name: 'はい' }));
     expect(gameHolder.loadGame()).toBeDefined();
     await userEvent.click(
@@ -120,7 +120,7 @@ test.todo(
   async () => {
     setup('2_3');
     resolve_2_3({ finish: true });
-    await userEvent.click(screen.getByRole('button', { name: '答え 合わせ' }));
+    await userEvent.click(screen.getByRole('button', { name: '答え合わせ' }));
     await userEvent.click(screen.getByRole('button', { name: 'はい' }));
     expect(gameHolder.loadGame()).toBeDefined();
     await userEvent.click(
@@ -132,9 +132,7 @@ test.todo(
 
 test('ゲームをやめると保存していたゲームを削除する', async () => {
   setup('2_2');
-  await userEvent.click(
-    screen.getByRole('button', { name: 'ゲームを やめる' }),
-  );
+  await userEvent.click(screen.getByRole('button', { name: 'ゲームをやめる' }));
   expect(gameHolder.loadGame()).toBeDefined();
   await userEvent.click(screen.getByRole('button', { name: 'はい' }));
   expect(gameHolder.loadGame()).toBeUndefined();
