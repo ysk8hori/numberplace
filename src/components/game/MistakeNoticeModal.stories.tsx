@@ -19,11 +19,3 @@ Primary.storyName = 'ミスなしの場合は表示しない';
 export const HasMistake = Template.bind({});
 HasMistake.storyName = 'ミスあり';
 HasMistake.args = { mistake: true };
-
-export const HasEmpty = Template.bind({});
-HasEmpty.storyName = '空欄あり';
-HasEmpty.args = { emptycell: true };
-
-export const HasBoth = Template.bind({});
-HasBoth.storyName = 'ミス・空欄あり';
-HasBoth.args = { mistake: true, emptycell: true };
