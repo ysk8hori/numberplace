@@ -16,10 +16,3 @@ const Template: ComponentStory<typeof Verifying> = args => (
 
 export const Primary = Template.bind({});
 Primary.storyName = '答え合わせボタン';
-
-export const Clicked = Template.bind({});
-Clicked.storyName = 'クリックで答え合わせ確認モーダルを表示する';
-Clicked.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
-  await userEvent.click(canvas.getByRole('button', { name: '答え合わせ' }));
-};

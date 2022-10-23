@@ -88,7 +88,6 @@ test('答え合わせ後に保存する（fix が記録される）', async () =
   await userEvent.click(screen.getByTestId('2,2'));
   await userEvent.keyboard('1');
   await userEvent.click(screen.getByRole('button', { name: '答え合わせ' }));
-  await userEvent.click(screen.getByRole('button', { name: 'はい' }));
   expect(gameHolder.loadGame()).toEqual({
     puzzle,
     solved: solved_2_2,
@@ -105,7 +104,6 @@ test.todo(
     setup('2_3');
     resolve_2_3({ finish: true });
     await userEvent.click(screen.getByRole('button', { name: '答え合わせ' }));
-    await userEvent.click(screen.getByRole('button', { name: 'はい' }));
     expect(gameHolder.loadGame()).toBeDefined();
     await userEvent.click(
       screen.getByRole('button', { name: 'ほかの おおきさで あそぶ' }),
@@ -121,7 +119,6 @@ test.todo(
     setup('2_3');
     resolve_2_3({ finish: true });
     await userEvent.click(screen.getByRole('button', { name: '答え合わせ' }));
-    await userEvent.click(screen.getByRole('button', { name: 'はい' }));
     expect(gameHolder.loadGame()).toBeDefined();
     await userEvent.click(
       screen.getByRole('button', { name: 'おなじ おおきさで あそぶ' }),
