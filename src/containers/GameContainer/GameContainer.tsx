@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useState,
-  useReducer,
-  ComponentProps,
-} from 'react';
+import React, { useCallback, useEffect, useState, useReducer } from 'react';
 import { BlockSize, Position } from '@ysk8hori/numberplace-generator';
 import { isSamePos, moveX, moveY } from '../../utils/positionUtils';
 import { MyGame } from '../../utils/typeUtils';
@@ -15,7 +9,6 @@ import Verifying from '../../components/game/Verifying';
 import MistakeNoticeModal from '../../components/game/MistakeNoticeModal';
 import GameClearModal from '../../components/game/GameClearModal';
 import Quit from '../../components/game/Quit';
-import InputNoticeLayer from '../../components/game/InputNoticeLayer';
 
 /** basePuzzle をクローンする */
 function clone(basePuzzle: MyGame): MyGame {
@@ -76,11 +69,7 @@ export default function GameContainer({
   gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   const [hasMistake, setMistake] = useState(false);
-  const [hasEmptycell, setEmptycell] = useState(false);
   const [isGameClear, setGameClear] = useState(false);
-  const [beforeAfter, setBeforeAfter] = useState<
-    ComponentProps<typeof InputNoticeLayer>['beforeAfter']
-  >([undefined, undefined]);
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   const fill = useFill(
     puzzle,
@@ -91,7 +80,6 @@ export default function GameContainer({
     cross,
     hyper,
     setPuzzle,
-    setBeforeAfter,
   );
   useFillByKeyboard(fill);
   const inputMemo = useInputMemo(
@@ -108,7 +96,6 @@ export default function GameContainer({
   useArrowSelector(selectedPos, blockSize, setSelectedPos);
   const checkAndUpdate = useCheckAndUpdate(
     solved,
-    setEmptycell,
     setMistake,
     forceUpdate,
     setGameClear,
@@ -118,19 +105,14 @@ export default function GameContainer({
   );
   /** 次回の check で mistake や empty を検知できるようクリアするコールバック */
   const clearMistakeAndEmptyInfo = useCallback(() => {
-    setEmptycell(false);
     setMistake(false);
-  }, [setEmptycell, setMistake]);
+  }, [setMistake]);
 
   const completeNumbers = getCompleteNumbers(puzzle, blockSize);
 
   return (
     <div className="max-w-xl grow">
       <div className="shadow-xl m-2 bg-white relative">
-        <InputNoticeLayer
-          className="absolute top-0 left-0"
-          beforeAfter={beforeAfter}
-        />
         <GameBoard
           puzzle={puzzle}
           blockSize={blockSize}
@@ -155,7 +137,6 @@ export default function GameContainer({
       </div>
       <MistakeNoticeModal
         mistake={hasMistake}
-        emptycell={hasEmptycell}
         onOk={clearMistakeAndEmptyInfo}
       />
       <GameClearModal
@@ -192,13 +173,11 @@ function getCompleteNumbers(puzzle: MyGame, blockSize: BlockSize) {
 /**
  *
  * @param solved 問題の答え
- * @param setEmptycell check した結果、空欄セルがある場合に true を指定する
  * @param setMistake check した結果、間違えのセルがある場合に true を指定する
  * @param forceUpdate チェック後に fix を反映する
  */
 function useCheckAndUpdate(
   solved: MyGame,
-  setEmptycell: React.Dispatch<React.SetStateAction<boolean>>,
   setMistake: React.Dispatch<React.SetStateAction<boolean>>,
   forceUpdate: React.DispatchWithoutAction,
   setGameClear: React.Dispatch<React.SetStateAction<boolean>>,
@@ -212,8 +191,7 @@ function useCheckAndUpdate(
         const targetCell = puzzle.cells.find(cell =>
           isSamePos(solvedCell.pos, cell.pos),
         )!;
-        // 空欄セルがあるか
-        if (!targetCell.answer) return setEmptycell(true);
+        if (!targetCell.answer) return;
         if (solvedCell.answer === targetCell.answer) {
           // 正解している cell は fix する
           targetCell.isFix = true;
@@ -229,7 +207,7 @@ function useCheckAndUpdate(
       // fix を反映するために forceUpdate する
       forceUpdate();
     },
-    [solved, setEmptycell, setMistake, forceUpdate, blockSize, cross, hyper],
+    [solved, setMistake, forceUpdate, blockSize, cross, hyper],
   );
 }
 
@@ -304,9 +282,6 @@ function useFill(
   cross: boolean,
   hyper: boolean,
   setPuzzle: React.Dispatch<React.SetStateAction<MyGame>>,
-  setBeforeAfter: React.Dispatch<
-    React.SetStateAction<[string | undefined, string | undefined] | undefined>
-  >,
 ) {
   return useCallback<Fill>(
     (answer?: string | undefined) => {
@@ -320,7 +295,6 @@ function useFill(
         targetCell.answer = answer;
         targetCell.memoList = undefined;
         gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
-        setBeforeAfter([before, answer]);
         setPuzzle(puzzle);
         forceUpdate();
         return;
@@ -332,7 +306,6 @@ function useFill(
       }
       targetCell.answer = answer;
       gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
-      setBeforeAfter([before, answer]);
       setPuzzle(puzzle);
       forceUpdate();
     },

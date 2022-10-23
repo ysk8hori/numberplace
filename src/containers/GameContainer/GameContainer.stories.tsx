@@ -98,7 +98,6 @@ ClearModal.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement.parentElement!);
   await resolve_2_3(canvas, { finish: true });
   await userEvent.click(canvas.getByRole('button', { name: '答え合わせ' }));
-  await userEvent.click(canvas.getByRole('button', { name: 'はい' }));
 };
 ClearModal.storyName = 'クリア時にはクリアモーダルを表示する';
 
