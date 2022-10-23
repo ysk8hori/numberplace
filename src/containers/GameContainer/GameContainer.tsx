@@ -76,7 +76,6 @@ export default function GameContainer({
   gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   const [hasMistake, setMistake] = useState(false);
-  const [hasEmptycell, setEmptycell] = useState(false);
   const [isGameClear, setGameClear] = useState(false);
   const [beforeAfter, setBeforeAfter] = useState<
     ComponentProps<typeof InputNoticeLayer>['beforeAfter']
@@ -108,7 +107,6 @@ export default function GameContainer({
   useArrowSelector(selectedPos, blockSize, setSelectedPos);
   const checkAndUpdate = useCheckAndUpdate(
     solved,
-    setEmptycell,
     setMistake,
     forceUpdate,
     setGameClear,
@@ -118,9 +116,8 @@ export default function GameContainer({
   );
   /** 次回の check で mistake や empty を検知できるようクリアするコールバック */
   const clearMistakeAndEmptyInfo = useCallback(() => {
-    setEmptycell(false);
     setMistake(false);
-  }, [setEmptycell, setMistake]);
+  }, [setMistake]);
 
   const completeNumbers = getCompleteNumbers(puzzle, blockSize);
 
@@ -155,7 +152,6 @@ export default function GameContainer({
       </div>
       <MistakeNoticeModal
         mistake={hasMistake}
-        emptycell={hasEmptycell}
         onOk={clearMistakeAndEmptyInfo}
       />
       <GameClearModal
@@ -192,13 +188,11 @@ function getCompleteNumbers(puzzle: MyGame, blockSize: BlockSize) {
 /**
  *
  * @param solved 問題の答え
- * @param setEmptycell check した結果、空欄セルがある場合に true を指定する
  * @param setMistake check した結果、間違えのセルがある場合に true を指定する
  * @param forceUpdate チェック後に fix を反映する
  */
 function useCheckAndUpdate(
   solved: MyGame,
-  setEmptycell: React.Dispatch<React.SetStateAction<boolean>>,
   setMistake: React.Dispatch<React.SetStateAction<boolean>>,
   forceUpdate: React.DispatchWithoutAction,
   setGameClear: React.Dispatch<React.SetStateAction<boolean>>,
@@ -212,8 +206,7 @@ function useCheckAndUpdate(
         const targetCell = puzzle.cells.find(cell =>
           isSamePos(solvedCell.pos, cell.pos),
         )!;
-        // 空欄セルがあるか
-        if (!targetCell.answer) return setEmptycell(true);
+        if (!targetCell.answer) return;
         if (solvedCell.answer === targetCell.answer) {
           // 正解している cell は fix する
           targetCell.isFix = true;
@@ -229,7 +222,7 @@ function useCheckAndUpdate(
       // fix を反映するために forceUpdate する
       forceUpdate();
     },
-    [solved, setEmptycell, setMistake, forceUpdate, blockSize, cross, hyper],
+    [solved, setMistake, forceUpdate, blockSize, cross, hyper],
   );
 }
 
