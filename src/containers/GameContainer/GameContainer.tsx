@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useState,
-  useReducer,
-  ComponentProps,
-} from 'react';
+import React, { useCallback, useEffect, useState, useReducer } from 'react';
 import { BlockSize, Position } from '@ysk8hori/numberplace-generator';
 import { isSamePos, moveX, moveY } from '../../utils/positionUtils';
 import { MyGame } from '../../utils/typeUtils';
@@ -15,7 +9,6 @@ import Verifying from '../../components/game/Verifying';
 import MistakeNoticeModal from '../../components/game/MistakeNoticeModal';
 import GameClearModal from '../../components/game/GameClearModal';
 import Quit from '../../components/game/Quit';
-import InputNoticeLayer from '../../components/game/InputNoticeLayer';
 
 /** basePuzzle をクローンする */
 function clone(basePuzzle: MyGame): MyGame {
@@ -77,9 +70,6 @@ export default function GameContainer({
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   const [hasMistake, setMistake] = useState(false);
   const [isGameClear, setGameClear] = useState(false);
-  const [beforeAfter, setBeforeAfter] = useState<
-    ComponentProps<typeof InputNoticeLayer>['beforeAfter']
-  >([undefined, undefined]);
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   const fill = useFill(
     puzzle,
@@ -90,7 +80,6 @@ export default function GameContainer({
     cross,
     hyper,
     setPuzzle,
-    setBeforeAfter,
   );
   useFillByKeyboard(fill);
   const inputMemo = useInputMemo(
@@ -124,10 +113,6 @@ export default function GameContainer({
   return (
     <div className="max-w-xl grow">
       <div className="shadow-xl m-2 bg-white relative">
-        <InputNoticeLayer
-          className="absolute top-0 left-0"
-          beforeAfter={beforeAfter}
-        />
         <GameBoard
           puzzle={puzzle}
           blockSize={blockSize}
@@ -297,9 +282,6 @@ function useFill(
   cross: boolean,
   hyper: boolean,
   setPuzzle: React.Dispatch<React.SetStateAction<MyGame>>,
-  setBeforeAfter: React.Dispatch<
-    React.SetStateAction<[string | undefined, string | undefined] | undefined>
-  >,
 ) {
   return useCallback<Fill>(
     (answer?: string | undefined) => {
@@ -313,7 +295,6 @@ function useFill(
         targetCell.answer = answer;
         targetCell.memoList = undefined;
         gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
-        setBeforeAfter([before, answer]);
         setPuzzle(puzzle);
         forceUpdate();
         return;
@@ -325,7 +306,6 @@ function useFill(
       }
       targetCell.answer = answer;
       gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
-      setBeforeAfter([before, answer]);
       setPuzzle(puzzle);
       forceUpdate();
     },
