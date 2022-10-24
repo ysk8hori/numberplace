@@ -52,7 +52,7 @@ function ToggleButton({
   'aria-label': ariaLabel,
 }: React.ComponentProps<'input'>) {
   return (
-    <Base style={style}>
+    <Base style={style} className="aspect-square">
       <ToggleInput
         id={id}
         {...{ onClick, defaultChecked }}
