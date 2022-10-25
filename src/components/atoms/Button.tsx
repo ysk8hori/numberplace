@@ -1,27 +1,54 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { ComponentProps } from 'react';
+import styled, { css } from 'styled-components';
+import { ButtonState, ButtonType } from '../../theme/styled';
 
-type Props = JSX.IntrinsicElements['button'];
+function getStyle(type: ButtonType, state: ButtonState) {
+  return css`
+    ${({ theme: { button } }) => css`
+      border-style: solid;
+      border-width: ${button[type][state].border_width};
+      border-color: ${button[type][state].border_color};
+      background-color: ${button[type][state].bg_color};
+      color: ${button[type][state].color};
+    `}
+  `;
+}
+
+const StyledButton = styled.button<{ buttonType: ButtonType }>`
+  ${({ buttonType }) => getStyle(buttonType, 'normal')}
+  &:hover {
+    ${({ buttonType }) => getStyle(buttonType, 'hover')}
+  }
+  &:active {
+    ${({ buttonType }) => getStyle(buttonType, 'active')}
+  }
+  &:disabled {
+    ${({ buttonType }) => getStyle(buttonType, 'disabled')}
+  }
+`;
 
 /**
  * 汎用ボタン
  */
-function Button({ onClick, disabled, children, className, ...rest }: Props) {
+function Button({
+  type = 'flat',
+  onClick,
+  disabled,
+  children,
+  className,
+  ...rest
+}: ComponentProps<typeof StyledButton> & { type?: ButtonType }) {
   return (
-    <button
-      className={clsx(
-        'rounded-md border px-2',
-        !disabled && 'bg-gray-100 active:bg-gray-200 hover:bg-gray-300',
-        disabled ? 'border-gray-300' : 'border-gray-500',
-        disabled ? 'text-gray-300' : 'text-gray-800',
-        className,
-      )}
+    <StyledButton
+      buttonType={type}
+      className={clsx('rounded-md px-2', className)}
       onClick={onClick}
       disabled={disabled}
       {...rest}
     >
       {children}
-    </button>
+    </StyledButton>
   );
 }
 
