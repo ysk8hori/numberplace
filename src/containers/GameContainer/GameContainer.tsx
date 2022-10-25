@@ -131,7 +131,7 @@ export default function GameContainer({
           completedNumbers={completeNumbers}
         />
       </div>
-      <div className="flex justify-center gap-8">
+      <div className="flex justify-center gap-8 pb-4">
         <Quit onQuit={() => (gameHolder.removeSavedGame(), onChangeSize?.())} />
         <Verifying onStartChecking={() => checkAndUpdate(puzzle)} />
       </div>
