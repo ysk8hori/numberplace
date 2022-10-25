@@ -31,19 +31,19 @@ const defaultToken: DefaultTheme = {
     },
     outlined: {
       normal: {
-        border_width: '1px',
+        border_width: '2px',
         border_color: colors.gray[800],
         bg_color: colors.transparent,
         color: colors.gray[800],
       },
       hover: {
-        border_width: '1px',
+        border_width: '2px',
         border_color: colors.gray[800],
         bg_color: `${colors.gray[800]}20`,
         color: colors.gray[800],
       },
       active: {
-        border_width: '1px',
+        border_width: '2px',
         border_color: colors.gray[800],
         bg_color: colors.transparent,
         color: colors.gray[800],
