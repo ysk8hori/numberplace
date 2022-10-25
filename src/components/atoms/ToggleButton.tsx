@@ -61,7 +61,7 @@ function ToggleButton({
       <ToggleLabel
         htmlFor={id}
         className={clsx(
-          'aspect-square w-full h-full border border-gray-800 rounded-lg flex justify-center items-center',
+          'aspect-square w-full h-full rounded-lg flex justify-center items-center',
           className,
         )}
       >

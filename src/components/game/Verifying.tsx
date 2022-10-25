@@ -15,6 +15,7 @@ const Verifying: React.FC<{
   return (
     <>
       <Button
+        type="outlined"
         onClick={() => onStartChecking?.()}
         className="p-4 rounded-2xl text-2xl"
       >

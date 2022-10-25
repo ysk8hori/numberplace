@@ -1,11 +1,9 @@
 import { BlockSize } from '@ysk8hori/numberplace-generator';
-import React, { useCallback, useMemo, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import ToggleMemoButton from './ToggleMemoButton';
 import { FaEraser } from 'react-icons/fa';
-import { getSvg } from '../utils/numberUtils';
-import { Icon } from '../../atoms/Icon';
-import colors from 'tailwindcss/colors';
 import Button from '../../atoms/Button';
+import NumberButton from '../../atoms/NumberButton';
 
 type Props = {
   /** ゲームのブロックサイズ */
@@ -62,6 +60,7 @@ const InputPanel: React.FC<Props> = ({
     <div className={`grid grid-cols-6 gap-1`} {...rest}>
       <NumberButtons {...numberButtonProps} />
       <Button
+        type="text"
         data-testid={`btn_delete`}
         onClick={onDelete}
         aria-label="消す"
@@ -109,43 +108,5 @@ function NumberButtons({
           />
         ))}
     </>
-  );
-}
-
-function NumberButton({
-  onMemoInput,
-  onInput,
-  completedNumbers,
-  buttonNumber,
-  isMemoMode,
-  size,
-}: Required<Omit<Props, 'onDelete'>> & {
-  buttonNumber: number;
-  isMemoMode: boolean;
-  size: number;
-}) {
-  const onClick = useCallback(
-    () => (isMemoMode ? onMemoInput : onInput)(buttonNumber.toString()),
-    [isMemoMode, onMemoInput, onInput, buttonNumber],
-  );
-  const disabled = useMemo(
-    () =>
-      size < buttonNumber || completedNumbers.includes(buttonNumber.toString()),
-    [size, buttonNumber, completedNumbers],
-  );
-  return (
-    <Button
-      data-testid={`input_${buttonNumber}`}
-      onClick={onClick}
-      disabled={disabled}
-      aria-label={buttonNumber.toString()}
-      className="flex justify-center items-center aspect-square"
-    >
-      <Icon
-        src={getSvg({ answer: buttonNumber.toString() })}
-        color={disabled ? colors.gray['300'] : colors.gray['800']}
-        style={{ width: '60%', height: '60%' }}
-      />
-    </Button>
   );
 }

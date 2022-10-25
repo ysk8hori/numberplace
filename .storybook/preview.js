@@ -1,3 +1,5 @@
+import { ThemeProvider } from 'styled-components';
+import defaultToken from '../src/theme/semanticToken';
 import '../src/index.css';
 import './story.css';
 
@@ -10,3 +12,10 @@ export const parameters = {
     },
   },
 };
+export const decorators = [
+  Story => (
+    <ThemeProvider theme={defaultToken}>
+      <Story />
+    </ThemeProvider>
+  ),
+];

@@ -1,11 +1,16 @@
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
+import { ThemeProvider } from 'styled-components';
+import semanticToken from '../theme/semanticToken';
+import React from 'react';
 
 const customRender = (ui: React.ReactElement, options = {}) =>
   render(ui, {
     // wrap provider(s) here if needed
-    wrapper: ({ children }) => children,
+    wrapper: ({ children }) => {
+      return <ThemeProvider theme={semanticToken}>{children}</ThemeProvider>;
+    },
     ...options,
   });
 
