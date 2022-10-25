@@ -17,7 +17,11 @@ export default function Generating({ cancel }: { cancel?: () => void }) {
     <div className="max-w-lg mx-auto flex flex-col justify-center items-center gap-5">
       <SelfBuildingSquareSpinner />
       <HiddenBox className={showCancel ? 'visible' : undefined}>
-        <Button onClick={() => cancel?.()} className="px-5 py-1">
+        <Button
+          type="outlined"
+          onClick={() => cancel?.()}
+          className="px-5 py-1"
+        >
           キャンセル
         </Button>
       </HiddenBox>
