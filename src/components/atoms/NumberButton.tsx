@@ -1,5 +1,5 @@
 import { BlockSize } from '@ysk8hori/numberplace-generator';
-import { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useTheme } from 'styled-components';
 import { getSvg } from '../game/utils/numberUtils';
 import Button from './Button';
