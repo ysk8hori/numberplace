@@ -2,7 +2,6 @@ import { BlockSize } from '@ysk8hori/numberplace-generator';
 import clsx from 'clsx';
 import React, { useMemo, useState } from 'react';
 import { MyGame } from '../../utils/typeUtils';
-import GlassCard from '../atoms/GlassCard';
 import GameBoard from '../game/GameBoard';
 import styled from 'styled-components';
 import { Difficulty } from '../../utils/difficulty';
