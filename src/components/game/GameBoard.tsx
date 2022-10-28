@@ -37,7 +37,7 @@ type Props = {
 const GameBoard: React.FC<Props> = ({
   puzzle,
   blockSize,
-  onSelectCell = () => undefined,
+  onSelectCell,
   selectedPos,
   className: additionalClassName,
   cross,
@@ -82,7 +82,7 @@ const GameBoard: React.FC<Props> = ({
               ? true
               : false
           }
-          onSelect={() => onSelectCell(cell.pos)}
+          onSelect={onSelectCell ? () => onSelectCell(cell.pos) : undefined}
           fix={cell.isFix}
           blockSize={blockSize}
           memoList={cell.memoList}

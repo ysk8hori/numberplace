@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { PropsWithChildren, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { getSvg } from '../utils/numberUtils';
 import MemoLayer, { Props as MemoLayerProps } from './MemoLayer';
 
@@ -25,7 +25,7 @@ import MemoLayer, { Props as MemoLayerProps } from './MemoLayer';
  * - 自分のポジションを意識した処理
  */
 function Cell({
-  onSelect = () => undefined,
+  onSelect,
   answer,
   fix,
   right,
@@ -37,41 +37,47 @@ function Cell({
   upleftDownright,
   uprightDownleft,
   hyper,
-  ...rest
-}: PropsWithChildren<
-  { onSelect?: () => void; 'data-testid'?: string } & AnswerLayerProps &
-    BorderLayerProps &
-    SelectLayerProps &
-    MemoLayerProps &
-    UpleftDownrightGroupLayerProps &
-    UprightDownleftGroupLayerProps &
-    HyperGroupLayerProps
->) {
+}: { onSelect?: () => void; 'data-testid'?: string } & AnswerLayerProps &
+  BorderLayerProps &
+  SelectLayerProps &
+  MemoLayerProps &
+  UpleftDownrightGroupLayerProps &
+  UprightDownleftGroupLayerProps &
+  HyperGroupLayerProps) {
+  if (onSelect)
+    return (
+      <button
+        className={'relative aspect-square select-none'}
+        onClick={onSelect}
+        data-testid={dataTestid}
+        data-select={select}
+        data-fix={fix}
+        data-answer={answer}
+      >
+        <BorderLayer right={right} bottom={bottom} />
+        <UpleftDownrightGroupLayer upleftDownright={upleftDownright} />
+        <UprightDownleftGroupLayer uprightDownleft={uprightDownleft} />
+        <HyperGroupLayer hyper={hyper} />
+        <SelectLayer select={select} />
+        {answer ? (
+          <AnswerLayer answer={answer} fix={fix} />
+        ) : (
+          <MemoLayer
+            blockSize={blockSize}
+            memoList={memoList}
+            data-testid={`${dataTestid}-memo`}
+            data-memo={memoList}
+          />
+        )}
+      </button>
+    );
   return (
-    <div
-      className={'relative aspect-square select-none'}
-      onMouseDown={onSelect}
-      data-testid={dataTestid}
-      data-select={select}
-      data-fix={fix}
-      data-answer={answer}
-      {...rest}
-    >
+    <div className={'relative aspect-square select-none'}>
       <BorderLayer right={right} bottom={bottom} />
       <UpleftDownrightGroupLayer upleftDownright={upleftDownright} />
       <UprightDownleftGroupLayer uprightDownleft={uprightDownleft} />
       <HyperGroupLayer hyper={hyper} />
-      <SelectLayer select={select} />
-      {answer ? (
-        <AnswerLayer answer={answer} fix={fix} />
-      ) : (
-        <MemoLayer
-          blockSize={blockSize}
-          memoList={memoList}
-          data-testid={`${dataTestid}-memo`}
-          data-memo={memoList}
-        />
-      )}
+      <AnswerLayer answer={answer} fix={fix} />
     </div>
   );
 }
