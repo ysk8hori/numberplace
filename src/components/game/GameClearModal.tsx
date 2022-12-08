@@ -26,7 +26,7 @@ const GameClearModal: React.FC<{
       <p className="text-center">クリア！</p>
       <div className="grid grid-cols-2 justify-center gap-8">
         <Button
-          type="text"
+          variant="text"
           onClick={() => (close(), onRegenerate?.())}
           className="p-2 rounded-lg w-full font-black"
         >
@@ -37,7 +37,7 @@ const GameClearModal: React.FC<{
           遊ぶ
         </Button>
         <Button
-          type="text"
+          variant="text"
           onClick={() => (close(), onChangeSize?.())}
           className="p-2 rounded-lg w-full font-black"
         >

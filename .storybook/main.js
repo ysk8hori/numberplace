@@ -5,12 +5,17 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     '@storybook/addon-postcss',
-    '@storybook/addon-docs',
   ],
   framework: '@storybook/react',
   options: {
     postcssLoaderOptions: {
       implementation: require('postcss'),
     },
+  },
+  docs: {
+    docsPage: 'automatic',
+  },
+  core: {
+    builder: 'webpack5',
   },
 };

@@ -21,7 +21,7 @@ const MistakeNoticeModal: React.FC<{
       {mistake && <p className="text-center">間違いがあります</p>}
       <div className="flex justify-center">
         <Button
-          type="text"
+          variant="text"
           onClick={() => (close(), onOk?.())}
           className="p-2 w-2/5 font-black"
         >
