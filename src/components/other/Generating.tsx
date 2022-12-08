@@ -18,7 +18,7 @@ export default function Generating({ cancel }: { cancel?: () => void }) {
       <SelfBuildingSquareSpinner />
       <HiddenBox className={showCancel ? 'visible' : undefined}>
         <Button
-          type="outlined"
+          variant="outlined"
           onClick={() => cancel?.()}
           className="px-5 py-1"
         >

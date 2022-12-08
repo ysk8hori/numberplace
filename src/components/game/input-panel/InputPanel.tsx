@@ -60,7 +60,7 @@ const InputPanel: React.FC<Props> = ({
     <div className={`grid grid-cols-6 gap-1`} {...rest}>
       <NumberButtons {...numberButtonProps} />
       <Button
-        type="text"
+        variant="text"
         data-testid={`btn_delete`}
         onClick={onDelete}
         aria-label="消す"

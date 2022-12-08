@@ -1,30 +1,30 @@
 import clsx from 'clsx';
 import React, { ComponentProps } from 'react';
 import styled, { css } from 'styled-components';
-import { ButtonState, ButtonType } from '../../theme/styled';
+import { ButtonState, ButtonVariant } from '../../theme/styled';
 
-function getStyle(type: ButtonType, state: ButtonState) {
+function getStyle(variant: ButtonVariant, state: ButtonState) {
   return css`
     ${({ theme: { button } }) => css`
       border-style: solid;
-      border-width: ${button[type][state].border_width};
-      border-color: ${button[type][state].border_color};
-      background-color: ${button[type][state].bg_color};
-      color: ${button[type][state].color};
+      border-width: ${button[variant][state].border_width};
+      border-color: ${button[variant][state].border_color};
+      background-color: ${button[variant][state].bg_color};
+      color: ${button[variant][state].color};
     `}
   `;
 }
 
-const StyledButton = styled.button<{ buttonType: ButtonType }>`
-  ${({ buttonType }) => getStyle(buttonType, 'normal')}
+const StyledButton = styled.button<{ buttonVariant: ButtonVariant }>`
+  ${({ buttonVariant }) => getStyle(buttonVariant, 'normal')}
   &:hover {
-    ${({ buttonType }) => getStyle(buttonType, 'hover')}
+    ${({ buttonVariant }) => getStyle(buttonVariant, 'hover')}
   }
   &:active {
-    ${({ buttonType }) => getStyle(buttonType, 'active')}
+    ${({ buttonVariant }) => getStyle(buttonVariant, 'active')}
   }
   &:disabled {
-    ${({ buttonType }) => getStyle(buttonType, 'disabled')}
+    ${({ buttonVariant }) => getStyle(buttonVariant, 'disabled')}
   }
 `;
 
@@ -32,16 +32,16 @@ const StyledButton = styled.button<{ buttonType: ButtonType }>`
  * 汎用ボタン
  */
 function Button({
-  type = 'flat',
+  variant = 'flat',
   onClick,
   disabled,
   children,
   className,
   ...rest
-}: ComponentProps<typeof StyledButton> & { type?: ButtonType }) {
+}: ComponentProps<typeof StyledButton> & { variant?: ButtonVariant }) {
   return (
     <StyledButton
-      buttonType={type}
+      buttonVariant={variant}
       className={clsx('rounded-md px-2', className)}
       onClick={onClick}
       disabled={disabled}

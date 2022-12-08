@@ -6,7 +6,7 @@ declare module 'styled-components' {
   }
 }
 
-type AllButton = Record<ButtonType, ButtonSet>;
+type AllButton = Record<ButtonVariant, ButtonSet>;
 type ButtonSet = Record<ButtonState, ButtonBase>;
 type ButtonBase = {
   border_color: string;
@@ -14,5 +14,5 @@ type ButtonBase = {
   bg_color: string;
   color: string;
 };
-export type ButtonType = 'flat' | 'outlined' | 'text';
+export type ButtonVariant = 'flat' | 'outlined' | 'text';
 export type ButtonState = 'normal' | 'hover' | 'active' | 'disabled';
