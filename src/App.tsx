@@ -35,40 +35,8 @@ function App() {
     'normal',
   );
   const [saveData, setSaveData] = useState<SaveData | undefined>(undefined);
-  useEffect(() => {
-    if (!location.search) return;
-
-    const params = new URLSearchParams(location.search);
-    history.replaceState('', '', '/');
-    const result = fromURLSearchParams(params);
-    if (result.status !== 'success') {
-      console.log(result.status);
-      return;
-    }
-
-    const gameTypes: GameType[] = [];
-    if (result.data.cross) gameTypes.push('cross');
-    if (result.data.hyper) gameTypes.push('hyper');
-    const analyzeResult = analyzeGame({
-      ...result.data,
-      option: { gameTypes },
-    });
-    if (analyzeResult.status !== 'solved') {
-      console.log(analyzeResult.status);
-      return;
-    }
-    gameHolder.saveGame({ ...result.data, solved: analyzeResult.solved });
-  }, [location.search]);
-  useEffect(() => {
-    const saveData = gameHolder.loadGame();
-    setSaveData(saveData);
-    if (saveData) {
-      setBlockSize(saveData.blockSize as BlockSize);
-      setCross(!!saveData.cross);
-      setHyper(!!saveData.hyper);
-      setMode('loadAndPlay');
-    }
-  }, [mode]);
+  useGameFromParams();
+  useGameFromSavedData(setSaveData, setBlockSize, setCross, setHyper, setMode);
 
   switch (mode) {
     case 'generateAndPlay':
@@ -116,3 +84,49 @@ function App() {
 }
 
 export default App;
+
+function useGameFromSavedData(
+  setSaveData: React.Dispatch<React.SetStateAction<SaveData | undefined>>,
+  setBlockSize: React.Dispatch<React.SetStateAction<BlockSize>>,
+  setCross: React.Dispatch<React.SetStateAction<boolean>>,
+  setHyper: React.Dispatch<React.SetStateAction<boolean>>,
+  setMode: React.Dispatch<React.SetStateAction<Mode>>,
+) {
+  useEffect(() => {
+    const saveData = gameHolder.loadGame();
+    setSaveData(saveData);
+    if (saveData) {
+      setBlockSize(saveData.blockSize as BlockSize);
+      setCross(!!saveData.cross);
+      setHyper(!!saveData.hyper);
+      setMode('loadAndPlay');
+    }
+  }, [gameHolder]);
+}
+
+function useGameFromParams() {
+  useEffect(() => {
+    if (!location.search) return;
+
+    const params = new URLSearchParams(location.search);
+    history.replaceState('', '', '/');
+    const result = fromURLSearchParams(params);
+    if (result.status !== 'success') {
+      console.log(result.status);
+      return;
+    }
+
+    const gameTypes: GameType[] = [];
+    if (result.data.cross) gameTypes.push('cross');
+    if (result.data.hyper) gameTypes.push('hyper');
+    const analyzeResult = analyzeGame({
+      ...result.data,
+      option: { gameTypes },
+    });
+    if (analyzeResult.status !== 'solved') {
+      console.log(analyzeResult.status);
+      return;
+    }
+    gameHolder.saveGame({ ...result.data, solved: analyzeResult.solved });
+  }, [location.search, gameHolder]);
+}
