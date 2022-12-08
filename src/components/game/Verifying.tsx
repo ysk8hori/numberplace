@@ -17,7 +17,7 @@ const Verifying: React.FC<{
       <Button
         variant="outlined"
         onClick={() => onStartChecking?.()}
-        className="p-4 rounded-2xl text-2xl"
+        className="p-4 rounded-2xl text-xl"
       >
         答え合わせ
       </Button>

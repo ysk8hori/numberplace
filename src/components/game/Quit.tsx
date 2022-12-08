@@ -21,7 +21,7 @@ const Quit: React.FC<{
       <Button
         variant="outlined"
         onClick={() => open()}
-        className="rounded-2xl text-2xl"
+        className="rounded-2xl text-xl"
       >
         ゲームをやめる
       </Button>
