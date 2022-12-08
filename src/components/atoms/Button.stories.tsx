@@ -13,8 +13,8 @@ const Container = styled.div`
 
 const FlatTemplate: ComponentStory<typeof Button> = () => (
   <Container>
-    <Button type="flat">Hello</Button>
-    <Button type="flat" disabled>
+    <Button variant="flat">Hello</Button>
+    <Button variant="flat" disabled>
       Disabled
     </Button>
   </Container>
@@ -23,8 +23,8 @@ export const Flat = FlatTemplate.bind({});
 
 const OutlinedTemplate: ComponentStory<typeof Button> = () => (
   <Container>
-    <Button type="outlined">Hello</Button>
-    <Button type="outlined" disabled>
+    <Button variant="outlined">Hello</Button>
+    <Button variant="outlined" disabled>
       Disabled
     </Button>
   </Container>
@@ -33,8 +33,8 @@ export const OutLined = OutlinedTemplate.bind({});
 
 const TextTemplate: ComponentStory<typeof Button> = () => (
   <Container>
-    <Button type="text">Hello</Button>
-    <Button type="text" disabled>
+    <Button variant="text">Hello</Button>
+    <Button variant="text" disabled>
       Disabled
     </Button>
   </Container>

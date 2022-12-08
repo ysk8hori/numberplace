@@ -1,7 +1,7 @@
 import { DefaultTheme } from 'styled-components';
 import colors from './colors';
 
-const defaultToken: DefaultTheme = {
+const defaultToken = {
   button: {
     flat: {
       normal: {
@@ -82,5 +82,5 @@ const defaultToken: DefaultTheme = {
       },
     },
   },
-};
+} satisfies DefaultTheme;
 export default defaultToken;

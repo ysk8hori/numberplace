@@ -49,7 +49,7 @@ export default function NumberButton({
       disabled={disabled}
       aria-label={buttonNumber.toString()}
       className="flex justify-center items-center aspect-square"
-      type="text"
+      variant="text"
     >
       <Icon
         src={getSvg({ answer: buttonNumber.toString() })}

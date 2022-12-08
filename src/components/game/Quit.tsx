@@ -19,7 +19,7 @@ const Quit: React.FC<{
   return (
     <>
       <Button
-        type="outlined"
+        variant="outlined"
         onClick={() => open()}
         className="rounded-2xl text-2xl"
       >
@@ -28,11 +28,11 @@ const Quit: React.FC<{
       <Modal isOpen={isOpen} contentLabel="ゲームをやめる確認">
         <p className="text-center">ゲームをやめますか？</p>
         <div className="w-60 flex gap-4 justify-center">
-          <Button type="text" onClick={() => close()} className="p-2 w-2/5">
+          <Button variant="text" onClick={() => close()} className="p-2 w-2/5">
             いいえ
           </Button>
           <Button
-            type="text"
+            variant="text"
             onClick={() => (close(), onQuit?.())}
             className="p-2 w-2/5"
           >
