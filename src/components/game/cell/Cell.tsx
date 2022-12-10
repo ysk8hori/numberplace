@@ -1,7 +1,9 @@
 import clsx from 'clsx';
 import React, { PropsWithChildren, useMemo } from 'react';
-import { getSvg } from '../utils/numberUtils';
+import getAnswerClass from '../utils/answers/getAnswerClass';
 import MemoLayer, { Props as MemoLayerProps } from './MemoLayer';
+import '../utils/answers/number/normal.scss';
+import '../utils/answers/number/bold.scss';
 
 /**
  * マス目１つを表すコンポーネント。以下の特徴を持つ。
@@ -210,15 +212,18 @@ type AnswerLayerProps = {
  * 答えを表示するレイヤー。
  */
 const AnswerLayer: React.FC<AnswerLayerProps> = ({ answer, fix }) => {
-  const numberImage = useMemo(() => getSvg({ answer, fix }), [answer, fix]);
+  const className = useMemo(
+    () => clsx(getAnswerClass({ answer, fix }), 'select-none'),
+    [answer, fix],
+  );
   return (
     <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center select-none">
-      <img
-        src={numberImage}
-        alt={`answer ${answer}`}
-        className="select-none"
+      <div
+        role="img"
+        className={className}
         style={{ width: '70%', height: '70%' }}
-      ></img>
+        aria-label={`answer ${answer}`}
+      />
     </div>
   );
 };
