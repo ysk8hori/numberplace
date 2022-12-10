@@ -1,9 +1,9 @@
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import React, { useCallback, useMemo } from 'react';
-import { useTheme } from 'styled-components';
-import { getSvg } from '../game/utils/numberUtils';
 import Button from './Button';
-import { Icon } from './Icon';
+import getAnswerClass from '../game/utils/answers/getAnswerClass';
+import '../game/utils/answers/number/normal.scss';
+import '../game/utils/answers/number/disabled.scss';
 
 type Props = {
   /** ゲームのブロックサイズ */
@@ -41,7 +41,10 @@ export default function NumberButton({
       size < buttonNumber || completedNumbers.includes(buttonNumber.toString()),
     [size, buttonNumber, completedNumbers],
   );
-  const theme = useTheme();
+  const className = useMemo(
+    () => getAnswerClass({ answer: buttonNumber.toString(), disabled }),
+    [buttonNumber, disabled],
+  );
   return (
     <Button
       data-testid={`input_${buttonNumber}`}
@@ -51,15 +54,7 @@ export default function NumberButton({
       className="flex justify-center items-center aspect-square"
       variant="text"
     >
-      <Icon
-        src={getSvg({ answer: buttonNumber.toString() })}
-        color={
-          disabled
-            ? theme.button.text.disabled.color
-            : theme.button.text.normal.color
-        }
-        style={{ width: '60%', height: '60%' }}
-      />
+      <div className={className} style={{ width: '60%', height: '60%' }}></div>
     </Button>
   );
 }
