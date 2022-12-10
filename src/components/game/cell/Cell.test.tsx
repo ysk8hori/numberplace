@@ -12,7 +12,7 @@ import Cell from './Cell';
 describe('Cell', () => {
   test('Cell は answer を表示する', () => {
     render(<Cell answer={'2'} />);
-    expect(screen.getByAltText('answer 2')).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'answer 2' })).toBeInTheDocument();
   });
   test('Cell は answer がない場合は空欄になる', () => {
     render(<Cell answer={undefined} />);
@@ -21,7 +21,7 @@ describe('Cell', () => {
   test('Cell は click 可能である', async () => {
     const onSelect = vi.fn();
     render(<Cell answer={'2'} onSelect={onSelect} />);
-    await userEvent.click(screen.getByAltText('answer 2'));
+    await userEvent.click(screen.getByRole('img', { name: 'answer 2' }));
     expect(onSelect).toHaveBeenCalled();
   });
   test('選択中の Cell には data-select 属性が付く', () => {
@@ -45,7 +45,7 @@ describe('Cell', () => {
     render(<Cell blockSize={blockSize_2_2} memoList={['1', '4']} answer="3" />);
     expect(screen.queryByAltText('answer candidate 1')).not.toBeInTheDocument();
     expect(screen.queryByAltText('answer candidate 2')).not.toBeInTheDocument();
-    expect(screen.queryByAltText('answer 3')).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'answer 3' })).toBeInTheDocument();
     expect(screen.queryByAltText('answer candidate 4')).not.toBeInTheDocument();
   });
 });

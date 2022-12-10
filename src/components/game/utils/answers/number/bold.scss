@@ -1,0 +1,49 @@
+@use 'smart-svg';
+.num1bold {
+  @include smart-svg.show('images/bold/1.svg');
+}
+.num2bold {
+  @include smart-svg.show('images/bold/2.svg');
+}
+.num3bold {
+  @include smart-svg.show('images/bold/3.svg');
+}
+.num4bold {
+  @include smart-svg.show('images/bold/4.svg');
+}
+.num5bold {
+  @include smart-svg.show('images/bold/5.svg');
+}
+.num6bold {
+  @include smart-svg.show('images/bold/6.svg');
+}
+.num7bold {
+  @include smart-svg.show('images/bold/7.svg');
+}
+.num8bold {
+  @include smart-svg.show('images/bold/8.svg');
+}
+.num9bold {
+  @include smart-svg.show('images/bold/9.svg');
+}
+.num10bold {
+  @include smart-svg.show('images/bold/10.svg');
+}
+.num11bold {
+  @include smart-svg.show('images/bold/11.svg');
+}
+.num12bold {
+  @include smart-svg.show('images/bold/12.svg');
+}
+.num13bold {
+  @include smart-svg.show('images/bold/13.svg');
+}
+.num14bold {
+  @include smart-svg.show('images/bold/14.svg');
+}
+.num15bold {
+  @include smart-svg.show('images/bold/15.svg');
+}
+.num16bold {
+  @include smart-svg.show('images/bold/16.svg');
+}

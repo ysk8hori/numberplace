@@ -1,0 +1,49 @@
+@use 'smart-svg';
+.num1disabled {
+  @include smart-svg.show('images/bold/1.svg', $fill-color: #aaa);
+}
+.num2disabled {
+  @include smart-svg.show('images/bold/2.svg', $fill-color: #aaa);
+}
+.num3disabled {
+  @include smart-svg.show('images/bold/3.svg', $fill-color: #aaa);
+}
+.num4disabled {
+  @include smart-svg.show('images/bold/4.svg', $fill-color: #aaa);
+}
+.num5disabled {
+  @include smart-svg.show('images/bold/5.svg', $fill-color: #aaa);
+}
+.num6disabled {
+  @include smart-svg.show('images/bold/6.svg', $fill-color: #aaa);
+}
+.num7disabled {
+  @include smart-svg.show('images/bold/7.svg', $fill-color: #aaa);
+}
+.num8disabled {
+  @include smart-svg.show('images/bold/8.svg', $fill-color: #aaa);
+}
+.num9disabled {
+  @include smart-svg.show('images/bold/9.svg', $fill-color: #aaa);
+}
+.num10disabled {
+  @include smart-svg.show('images/bold/10.svg', $fill-color: #aaa);
+}
+.num11disabled {
+  @include smart-svg.show('images/bold/11.svg', $fill-color: #aaa);
+}
+.num12disabled {
+  @include smart-svg.show('images/bold/12.svg', $fill-color: #aaa);
+}
+.num13disabled {
+  @include smart-svg.show('images/bold/13.svg', $fill-color: #aaa);
+}
+.num14disabled {
+  @include smart-svg.show('images/bold/14.svg', $fill-color: #aaa);
+}
+.num15disabled {
+  @include smart-svg.show('images/bold/15.svg', $fill-color: #aaa);
+}
+.num16disabled {
+  @include smart-svg.show('images/bold/16.svg', $fill-color: #aaa);
+}
