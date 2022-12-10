@@ -6,7 +6,7 @@
 @tailwind utilities;
 
 .num1 {
-  @include smart-svg.show('/1.svg');
+  @include smart-svg.show('1.svg');
 }
 
 body {

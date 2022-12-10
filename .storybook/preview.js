@@ -1,6 +1,6 @@
 import { ThemeProvider } from 'styled-components';
 import defaultToken from '../src/theme/semanticToken';
-import '../src/index.css';
+import '../src/index.scss';
 import './story.css';
 
 export const parameters = {
