@@ -9,9 +9,9 @@ export default function getAnswerClass({
   disabled?: boolean;
   answerSvgType?: 'num';
 }) {
-  return answer
-    ? `${answerSvgType}${answer}${disabled ? 'disabled' : ''}${
+  return answer === '?'
+    ? 'question'
+    : `${answerSvgType}${answer}${disabled ? 'disabled' : ''}${
         fix ? 'bold' : ''
-      }`
-    : undefined;
+      }`;
 }

@@ -4,6 +4,7 @@ import BlockSizeButton from './BlockSizeButton';
 import backgroundimg from '../../images/top.svg';
 import { Difficulty } from '../../utils/difficulty';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
+import '../game/utils/answers/question.scss';
 
 /**
  * 選択可能な BlockSize のリスト
