@@ -16,7 +16,9 @@ describe('Cell', () => {
   });
   test('Cell は answer がない場合は空欄になる', () => {
     render(<Cell answer={undefined} />);
-    expect(screen.queryByAltText(/[0-9]/)).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('img', { name: /[0-9]/ }),
+    ).not.toBeInTheDocument();
   });
   test('Cell は click 可能である', async () => {
     const onSelect = vi.fn();
@@ -36,16 +38,30 @@ describe('Cell', () => {
   });
   test('Cell はメモした内容を表示する', () => {
     render(<Cell blockSize={blockSize_2_2} memoList={['1', '4']} />);
-    expect(screen.getByAltText('answer candidate 1')).toBeInTheDocument();
-    expect(screen.queryByAltText('answer candidate 2')).not.toBeInTheDocument();
-    expect(screen.queryByAltText('answer candidate 3')).not.toBeInTheDocument();
-    expect(screen.getByAltText('answer candidate 4')).toBeInTheDocument();
+    expect(
+      screen.getByRole('img', { name: 'answer candidate 1' }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole('img', { name: 'answer candidate 2' }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('img', { name: 'answer candidate 3' }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole('img', { name: 'answer candidate 4' }),
+    ).toBeInTheDocument();
   });
   test('Cell はメモより答えを優先して表示する', () => {
     render(<Cell blockSize={blockSize_2_2} memoList={['1', '4']} answer="3" />);
-    expect(screen.queryByAltText('answer candidate 1')).not.toBeInTheDocument();
-    expect(screen.queryByAltText('answer candidate 2')).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('img', { name: 'answer candidate 1' }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('img', { name: 'answer candidate 2' }),
+    ).not.toBeInTheDocument();
     expect(screen.getByRole('img', { name: 'answer 3' })).toBeInTheDocument();
-    expect(screen.queryByAltText('answer candidate 4')).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('img', { name: 'answer candidate 4' }),
+    ).not.toBeInTheDocument();
   });
 });
