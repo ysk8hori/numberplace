@@ -212,7 +212,7 @@ type AnswerLayerProps = {
 const AnswerLayer: React.FC<AnswerLayerProps> = ({ answer, fix }) => {
   const numberImage = useMemo(() => getSvg({ answer, fix }), [answer, fix]);
   return (
-    <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center select-none">
+    <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center select-none num1">
       <img
         src={numberImage}
         alt={`answer ${answer}`}

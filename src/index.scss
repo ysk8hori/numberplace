@@ -1,8 +1,13 @@
 /* @import url('https://fonts.googleapis.com/css?family=Quicksand');
 @import url('https://fonts.googleapis.com/css?family=Anton'); */
+@use 'smart-svg';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.num1 {
+  @include smart-svg.show('/1.svg');
+}
 
 body {
   margin: 0;
