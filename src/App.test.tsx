@@ -13,11 +13,11 @@ import {
   resolve_2_3,
 } from './utils/test-utils';
 import App from './App';
-import useGenerateGame from './containers/GenerateGameContainer/utils/useGenerateGame';
+import useGenerateGame from './pages/GenerateGameContainer/utils/useGenerateGame';
 import gameHolder from './utils/gameHolder';
 import { MyGame } from './utils/typeUtils';
 
-vi.mock('./containers/GenerateGameContainer/utils/useGenerateGame', () => ({
+vi.mock('./pages/GenerateGameContainer/utils/useGenerateGame', () => ({
   default: vi.fn(() => {
     return { puzzle: puzzle_2_3, solved: solved_2_3 };
   }),
