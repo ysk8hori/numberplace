@@ -8,7 +8,6 @@ import { blockSize_2_3 } from '../../../utils/samples';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'components/game/cell/Cell',
   component: Cell,
   decorators: [
     Story => (

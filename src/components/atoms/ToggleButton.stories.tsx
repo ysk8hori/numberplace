@@ -6,7 +6,6 @@ import { TiPencil } from 'react-icons/ti';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'components/atoms/ToggleButton',
   component: ToggleButton,
 } as ComponentMeta<typeof ToggleButton>;
 
