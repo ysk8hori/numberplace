@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import { useCallback, useMemo } from 'react';
 import { useRecoilState } from 'recoil';
-import { atomOfAnswerImageVariant } from '../atoms';
-import Button from '../atoms/Button';
-import './ConfigMenu.scss';
+import { atomOfAnswerImageVariant } from '../../../atoms';
+import Button from '../../Button';
+import './MenuStack.scss';
 
-export default function ConfigMenu({
+export default function MenuStack({
   isShow,
   onSelected,
   className,

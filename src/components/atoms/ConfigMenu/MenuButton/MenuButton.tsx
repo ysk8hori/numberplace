@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React, { useMemo } from 'react';
-import Button from '../../atoms/Button';
-import './index.scss';
+import Button from '../../Button';
+import './MenuButton.scss';
 
 export default function MenuButton({
   className: _className,

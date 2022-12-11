@@ -1,12 +1,11 @@
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React from 'react';
 import BlockSizeButton from './BlockSizeButton';
 import { Difficulty } from '../../utils/difficulty';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import '../game/utils/answers/question.scss';
 import '../../images/svg.scss';
-import MenuButton from './MenuButton';
-import ConfigMenu from './ConfigMenu';
+import ConfigMenu from '../atoms/ConfigMenu';
 
 /**
  * 選択可能な BlockSize のリスト
@@ -40,7 +39,6 @@ type Props = {
 } & React.ComponentProps<'div'>;
 
 function StartMenu({ onChoseBlockSize, className, ...rest }: Props) {
-  const [isShowConfig, showConfig] = useState<boolean>(false);
   return (
     <div className="max-w-lg mx-auto">
       <div
@@ -63,15 +61,7 @@ function StartMenu({ onChoseBlockSize, className, ...rest }: Props) {
           />
         ))}
       </div>
-      <ConfigMenu
-        isShow={isShowConfig}
-        onSelected={() => showConfig(false)}
-        className="fixed bottom-4 right-12"
-      ></ConfigMenu>
-      <MenuButton
-        onClick={() => showConfig(!isShowConfig)}
-        className="fixed bottom-4 right-4"
-      />
+      <ConfigMenu />
     </div>
   );
 }
