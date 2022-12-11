@@ -4,6 +4,8 @@ import Button from './Button';
 import getAnswerClass from '../game/utils/answers/getAnswerClass';
 import '../game/utils/answers/number/normal.scss';
 import '../game/utils/answers/number/disabled.scss';
+import '../game/utils/answers/asobi/normal.scss';
+import '../game/utils/answers/asobi/disabled.scss';
 
 type Props = {
   /** ゲームのブロックサイズ */

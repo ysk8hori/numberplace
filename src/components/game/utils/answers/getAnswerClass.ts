@@ -2,12 +2,12 @@ export default function getAnswerClass({
   answer,
   fix = false,
   disabled = false,
-  answerSvgType = 'num',
+  answerSvgType = 'asobi',
 }: {
   answer: string | undefined;
   fix?: boolean;
   disabled?: boolean;
-  answerSvgType?: 'num';
+  answerSvgType?: 'num' | 'asobi';
 }) {
   return answer === '?'
     ? 'question'
