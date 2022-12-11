@@ -3,9 +3,9 @@ import React from 'react';
 import BlockSizeButton from './BlockSizeButton';
 import { Difficulty } from '../../utils/difficulty';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
-import '../game/utils/answers/question.scss';
+import '../../components/game/utils/answers/question.scss';
 import '../../images/svg.scss';
-import ConfigMenu from '../atoms/ConfigMenu';
+import ConfigMenu from '../../components/atoms/ConfigMenu';
 
 /**
  * 選択可能な BlockSize のリスト
