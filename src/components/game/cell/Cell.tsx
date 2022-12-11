@@ -7,7 +7,7 @@ import '../utils/answers/number/bold.scss';
 import '../utils/answers/asobi/normal.scss';
 import '../utils/answers/asobi/bold.scss';
 import { useRecoilValue } from 'recoil';
-import { atomOfAnswerImageVariant } from '../../atoms';
+import { atomOfAnswerImageVariant } from '../../../atoms';
 
 /**
  * マス目１つを表すコンポーネント。以下の特徴を持つ。

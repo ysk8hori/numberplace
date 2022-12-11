@@ -2,7 +2,7 @@ import { BlockSize } from '@ysk8hori/numberplace-generator';
 import clsx from 'clsx';
 import React, { useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
-import { atomOfAnswerImageVariant } from '../../atoms';
+import { atomOfAnswerImageVariant } from '../../../atoms';
 import getAnswerClass from '../utils/answers/getAnswerClass';
 
 export type Props = React.ComponentProps<'div'> & {

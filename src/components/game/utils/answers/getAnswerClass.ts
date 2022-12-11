@@ -1,4 +1,4 @@
-import { AnswerImageVariant } from '../../../atoms';
+import { AnswerImageVariant } from '../../../../atoms';
 
 export default function getAnswerClass({
   answer,

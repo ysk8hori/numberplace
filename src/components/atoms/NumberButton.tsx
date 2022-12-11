@@ -7,7 +7,7 @@ import '../game/utils/answers/number/disabled.scss';
 import '../game/utils/answers/asobi/normal.scss';
 import '../game/utils/answers/asobi/disabled.scss';
 import { useRecoilValue } from 'recoil';
-import { atomOfAnswerImageVariant } from '../atoms';
+import { atomOfAnswerImageVariant } from '../../atoms';
 
 type Props = {
   /** ゲームのブロックサイズ */
