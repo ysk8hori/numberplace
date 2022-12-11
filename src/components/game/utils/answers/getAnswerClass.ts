@@ -1,17 +1,19 @@
+import { AnswerImageVariant } from '../../../atoms';
+
 export default function getAnswerClass({
   answer,
   fix = false,
   disabled = false,
-  answerSvgType = 'asobi',
+  answerImageVariant,
 }: {
   answer: string | undefined;
   fix?: boolean;
   disabled?: boolean;
-  answerSvgType?: 'num' | 'asobi';
+  answerImageVariant: AnswerImageVariant;
 }) {
   return answer === '?'
     ? 'question'
-    : `${answerSvgType}${answer}${disabled ? 'disabled' : ''}${
+    : `${answerImageVariant}${answer}${disabled ? 'disabled' : ''}${
         fix ? 'bold' : ''
       }`;
 }

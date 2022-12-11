@@ -4,12 +4,17 @@ import { screen } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import semanticToken from '../theme/semanticToken';
 import React from 'react';
+import { RecoilRoot } from 'recoil';
 
 const customRender = (ui: React.ReactElement, options = {}) =>
   render(ui, {
     // wrap provider(s) here if needed
     wrapper: ({ children }) => {
-      return <ThemeProvider theme={semanticToken}>{children}</ThemeProvider>;
+      return (
+        <RecoilRoot>
+          <ThemeProvider theme={semanticToken}>{children}</ThemeProvider>
+        </RecoilRoot>
+      );
     },
     ...options,
   });

@@ -6,6 +6,8 @@ import '../utils/answers/number/normal.scss';
 import '../utils/answers/number/bold.scss';
 import '../utils/answers/asobi/normal.scss';
 import '../utils/answers/asobi/bold.scss';
+import { useRecoilValue } from 'recoil';
+import { atomOfAnswerImageVariant } from '../../atoms';
 
 /**
  * マス目１つを表すコンポーネント。以下の特徴を持つ。
@@ -214,8 +216,10 @@ type AnswerLayerProps = {
  * 答えを表示するレイヤー。
  */
 const AnswerLayer: React.FC<AnswerLayerProps> = ({ answer, fix }) => {
+  const answerImageVariant = useRecoilValue(atomOfAnswerImageVariant);
   const className = useMemo(
-    () => clsx(getAnswerClass({ answer, fix }), 'select-none'),
+    () =>
+      clsx(getAnswerClass({ answer, fix, answerImageVariant }), 'select-none'),
     [answer, fix],
   );
   return (

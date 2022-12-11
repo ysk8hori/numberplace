@@ -1,6 +1,8 @@
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import clsx from 'clsx';
 import React, { useMemo } from 'react';
+import { useRecoilValue } from 'recoil';
+import { atomOfAnswerImageVariant } from '../../atoms';
 import getAnswerClass from '../utils/answers/getAnswerClass';
 
 export type Props = React.ComponentProps<'div'> & {
@@ -16,10 +18,11 @@ function MemoCell({
   answerCandidate: string;
   memoList?: string[];
 }) {
+  const answerImageVariant = useRecoilValue(atomOfAnswerImageVariant);
   const imageClassName = useMemo(
     () =>
       clsx(
-        getAnswerClass({ answer: answerCandidate }),
+        getAnswerClass({ answer: answerCandidate, answerImageVariant }),
         'select-none aspect-square',
       ),
     [answerCandidate],
