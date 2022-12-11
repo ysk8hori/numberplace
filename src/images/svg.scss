@@ -1,4 +1,4 @@
 @use 'smart-svg';
 .svg-top {
-  @include smart-svg.show('top.svg');
+  @include smart-svg.show('top.svg', $fill-color: theme('colors.zinc.400'));
 }
