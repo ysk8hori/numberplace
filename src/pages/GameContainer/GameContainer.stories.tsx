@@ -19,7 +19,6 @@ import ReactModal from 'react-modal';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'containers/GameContainer',
   component: GameContainer,
   parameters: {
     viewport: {

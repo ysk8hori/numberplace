@@ -5,7 +5,6 @@ import BlockSizeButton from './BlockSizeButton';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'components/menu/BlockSizeButton',
   component: BlockSizeButton,
 } as ComponentMeta<typeof BlockSizeButton>;
 

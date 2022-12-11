@@ -4,7 +4,6 @@ import DifficultySelector from './DifficultySelector';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'components/menu/DifficultySelector',
   component: DifficultySelector,
 } as ComponentMeta<typeof DifficultySelector>;
 

@@ -6,7 +6,6 @@ import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'containers/LoadGameContainer',
   component: LoadGameContainer,
   parameters: {
     viewport: {
