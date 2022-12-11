@@ -41,7 +41,10 @@ function App() {
   switch (mode) {
     case 'generateAndPlay':
       return (
-        <div className="w-screen h-screen flex justify-center">
+        <div
+          className="w-screen flex justify-center"
+          style={{ minHeight: '100svh' }}
+        >
           <GenerateGameContainer
             blockSize={blockSize}
             onChangeSize={() => setMode('menu')}
@@ -53,7 +56,10 @@ function App() {
       );
     case 'loadAndPlay':
       return (
-        <div className="w-screen h-screen flex justify-center">
+        <div
+          className="w-screen flex justify-center"
+          style={{ minHeight: '100svh' }}
+        >
           <LoadGameContainer
             blockSize={saveData!.blockSize}
             puzzle={saveData!.puzzle}
