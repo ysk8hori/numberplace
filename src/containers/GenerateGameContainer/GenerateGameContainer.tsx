@@ -4,6 +4,7 @@ import { BlockSize } from '@ysk8hori/numberplace-generator';
 import { Difficulty } from '../../utils/difficulty';
 import useGenerateGame from './utils/useGenerateGame';
 import Generating from '../../components/other/Generating';
+import ConfigMenu from '../../components/atoms/ConfigMenu';
 
 function GenerateGameContainer({
   blockSize,
@@ -44,6 +45,7 @@ function GenerateGameContainer({
         cross={cross}
         hyper={hyper}
       />
+      <ConfigMenu />
     </div>
   );
 }

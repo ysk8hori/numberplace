@@ -9,6 +9,7 @@ import Verifying from '../../components/game/Verifying';
 import MistakeNoticeModal from '../../components/game/MistakeNoticeModal';
 import GameClearModal from '../../components/game/GameClearModal';
 import Quit from '../../components/game/Quit';
+import ConfigMenu from '../../components/atoms/ConfigMenu';
 
 /** basePuzzle をクローンする */
 function clone(basePuzzle: MyGame): MyGame {
@@ -144,6 +145,7 @@ export default function GameContainer({
         onRegenerate={() => (gameHolder.removeSavedGame(), onRegenerate?.())}
         onChangeSize={() => (gameHolder.removeSavedGame(), onChangeSize?.())}
       />
+      <ConfigMenu />
     </div>
   );
 }

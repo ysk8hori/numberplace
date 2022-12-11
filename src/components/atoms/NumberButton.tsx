@@ -46,6 +46,7 @@ export default function NumberButton({
       size < buttonNumber || completedNumbers.includes(buttonNumber.toString()),
     [size, buttonNumber, completedNumbers],
   );
+
   const className = useMemo(
     () =>
       getAnswerClass({
@@ -53,7 +54,7 @@ export default function NumberButton({
         disabled,
         answerImageVariant,
       }),
-    [buttonNumber, disabled],
+    [buttonNumber, disabled, answerImageVariant],
   );
   return (
     <Button

@@ -25,7 +25,7 @@ function MemoCell({
         getAnswerClass({ answer: answerCandidate, answerImageVariant }),
         'select-none aspect-square',
       ),
-    [answerCandidate],
+    [answerCandidate, answerImageVariant],
   );
   const display = useMemo(
     () => memoList?.includes(answerCandidate),
