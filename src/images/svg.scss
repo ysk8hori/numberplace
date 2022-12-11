@@ -1,0 +1,4 @@
+@use 'smart-svg';
+.svg-top {
+  @include smart-svg.show('top.svg');
+}

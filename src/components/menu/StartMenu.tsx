@@ -5,6 +5,7 @@ import backgroundimg from '../../images/top.svg';
 import { Difficulty } from '../../utils/difficulty';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import '../game/utils/answers/question.scss';
+import '../../images/svg.scss';
 
 /**
  * 選択可能な BlockSize のリスト
@@ -44,7 +45,7 @@ function StartMenu({ onChoseBlockSize, className, ...rest }: Props) {
         className="h-screen flex justify-center items-center"
         style={{ height: '100svh' }}
       >
-        <img src={backgroundimg} alt="numberp" role="heading" aria-level={1} />
+        <h1 className="text-transparent svg-top w-full h-full">numberp</h1>
       </div>
       <div className={clsx('flex flex-col', className)} {...rest}>
         {gameList.map(({ blockSize, cross, hyper }) => (
