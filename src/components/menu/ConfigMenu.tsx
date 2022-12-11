@@ -1,13 +1,28 @@
+import clsx from 'clsx';
 import { useCallback, useMemo } from 'react';
 import { useRecoilState } from 'recoil';
 import { atomOfAnswerImageVariant } from '../atoms';
 import Button from '../atoms/Button';
 import './ConfigMenu.scss';
 
-export default function ConfigMenu() {
+export default function ConfigMenu({
+  isShow,
+  onSelected,
+  className,
+}: {
+  isShow: boolean;
+  onSelected: () => void;
+  className?: string;
+}) {
   const [variant, setVariant] = useRecoilState(atomOfAnswerImageVariant);
-  const onSelectNum = useCallback(() => setVariant('num'), [setVariant]);
-  const onSelectIcon = useCallback(() => setVariant('asobi'), [setVariant]);
+  const onSelectNum = useCallback(
+    () => (setVariant('num'), onSelected()),
+    [setVariant],
+  );
+  const onSelectIcon = useCallback(
+    () => (setVariant('asobi'), onSelected()),
+    [setVariant],
+  );
   const numClass = useMemo(
     () => (variant === 'num' ? 'svg-checked' : 'svg-unchecked'),
     [variant],
@@ -16,8 +31,15 @@ export default function ConfigMenu() {
     () => (variant === 'asobi' ? 'svg-checked' : 'svg-unchecked'),
     [variant],
   );
+  const containerClass = useMemo(
+    () => clsx(className, 'shadow border-zinc-500 rounded p-2 bg-zinc-50'),
+    [className],
+  );
   return (
-    <div className="shadow border-zinc-500 rounded p-2">
+    <div
+      className={containerClass}
+      style={{ display: isShow ? 'block' : 'none' }}
+    >
       <Button className="text-base block" variant="text" onClick={onSelectNum}>
         <span className={numClass}></span>数字で遊ぶ
       </Button>
