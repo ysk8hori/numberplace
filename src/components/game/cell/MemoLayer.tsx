@@ -1,7 +1,9 @@
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import clsx from 'clsx';
 import React, { useMemo } from 'react';
-import { getSvg } from '../utils/numberUtils';
+import { useRecoilValue } from 'recoil';
+import { atomOfAnswerImageVariant } from '../../../atoms';
+import getAnswerClass from '../utils/answers/getAnswerClass';
 
 export type Props = React.ComponentProps<'div'> & {
   memoList?: string[];
@@ -16,9 +18,14 @@ function MemoCell({
   answerCandidate: string;
   memoList?: string[];
 }) {
-  const numberImage = useMemo(
-    () => getSvg({ answer: answerCandidate }),
-    [answerCandidate],
+  const answerImageVariant = useRecoilValue(atomOfAnswerImageVariant);
+  const imageClassName = useMemo(
+    () =>
+      clsx(
+        getAnswerClass({ answer: answerCandidate, answerImageVariant }),
+        'select-none aspect-square',
+      ),
+    [answerCandidate, answerImageVariant],
   );
   const display = useMemo(
     () => memoList?.includes(answerCandidate),
@@ -27,12 +34,12 @@ function MemoCell({
   return (
     <div className="aspect-square">
       {display && (
-        <img
-          src={numberImage}
-          alt={`answer candidate ${answerCandidate}`}
-          className="select-none"
-          style={{ width: '80%', height: '80%' }}
-        ></img>
+        <div
+          role="img"
+          aria-label={`answer candidate ${answerCandidate}`}
+          className={imageClassName}
+          style={{ width: '80%', height: '80%', display: 'block' }}
+        ></div>
       )}
     </div>
   );

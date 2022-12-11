@@ -1,0 +1,97 @@
+@use 'smart-svg';
+.asobi1bold {
+  @include smart-svg.show(
+    'images/heart.svg',
+    $fill-color: theme('colors[pink][400]')
+  );
+}
+.asobi2bold {
+  @include smart-svg.show(
+    'images/star.svg',
+    $fill-color: theme('colors[yellow][400]')
+  );
+}
+.asobi3bold {
+  @include smart-svg.show(
+    'images/airplane.svg',
+    $fill-color: theme('colors[sky][500]')
+  );
+}
+.asobi4bold {
+  @include smart-svg.show(
+    'images/cat.svg',
+    $fill-color: theme('colors[orange][400]')
+  );
+}
+.asobi5bold {
+  @include smart-svg.show(
+    'images/cloud.svg',
+    $fill-color: theme('colors[sky][800]')
+  );
+}
+.asobi6bold {
+  @include smart-svg.show(
+    'images/truck.svg',
+    $fill-color: theme('colors[blue][700]')
+  );
+}
+.asobi7bold {
+  @include smart-svg.show(
+    'images/baguette.svg',
+    $fill-color: theme('colors[amber][900]')
+  );
+}
+.asobi8bold {
+  @include smart-svg.show(
+    'images/tennis-ball.svg',
+    $fill-color: theme('colors[amber][400]')
+  );
+}
+.asobi9bold {
+  @include smart-svg.show(
+    'images/umbrella.svg',
+    $fill-color: theme('colors[violet][500]')
+  );
+}
+.asobi10bold {
+  @include smart-svg.show(
+    'images/hand.svg',
+    $fill-color: theme('colors[orange][300]')
+  );
+}
+.asobi11bold {
+  @include smart-svg.show(
+    'images/train.svg',
+    $fill-color: theme('colors[green][500]')
+  );
+}
+.asobi12bold {
+  @include smart-svg.show(
+    'images/bird.svg',
+    $fill-color: theme('colors[rose][400]')
+  );
+}
+.asobi13bold {
+  @include smart-svg.show(
+    'images/airballoon.svg',
+    $fill-color: theme('colors[fuchsia][600]')
+  );
+}
+.asobi14bold {
+  @include smart-svg.show(
+    'images/home.svg',
+    $fill-color: theme('colors[rose][800]')
+  );
+}
+.asobi15bold {
+  @include smart-svg.show(
+    'images/diamond.svg',
+    $fill-color: theme('colors[red][500]')
+  );
+}
+.asobi16bold {
+  @include smart-svg.show(
+    'images/club.svg',
+    $fill-color: theme('colors[indigo][600]')
+  );
+}

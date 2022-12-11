@@ -1,9 +1,11 @@
 import clsx from 'clsx';
 import React from 'react';
 import BlockSizeButton from './BlockSizeButton';
-import backgroundimg from '../../images/top.svg';
 import { Difficulty } from '../../utils/difficulty';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
+import '../game/utils/answers/question.scss';
+import '../../images/svg.scss';
+import ConfigMenu from '../atoms/ConfigMenu';
 
 /**
  * 選択可能な BlockSize のリスト
@@ -39,8 +41,11 @@ type Props = {
 function StartMenu({ onChoseBlockSize, className, ...rest }: Props) {
   return (
     <div className="max-w-lg mx-auto">
-      <div className="h-screen flex justify-center items-center">
-        <img src={backgroundimg} alt="numberp" role="heading" aria-level={1} />
+      <div
+        className="h-screen flex justify-center items-center"
+        style={{ height: '100svh' }}
+      >
+        <h1 className="text-transparent svg-top w-full h-full">numberp</h1>
       </div>
       <div className={clsx('flex flex-col', className)} {...rest}>
         {gameList.map(({ blockSize, cross, hyper }) => (
@@ -56,6 +61,7 @@ function StartMenu({ onChoseBlockSize, className, ...rest }: Props) {
           />
         ))}
       </div>
+      <ConfigMenu />
     </div>
   );
 }

@@ -1,0 +1,97 @@
+@use 'smart-svg';
+.num1bold {
+  @include smart-svg.show(
+    'images/bold/1.svg',
+    $fill-color: theme('colors[zinc][700]')
+  );
+}
+.num2bold {
+  @include smart-svg.show(
+    'images/bold/2.svg',
+    $fill-color: theme('colors[zinc][700]')
+  );
+}
+.num3bold {
+  @include smart-svg.show(
+    'images/bold/3.svg',
+    $fill-color: theme('colors[zinc][700]')
+  );
+}
+.num4bold {
+  @include smart-svg.show(
+    'images/bold/4.svg',
+    $fill-color: theme('colors[zinc][700]')
+  );
+}
+.num5bold {
+  @include smart-svg.show(
+    'images/bold/5.svg',
+    $fill-color: theme('colors[zinc][700]')
+  );
+}
+.num6bold {
+  @include smart-svg.show(
+    'images/bold/6.svg',
+    $fill-color: theme('colors[zinc][700]')
+  );
+}
+.num7bold {
+  @include smart-svg.show(
+    'images/bold/7.svg',
+    $fill-color: theme('colors[zinc][700]')
+  );
+}
+.num8bold {
+  @include smart-svg.show(
+    'images/bold/8.svg',
+    $fill-color: theme('colors[zinc][700]')
+  );
+}
+.num9bold {
+  @include smart-svg.show(
+    'images/bold/9.svg',
+    $fill-color: theme('colors[zinc][700]')
+  );
+}
+.num10bold {
+  @include smart-svg.show(
+    'images/bold/10.svg',
+    $fill-color: theme('colors[zinc][700]')
+  );
+}
+.num11bold {
+  @include smart-svg.show(
+    'images/bold/11.svg',
+    $fill-color: theme('colors[zinc][700]')
+  );
+}
+.num12bold {
+  @include smart-svg.show(
+    'images/bold/12.svg',
+    $fill-color: theme('colors[zinc][700]')
+  );
+}
+.num13bold {
+  @include smart-svg.show(
+    'images/bold/13.svg',
+    $fill-color: theme('colors[zinc][700]')
+  );
+}
+.num14bold {
+  @include smart-svg.show(
+    'images/bold/14.svg',
+    $fill-color: theme('colors[zinc][700]')
+  );
+}
+.num15bold {
+  @include smart-svg.show(
+    'images/bold/15.svg',
+    $fill-color: theme('colors[zinc][700]')
+  );
+}
+.num16bold {
+  @include smart-svg.show(
+    'images/bold/16.svg',
+    $fill-color: theme('colors[zinc][700]')
+  );
+}

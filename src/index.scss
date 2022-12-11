@@ -1,0 +1,67 @@
+/* @import url('https://fonts.googleapis.com/css?family=Quicksand');
+@import url('https://fonts.googleapis.com/css?family=Anton'); */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-size: 20px;
+  color: theme('colors.zinc[700]');
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #eee;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* 
+ * grid-cols-n をスクリプトで動的に使用したいが、tailwind はクラス名を完全な状態で記載していないとスタイルを生成してくれない。
+ * そのためここでラッパーを定義して回避している。
+ * @see https://twitter.com/ysk8_/status/1505018757391200256?s=21
+ */
+.grid-cols-wrap-1 {
+  @apply grid-cols-1;
+}
+.grid-cols-wrap-2 {
+  @apply grid-cols-2;
+}
+.grid-cols-wrap-3 {
+  @apply grid-cols-3;
+}
+.grid-cols-wrap-4 {
+  @apply grid-cols-4;
+}
+.grid-cols-wrap-5 {
+  @apply grid-cols-5;
+}
+.grid-cols-wrap-6 {
+  @apply grid-cols-6;
+}
+.grid-cols-wrap-7 {
+  @apply grid-cols-7;
+}
+.grid-cols-wrap-8 {
+  @apply grid-cols-8;
+}
+.grid-cols-wrap-9 {
+  @apply grid-cols-9;
+}
+.grid-cols-wrap-10 {
+  @apply grid-cols-10;
+}
+.grid-cols-wrap-11 {
+  @apply grid-cols-11;
+}
+.grid-cols-wrap-12 {
+  @apply grid-cols-12;
+}
+.grid-cols-wrap-16 {
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+}

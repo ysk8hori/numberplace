@@ -1,0 +1,7 @@
+@use 'smart-svg';
+.question {
+  @include smart-svg.show(
+    'question.svg',
+    $fill-color: theme('colors[zinc][700]')
+  );
+}
