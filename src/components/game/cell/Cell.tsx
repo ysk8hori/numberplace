@@ -220,7 +220,7 @@ const AnswerLayer: React.FC<AnswerLayerProps> = ({ answer, fix }) => {
   const className = useMemo(
     () =>
       clsx(getAnswerClass({ answer, fix, answerImageVariant }), 'select-none'),
-    [answer, fix],
+    [answer, fix, answerImageVariant],
   );
   return (
     <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center select-none">
