@@ -13,7 +13,7 @@ import {
   resolve_2_3,
 } from './utils/test-utils';
 import App from './App';
-import useGenerateGame from './containers/GenerateGameContainer/utils/useGenerateGame';
+import useGenerateGame from './pages/GenerateGameContainer/utils/useGenerateGame';
 import gameHolder from './utils/gameHolder';
 import { MyGame } from './utils/typeUtils';
 
