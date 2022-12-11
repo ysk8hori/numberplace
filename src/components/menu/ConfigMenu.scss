@@ -1,0 +1,15 @@
+@use 'smart-svg';
+.svg-checked {
+  @include smart-svg.show(
+    'check.svg',
+    1rem,
+    $fill-color: theme('colors.zinc.700')
+  );
+}
+.svg-unchecked {
+  @include smart-svg.show-with-pseudo(
+    'check.svg',
+    1rem,
+    $fill-color: theme('colors.transparent')
+  );
+}
