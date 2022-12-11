@@ -4,6 +4,10 @@ import Button from './Button';
 import getAnswerClass from '../game/utils/answers/getAnswerClass';
 import '../game/utils/answers/number/normal.scss';
 import '../game/utils/answers/number/disabled.scss';
+import '../game/utils/answers/asobi/normal.scss';
+import '../game/utils/answers/asobi/disabled.scss';
+import { useRecoilValue } from 'recoil';
+import { atomOfAnswerImageVariant } from '../../atoms';
 
 type Props = {
   /** ゲームのブロックサイズ */
@@ -32,6 +36,7 @@ export default function NumberButton({
   isMemoMode: boolean;
   size: number;
 }) {
+  const answerImageVariant = useRecoilValue(atomOfAnswerImageVariant);
   const onClick = useCallback(
     () => (isMemoMode ? onMemoInput : onInput)(buttonNumber.toString()),
     [isMemoMode, onMemoInput, onInput, buttonNumber],
@@ -42,7 +47,12 @@ export default function NumberButton({
     [size, buttonNumber, completedNumbers],
   );
   const className = useMemo(
-    () => getAnswerClass({ answer: buttonNumber.toString(), disabled }),
+    () =>
+      getAnswerClass({
+        answer: buttonNumber.toString(),
+        disabled,
+        answerImageVariant,
+      }),
     [buttonNumber, disabled],
   );
   return (
