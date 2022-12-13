@@ -25,7 +25,7 @@ function useWorker(blockSize: BlockSize, difficulty: string) {
       console.log('worker terminate');
       worker.terminate();
     };
-  }, [blockSize, difficulty]);
+  }, [blockSize, difficulty, worker]);
   return worker;
 }
 
@@ -58,7 +58,7 @@ export default function useGenerateGame({
   }, [worker]);
 
   const [result, setResult] = useState<Result>({ cancel, isGenerating: true });
-  useEffect(() => setResult({ cancel, isGenerating: true }), [count]);
+  useEffect(() => setResult({ cancel, isGenerating: true }), [cancel, count]);
 
   useEffect(() => {
     // ワーカーにゲーム生成を依頼
@@ -67,7 +67,7 @@ export default function useGenerateGame({
     worker.onmessage = ({ data }) => {
       setResult(data);
     };
-  }, [count, worker]);
+  }, [blockSize, count, cross, difficulty, hyper, worker]);
 
   return result;
 }

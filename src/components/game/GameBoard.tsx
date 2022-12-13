@@ -62,7 +62,7 @@ const GameBoard: React.FC<Props> = ({
         ],
         additionalClassName,
       ),
-    [blockSize],
+    [additionalClassName, blockSize],
   );
   const { upleftDownrightPosList, uprightDownleftPosList } = useCrossPos(
     cross,
