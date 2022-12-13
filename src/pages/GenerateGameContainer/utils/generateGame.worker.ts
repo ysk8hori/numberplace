@@ -44,8 +44,7 @@ onmessage = ev => {
     cross,
     hyper,
   });
-  console.log(`http://localhost:3000/?${params.toString()}`);
-  console.log(`https://numberp.net/?${params.toString()}`);
+  console.log(`/?${params.toString()}`);
   postMessage({
     puzzle: puzzle,
     solved: { cells: solved.cells },
