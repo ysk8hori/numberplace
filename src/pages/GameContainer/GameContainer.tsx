@@ -209,7 +209,7 @@ function useCheckAndUpdate(
       // fix を反映するために forceUpdate する
       forceUpdate();
     },
-    [solved, setMistake, forceUpdate, blockSize, cross, hyper],
+    [solved, setGameClear, blockSize, cross, hyper, forceUpdate, setMistake],
   );
 }
 
@@ -265,7 +265,7 @@ function useArrowSelector(
           break;
       }
     },
-    [selectedPos],
+    [blockSize.height, blockSize.width, selectedPos, setSelectedPos],
   );
   useEffect(() => {
     window.addEventListener('keydown', movePos);
@@ -292,7 +292,6 @@ function useFill(
         isSamePos(cell.pos, selectedPos),
       );
       if (!targetCell || targetCell.isFix) return;
-      const before = targetCell.answer;
       if (answer === undefined) {
         targetCell.answer = answer;
         targetCell.memoList = undefined;

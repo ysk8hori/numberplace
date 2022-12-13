@@ -107,7 +107,7 @@ function useGameFromSavedData(
       setHyper(!!saveData.hyper);
       setMode('loadAndPlay');
     }
-  }, [gameHolder]);
+  }, [setBlockSize, setCross, setHyper, setMode, setSaveData]);
 }
 
 function useGameFromParams() {
@@ -134,5 +134,5 @@ function useGameFromParams() {
       return;
     }
     gameHolder.saveGame({ ...result.data, solved: analyzeResult.solved });
-  }, [location.search, gameHolder]);
+  }, []);
 }

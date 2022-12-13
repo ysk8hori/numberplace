@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 import { test, vi, expect } from 'vitest';
-import { render, screen, userEvent, waitFor } from '../../utils/test-utils';
+import { render, screen, userEvent } from '../../utils/test-utils';
 import Verifying from './Verifying';
 
 test('「答え合わせ」ボタンを押下すると onStartChecking イベントが実行される', async () => {

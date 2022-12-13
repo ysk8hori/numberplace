@@ -17,11 +17,11 @@ export default function MenuStack({
   const [variant, setVariant] = useRecoilState(atomOfAnswerImageVariant);
   const onSelectNum = useCallback(
     () => (setVariant('num'), onSelected()),
-    [setVariant],
+    [onSelected, setVariant],
   );
   const onSelectIcon = useCallback(
     () => (setVariant('asobi'), onSelected()),
-    [setVariant],
+    [onSelected, setVariant],
   );
   const numClass = useMemo(
     () => (variant === 'num' ? 'svg-checked' : 'svg-unchecked'),

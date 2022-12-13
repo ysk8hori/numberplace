@@ -1,7 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Verifying from './Verifying';
-import { userEvent, within } from '@storybook/testing-library';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
