@@ -6,7 +6,6 @@ import GlassCardButton from './GlassCardButton';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'components/atoms/GlassCardButton',
   component: GlassCardButton,
   decorators: [
     Story => (

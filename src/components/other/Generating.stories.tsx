@@ -4,7 +4,6 @@ import Generating from './Generating';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'components/other/Generating',
   component: Generating,
   parameters: {
     chromatic: { pauseAnimationAtEnd: true },

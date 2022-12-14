@@ -1,5 +1,9 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import {
+  ComponentStory,
+  ComponentMeta,
+  ComponentStoryObj,
+} from '@storybook/react';
 import { within, userEvent } from '@storybook/testing-library';
 import GameContainer from '.';
 import {
@@ -16,10 +20,10 @@ import {
 import { resolve_2_3 } from '../../utils/storybookUtils';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import ReactModal from 'react-modal';
+import { expect } from '@storybook/jest';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'containers/GameContainer',
   component: GameContainer,
   parameters: {
     viewport: {
@@ -97,9 +101,28 @@ ClearModal.play = async ({ canvasElement }) => {
   // モーダルが canvasElement の外に描画されモーダル内の要素が取れないので body を canvas にしないと動かない
   const canvas = within(canvasElement.parentElement!);
   await resolve_2_3(canvas, { finish: true });
+  await expect(canvas.queryByText('クリア！')).not.toBeInTheDocument();
   await userEvent.click(canvas.getByRole('button', { name: '答え合わせ' }));
+  await expect(canvas.getByText('クリア！')).toBeInTheDocument();
 };
 ClearModal.storyName = 'クリア時にはクリアモーダルを表示する';
+
+export const MistakeModal: ComponentStoryObj<typeof GameContainer> = {
+  args: Template.args,
+  name: 'ミスが有る状態で答え合わせボタンを謳歌した場合はミステイクモーダルを表示する',
+  play: async ({ canvasElement }) => {
+    ReactModal.setAppElement(canvasElement);
+    // モーダルが canvasElement の外に描画されモーダル内の要素が取れないので body を canvas にしないと動かない
+    const canvas = within(canvasElement.parentElement!);
+    await userEvent.click(canvas.getByTestId('0,0'));
+    await userEvent.keyboard('1');
+    await expect(
+      canvas.queryByText('間違いがあります'),
+    ).not.toBeInTheDocument();
+    await userEvent.click(canvas.getByRole('button', { name: '答え合わせ' }));
+    await expect(canvas.getByText('間違いがあります')).toBeInTheDocument();
+  },
+};
 
 export const Game_3_3 = Template.bind({});
 Game_3_3.args = {

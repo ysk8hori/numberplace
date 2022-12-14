@@ -4,7 +4,6 @@ import StartMenu from './StartMenu';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'components/menu/StartMenu',
   component: StartMenu,
 } as ComponentMeta<typeof StartMenu>;
 

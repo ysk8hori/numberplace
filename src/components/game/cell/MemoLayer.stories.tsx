@@ -10,7 +10,6 @@ import {
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'components/game/cell/MemoLayer',
   component: MemoLayer,
 } as ComponentMeta<typeof MemoLayer>;
 

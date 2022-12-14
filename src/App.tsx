@@ -1,17 +1,18 @@
 import './App.css';
-import GenerateGameContainer from './containers/GenerateGameContainer/GenerateGameContainer';
-import React, { useEffect, useState } from 'react';
-import gameHolder, { SaveData } from './utils/gameHolder';
-import StartMenu from './components/menu/StartMenu';
-import LoadGameContainer from './containers/LoadGameContainer';
+import GenerateGameContainer from './pages/GenerateGameContainer/GenerateGameContainer';
+import React, { useState } from 'react';
+import gameHolder from './utils/gameHolder';
+import StartMenu from './pages/StartMenu/StartMenu';
+import LoadGameContainer from './pages/LoadGameContainer';
 import {
   analyzeGame,
   BlockSize,
   GameType,
 } from '@ysk8hori/numberplace-generator';
 import { Difficulty } from './utils/difficulty';
-import { fromURLSearchParams } from './utils/URLSearchParamConverter';
 import { useLocalStorage } from 'usehooks-ts';
+import { MyGame } from './utils/typeUtils';
+import { fromURLSearchParams } from './utils/URLSearchParamConverter';
 
 /**
  * 現在のアプリのモード
@@ -23,20 +24,20 @@ import { useLocalStorage } from 'usehooks-ts';
 type Mode = 'menu' | 'loadAndPlay' | 'generateAndPlay';
 
 function App() {
-  const [mode, setMode] = useState<Mode>('menu');
-  const [blockSize, setBlockSize] = useState<BlockSize>({
-    height: 2,
-    width: 3,
-  });
-  const [cross, setCross] = useState(false);
-  const [hyper, setHyper] = useState(false);
+  const [doneFirstRender, setDoneFirstRender] = useState<boolean>(false);
+  if (!doneFirstRender) {
+    loadGameFromParams();
+    setDoneFirstRender(true);
+  }
+  const initialState = getInitialStates();
+  const [mode, setMode] = useState<Mode>(initialState.mode);
+  const [blockSize, setBlockSize] = useState<BlockSize>(initialState.blockSize);
+  const [cross, setCross] = useState(initialState.cross);
+  const [hyper, setHyper] = useState(initialState.hyper);
   const [difficulty, setDifficulty] = useLocalStorage<Difficulty>(
     'difficulty',
     'normal',
   );
-  const [saveData, setSaveData] = useState<SaveData | undefined>(undefined);
-  useGameFromParams();
-  useGameFromSavedData(setSaveData, setBlockSize, setCross, setHyper, setMode);
 
   switch (mode) {
     case 'generateAndPlay':
@@ -61,9 +62,9 @@ function App() {
           style={{ minHeight: '100svh' }}
         >
           <LoadGameContainer
-            blockSize={saveData!.blockSize}
-            puzzle={saveData!.puzzle}
-            solved={saveData!.solved}
+            blockSize={blockSize}
+            puzzle={initialState.puzzle!}
+            solved={initialState.solved!}
             onChangeSize={() => setMode('menu')}
             onRegenerate={blockSize => (
               setBlockSize(blockSize), setMode('generateAndPlay')
@@ -91,48 +92,52 @@ function App() {
 
 export default App;
 
-function useGameFromSavedData(
-  setSaveData: React.Dispatch<React.SetStateAction<SaveData | undefined>>,
-  setBlockSize: React.Dispatch<React.SetStateAction<BlockSize>>,
-  setCross: React.Dispatch<React.SetStateAction<boolean>>,
-  setHyper: React.Dispatch<React.SetStateAction<boolean>>,
-  setMode: React.Dispatch<React.SetStateAction<Mode>>,
-) {
-  useEffect(() => {
-    const saveData = gameHolder.loadGame();
-    setSaveData(saveData);
-    if (saveData) {
-      setBlockSize(saveData.blockSize as BlockSize);
-      setCross(!!saveData.cross);
-      setHyper(!!saveData.hyper);
-      setMode('loadAndPlay');
-    }
-  }, [gameHolder]);
+function getInitialStates(): {
+  mode: Mode;
+  blockSize: BlockSize;
+  cross?: boolean;
+  hyper?: boolean;
+  puzzle?: MyGame;
+  solved?: MyGame;
+} {
+  const saveData = gameHolder.loadGame();
+  if (saveData) {
+    return {
+      mode: 'loadAndPlay',
+      ...saveData,
+    };
+  }
+
+  return {
+    mode: 'menu',
+    blockSize: {
+      height: 2,
+      width: 3,
+    },
+  };
 }
 
-function useGameFromParams() {
-  useEffect(() => {
-    if (!location.search) return;
+function loadGameFromParams() {
+  if (!location.search) return;
 
-    const params = new URLSearchParams(location.search);
-    history.replaceState('', '', '/');
-    const result = fromURLSearchParams(params);
-    if (result.status !== 'success') {
-      console.log(result.status);
-      return;
-    }
+  const params = new URLSearchParams(location.search);
+  history.replaceState('', '', '/');
+  const result = fromURLSearchParams(params);
+  if (result.status !== 'success') {
+    console.log(result.status);
+    return;
+  }
 
-    const gameTypes: GameType[] = [];
-    if (result.data.cross) gameTypes.push('cross');
-    if (result.data.hyper) gameTypes.push('hyper');
-    const analyzeResult = analyzeGame({
-      ...result.data,
-      option: { gameTypes },
-    });
-    if (analyzeResult.status !== 'solved') {
-      console.log(analyzeResult.status);
-      return;
-    }
-    gameHolder.saveGame({ ...result.data, solved: analyzeResult.solved });
-  }, [location.search, gameHolder]);
+  const gameTypes: GameType[] = [];
+  if (result.data.cross) gameTypes.push('cross');
+  if (result.data.hyper) gameTypes.push('hyper');
+  const analyzeResult = analyzeGame({
+    ...result.data,
+    option: { gameTypes },
+  });
+  if (analyzeResult.status !== 'solved') {
+    console.log(analyzeResult.status);
+    return;
+  }
+  gameHolder.saveGame({ ...result.data, solved: analyzeResult.solved });
 }
