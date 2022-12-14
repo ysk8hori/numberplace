@@ -6,6 +6,6 @@ export default {
   argTypes: {
     onClick: { action: 'clicked' },
   },
-} satisfies ComponentMeta<typeof MenuButton>;
+} as ComponentMeta<typeof MenuButton>;
 
 export const Default: ComponentStoryObj<typeof MenuButton> = {};

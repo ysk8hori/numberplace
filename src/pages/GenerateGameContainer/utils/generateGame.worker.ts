@@ -4,10 +4,8 @@ import {
   generateGame,
 } from '@ysk8hori/numberplace-generator';
 import { Difficulty, difficultyAdjustment } from '../../../utils/difficulty';
-import {
-  puzzleToString,
-  toURLSearchParam,
-} from '../../../utils/URLSearchParamConverter';
+import { MyGame } from '../../../utils/typeUtils';
+import { toURLSearchParam } from '../../../utils/URLSearchParamConverter';
 import { markFixed } from '../../../utils/utils';
 
 onmessage = ev => {
@@ -21,16 +19,6 @@ onmessage = ev => {
   if (cross) gameTypes.push('cross');
   if (hyper) gameTypes.push('hyper');
   const [tempPuzzle, solved] = generateGame(blockSize, { gameTypes });
-  console.log(
-    encodeURI(
-      puzzleToString({
-        puzzle: tempPuzzle,
-        rowSplitter: 'n',
-        colSplitter: '',
-        empty: 'x',
-      }),
-    ),
-  );
   const puzzle = difficultyAdjustment({
     puzzle: tempPuzzle,
     solved,
@@ -45,8 +33,11 @@ onmessage = ev => {
     hyper,
   });
   console.log(`/?${params.toString()}`);
-  postMessage({
+  const result: Result = {
     puzzle: puzzle,
     solved: { cells: solved.cells },
-  });
+  };
+  postMessage(result);
 };
+
+export type Result = { puzzle: MyGame; solved: MyGame; isGenerating?: false };

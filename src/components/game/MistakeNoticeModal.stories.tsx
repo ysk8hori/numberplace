@@ -12,9 +12,4 @@ const Template: ComponentStory<typeof MistakeNoticeModal> = args => (
   <MistakeNoticeModal {...args} />
 );
 
-export const Primary = Template.bind({});
-Primary.storyName = 'ミスなしの場合は表示しない';
-
 export const HasMistake = Template.bind({});
-HasMistake.storyName = 'ミスあり';
-HasMistake.args = { mistake: true };

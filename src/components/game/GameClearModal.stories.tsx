@@ -14,7 +14,3 @@ const Template: ComponentStory<typeof GameClearModal> = args => (
 
 export const Cleared = Template.bind({});
 Cleared.storyName = 'ゲームクリアした際に表示する';
-Cleared.args = { gameClear: true };
-
-export const NotCleared = Template.bind({});
-NotCleared.storyName = 'ゲームクリアしていない場合は表示しない';

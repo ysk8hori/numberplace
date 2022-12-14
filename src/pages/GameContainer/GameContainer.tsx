@@ -136,15 +136,13 @@ export default function GameContainer({
         <Quit onQuit={() => (gameHolder.removeSavedGame(), onChangeSize?.())} />
         <Verifying onStartChecking={() => checkAndUpdate(puzzle)} />
       </div>
-      <MistakeNoticeModal
-        mistake={hasMistake}
-        onOk={clearMistakeAndEmptyInfo}
-      />
-      <GameClearModal
-        gameClear={isGameClear}
-        onRegenerate={() => (gameHolder.removeSavedGame(), onRegenerate?.())}
-        onChangeSize={() => (gameHolder.removeSavedGame(), onChangeSize?.())}
-      />
+      {hasMistake && <MistakeNoticeModal onOk={clearMistakeAndEmptyInfo} />}
+      {isGameClear && (
+        <GameClearModal
+          onRegenerate={() => (gameHolder.removeSavedGame(), onRegenerate?.())}
+          onChangeSize={() => (gameHolder.removeSavedGame(), onChangeSize?.())}
+        />
+      )}
       <ConfigMenu />
     </div>
   );

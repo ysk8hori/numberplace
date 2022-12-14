@@ -1,33 +1,9 @@
 // vite では xxx?worker の形でインポートすることで WebWorker として利用できる
 import GenerateGameWorker from './generateGame.worker?worker';
+import type { Result } from './generateGame.worker';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { MyGame } from '../../../utils/typeUtils';
 import { Difficulty } from '../../../utils/difficulty';
-
-type Result =
-  | {
-      /** ゲームの生成をキャンセルする */
-      cancel: () => void;
-      isGenerating: true;
-    }
-  | { puzzle: MyGame; solved: MyGame; isGenerating?: false };
-
-function useWorker(blockSize: BlockSize, difficulty: string) {
-  const worker = useMemo(() => {
-    console.log('Generate Worker');
-    return new GenerateGameWorker();
-  }, []);
-
-  // worker の 破棄を行う useEffect
-  useEffect(() => {
-    return () => {
-      console.log('worker terminate');
-      worker.terminate();
-    };
-  }, [blockSize, difficulty, worker]);
-  return worker;
-}
+import { useQuery } from '@tanstack/react-query';
 
 /**
  * ナンプレのゲームを生成する hooks
@@ -36,38 +12,62 @@ function useWorker(blockSize: BlockSize, difficulty: string) {
  * @param count ゲームを再生成するたびにインクリメントされる値
  * @returns ゲーム生成状況や結果
  */
+
 export default function useGenerateGame({
   blockSize,
-  count,
   difficulty,
   cross,
   hyper,
+  count,
 }: {
   blockSize: BlockSize;
-  count: number;
   difficulty: Difficulty;
   cross?: boolean;
   hyper?: boolean;
-}): Result {
-  // worker を生成
-  const worker = useWorker(blockSize, difficulty);
+  count: number;
+}) {
+  return useQuery({
+    queryKey: ['generate-game', blockSize, difficulty, cross, hyper, count],
+    queryFn: ({ signal }) =>
+      generateGameAsync({ blockSize, difficulty, cross, hyper, signal }),
+    cacheTime: 0,
+    staleTime: 0,
+    suspense: true,
+    useErrorBoundary: true,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    refetchOnWindowFocus: false,
+    retry: false,
+    retryOnMount: false,
+  });
+}
 
-  // 生成をキャンセルするコールバック
-  const cancel = useCallback(() => {
-    worker?.terminate();
-  }, [worker]);
-
-  const [result, setResult] = useState<Result>({ cancel, isGenerating: true });
-  useEffect(() => setResult({ cancel, isGenerating: true }), [cancel, count]);
-
-  useEffect(() => {
+function generateGameAsync({
+  blockSize,
+  difficulty,
+  cross,
+  hyper,
+  signal,
+}: {
+  blockSize: BlockSize;
+  difficulty: Difficulty;
+  cross?: boolean;
+  hyper?: boolean;
+  signal: AbortSignal | undefined;
+}): Promise<Result> {
+  const worker = new GenerateGameWorker();
+  signal?.addEventListener('abort', () => {
+    worker.terminate();
+    console.log('worker terminated by cancel signal.');
+  });
+  console.log('worker generated.');
+  return new Promise<Result>(resolve => {
     // ワーカーにゲーム生成を依頼
     worker.postMessage({ blockSize, difficulty, cross, hyper });
     // ワーカーからゲーム生成結果が渡された際の処理を登録
-    worker.onmessage = ({ data }) => {
-      setResult(data);
-    };
-  }, [blockSize, count, cross, difficulty, hyper, worker]);
-
-  return result;
+    worker.onmessage = ({ data }) => resolve(data);
+  }).finally(() => {
+    worker.terminate();
+    console.log('worker terminated.');
+  });
 }
