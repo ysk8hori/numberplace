@@ -140,11 +140,12 @@ export default function GameContainer({
         mistake={hasMistake}
         onOk={clearMistakeAndEmptyInfo}
       />
-      <GameClearModal
-        gameClear={isGameClear}
-        onRegenerate={() => (gameHolder.removeSavedGame(), onRegenerate?.())}
-        onChangeSize={() => (gameHolder.removeSavedGame(), onChangeSize?.())}
-      />
+      {isGameClear && (
+        <GameClearModal
+          onRegenerate={() => (gameHolder.removeSavedGame(), onRegenerate?.())}
+          onChangeSize={() => (gameHolder.removeSavedGame(), onChangeSize?.())}
+        />
+      )}
       <ConfigMenu />
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import Modal from '../atoms/Modal';
 import Button from '../atoms/Button';
 
@@ -11,15 +11,12 @@ import Button from '../atoms/Button';
  * - todo: block size を選択するコールバックを呼ぶ
  */
 const GameClearModal: React.FC<{
-  /** ゲームをクリアしたかどうかのフラグ。true の場合本モーダルを表示する。 */
-  gameClear?: boolean;
   /** 同じサイズで遊ぶコールバック */
   onRegenerate?: () => void;
   /** 他のサイズで遊ぶコールバック */
   onChangeSize?: () => void;
-}> = ({ gameClear, onRegenerate, onChangeSize }) => {
-  const [isOpen, setOpenState] = useState(false);
-  useEffect(() => setOpenState(!!gameClear), [gameClear]);
+}> = ({ onRegenerate, onChangeSize }) => {
+  const [isOpen, setOpenState] = useState(true);
   const close = useCallback(() => setOpenState(false), [setOpenState]);
   return (
     <Modal isOpen={!!isOpen} contentLabel="クリア">
