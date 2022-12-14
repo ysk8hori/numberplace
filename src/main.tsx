@@ -9,6 +9,7 @@ import { BrowserTracing } from '@sentry/tracing';
 import { ThemeProvider } from 'styled-components';
 import semanticToken from './theme/semanticToken';
 import { RecoilRoot } from 'recoil';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 Sentry.init({
   dsn: 'https://d37eba4a04cc41b1b0762539d7d23409@o1222276.ingest.sentry.io/6366032',
@@ -21,14 +22,17 @@ Sentry.init({
 });
 
 registerSW();
+const queryClient = new QueryClient();
 
 const root = createRoot(document.getElementById('root')!);
 root.render(
   <React.StrictMode>
     <RecoilRoot>
-      <ThemeProvider theme={semanticToken}>
-        <App />
-      </ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={semanticToken}>
+          <App />
+        </ThemeProvider>
+      </QueryClientProvider>
     </RecoilRoot>
   </React.StrictMode>,
 );
