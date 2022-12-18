@@ -85,16 +85,6 @@ export default function GameContainer({
     setPuzzle,
   );
   useFillByKeyboard(fill);
-  const inputMemo = useInputMemo(
-    puzzle,
-    selectedPos,
-    forceUpdate,
-    blockSize,
-    solved,
-    cross,
-    hyper,
-    setPuzzle,
-  );
   useDeleteByKeybord(fill);
   useArrowSelector(selectedPos, blockSize, setSelectedPos);
   const checkAndUpdate = useCheckAndUpdate(
@@ -129,7 +119,6 @@ export default function GameContainer({
         <InputPanel
           blockSize={blockSize}
           onInput={fill}
-          onMemoInput={inputMemo}
           onDelete={() => fill()}
           completedNumbers={completeNumbers}
         />
@@ -333,77 +322,6 @@ function useFill(
         setPuzzle(puzzle);
         forceUpdate();
       },
-    [
-      _puzzle,
-      selectedPos,
-      forceUpdate,
-      blockSize,
-      solved,
-      cross,
-      hyper,
-      setPuzzle,
-    ],
-  );
-}
-
-type InputMemo = (answerCandidate: string) => void;
-
-/**
- * メモ記入処理
- *
- * 実現すること
- *
- * - メモモードで空欄セルにメモ記入
- * - メモモードでメモ済み数字と同じボタン押下でそのメモ数字を消す
- * - ターゲットが通常入力済みセルの場合は通常入力していた値をクリアする
- *
- */
-function useInputMemo(
-  _puzzle: MyGame,
-  selectedPos: readonly [number, number],
-  forceUpdate: React.DispatchWithoutAction,
-  blockSize: BlockSize,
-  solved: MyGame,
-  cross: boolean,
-  hyper: boolean,
-  setPuzzle: React.Dispatch<React.SetStateAction<MyGame>>,
-) {
-  return useCallback<InputMemo>(
-    (answerCandidate: string) => {
-      const puzzle = clone(_puzzle);
-      const targetCell = puzzle.cells.find(cell =>
-        isSamePos(cell.pos, selectedPos),
-      );
-      if (!targetCell || targetCell.isFix) return;
-      // 扱える範囲の数字かどうかをチェックする
-      const num = Number(answerCandidate);
-      if (isNaN(num) || num < 1 || blockSize.height * blockSize.width < num) {
-        return;
-      }
-      // ターゲットが通常入力済みセルの場合は通常入力していた値をクリアする
-      targetCell.answer = undefined;
-      // 記入済みの数字ならクリアし、未記入なら記入する
-      if (!targetCell.memoList) targetCell.memoList = [];
-      if (targetCell.memoList.includes(answerCandidate)) {
-        targetCell.memoList = targetCell.memoList.reduce((list, current) => {
-          if (current !== answerCandidate) list.push(current);
-          return list;
-        }, new Array<string>());
-      } else {
-        const list = Array.from(targetCell.memoList);
-        list.push(answerCandidate);
-        targetCell.memoList = list;
-      }
-      gameHolder.saveGame({
-        puzzle,
-        solved,
-        blockSize,
-        cross,
-        hyper,
-      });
-      setPuzzle(puzzle);
-      forceUpdate();
-    },
     [
       _puzzle,
       selectedPos,

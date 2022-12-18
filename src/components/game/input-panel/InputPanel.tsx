@@ -18,8 +18,6 @@ type Props = {
   onInput?: (buttonText: string) => void;
   /** 消去ボタンを押下した際のイベント */
   onDelete?: () => void;
-  /** メモモードで入力ボタンを押下した際のイベント */
-  onMemoInput?: (buttonText: string) => void;
 };
 
 /**
@@ -39,21 +37,14 @@ const InputPanel: React.FC<Props> = ({
   completedNumbers = [],
   onInput = () => undefined,
   onDelete = () => undefined,
-  onMemoInput = () => undefined,
   ...rest
 }) => {
   const size = blockSize.height * blockSize.width;
-  const [isMemoMode, toggleMemoMode] = useReducer(
-    isMemoMode => !isMemoMode,
-    false,
-  );
   const numberButtonProps = {
     blockSize,
     size,
     completedNumbers,
     onInput,
-    onMemoInput,
-    isMemoMode,
   };
 
   return (
@@ -68,7 +59,7 @@ const InputPanel: React.FC<Props> = ({
       >
         <FaEraser style={{ width: '60%', height: '60%' }} />
       </Button>
-      <ToggleMemoButton defaultChecked={isMemoMode} onClick={toggleMemoMode} />
+      <ToggleMemoButton />
     </div>
   );
 };
@@ -80,15 +71,11 @@ function NumberButtons({
   blockSize,
   completedNumbers,
   onInput,
-  onMemoInput,
-  isMemoMode,
 }: {
   blockSize: BlockSize;
   size: number;
   completedNumbers: string[];
   onInput: (buttonText: string) => void;
-  onMemoInput: (buttonText: string) => void;
-  isMemoMode: boolean;
 }) {
   return (
     <>
@@ -101,9 +88,7 @@ function NumberButtons({
             blockSize={blockSize}
             completedNumbers={completedNumbers}
             onInput={onInput}
-            onMemoInput={onMemoInput}
             buttonNumber={buttonNumber}
-            isMemoMode={isMemoMode}
             size={size}
           />
         ))}
