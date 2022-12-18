@@ -46,8 +46,8 @@ function ToggleButton({
   type: _,
   className,
   style,
-  onClick,
-  defaultChecked,
+  onChange,
+  checked,
   id = 'toggle',
   'aria-label': ariaLabel,
 }: React.ComponentProps<'input'>) {
@@ -55,7 +55,8 @@ function ToggleButton({
     <Base style={style} className="aspect-square">
       <ToggleInput
         id={id}
-        {...{ onClick, defaultChecked }}
+        checked={checked}
+        onChange={onChange}
         aria-label={ariaLabel}
       />
       <ToggleLabel
