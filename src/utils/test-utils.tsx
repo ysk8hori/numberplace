@@ -3,8 +3,8 @@ import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import semanticToken from '../theme/semanticToken';
-import React from 'react';
-import { RecoilRoot } from 'recoil';
+import React, { useEffect } from 'react';
+import { RecoilRoot, RecoilState, useRecoilValue } from 'recoil';
 
 const customRender = (ui: React.ReactElement, options = {}) =>
   render(ui, {
@@ -18,6 +18,18 @@ const customRender = (ui: React.ReactElement, options = {}) =>
     },
     ...options,
   });
+
+export function RecoilObserver<T>({
+  node,
+  onChange,
+}: {
+  node: RecoilState<T>;
+  onChange: (value: T) => void;
+}) {
+  const value = useRecoilValue(node);
+  useEffect(() => onChange(value), [onChange, value]);
+  return null;
+}
 
 export * from '@testing-library/react';
 export { default as userEvent } from '@testing-library/user-event';

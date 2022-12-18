@@ -25,28 +25,12 @@ describe('InputPanel', () => {
     await userEvent.click(screen.getByRole('button', { name: '1' }));
     expect(onInput).toHaveBeenCalledWith('1');
   });
-  test('メモモードでボタン押下時に押下したボタンのテキストを onMemoInput で親へ通知する', async () => {
+  test('メモモードでボタン押下時に押下したボタンのテキストも onInput で親へ通知する', async () => {
     const onInput = vi.fn();
-    const onMemoInput = vi.fn();
-    render(
-      <InputPanel
-        blockSize={blockSize_2_2}
-        onInput={onInput}
-        onMemoInput={onMemoInput}
-      />,
-    );
-    await userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
-    await userEvent.click(screen.getByRole('button', { name: '1' }));
-    expect(onInput).not.toBeCalled();
-    expect(onMemoInput).toHaveBeenCalledWith('1');
-
-    onInput.mockClear();
-    onMemoInput.mockClear();
-
+    render(<InputPanel blockSize={blockSize_2_2} onInput={onInput} />);
     await userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
     await userEvent.click(screen.getByRole('button', { name: '1' }));
     expect(onInput).toHaveBeenCalledWith('1');
-    expect(onMemoInput).not.toBeCalled();
   });
   test('消去ボタン押下時には onDelete で親へ通知する', async () => {
     const onDelete = vi.fn();
