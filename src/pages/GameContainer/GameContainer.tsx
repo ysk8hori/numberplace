@@ -94,7 +94,9 @@ export default function GameContainer({
     cross,
     hyper,
     setPuzzle,
+    puzzle,
   );
+  useCheckAndUpdateByEnter(checkAndUpdate);
   /** 次回の check で mistake や empty を検知できるようクリアするコールバック */
   const clearMistakeAndEmptyInfo = useCallback(() => {
     setMistake(false);
@@ -124,7 +126,7 @@ export default function GameContainer({
       </div>
       <div className="flex justify-center gap-8 pb-4">
         <Quit onQuit={() => (gameHolder.removeSavedGame(), onChangeSize?.())} />
-        <Verifying onStartChecking={() => checkAndUpdate(puzzle)} />
+        <Verifying onStartChecking={() => checkAndUpdate()} />
       </div>
       {hasMistake && <MistakeNoticeModal onOk={clearMistakeAndEmptyInfo} />}
       {isGameClear && (
@@ -173,30 +175,51 @@ function useCheckAndUpdate(
   cross: boolean,
   hyper: boolean,
   setPuzzle: React.Dispatch<React.SetStateAction<MyGame>>,
+  _puzzle: MyGame,
 ) {
-  return useCallback(
-    (_puzzle: MyGame) => {
-      const puzzle = clone(_puzzle);
-      solved.cells.forEach(solvedCell => {
-        const targetCell = puzzle.cells.find(cell =>
-          isSamePos(solvedCell.pos, cell.pos),
-        )!;
-        if (!targetCell.answer) return;
-        if (solvedCell.answer === targetCell.answer) {
-          // 正解している cell は fix する
-          targetCell.isFix = true;
-        } else {
-          // 誤答がある場合
-          setMistake(true);
-        }
-      });
+  return useCallback(() => {
+    const puzzle = clone(_puzzle);
+    solved.cells.forEach(solvedCell => {
+      const targetCell = puzzle.cells.find(cell =>
+        isSamePos(solvedCell.pos, cell.pos),
+      )!;
+      if (!targetCell.answer) return;
+      if (solvedCell.answer === targetCell.answer) {
+        // 正解している cell は fix する
+        targetCell.isFix = true;
+      } else {
+        // 誤答がある場合
+        setMistake(true);
+      }
+    });
 
-      if (puzzle.cells.every(cell => cell.isFix)) setGameClear(true);
-      gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
-      setPuzzle(puzzle);
-    },
-    [solved, setGameClear, blockSize, cross, hyper, setMistake, setPuzzle],
-  );
+    if (puzzle.cells.every(cell => cell.isFix)) setGameClear(true);
+    gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
+    setPuzzle(puzzle);
+  }, [
+    solved,
+    setGameClear,
+    blockSize,
+    cross,
+    hyper,
+    setMistake,
+    setPuzzle,
+    _puzzle,
+  ]);
+}
+
+function useCheckAndUpdateByEnter(
+  _useCheckAndUpdate: ReturnType<typeof useCheckAndUpdate>,
+) {
+  function enter(ev: KeyboardEvent) {
+    if (ev.key !== 'Enter') return;
+    _useCheckAndUpdate();
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', enter);
+    return () => window.removeEventListener('keydown', enter);
+  });
 }
 
 function useArrowSelector(

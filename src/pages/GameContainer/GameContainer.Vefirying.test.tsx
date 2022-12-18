@@ -51,6 +51,23 @@ test('「答え合わせ」によって正しい Cell のみ fix する', async 
   expect(screen.getByTestId('2,0')).not.toHaveAttribute('data-fix'); // 未記入セル
   expect(screen.getByTestId('1,1')).not.toHaveAttribute('data-fix'); // 誤答を記入したセル
 });
+test('Enter で「答え合わせ」する', async () => {
+  setup('2_3');
+  await userEvent.click(screen.getByTestId('0,0'));
+  await userEvent.keyboard('6'); // 正答を記入
+  await userEvent.click(screen.getByTestId('1,1'));
+  await userEvent.keyboard('6'); // 誤答を記入
+  expect(screen.getByTestId('0,0')).not.toHaveAttribute('data-fix'); // 正答を記入したセル
+  expect(screen.getByTestId('1,0')).toHaveAttribute('data-fix'); // fix 済みセル
+  expect(screen.getByTestId('2,0')).not.toHaveAttribute('data-fix'); // 未記入セル
+  expect(screen.getByTestId('1,1')).not.toHaveAttribute('data-fix'); // 誤答を記入したセル
+  // await userEvent.click(screen.getByRole('button', { name: '答え合わせ' }));
+  await userEvent.keyboard('{Enter}');
+  expect(screen.getByTestId('0,0')).toHaveAttribute('data-fix'); // 正答を記入したセルは fix する
+  expect(screen.getByTestId('1,0')).toHaveAttribute('data-fix'); // fix 済みセル
+  expect(screen.getByTestId('2,0')).not.toHaveAttribute('data-fix'); // 未記入セル
+  expect(screen.getByTestId('1,1')).not.toHaveAttribute('data-fix'); // 誤答を記入したセル
+});
 test('「答え合わせ」によって誤りのセルや空欄のセルがあった場合はダイアログで通知する', async () => {
   setup('2_3');
   await userEvent.click(screen.getByTestId('0,0'));
