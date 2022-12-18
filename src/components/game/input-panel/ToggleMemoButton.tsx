@@ -7,19 +7,12 @@ import { atomOfInputMode } from '../../../pages/GameContainer/atoms';
 
 type Props = React.ComponentProps<typeof ToggleButton>;
 
-export default function ToggleMemoButton({
-  onClick: _onClick,
-  defaultChecked: _defaultChecked,
-  style,
-  className,
-}: Props) {
+export default function ToggleMemoButton({ style, className }: Props) {
   const [mode, setMode] = useRecoilState(atomOfInputMode);
-  const onClick = () => setMode(mode => (mode === 'memo' ? 'answer' : 'memo'));
-
   return (
     <ToggleButton
-      onClick={onClick}
-      defaultChecked={mode === 'memo'}
+      onChange={ev => setMode(ev.target.checked ? 'memo' : 'answer')}
+      checked={mode === 'memo'}
       style={{ ...style }}
       className={clsx(
         'aspect-square w-full h-full rounded-lg flex justify-center items-center',
