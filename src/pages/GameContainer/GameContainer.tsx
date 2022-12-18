@@ -10,6 +10,8 @@ import MistakeNoticeModal from '../../components/game/MistakeNoticeModal';
 import GameClearModal from '../../components/game/GameClearModal';
 import Quit from '../../components/game/Quit';
 import ConfigMenu from '../../components/atoms/ConfigMenu';
+import { useRecoilCallback } from 'recoil';
+import { atomOfInputMode } from './atoms';
 
 /** basePuzzle をクローンする */
 function clone(basePuzzle: MyGame): MyGame {
@@ -283,31 +285,54 @@ function useFill(
   hyper: boolean,
   setPuzzle: React.Dispatch<React.SetStateAction<MyGame>>,
 ) {
-  return useCallback<Fill>(
-    (answer?: string | undefined) => {
-      const puzzle = clone(_puzzle);
-      const targetCell = puzzle.cells.find(cell =>
-        isSamePos(cell.pos, selectedPos),
-      );
-      if (!targetCell || targetCell.isFix) return;
-      if (answer === undefined) {
-        targetCell.answer = answer;
-        targetCell.memoList = undefined;
+  return useRecoilCallback(
+    ({ snapshot }) =>
+      async (answer?: string | undefined) => {
+        const puzzle = clone(_puzzle);
+        const targetCell = puzzle.cells.find(cell =>
+          isSamePos(cell.pos, selectedPos),
+        );
+        if (!targetCell || targetCell.isFix) return;
+        if (answer === undefined) {
+          targetCell.answer = answer;
+          targetCell.memoList = undefined;
+          gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
+          setPuzzle(puzzle);
+          forceUpdate();
+          return;
+        }
+        // 扱える範囲の数字かどうかをチェックする
+        const num = Number(answer);
+        if (isNaN(num) || num < 1 || blockSize.height * blockSize.width < num) {
+          return;
+        }
+        const inputMode = await snapshot.getPromise(atomOfInputMode);
+        if (inputMode === 'answer') {
+          targetCell.memoList = undefined;
+          targetCell.answer = answer;
+        } else {
+          // ターゲットが通常入力済みセルの場合は通常入力していた値をクリアする
+          targetCell.answer = undefined;
+          // 記入済みの数字ならクリアし、未記入なら記入する
+          if (!targetCell.memoList) targetCell.memoList = [];
+          if (targetCell.memoList.includes(answer)) {
+            targetCell.memoList = targetCell.memoList.reduce(
+              (list, current) => {
+                if (current !== answer) list.push(current);
+                return list;
+              },
+              new Array<string>(),
+            );
+          } else {
+            const list = Array.from(targetCell.memoList);
+            list.push(answer);
+            targetCell.memoList = list;
+          }
+        }
         gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
         setPuzzle(puzzle);
         forceUpdate();
-        return;
-      }
-      // 扱える範囲の数字かどうかをチェックする
-      const num = Number(answer);
-      if (isNaN(num) || num < 1 || blockSize.height * blockSize.width < num) {
-        return;
-      }
-      targetCell.answer = answer;
-      gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
-      setPuzzle(puzzle);
-      forceUpdate();
-    },
+      },
     [
       _puzzle,
       selectedPos,
