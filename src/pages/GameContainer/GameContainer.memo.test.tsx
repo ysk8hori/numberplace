@@ -43,7 +43,7 @@ test('メモモードで入力パネルから空欄セルにメモを記入で�
   await userEvent.click(screen.getByRole('button', { name: '1' }));
   expect(screen.getByTestId('0,0-memo')).toHaveAttribute('data-memo', '1');
 });
-test.todo('メモモードでキーボードから空欄セルにメモを記入できる', async () => {
+test('メモモードでキーボードから空欄セルにメモを記入できる', async () => {
   setup('2_2');
   expect(screen.getByTestId('0,0')).not.toHaveTextContent('1');
   expect(screen.getByTestId('0,0-memo')).not.toHaveTextContent('1');

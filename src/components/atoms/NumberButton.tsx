@@ -20,26 +20,21 @@ type Props = {
   completedNumbers?: string[];
   /** 入力ボタンを押下した際のイベント */
   onInput?: (buttonText: string) => void;
-  /** メモモードで入力ボタンを押下した際のイベント */
-  onMemoInput?: (buttonText: string) => void;
 };
 
 export default function NumberButton({
-  onMemoInput,
   onInput,
   completedNumbers,
   buttonNumber,
-  isMemoMode,
   size,
 }: Required<Props> & {
   buttonNumber: number;
-  isMemoMode: boolean;
   size: number;
 }) {
   const answerImageVariant = useRecoilValue(atomOfAnswerImageVariant);
   const onClick = useCallback(
-    () => (isMemoMode ? onMemoInput : onInput)(buttonNumber.toString()),
-    [isMemoMode, onMemoInput, onInput, buttonNumber],
+    () => onInput(buttonNumber.toString()),
+    [onInput, buttonNumber],
   );
   const disabled = useMemo(
     () =>
