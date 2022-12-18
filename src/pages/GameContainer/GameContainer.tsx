@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, useReducer } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { BlockSize, Position } from '@ysk8hori/numberplace-generator';
 import { isSamePos, moveX, moveY } from '../../utils/positionUtils';
 import { MyGame } from '../../utils/typeUtils';
@@ -73,11 +73,9 @@ export default function GameContainer({
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   const [hasMistake, setMistake] = useState(false);
   const [isGameClear, setGameClear] = useState(false);
-  const [, forceUpdate] = useReducer(x => x + 1, 0);
   const fill = useFill(
     puzzle,
     selectedPos,
-    forceUpdate,
     blockSize,
     solved,
     cross,
@@ -90,11 +88,11 @@ export default function GameContainer({
   const checkAndUpdate = useCheckAndUpdate(
     solved,
     setMistake,
-    forceUpdate,
     setGameClear,
     blockSize,
     cross,
     hyper,
+    setPuzzle,
   );
   /** 次回の check で mistake や empty を検知できるようクリアするコールバック */
   const clearMistakeAndEmptyInfo = useCallback(() => {
@@ -165,19 +163,19 @@ function getCompleteNumbers(puzzle: MyGame, blockSize: BlockSize) {
  *
  * @param solved 問題の答え
  * @param setMistake check した結果、間違えのセルがある場合に true を指定する
- * @param forceUpdate チェック後に fix を反映する
  */
 function useCheckAndUpdate(
   solved: MyGame,
   setMistake: React.Dispatch<React.SetStateAction<boolean>>,
-  forceUpdate: React.DispatchWithoutAction,
   setGameClear: React.Dispatch<React.SetStateAction<boolean>>,
   blockSize: BlockSize,
   cross: boolean,
   hyper: boolean,
+  setPuzzle: React.Dispatch<React.SetStateAction<MyGame>>,
 ) {
   return useCallback(
-    (puzzle: MyGame) => {
+    (_puzzle: MyGame) => {
+      const puzzle = clone(_puzzle);
       solved.cells.forEach(solvedCell => {
         const targetCell = puzzle.cells.find(cell =>
           isSamePos(solvedCell.pos, cell.pos),
@@ -194,11 +192,9 @@ function useCheckAndUpdate(
 
       if (puzzle.cells.every(cell => cell.isFix)) setGameClear(true);
       gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
-
-      // fix を反映するために forceUpdate する
-      forceUpdate();
+      setPuzzle(puzzle);
     },
-    [solved, setGameClear, blockSize, cross, hyper, forceUpdate, setMistake],
+    [solved, setGameClear, blockSize, cross, hyper, setMistake, setPuzzle],
   );
 }
 
@@ -267,7 +263,6 @@ type Fill = (answer?: string | undefined) => void;
 function useFill(
   _puzzle: MyGame,
   selectedPos: readonly [number, number],
-  forceUpdate: React.DispatchWithoutAction,
   blockSize: BlockSize,
   solved: MyGame,
   cross: boolean,
@@ -287,7 +282,6 @@ function useFill(
           targetCell.memoList = undefined;
           gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
           setPuzzle(puzzle);
-          forceUpdate();
           return;
         }
         // 扱える範囲の数字かどうかをチェックする
@@ -320,18 +314,8 @@ function useFill(
         }
         gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
         setPuzzle(puzzle);
-        forceUpdate();
       },
-    [
-      _puzzle,
-      selectedPos,
-      forceUpdate,
-      blockSize,
-      solved,
-      cross,
-      hyper,
-      setPuzzle,
-    ],
+    [_puzzle, selectedPos, blockSize, solved, cross, hyper, setPuzzle],
   );
 }
 
