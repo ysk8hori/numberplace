@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { BlockSize, Position } from '@ysk8hori/numberplace-generator';
 import { isSamePos, moveX, moveY } from '../../utils/positionUtils';
 import { MyGame } from '../../utils/typeUtils';
-import gameHolder from '../../utils/gameHolder';
 import GameBoard from '../../components/game/GameBoard';
 import InputPanel from '../../components/game/input-panel/InputPanel';
 import Verifying from '../../components/game/Verifying';
@@ -10,8 +9,13 @@ import MistakeNoticeModal from '../../components/game/MistakeNoticeModal';
 import GameClearModal from '../../components/game/GameClearModal';
 import Quit from '../../components/game/Quit';
 import ConfigMenu from '../../components/atoms/ConfigMenu';
-import { useRecoilCallback } from 'recoil';
+import {
+  useRecoilCallback,
+  useResetRecoilState,
+  useSetRecoilState,
+} from 'recoil';
 import { atomOfInputMode } from './atoms';
+import { atomOfGame } from '../../atoms';
 
 /** basePuzzle をクローンする */
 function clone(basePuzzle: MyGame): MyGame {
@@ -69,7 +73,7 @@ export default function GameContainer({
   hyper?: boolean;
 }) {
   const [puzzle, setPuzzle] = useState(() => clone(basePuzzle));
-  gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
+  // gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   const [hasMistake, setMistake] = useState(false);
   const [isGameClear, setGameClear] = useState(false);
@@ -103,6 +107,7 @@ export default function GameContainer({
   }, [setMistake]);
 
   const completeNumbers = getCompleteNumbers(puzzle, blockSize);
+  const removeSavedGame = useResetRecoilState(atomOfGame);
 
   return (
     <div className="max-w-xl grow">
@@ -125,14 +130,14 @@ export default function GameContainer({
         />
       </div>
       <div className="flex justify-center gap-8 pb-4">
-        <Quit onQuit={() => (gameHolder.removeSavedGame(), onChangeSize?.())} />
+        <Quit onQuit={() => (removeSavedGame(), onChangeSize?.())} />
         <Verifying onStartChecking={() => checkAndUpdate()} />
       </div>
       {hasMistake && <MistakeNoticeModal onOk={clearMistakeAndEmptyInfo} />}
       {isGameClear && (
         <GameClearModal
-          onRegenerate={() => (gameHolder.removeSavedGame(), onRegenerate?.())}
-          onChangeSize={() => (gameHolder.removeSavedGame(), onChangeSize?.())}
+          onRegenerate={() => (removeSavedGame(), onRegenerate?.())}
+          onChangeSize={() => (removeSavedGame(), onChangeSize?.())}
         />
       )}
       <ConfigMenu />
@@ -177,6 +182,7 @@ function useCheckAndUpdate(
   setPuzzle: React.Dispatch<React.SetStateAction<MyGame>>,
   _puzzle: MyGame,
 ) {
+  const saveGame = useSetRecoilState(atomOfGame);
   return useCallback(() => {
     const puzzle = clone(_puzzle);
     solved.cells.forEach(solvedCell => {
@@ -194,17 +200,18 @@ function useCheckAndUpdate(
     });
 
     if (puzzle.cells.every(cell => cell.isFix)) setGameClear(true);
-    gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
+    saveGame({ puzzle, solved, blockSize, cross, hyper });
     setPuzzle(puzzle);
   }, [
+    _puzzle,
     solved,
     setGameClear,
+    saveGame,
     blockSize,
     cross,
     hyper,
-    setMistake,
     setPuzzle,
-    _puzzle,
+    setMistake,
   ]);
 }
 
@@ -293,6 +300,7 @@ function useFill(
   hyper: boolean,
   setPuzzle: React.Dispatch<React.SetStateAction<MyGame>>,
 ) {
+  const saveGame = useSetRecoilState(atomOfGame);
   return useRecoilCallback(
     ({ snapshot }) =>
       async (answer?: string | undefined) => {
@@ -304,7 +312,7 @@ function useFill(
         if (answer === undefined) {
           targetCell.answer = answer;
           targetCell.memoList = undefined;
-          gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
+          saveGame({ puzzle, solved, blockSize, cross, hyper });
           setPuzzle(puzzle);
           return;
         }
@@ -336,7 +344,7 @@ function useFill(
             targetCell.memoList = list;
           }
         }
-        gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
+        saveGame({ puzzle, solved, blockSize, cross, hyper });
         setPuzzle(puzzle);
       },
     [_puzzle, selectedPos, blockSize, solved, cross, hyper, setPuzzle],

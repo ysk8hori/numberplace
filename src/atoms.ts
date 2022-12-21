@@ -1,4 +1,6 @@
+import { BlockSize } from '@ysk8hori/numberplace-generator';
 import { atom, AtomEffect } from 'recoil';
+import { MyGame } from './utils/typeUtils';
 
 const localStorageEffect: <T>(key: string) => AtomEffect<T> =
   key =>
@@ -21,4 +23,18 @@ export const atomOfAnswerImageVariant = atom<AnswerImageVariant>({
   key: 'answerImageVariant',
   default: 'num',
   effects: [localStorageEffect('answerImageVariant')],
+});
+
+export type SaveData = {
+  puzzle: MyGame;
+  solved: MyGame;
+  blockSize: BlockSize;
+  cross?: boolean;
+  hyper?: boolean;
+};
+
+export const atomOfGame = atom<SaveData>({
+  key: 'gameData',
+  default: undefined,
+  effects: [localStorageEffect('game')],
 });

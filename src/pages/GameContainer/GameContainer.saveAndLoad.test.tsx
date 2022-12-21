@@ -38,19 +38,6 @@ function setup(size: '2_2' | '2_3') {
   ReactModal.setAppElement(rendered.container);
 }
 
-test('ゲーム開始時に isFix を付与したパズルを保存する', async () => {
-  setup('2_2');
-  const puzzle = JSON.parse(JSON.stringify(puzzle_2_2)) as MyGame;
-  puzzle.cells.filter(cell => cell.answer).forEach(cell => (cell.isFix = true));
-  expect(gameHolder.loadGame()).toEqual({
-    puzzle,
-    solved: solved_2_2,
-    blockSize: blockSize_2_2,
-    cross: false,
-    hyper: false,
-  });
-});
-
 test('数字入力時に保存する', async () => {
   setup('2_2');
   expect(
