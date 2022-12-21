@@ -21,6 +21,8 @@ import { inputAnswer, resolve_2_3 } from '../../utils/storybookUtils';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import ReactModal from 'react-modal';
 import { expect } from '@storybook/jest';
+import { useSetRecoilState } from 'recoil';
+import { atomOfAnswerImageVariant } from '../../atoms';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -31,6 +33,13 @@ export default {
       defaultViewport: 'iphone12mini',
     },
   },
+  decorators: [
+    Story => {
+      const setIconMode = useSetRecoilState(atomOfAnswerImageVariant);
+      setIconMode('num');
+      return <Story />;
+    },
+  ],
 } as ComponentMeta<typeof GameContainer>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
@@ -46,6 +55,16 @@ Template.args = {
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = Template.args;
+
+export const IconMode = Template.bind({});
+IconMode.args = Template.args;
+IconMode.decorators = [
+  Story => {
+    const setIconMode = useSetRecoilState(atomOfAnswerImageVariant);
+    setIconMode('asobi');
+    return <Story />;
+  },
+];
 
 export const Primary_2_2 = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
