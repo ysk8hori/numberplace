@@ -5,6 +5,8 @@ import { MyGame } from '../../utils/typeUtils';
 import clsx from 'clsx';
 import { isSamePos } from '../../utils/positionUtils';
 import { isSameBlockSize } from '../../utils/blockUtils';
+import { useRecoilValue } from 'recoil';
+import { atomOfAnswerImageVariant } from '../../atoms';
 
 type Props = {
   /** ナンプレの問題 */
@@ -68,6 +70,7 @@ const GameBoard: React.FC<Props> = ({
     cross,
     blockSize,
   );
+  const answerImageVariant = useRecoilValue(atomOfAnswerImageVariant);
   return (
     <div className={className}>
       {puzzle.cells.map(cell => (
@@ -77,11 +80,7 @@ const GameBoard: React.FC<Props> = ({
           right={(cell.pos[0] + 1) % blockSize.width === 0}
           bottom={(cell.pos[1] + 1) % blockSize.height === 0}
           data-testid={cell.pos.toString()}
-          select={
-            cell.pos[0] === selectedPos?.[0] && cell.pos[1] === selectedPos?.[1]
-              ? true
-              : false
-          }
+          select={selectedPos ? isSamePos(cell.pos, selectedPos) : false}
           onSelect={() => onSelectCell(cell.pos)}
           fix={cell.isFix}
           blockSize={blockSize}
@@ -98,6 +97,7 @@ const GameBoard: React.FC<Props> = ({
               poss.some(pos => isSamePos(cell.pos, pos)),
             )
           }
+          answerImageVariant={answerImageVariant}
         />
       ))}
     </div>

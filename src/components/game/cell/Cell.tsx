@@ -6,8 +6,7 @@ import '../utils/answers/number/normal.scss';
 import '../utils/answers/number/bold.scss';
 import '../utils/answers/asobi/normal.scss';
 import '../utils/answers/asobi/bold.scss';
-import { useRecoilValue } from 'recoil';
-import { atomOfAnswerImageVariant } from '../../../atoms';
+import { AnswerImageVariant } from '../../../atoms';
 
 /**
  * マス目１つを表すコンポーネント。以下の特徴を持つ。
@@ -43,9 +42,13 @@ function Cell({
   upleftDownright,
   uprightDownleft,
   hyper,
+  answerImageVariant = 'num',
   ...rest
 }: PropsWithChildren<
-  { onSelect?: () => void; 'data-testid'?: string } & AnswerLayerProps &
+  {
+    onSelect?: () => void;
+    'data-testid'?: string;
+  } & Partial<AnswerLayerProps> &
     BorderLayerProps &
     SelectLayerProps &
     MemoLayerProps &
@@ -69,14 +72,21 @@ function Cell({
       <HyperGroupLayer hyper={hyper} />
       <SelectLayer select={select} />
       {answer ? (
-        <AnswerLayer answer={answer} fix={fix} />
-      ) : (
-        <MemoLayer
-          blockSize={blockSize}
-          memoList={memoList}
-          data-testid={`${dataTestid}-memo`}
-          data-memo={memoList}
+        <AnswerLayer
+          answer={answer}
+          fix={fix}
+          answerImageVariant={answerImageVariant}
         />
+      ) : (
+        memoList &&
+        memoList.length > 0 && (
+          <MemoLayer
+            blockSize={blockSize}
+            memoList={memoList}
+            data-testid={`${dataTestid}-memo`}
+            data-memo={memoList}
+          />
+        )
       )}
     </div>
   );
@@ -94,14 +104,9 @@ type HyperGroupLayerProps = {
  * - 属する HyperGroup の数に応じて濃くする。
  */
 const HyperGroupLayer: React.FC<HyperGroupLayerProps> = ({ hyper }) => {
-  const bg = useMemo(() => {
-    if (hyper) {
-      return 'bg-emerald-400/20';
-    }
-    return 'bg-transparent';
-  }, [hyper]);
+  if (!hyper) return null;
   return (
-    <div className={clsx('w-full h-full absolute top-0 left-0', bg)}></div>
+    <div className="w-full h-full absolute top-0 left-0 bg-emerald-400/20"></div>
   );
 };
 
@@ -116,14 +121,9 @@ type UpleftDownrightGroupLayerProps = {
 const UpleftDownrightGroupLayer: React.FC<UpleftDownrightGroupLayerProps> = ({
   upleftDownright,
 }) => {
-  const bg = useMemo(() => {
-    if (upleftDownright) {
-      return 'bg-pink-500/20';
-    }
-    return 'bg-transparent';
-  }, [upleftDownright]);
+  if (!upleftDownright) return null;
   return (
-    <div className={clsx('w-full h-full absolute top-0 left-0', bg)}></div>
+    <div className="w-full h-full absolute top-0 left-0 bg-pink-500/20"></div>
   );
 };
 
@@ -141,14 +141,9 @@ type UprightDownleftGroupLayerProps = {
 const UprightDownleftGroupLayer: React.FC<UprightDownleftGroupLayerProps> = ({
   uprightDownleft,
 }) => {
-  const bg = useMemo(() => {
-    if (uprightDownleft) {
-      return 'bg-sky-500/20';
-    }
-    return 'bg-transparent';
-  }, [uprightDownleft]);
+  if (!uprightDownleft) return null;
   return (
-    <div className={clsx('w-full h-full absolute top-0 left-0', bg)}></div>
+    <div className="w-full h-full absolute top-0 left-0 bg-sky-500/20"></div>
   );
 };
 
@@ -206,17 +201,21 @@ const SelectLayer: React.FC<SelectLayerProps> = ({ select }) => {
 };
 
 type AnswerLayerProps = {
-  /** そのセルの答え。未回答ならば省略可。 */
-  answer?: string;
+  /** そのセルの答え */
+  answer: string;
   /** 変更不可フラグ */
   fix?: boolean;
+  answerImageVariant: AnswerImageVariant;
 };
 
 /**
  * 答えを表示するレイヤー。
  */
-const AnswerLayer: React.FC<AnswerLayerProps> = ({ answer, fix }) => {
-  const answerImageVariant = useRecoilValue(atomOfAnswerImageVariant);
+const AnswerLayer: React.FC<AnswerLayerProps> = ({
+  answer,
+  fix,
+  answerImageVariant,
+}) => {
   const className = useMemo(
     () =>
       clsx(getAnswerClass({ answer, fix, answerImageVariant }), 'select-none'),

@@ -37,7 +37,7 @@ function setup(size: '2_2' | '2_3') {
 test('メモモードで入力パネルから空欄セルにメモを記入できる', async () => {
   setup('2_2');
   expect(screen.getByTestId('0,0')).not.toHaveTextContent('1');
-  expect(screen.getByTestId('0,0-memo')).not.toHaveTextContent('1');
+  expect(screen.queryByTestId('0,0-memo')).not.toBeInTheDocument();
   await userEvent.click(screen.getByTestId('0,0'));
   await userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
   await userEvent.click(screen.getByRole('button', { name: '1' }));
@@ -46,7 +46,7 @@ test('メモモードで入力パネルから空欄セルにメモを記入で�
 test('メモモードでキーボードから空欄セルにメモを記入できる', async () => {
   setup('2_2');
   expect(screen.getByTestId('0,0')).not.toHaveTextContent('1');
-  expect(screen.getByTestId('0,0-memo')).not.toHaveTextContent('1');
+  expect(screen.queryByTestId('0,0-memo')).not.toBeInTheDocument();
   await userEvent.click(screen.getByTestId('0,0'));
   await userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
   await userEvent.keyboard('1');
@@ -55,7 +55,7 @@ test('メモモードでキーボードから空欄セルにメモを記入で�
 test('メモモードでメモ済み数字と同じボタン押下でそのメモ数字を消す', async () => {
   setup('2_2');
   expect(screen.getByTestId('0,0')).not.toHaveTextContent('1');
-  expect(screen.getByTestId('0,0-memo')).not.toHaveTextContent('1');
+  expect(screen.queryByTestId('0,0-memo')).not.toBeInTheDocument();
   await userEvent.click(screen.getByTestId('0,0'));
   await userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
   await userEvent.click(screen.getByRole('button', { name: '1' }));
@@ -96,7 +96,7 @@ test('メモがある、かつメモモードで消去ボタンを押下する�
   await userEvent.click(screen.getByRole('button', { name: '2' }));
   expect(screen.getByTestId('0,0-memo')).toHaveAttribute('data-memo', '1,2');
   await userEvent.click(screen.getByRole('button', { name: '消す' }));
-  expect(screen.getByTestId('0,0-memo')).not.toHaveAttribute('data-memo');
+  expect(screen.queryByTestId('0,0-memo')).not.toBeInTheDocument();
 });
 test('メモがある、かつ通常モードで消去ボタンを押下するとメモをクリアする', async () => {
   setup('2_2');
@@ -108,7 +108,7 @@ test('メモがある、かつ通常モードで消去ボタンを押下する�
   await userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
   expect(screen.getByTestId('0,0-memo')).toHaveAttribute('data-memo', '1,2');
   await userEvent.click(screen.getByRole('button', { name: '消す' }));
-  expect(screen.getByTestId('0,0-memo')).not.toHaveAttribute('data-memo');
+  expect(screen.queryByTestId('0,0-memo')).not.toBeInTheDocument();
 });
 
 test('fix のセルはメモ入力ボタンでメモを記入できない', async () => {
@@ -124,7 +124,7 @@ test('fix のセルはメモ入力ボタンでメモを記入できない', asyn
 test('キーボードの Shift でメモモードに変更しメモボタンで通常モードに変更できる', async () => {
   setup('2_2');
   expect(screen.getByTestId('0,0')).not.toHaveTextContent('1');
-  expect(screen.getByTestId('0,0-memo')).not.toHaveTextContent('1');
+  expect(screen.queryByTestId('0,0-memo')).not.toBeInTheDocument();
   await userEvent.click(screen.getByTestId('0,0'));
   await userEvent.keyboard('{Shift}');
   await userEvent.click(screen.getByRole('button', { name: '1' }));
@@ -136,7 +136,7 @@ test('キーボードの Shift でメモモードに変更しメモボタンで�
 test('メモボタンでメモモードに変更しキーボードの Shift で通常モードに変更できる', async () => {
   setup('2_2');
   expect(screen.getByTestId('0,0')).not.toHaveTextContent('1');
-  expect(screen.getByTestId('0,0-memo')).not.toHaveTextContent('1');
+  expect(screen.queryByTestId('0,0-memo')).not.toBeInTheDocument();
   await userEvent.click(screen.getByTestId('0,0'));
   await userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
   await userEvent.click(screen.getByRole('button', { name: '1' }));
