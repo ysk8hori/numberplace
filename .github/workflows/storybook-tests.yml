@@ -1,4 +1,4 @@
-name: Pre Workflow
+name: Storybook Tests
 on:
   pull_request:
     types: [opened, reopened, synchronize]
@@ -22,8 +22,5 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Type Check
-        run: npm run type-check
-
-      - name: Test
-        run: npm run test:run
+      - name: Run Storybook tests
+        run: npm run storybook:test:ci
