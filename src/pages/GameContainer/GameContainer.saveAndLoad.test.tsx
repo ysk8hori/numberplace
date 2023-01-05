@@ -23,15 +23,15 @@ function setup(size: '2_2' | '2_3') {
   const rendered = render(
     size === '2_2' ? (
       <GameContainer
-        puzzle={puzzle_2_2}
-        solved={solved_2_2}
-        blockSize={blockSize_2_2}
+      // puzzle={puzzle_2_2}
+      // solved={solved_2_2}
+      // blockSize={blockSize_2_2}
       />
     ) : (
       <GameContainer
-        puzzle={puzzle_2_3}
-        solved={solved_2_3}
-        blockSize={blockSize_2_3}
+      // puzzle={puzzle_2_3}
+      // solved={solved_2_3}
+      // blockSize={blockSize_2_3}
       />
     ),
   );

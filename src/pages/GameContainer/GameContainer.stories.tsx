@@ -47,9 +47,9 @@ const Template: ComponentStory<typeof GameContainer> = args => (
   <GameContainer {...args} />
 );
 Template.args = {
-  puzzle,
-  solved: solved_2_3,
-  blockSize,
+  // puzzle,
+  // solved: solved_2_3,
+  // blockSize,
 };
 
 export const Primary = Template.bind({});
@@ -69,9 +69,9 @@ IconMode.decorators = [
 export const Primary_2_2 = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary_2_2.args = {
-  puzzle: puzzle_2_2,
-  solved: solved_2_2,
-  blockSize: blockSize_2_2,
+  // puzzle: puzzle_2_2,
+  // solved: solved_2_2,
+  // blockSize: blockSize_2_2,
 };
 
 export const IPad = Template.bind({});
@@ -133,36 +133,36 @@ export const MistakeModal: ComponentStoryObj<typeof GameContainer> = {
 
 export const Game_3_3 = Template.bind({});
 Game_3_3.args = {
-  blockSize: blockSize_3_3,
-  puzzle: puzzle_3_3,
-  solved: solved_3_3,
+  // blockSize: blockSize_3_3,
+  // puzzle: puzzle_3_3,
+  // solved: solved_3_3,
 };
 Game_3_3.storyName = '9x9の表示確認';
 
 export const Game_3_3_cross = Template.bind({});
 Game_3_3_cross.args = {
-  blockSize: blockSize_3_3,
-  puzzle: puzzle_3_3,
-  solved: solved_3_3,
-  cross: true,
+  // blockSize: blockSize_3_3,
+  // puzzle: puzzle_3_3,
+  // solved: solved_3_3,
+  // cross: true,
 };
 Game_3_3_cross.storyName = '9x9クロスの表示確認';
 
 export const Game_3_3_hyper = Template.bind({});
 Game_3_3_hyper.args = {
-  blockSize: blockSize_3_3,
-  puzzle: puzzle_3_3,
-  solved: solved_3_3,
-  hyper: true,
+  // blockSize: blockSize_3_3,
+  // puzzle: puzzle_3_3,
+  // solved: solved_3_3,
+  // hyper: true,
 };
 Game_3_3_hyper.storyName = '9x9HYPERの表示確認';
 
 export const Game_3_3_hyper_cross = Template.bind({});
 Game_3_3_hyper_cross.args = {
-  blockSize: blockSize_3_3,
-  puzzle: puzzle_3_3,
-  solved: solved_3_3,
-  cross: true,
-  hyper: true,
+  // blockSize: blockSize_3_3,
+  // puzzle: puzzle_3_3,
+  // solved: solved_3_3,
+  // cross: true,
+  // hyper: true,
 };
 Game_3_3_hyper_cross.storyName = '9x9HYPERxCROSSの表示確認';
