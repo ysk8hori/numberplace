@@ -37,18 +37,12 @@ function LoadGameContainer({
 }) {
   const [doneFirstRender, setDoneFirstRender] = useState<boolean>(false);
   const [game, setGame] = useRecoilState(atomOfGame);
-  let loadedGameFromParams;
   if (!doneFirstRender) {
     setDoneFirstRender(true);
-    loadedGameFromParams = loadGameFromParams();
+    const loadedGameFromParams = loadGameFromParams();
+    if (loadedGameFromParams) setGame(loadedGameFromParams);
   }
-  if (loadedGameFromParams) {
-    setGame(loadedGameFromParams);
-  } else if (!game) {
-    onChangeSize?.();
-    return null;
-  }
-
+  if (!game) return null;
   return (
     <div className="grow flex justify-center">
       <GameContainer
