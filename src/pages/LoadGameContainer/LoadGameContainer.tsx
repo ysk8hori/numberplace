@@ -6,7 +6,7 @@ import {
   BlockSize,
   GameType,
 } from '@ysk8hori/numberplace-generator';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { atomOfGame } from '../../atoms';
 import { fromURLSearchParams } from '../../utils/URLSearchParamConverter';
 
@@ -14,26 +14,13 @@ import { fromURLSearchParams } from '../../utils/URLSearchParamConverter';
  * セーブデータなどからゲームをロードした際に、ゲーム生成処理を介さずにゲームプレイを可能とするコンテナ。
  */
 function LoadGameContainer({
-  puzzle,
-  solved,
-  blockSize,
   onChangeSize,
   onRegenerate,
-  cross = false,
-  hyper = false,
 }: {
-  /** ナンプレの問題 */
-  puzzle: MyGame;
-  /** ナンプレの答え */
-  solved: MyGame;
-  /** ナンプレのブロックのサイズ */
-  blockSize: BlockSize;
   /** 他のサイズで遊ぶコールバック */
   onChangeSize?: () => void;
   /** 同じサイズで遊ぶコールバック */
   onRegenerate?: (blockSize: BlockSize) => void;
-  cross?: boolean;
-  hyper?: boolean;
 }) {
   const [doneFirstRender, setDoneFirstRender] = useState<boolean>(false);
   const [game, setGame] = useRecoilState(atomOfGame);
@@ -43,8 +30,12 @@ function LoadGameContainer({
     loadedGameFromParams = loadGameFromParams();
   }
   if (loadedGameFromParams) {
+    // URL からゲームをロードできた場合はローカルストレージに保持して rerender を待つ
     setGame(loadedGameFromParams);
-  } else if (!game) {
+    return null;
+  }
+  if (!game) {
+    // 保持しているゲームがない場合やロードしたゲームが不正な場合はメニューへ戻る
     onChangeSize?.();
     return null;
   }
@@ -52,7 +43,7 @@ function LoadGameContainer({
   return (
     <div className="grow flex justify-center">
       <GameContainer
-        onRegenerate={() => onRegenerate?.(blockSize)}
+        onRegenerate={() => onRegenerate?.(game.blockSize)}
         onChangeSize={onChangeSize}
       />
     </div>

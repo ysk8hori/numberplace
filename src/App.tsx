@@ -3,17 +3,10 @@ import GenerateGameContainer from './pages/GenerateGameContainer/GenerateGameCon
 import React, { useState } from 'react';
 import StartMenu from './pages/StartMenu/StartMenu';
 import LoadGameContainer from './pages/LoadGameContainer';
-import {
-  analyzeGame,
-  BlockSize,
-  GameType,
-} from '@ysk8hori/numberplace-generator';
+import { BlockSize } from '@ysk8hori/numberplace-generator';
 import { Difficulty } from './utils/difficulty';
 import { useLocalStorage } from 'usehooks-ts';
 import { MyGame } from './utils/typeUtils';
-import { fromURLSearchParams } from './utils/URLSearchParamConverter';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { atomOfGame } from './atoms';
 
 /**
  * 現在のアプリのモード
@@ -58,15 +51,10 @@ function App() {
           style={{ minHeight: '100svh' }}
         >
           <LoadGameContainer
-            blockSize={blockSize}
-            puzzle={initialState.puzzle!}
-            solved={initialState.solved!}
             onChangeSize={() => setMode('menu')}
             onRegenerate={blockSize => (
               setBlockSize(blockSize), setMode('generateAndPlay')
             )}
-            cross={cross}
-            hyper={hyper}
           />
         </div>
       );
