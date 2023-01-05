@@ -2,7 +2,6 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Generating from './Generating';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   component: Generating,
   parameters: {
@@ -10,7 +9,6 @@ export default {
   },
 } as ComponentMeta<typeof Generating>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Generating> = args => (
   <Generating {...args} />
 );

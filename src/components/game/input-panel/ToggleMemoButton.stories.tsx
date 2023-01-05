@@ -4,12 +4,10 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ToggleMemoButton from './ToggleMemoButton';
 import { TiPencil } from 'react-icons/ti';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   component: ToggleMemoButton,
 } as ComponentMeta<typeof ToggleMemoButton>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof ToggleMemoButton> = args => (
   <ToggleMemoButton {...args}></ToggleMemoButton>
 );

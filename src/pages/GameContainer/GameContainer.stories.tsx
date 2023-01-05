@@ -20,7 +20,6 @@ import { expect } from '@storybook/jest';
 import { useSetRecoilState } from 'recoil';
 import { atomOfAnswerImageVariant, atomOfGame } from '../../atoms';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   component: GameContainer,
   parameters: {

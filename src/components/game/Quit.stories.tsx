@@ -3,12 +3,10 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Quit from './Quit';
 import { userEvent, within } from '@storybook/testing-library';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   component: Quit,
 } as ComponentMeta<typeof Quit>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Quit> = args => <Quit {...args} />;
 
 export const Primary = Template.bind({});
