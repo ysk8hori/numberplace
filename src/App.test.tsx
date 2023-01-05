@@ -161,3 +161,18 @@ test('セーブデータがあり URL に 不正なパズルの情報がある�
   ).toBeInTheDocument();
   expect(location.search).toEqual(''); // URLSearchParams はクリアされている
 });
+
+test('ゲームをやめると保存していたゲームを削除する', async () => {
+  gameHolder.saveGame({
+    blockSize: blockSize_2_3,
+    solved: solved_2_3,
+    puzzle: puzzle_2_3,
+  });
+  setup();
+  await userEvent.click(screen.getByRole('button', { name: 'ゲームをやめる' }));
+  expect(gameHolder.loadGame()).toBeDefined();
+  await userEvent
+    .click(screen.getByRole('button', { name: 'はい' }))
+    .catch(_ => undefined);
+  expect(gameHolder.loadGame()).toBeUndefined();
+});

@@ -12,23 +12,41 @@ import {
   puzzle_2_3,
   blockSize_2_3,
   solved_2_3,
+  RecoilServer,
 } from '../../utils/test-utils';
 import GameContainer from '.';
+import { atomOfGame } from '../../atoms';
 
 function setup(size: '2_2' | '2_3') {
   const rendered = render(
     size === '2_2' ? (
-      <GameContainer
-      // puzzle={puzzle_2_2}
-      // solved={solved_2_2}
-      // blockSize={blockSize_2_2}
-      />
+      <>
+        <RecoilServer
+          node={atomOfGame}
+          value={{
+            puzzle: puzzle_2_2,
+            solved: solved_2_2,
+            blockSize: blockSize_2_2,
+            hyper: false,
+            cross: false,
+          }}
+        />
+        <GameContainer />
+      </>
     ) : (
-      <GameContainer
-      // puzzle={puzzle_2_3}
-      // solved={solved_2_3}
-      // blockSize={blockSize_2_3}
-      />
+      <>
+        <RecoilServer
+          node={atomOfGame}
+          value={{
+            puzzle: puzzle_2_3,
+            solved: solved_2_3,
+            blockSize: blockSize_2_3,
+            hyper: false,
+            cross: false,
+          }}
+        />
+        <GameContainer />
+      </>
     ),
   );
   ReactModal.setAppElement(rendered.container);

@@ -184,7 +184,11 @@ describe('fromURLSearchParams', () => {
     const params = toURLSearchParam(puzzleInfo);
     const result = fromURLSearchParams(params);
     if (result.status === 'success') {
-      expect(result.data).toEqual(puzzleInfo);
+      expect(result.data).toEqual({
+        ...puzzleInfo,
+        hyper: false,
+        cross: false,
+      });
     } else {
       fail();
     }
