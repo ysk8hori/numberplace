@@ -14,19 +14,28 @@ module.exports = {
       },
     },
   ],
-  framework: '@storybook/react',
+  framework: '@storybook/react-vite', // OR whatever framework you're using
+  features: {
+    storyStoreV7: true,
+  },
   docs: {
     docsPage: 'automatic',
+    autodocs: true,
   },
   core: {
-    builder: 'webpack5',
+    builder: '@storybook/builder-vite',
   },
-  webpackFinal: config => {
-    config.module.rules.push({
-      test: /\.scss$/,
-      use: ['postcss-loader'],
-    });
-
-    return config;
+  async viteFinal(config) {
+    return {
+      ...config,
+      define: {
+        ...config.define,
+        global: 'window',
+      },
+      esbuild: {
+        ...config.esbuild,
+        jsxInject: `import React from 'react'`,
+      },
+    };
   },
 };

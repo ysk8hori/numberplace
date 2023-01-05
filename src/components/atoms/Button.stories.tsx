@@ -1,17 +1,32 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { StoryFn, Meta, StoryObj } from '@storybook/react';
 import styled from 'styled-components';
 import Button from './Button';
 
 export default {
   component: Button,
-} as ComponentMeta<typeof Button>;
+} as Meta<typeof Button>;
 
 const Container = styled.div`
   display: flex;
   gap: 8px;
 `;
 
-const FlatTemplate: ComponentStory<typeof Button> = () => (
+export const Default: StoryObj<typeof Button> = {
+  args: {
+    variant: 'flat',
+    disabled: false,
+    children: 'Hello',
+  },
+  decorators: [
+    Story => (
+      <Container>
+        <Story />
+      </Container>
+    ),
+  ],
+};
+
+export const Flat: StoryFn<typeof Button> = () => (
   <Container>
     <Button variant="flat">Hello</Button>
     <Button variant="flat" disabled>
@@ -19,9 +34,8 @@ const FlatTemplate: ComponentStory<typeof Button> = () => (
     </Button>
   </Container>
 );
-export const Flat = FlatTemplate.bind({});
 
-const OutlinedTemplate: ComponentStory<typeof Button> = () => (
+export const Outlined: StoryFn<typeof Button> = () => (
   <Container>
     <Button variant="outlined">Hello</Button>
     <Button variant="outlined" disabled>
@@ -29,9 +43,8 @@ const OutlinedTemplate: ComponentStory<typeof Button> = () => (
     </Button>
   </Container>
 );
-export const OutLined = OutlinedTemplate.bind({});
 
-const TextTemplate: ComponentStory<typeof Button> = () => (
+export const Text: StoryFn<typeof Button> = () => (
   <Container>
     <Button variant="text">Hello</Button>
     <Button variant="text" disabled>
@@ -39,4 +52,3 @@ const TextTemplate: ComponentStory<typeof Button> = () => (
     </Button>
   </Container>
 );
-export const Text = TextTemplate.bind({});
