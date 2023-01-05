@@ -11,13 +11,11 @@ import Quit from '../../components/game/Quit';
 import ConfigMenu from '../../components/atoms/ConfigMenu';
 import {
   useRecoilCallback,
-  useRecoilValue,
   useResetRecoilState,
   useSetRecoilState,
 } from 'recoil';
 import { atomOfInputMode } from './atoms';
 import { atomOfGame } from '../../atoms';
-import { assertUndefined } from '../../utils/assertNull';
 
 /** basePuzzle をクローンする */
 function clone(basePuzzle: MyGame): MyGame {
@@ -51,21 +49,43 @@ function clone(basePuzzle: MyGame): MyGame {
  * - 親から受け取った puzzle の変更
  */
 export default function GameContainer({
+  puzzle: basePuzzle,
+  solved,
+  blockSize,
   onRegenerate,
   onChangeSize,
+  cross = false,
+  hyper = false,
 }: {
+  /** ナンプレの問題 */
+  puzzle: MyGame;
+  /** ナンプレの答え */
+  solved: MyGame;
+  /** ナンプレのブロックのサイズ */
+  blockSize: BlockSize;
   /** 同じサイズで遊ぶコールバック */
   onRegenerate?: () => void;
   /** 他のサイズで遊ぶコールバック */
   onChangeSize?: () => void;
+  /** ゲームタイプがクロスかどうか */
+  cross?: boolean;
+  /** ゲームタイプがHYPERかどうか */
+  hyper?: boolean;
 }) {
-  const gameData = useRecoilValue(atomOfGame);
-  if (!assertUndefined(gameData)) throw new Error('hoge');
-  const { puzzle, solved, blockSize, cross, hyper } = gameData;
+  const [puzzle, setPuzzle] = useState(() => clone(basePuzzle));
+  // gameHolder.saveGame({ puzzle, solved, blockSize, cross, hyper });
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   const [hasMistake, setMistake] = useState(false);
   const [isGameClear, setGameClear] = useState(false);
-  const fill = useFill(puzzle, selectedPos, blockSize, solved, cross, hyper);
+  const fill = useFill(
+    puzzle,
+    selectedPos,
+    blockSize,
+    solved,
+    cross,
+    hyper,
+    setPuzzle,
+  );
   useFillByKeyboard(fill);
   useDeleteByKeybord(fill);
   useToggleMemoByKeyboard();
@@ -77,6 +97,7 @@ export default function GameContainer({
     blockSize,
     cross,
     hyper,
+    setPuzzle,
     puzzle,
   );
   useCheckAndUpdateByEnter(checkAndUpdate);
@@ -158,6 +179,7 @@ function useCheckAndUpdate(
   blockSize: BlockSize,
   cross: boolean,
   hyper: boolean,
+  setPuzzle: React.Dispatch<React.SetStateAction<MyGame>>,
   _puzzle: MyGame,
 ) {
   const saveGame = useSetRecoilState(atomOfGame);
@@ -179,6 +201,7 @@ function useCheckAndUpdate(
 
     if (puzzle.cells.every(cell => cell.isFix)) setGameClear(true);
     saveGame({ puzzle, solved, blockSize, cross, hyper });
+    setPuzzle(puzzle);
   }, [
     _puzzle,
     solved,
@@ -187,6 +210,7 @@ function useCheckAndUpdate(
     blockSize,
     cross,
     hyper,
+    setPuzzle,
     setMistake,
   ]);
 }
@@ -274,6 +298,7 @@ function useFill(
   solved: MyGame,
   cross: boolean,
   hyper: boolean,
+  setPuzzle: React.Dispatch<React.SetStateAction<MyGame>>,
 ) {
   const saveGame = useSetRecoilState(atomOfGame);
   return useRecoilCallback(
@@ -288,6 +313,7 @@ function useFill(
           targetCell.answer = answer;
           targetCell.memoList = undefined;
           saveGame({ puzzle, solved, blockSize, cross, hyper });
+          setPuzzle(puzzle);
           return;
         }
         // 扱える範囲の数字かどうかをチェックする
@@ -319,8 +345,9 @@ function useFill(
           }
         }
         saveGame({ puzzle, solved, blockSize, cross, hyper });
+        setPuzzle(puzzle);
       },
-    [_puzzle, selectedPos, blockSize, solved, cross, hyper],
+    [_puzzle, selectedPos, blockSize, solved, cross, hyper, setPuzzle],
   );
 }
 
