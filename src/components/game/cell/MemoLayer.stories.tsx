@@ -8,12 +8,10 @@ import {
   blockSize_3_3,
 } from '../../../utils/samples';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   component: MemoLayer,
 } as ComponentMeta<typeof MemoLayer>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof MemoLayer> = args => (
   <MemoLayer {...args} />
 );

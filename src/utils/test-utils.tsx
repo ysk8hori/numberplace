@@ -4,7 +4,12 @@ import { screen } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import semanticToken from '../theme/semanticToken';
 import React, { useEffect } from 'react';
-import { RecoilRoot, RecoilState, useRecoilValue } from 'recoil';
+import {
+  RecoilRoot,
+  RecoilState,
+  useRecoilValue,
+  useSetRecoilState,
+} from 'recoil';
 
 const customRender = (ui: React.ReactElement, options = {}) =>
   render(ui, {
@@ -28,6 +33,18 @@ export function RecoilObserver<T>({
 }) {
   const value = useRecoilValue(node);
   useEffect(() => onChange(value), [onChange, value]);
+  return null;
+}
+
+export function RecoilServer<T>({
+  node,
+  value,
+}: {
+  node: RecoilState<T>;
+  value: T;
+}) {
+  const set = useSetRecoilState(node);
+  set(value);
   return null;
 }
 
