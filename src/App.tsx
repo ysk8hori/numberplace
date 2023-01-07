@@ -25,15 +25,7 @@ import { atomOfGame } from './atoms';
 type Mode = 'menu' | 'loadAndPlay' | 'generateAndPlay';
 
 function App() {
-  const [doneFirstRender, setDoneFirstRender] = useState<boolean>(false);
-  const setGame = useSetRecoilState(atomOfGame);
-  if (!doneFirstRender) {
-    setDoneFirstRender(true);
-    const loadedGameFromParams = loadGameFromParams();
-    if (loadedGameFromParams) setGame(loadedGameFromParams);
-  }
-
-  const initialState = useInitialStates();
+  const initialState = getInitialStates();
   const [mode, setMode] = useState<Mode>(initialState.mode);
   const [blockSize, setBlockSize] = useState<BlockSize>(initialState.blockSize);
   const [cross, setCross] = useState(initialState.cross);
@@ -96,7 +88,7 @@ function App() {
 
 export default App;
 
-function useInitialStates(): {
+function getInitialStates(): {
   mode: Mode;
   blockSize: BlockSize;
   cross?: boolean;
@@ -104,45 +96,19 @@ function useInitialStates(): {
   puzzle?: MyGame;
   solved?: MyGame;
 } {
-  const game = useRecoilValue(atomOfGame);
-  if (game) {
-    return {
-      mode: 'loadAndPlay',
-      ...game,
-    };
-  }
+  // const game = useRecoilValue(atomOfGame);
+  // if (game) {
+  //   return {
+  //     mode: 'loadAndPlay',
+  //     ...game,
+  //   };
+  // }
 
   return {
-    mode: 'menu',
+    mode: 'loadAndPlay',
     blockSize: {
       height: 2,
       width: 3,
     },
   };
-}
-
-function loadGameFromParams() {
-  if (!location.search) return;
-
-  const params = new URLSearchParams(location.search);
-  history.replaceState('', '', '/');
-  const result = fromURLSearchParams(params);
-  if (result.status !== 'success') {
-    console.log(result.status);
-    return;
-  }
-
-  const gameTypes: GameType[] = [];
-  if (result.data.cross) gameTypes.push('cross');
-  if (result.data.hyper) gameTypes.push('hyper');
-  const analyzeResult = analyzeGame({
-    ...result.data,
-    option: { gameTypes },
-  });
-  if (analyzeResult.status !== 'solved') {
-    console.log(analyzeResult.status);
-    return;
-  }
-  // gameHolder.saveGame({ ...result.data, solved: analyzeResult.solved });
-  return { ...result.data, solved: analyzeResult.solved };
 }

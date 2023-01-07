@@ -114,7 +114,7 @@ test.todo(
   },
 );
 
-test('URL に パズルの情報がある場合はそれをプレイできる http://localhost:3000/?v=1&p=x45x3nxxx5nxx2nnxxxx1n&w=3&h=2&t=c', async () => {
+test('URL に パズルの情報がある場合はそれをプレイできる http://127.0.0.1:5173/?v=1&p=x45x3nxxx5nxx2nnxxxx1n&w=3&h=2&t=c', async () => {
   history.pushState('', '', '/?v=1&p=x45x3nxxx5nxx2nnxxxx1n&w=3&h=2&t=c');
   setup();
   expect(
