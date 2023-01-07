@@ -3,12 +3,10 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import BlockSizeButton from './BlockSizeButton';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   component: BlockSizeButton,
 } as ComponentMeta<typeof BlockSizeButton>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof BlockSizeButton> = args => (
   <BlockSizeButton {...args} />
 );

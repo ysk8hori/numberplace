@@ -6,8 +6,8 @@ import { MyCell, MyGame } from './typeUtils';
 type PuzzleInfo = {
   puzzle: Pick<MyGame, 'cells'>;
   blockSize: BlockSize;
-  cross?: boolean;
-  hyper?: boolean;
+  cross: boolean;
+  hyper: boolean;
 };
 
 const SPLITTER = { colSplitter: '', rowSplitter: 'n', empty: 'x' };
@@ -17,7 +17,8 @@ export function toURLSearchParam({
   blockSize,
   cross,
   hyper,
-}: PuzzleInfo) {
+}: Pick<PuzzleInfo, 'puzzle' | 'blockSize'> &
+  Partial<Pick<PuzzleInfo, 'hyper' | 'cross'>>) {
   const param: Record<string, string> = {};
   // ざっくりとした version 情報も一応載せる
   param.v = '1';
@@ -64,8 +65,8 @@ export function fromURLSearchParams(
   // const version = param.get('v');
 
   const typesStr = param.get('t');
-  const cross = typesStr?.includes('c');
-  const hyper = typesStr?.includes('h');
+  const cross = typesStr?.includes('c') ?? false;
+  const hyper = typesStr?.includes('h') ?? false;
 
   const puzzleStr = param.get('p');
   if (!puzzleStr) return Result.create('invalid_puzzle');

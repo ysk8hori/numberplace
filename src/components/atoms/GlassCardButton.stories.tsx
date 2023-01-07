@@ -4,7 +4,6 @@ import backgroundimg from '../../images/11-g-90.png';
 
 import GlassCardButton from './GlassCardButton';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   component: GlassCardButton,
   decorators: [
@@ -16,7 +15,6 @@ export default {
   ],
 } as ComponentMeta<typeof GlassCardButton>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof GlassCardButton> = args => (
   <GlassCardButton {...args} />
 );

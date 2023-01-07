@@ -114,7 +114,7 @@ test.todo(
   },
 );
 
-test('URL に パズルの情報がある場合はそれをプレイできる http://localhost:3000/?v=1&p=x45x3nxxx5nxx2nnxxxx1n&w=3&h=2&t=c', async () => {
+test('URL に パズルの情報がある場合はそれをプレイできる http://127.0.0.1:5173/?v=1&p=x45x3nxxx5nxx2nnxxxx1n&w=3&h=2&t=c', async () => {
   history.pushState('', '', '/?v=1&p=x45x3nxxx5nxx2nnxxxx1n&w=3&h=2&t=c');
   setup();
   expect(
@@ -160,4 +160,19 @@ test('セーブデータがあり URL に 不正なパズルの情報がある�
     await screen.findByRole('button', { name: '答え合わせ' }),
   ).toBeInTheDocument();
   expect(location.search).toEqual(''); // URLSearchParams はクリアされている
+});
+
+test('ゲームをやめると保存していたゲームを削除する', async () => {
+  gameHolder.saveGame({
+    blockSize: blockSize_2_3,
+    solved: solved_2_3,
+    puzzle: puzzle_2_3,
+  });
+  setup();
+  await userEvent.click(screen.getByRole('button', { name: 'ゲームをやめる' }));
+  expect(gameHolder.loadGame()).toBeDefined();
+  await userEvent
+    .click(screen.getByRole('button', { name: 'はい' }))
+    .catch(_ => undefined);
+  expect(gameHolder.loadGame()).toBeUndefined();
 });
