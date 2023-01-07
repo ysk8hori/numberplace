@@ -1,3 +1,5 @@
+const react = require('@vitejs/plugin-react');
+
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
@@ -22,9 +24,6 @@ module.exports = {
     docsPage: 'automatic',
     autodocs: true,
   },
-  core: {
-    builder: '@storybook/builder-vite',
-  },
   async viteFinal(config) {
     return {
       ...config,
@@ -32,9 +31,11 @@ module.exports = {
         ...config.define,
         global: 'window',
       },
-      esbuild: {
-        ...config.esbuild,
-        jsxInject: `import React from 'react'`,
+      build: {
+        ...config.build,
+        rollupOptions: {
+          external: ['@storybook/window', '@testing-library/jest-dom'],
+        },
       },
     };
   },

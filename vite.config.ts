@@ -34,4 +34,7 @@ export default defineConfig({
       },
     }),
   ],
+  optimizeDeps: {
+    include: ['tailwindcss/colors'],
+  },
 });
