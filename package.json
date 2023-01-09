@@ -62,7 +62,7 @@
     "@vitejs/plugin-react": "2.2.0",
     "@vitest/ui": "latest",
     "autoprefixer": "10.4.13",
-    "babel-loader": "9.1.0",
+    "babel-loader": "9.1.2",
     "chromatic": "6.13.1",
     "concurrently": "^7.6.0",
     "css-loader": "^6.7.2",
