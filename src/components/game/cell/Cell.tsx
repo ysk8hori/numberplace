@@ -28,6 +28,8 @@ import { AnswerImageVariant } from '../../../atoms';
  * 以下のことは行わない。
  *
  * - 自分のポジションを意識した処理
+ *
+ * ほげ
  */
 function Cell({
   onSelect = () => undefined,
