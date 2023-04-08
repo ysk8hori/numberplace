@@ -7,6 +7,7 @@ import '../utils/answers/number/bold.scss';
 import '../utils/answers/asobi/normal.scss';
 import '../utils/answers/asobi/bold.scss';
 import { AnswerImageVariant } from '../../../atoms';
+import hoge from './Hoge';
 
 /**
  * マス目１つを表すコンポーネント。以下の特徴を持つ。
@@ -58,6 +59,7 @@ function Cell({
     UprightDownleftGroupLayerProps &
     HyperGroupLayerProps
 >) {
+  hoge();
   return (
     <div
       className={'relative aspect-square select-none'}
