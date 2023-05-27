@@ -21,8 +21,8 @@
     "chromatic": "npx chromatic --project-token=1d1cac2951ec --patch-build=ysk8hori-patch-2...main"
   },
   "dependencies": {
-    "@sentry/react": "7.23.0",
-    "@sentry/tracing": "7.23.0",
+    "@sentry/react": "7.53.1",
+    "@sentry/tracing": "7.53.1",
     "@tanstack/react-query": "4.29.11",
     "@ysk8hori/numberplace-generator": "2.8.2",
     "clsx": "1.2.1",
