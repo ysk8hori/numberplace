@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentStory, Meta } from '@storybook/react';
 
 import MemoLayer from './MemoLayer';
 import {
@@ -10,7 +10,7 @@ import {
 
 export default {
   component: MemoLayer,
-} as ComponentMeta<typeof MemoLayer>;
+} as Meta<typeof MemoLayer>;
 
 const Template: ComponentStory<typeof MemoLayer> = args => (
   <MemoLayer {...args} />

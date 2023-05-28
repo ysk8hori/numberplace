@@ -1,10 +1,10 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentStory, Meta } from '@storybook/react';
 import MistakeNoticeModal from './MistakeNoticeModal';
 
 export default {
   component: MistakeNoticeModal,
-} as ComponentMeta<typeof MistakeNoticeModal>;
+} as Meta<typeof MistakeNoticeModal>;
 
 const Template: ComponentStory<typeof MistakeNoticeModal> = args => (
   <MistakeNoticeModal {...args} />

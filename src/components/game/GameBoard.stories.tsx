@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentStory, Meta } from '@storybook/react';
 import GameBoard from './GameBoard';
 import {
   blockSize_2_3 as blockSize,
@@ -17,7 +17,7 @@ export default {
       </div>
     ),
   ],
-} as ComponentMeta<typeof GameBoard>;
+} as Meta<typeof GameBoard>;
 
 const Template: ComponentStory<typeof GameBoard> = args => (
   <GameBoard {...args} />

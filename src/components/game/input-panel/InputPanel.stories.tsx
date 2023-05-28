@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentStory, Meta } from '@storybook/react';
 import InputPanel from './InputPanel';
 import { blockSize_2_2 } from '../../../utils/samples';
 
@@ -12,7 +12,7 @@ export default {
       </div>
     ),
   ],
-} as ComponentMeta<typeof InputPanel>;
+} as Meta<typeof InputPanel>;
 
 const Template: ComponentStory<typeof InputPanel> = args => (
   <InputPanel {...args} />

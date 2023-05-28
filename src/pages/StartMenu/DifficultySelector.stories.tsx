@@ -1,10 +1,10 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentStory, Meta } from '@storybook/react';
 import DifficultySelector from './DifficultySelector';
 
 export default {
   component: DifficultySelector,
-} as ComponentMeta<typeof DifficultySelector>;
+} as Meta<typeof DifficultySelector>;
 
 const Template: ComponentStory<typeof DifficultySelector> = args => (
   <DifficultySelector {...args} />

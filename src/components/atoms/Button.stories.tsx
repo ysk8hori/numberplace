@@ -1,10 +1,10 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, ComponentStory } from '@storybook/react';
 import styled from 'styled-components';
 import Button from './Button';
 
 export default {
   component: Button,
-} as ComponentMeta<typeof Button>;
+} as Meta<typeof Button>;
 
 const Container = styled.div`
   display: flex;

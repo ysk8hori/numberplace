@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta, ComponentStoryObj } from '@storybook/react';
+import { Meta, ComponentStoryObj } from '@storybook/react';
 import { within, userEvent } from '@storybook/testing-library';
 import GameContainer from '.';
 import {
@@ -46,7 +46,7 @@ export default {
       return <Story />;
     },
   ],
-} as ComponentMeta<typeof GameContainer>;
+} as Meta<typeof GameContainer>;
 
 export const Primary: ComponentStoryObj<typeof GameContainer> = {};
 

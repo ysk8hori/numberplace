@@ -1,11 +1,11 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentStory, Meta } from '@storybook/react';
 
 import BlockSizeButton from './BlockSizeButton';
 
 export default {
   component: BlockSizeButton,
-} as ComponentMeta<typeof BlockSizeButton>;
+} as Meta<typeof BlockSizeButton>;
 
 const Template: ComponentStory<typeof BlockSizeButton> = args => (
   <BlockSizeButton {...args} />
