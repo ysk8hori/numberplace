@@ -16,7 +16,6 @@
         "react",
         "react-dom",
         "@sentry/react",
-        "@tanstack/react-query",
         "react-icons",
         "react-modal"
       ]
@@ -33,7 +32,22 @@
     {
       "groupName": "All minore and patch dependencies",
       "matchUpdateTypes": ["minor", "patch"],
-      "labels": ["UPDATE-MINOR&PATCH"]
+      "labels": ["UPDATE-MINOR&PATCH"],
+      "excludePackageNames": [
+        "typescript",
+        "react",
+        "react-dom",
+        "@sentry/react",
+        "react-icons",
+        "react-modal",
+        "eslint",
+        "eslint-config-prettier"
+      ],
+      "excludePackagePatterns": [
+        "^@storybook/",
+        "^@typescript-eslint/",
+        "^eslint-plugin"
+      ]
     }
   ]
 }
