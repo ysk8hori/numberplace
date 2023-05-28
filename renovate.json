@@ -22,6 +22,11 @@
       ]
     },
     {
+      "groupName": "Vite related packages",
+      "packageNames": ["vite"],
+      "packagePatterns": ["^@vitejs"]
+    },
+    {
       "groupName": "Storybook related packages",
       "packagePatterns": ["^@storybook/"]
     },
