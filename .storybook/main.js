@@ -14,19 +14,18 @@ module.exports = {
       },
     },
   ],
-  framework: '@storybook/react',
-  docs: {
-    docsPage: 'automatic',
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {},
   },
-  core: {
-    builder: 'webpack5',
+  docs: {
+    autodocs: true,
   },
   webpackFinal: config => {
     config.module.rules.push({
       test: /\.scss$/,
       use: ['postcss-loader'],
     });
-
     return config;
   },
 };
