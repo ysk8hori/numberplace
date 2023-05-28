@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { PropsWithChildren, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import getAnswerClass from '../utils/answers/getAnswerClass';
 import MemoLayer, { Props as MemoLayerProps } from './MemoLayer';
 import '../utils/answers/number/normal.scss';
@@ -43,28 +43,25 @@ function Cell({
   uprightDownleft,
   hyper,
   answerImageVariant = 'num',
-  ...rest
-}: PropsWithChildren<
-  {
-    onSelect?: () => void;
-    'data-testid'?: string;
-  } & Partial<AnswerLayerProps> &
-    BorderLayerProps &
-    SelectLayerProps &
-    MemoLayerProps &
-    UpleftDownrightGroupLayerProps &
-    UprightDownleftGroupLayerProps &
-    HyperGroupLayerProps
->) {
+}: {
+  onSelect?: () => void;
+  'data-testid'?: string;
+} & Partial<AnswerLayerProps> &
+  BorderLayerProps &
+  SelectLayerProps &
+  MemoLayerProps &
+  UpleftDownrightGroupLayerProps &
+  UprightDownleftGroupLayerProps &
+  HyperGroupLayerProps) {
   return (
-    <div
-      className={'relative aspect-square select-none'}
+    <button
+      type="button"
+      className={'relative aspect-square select-none w-full h-full'}
       onMouseDown={onSelect}
       data-testid={dataTestid}
       data-select={select}
       data-fix={fix}
       data-answer={answer}
-      {...rest}
     >
       <BorderLayer right={right} bottom={bottom} />
       <UpleftDownrightGroupLayer upleftDownright={upleftDownright} />
@@ -88,7 +85,7 @@ function Cell({
           />
         )
       )}
-    </div>
+    </button>
   );
 }
 

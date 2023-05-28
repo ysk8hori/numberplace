@@ -6,27 +6,26 @@ module.exports = {
     '@storybook/addon-interactions',
     '@storybook/preset-scss',
     {
-      name: '@storybook/addon-postcss',
+      name: '@storybook/addon-styling',
       options: {
-        postcssLoaderOptions: {
+        postCss: {
           implementation: require('postcss'),
         },
       },
     },
   ],
-  framework: '@storybook/react',
-  docs: {
-    docsPage: 'automatic',
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {},
   },
-  core: {
-    builder: 'webpack5',
+  docs: {
+    autodocs: true,
   },
   webpackFinal: config => {
     config.module.rules.push({
       test: /\.scss$/,
       use: ['postcss-loader'],
     });
-
     return config;
   },
 };

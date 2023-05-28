@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import MemoLayer from './MemoLayer';
 import {
@@ -10,11 +10,9 @@ import {
 
 export default {
   component: MemoLayer,
-} as ComponentMeta<typeof MemoLayer>;
+} as Meta<typeof MemoLayer>;
 
-const Template: ComponentStory<typeof MemoLayer> = args => (
-  <MemoLayer {...args} />
-);
+const Template: StoryFn<typeof MemoLayer> = args => <MemoLayer {...args} />;
 Template.args = {
   blockSize: blockSize_3_3,
   memoList: ['1', '2', '4', '9'],

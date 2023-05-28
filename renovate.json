@@ -1,21 +1,58 @@
 {
-  "extends": ["config:base", "schedule:earlyMondays"],
+  "extends": ["config:base"],
   "baseBranches": ["develop"],
+  "timezone": "Asia/Tokyo",
+  "schedule": ["after 5pm and before 10pm"],
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor", "patch"],
-      "labels": ["UPDATE-MINOR&PATCH"],
-      "excludePackageNames": ["typescript"]
+      "matchUpdateTypes": ["major", "minor"],
+      "labels": ["TypeScript"],
+      "matchPackageNames": ["typescript"],
+      "groupName": "TypeScript"
     },
     {
-      "matchPackageNames": [
+      "groupName": "React related packages",
+      "packageNames": [
         "react",
-        "@types/react",
         "react-dom",
-        "@types/react-dom"
+        "@sentry/react",
+        "react-icons",
+        "react-modal"
+      ]
+    },
+    {
+      "groupName": "Vite related packages",
+      "packageNames": ["vite"],
+      "packagePatterns": ["^@vitejs"]
+    },
+    {
+      "groupName": "Storybook related packages",
+      "packagePatterns": ["^@storybook/"]
+    },
+    {
+      "groupName": "ESLint related packages",
+      "packageNames": ["eslint", "eslint-config-prettier"],
+      "packagePatterns": ["^@typescript-eslint/", "^eslint-plugin"]
+    },
+    {
+      "groupName": "All minore and patch dependencies",
+      "matchUpdateTypes": ["minor", "patch"],
+      "labels": ["UPDATE-MINOR&PATCH"],
+      "excludePackageNames": [
+        "typescript",
+        "react",
+        "react-dom",
+        "@sentry/react",
+        "react-icons",
+        "react-modal",
+        "eslint",
+        "eslint-config-prettier"
       ],
-      "matchPackagePatterns": ["@testing-library.*"],
-      "groupName": "react"
+      "excludePackagePatterns": [
+        "^@storybook/",
+        "^@typescript-eslint/",
+        "^eslint-plugin"
+      ]
     }
   ],
   "automerge": true
