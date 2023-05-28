@@ -56,7 +56,7 @@ function Cell({
   return (
     <button
       type="button"
-      className={'relative aspect-square select-none'}
+      className={'relative aspect-square select-none w-full h-full'}
       onMouseDown={onSelect}
       data-testid={dataTestid}
       data-select={select}
