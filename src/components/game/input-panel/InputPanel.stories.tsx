@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import InputPanel from './InputPanel';
 import { blockSize_2_2 } from '../../../utils/samples';
 
@@ -14,9 +14,7 @@ export default {
   ],
 } as Meta<typeof InputPanel>;
 
-const Template: ComponentStory<typeof InputPanel> = args => (
-  <InputPanel {...args} />
-);
+const Template: StoryFn<typeof InputPanel> = args => <InputPanel {...args} />;
 
 export const BlockSize_2x2 = Template.bind({});
 

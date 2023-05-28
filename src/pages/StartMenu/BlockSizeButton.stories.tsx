@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import BlockSizeButton from './BlockSizeButton';
 
@@ -7,7 +7,7 @@ export default {
   component: BlockSizeButton,
 } as Meta<typeof BlockSizeButton>;
 
-const Template: ComponentStory<typeof BlockSizeButton> = args => (
+const Template: StoryFn<typeof BlockSizeButton> = args => (
   <BlockSizeButton {...args} />
 );
 

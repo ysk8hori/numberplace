@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import Generating from './Generating';
 
 export default {
@@ -9,9 +9,7 @@ export default {
   },
 } as Meta<typeof Generating>;
 
-const Template: ComponentStory<typeof Generating> = args => (
-  <Generating {...args} />
-);
+const Template: StoryFn<typeof Generating> = args => <Generating {...args} />;
 Template.args = {
   cancel: () => console.log('cancel'),
 };

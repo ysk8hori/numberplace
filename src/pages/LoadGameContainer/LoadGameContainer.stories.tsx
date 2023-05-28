@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, Meta, ComponentStoryObj } from '@storybook/react';
+import { StoryFn, Meta, StoryObj } from '@storybook/react';
 import LoadGameContainer from '.';
 import { blockSize_2_2, puzzle_2_2, solved_2_2 } from '../../utils/samples';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
@@ -29,4 +29,4 @@ export default {
   ],
 } as Meta<typeof LoadGameContainer>;
 
-export const Default: ComponentStoryObj<typeof LoadGameContainer> = {};
+export const Default: StoryObj<typeof LoadGameContainer> = {};

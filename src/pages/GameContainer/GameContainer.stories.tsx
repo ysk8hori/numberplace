@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, ComponentStoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { within, userEvent } from '@storybook/testing-library';
 import GameContainer from '.';
 import {
@@ -48,9 +48,9 @@ export default {
   ],
 } as Meta<typeof GameContainer>;
 
-export const Primary: ComponentStoryObj<typeof GameContainer> = {};
+export const Primary: StoryObj<typeof GameContainer> = {};
 
-export const IconMode: ComponentStoryObj<typeof GameContainer> = {
+export const IconMode: StoryObj<typeof GameContainer> = {
   decorators: [
     Story => {
       const setIconMode = useSetRecoilState(atomOfAnswerImageVariant);
@@ -60,7 +60,7 @@ export const IconMode: ComponentStoryObj<typeof GameContainer> = {
   ],
 };
 
-export const Primary_2_2: ComponentStoryObj<typeof GameContainer> = {
+export const Primary_2_2: StoryObj<typeof GameContainer> = {
   decorators: [
     Story => {
       const setGame = useSetRecoilState(atomOfGame);
@@ -76,13 +76,13 @@ export const Primary_2_2: ComponentStoryObj<typeof GameContainer> = {
   ],
 };
 
-export const IPad: ComponentStoryObj<typeof GameContainer> = {
+export const IPad: StoryObj<typeof GameContainer> = {
   parameters: {
     viewport: { defaultViewport: 'ipad' },
   },
 };
 
-export const Click2_3: ComponentStoryObj<typeof GameContainer> = {
+export const Click2_3: StoryObj<typeof GameContainer> = {
   name: 'セルをクリックすると選択中となる',
   play: async ({ canvasElement }) => {
     // Starts querying the component from its root element
@@ -91,7 +91,7 @@ export const Click2_3: ComponentStoryObj<typeof GameContainer> = {
   },
 };
 
-export const FillableByPanel: ComponentStoryObj<typeof GameContainer> = {
+export const FillableByPanel: StoryObj<typeof GameContainer> = {
   name: 'パネルのボタンから数字を入力できる',
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -100,7 +100,7 @@ export const FillableByPanel: ComponentStoryObj<typeof GameContainer> = {
   },
 };
 
-export const ClearModal: ComponentStoryObj<typeof GameContainer> = {
+export const ClearModal: StoryObj<typeof GameContainer> = {
   name: 'クリア時にはクリアモーダルを表示する',
   play: async ({ canvasElement }) => {
     ReactModal.setAppElement(canvasElement);
@@ -113,7 +113,7 @@ export const ClearModal: ComponentStoryObj<typeof GameContainer> = {
   },
 };
 
-export const MistakeModal: ComponentStoryObj<typeof GameContainer> = {
+export const MistakeModal: StoryObj<typeof GameContainer> = {
   name: 'ミスが有る状態で答え合わせボタンを謳歌した場合はミステイクモーダルを表示する',
   play: async ({ canvasElement }) => {
     ReactModal.setAppElement(canvasElement);
@@ -128,7 +128,7 @@ export const MistakeModal: ComponentStoryObj<typeof GameContainer> = {
   },
 };
 
-export const Game_3_3: ComponentStoryObj<typeof GameContainer> = {
+export const Game_3_3: StoryObj<typeof GameContainer> = {
   name: '9x9の表示確認',
   decorators: [
     Story => {
@@ -145,7 +145,7 @@ export const Game_3_3: ComponentStoryObj<typeof GameContainer> = {
   ],
 };
 
-export const Game_3_3_cross: ComponentStoryObj<typeof GameContainer> = {
+export const Game_3_3_cross: StoryObj<typeof GameContainer> = {
   name: '9x9クロスの表示確認',
   decorators: [
     Story => {
@@ -162,7 +162,7 @@ export const Game_3_3_cross: ComponentStoryObj<typeof GameContainer> = {
   ],
 };
 
-export const Game_3_3_hyper: ComponentStoryObj<typeof GameContainer> = {
+export const Game_3_3_hyper: StoryObj<typeof GameContainer> = {
   name: '9x9HYPERの表示確認',
   decorators: [
     Story => {
@@ -179,7 +179,7 @@ export const Game_3_3_hyper: ComponentStoryObj<typeof GameContainer> = {
   ],
 };
 
-export const Game_3_3_hyper_cross: ComponentStoryObj<typeof GameContainer> = {
+export const Game_3_3_hyper_cross: StoryObj<typeof GameContainer> = {
   name: '9x9HYPERxCROSSの表示確認',
   decorators: [
     Story => {

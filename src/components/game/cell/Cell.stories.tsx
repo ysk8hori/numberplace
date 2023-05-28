@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import Cell from './Cell';
 import { within } from '@storybook/testing-library';
@@ -17,7 +17,7 @@ export default {
   ],
 } as Meta<typeof Cell>;
 
-const Template: ComponentStory<typeof Cell> = args => <Cell {...args} />;
+const Template: StoryFn<typeof Cell> = args => <Cell {...args} />;
 
 export const Primary = Template.bind({});
 

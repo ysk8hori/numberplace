@@ -1,4 +1,4 @@
-import { Meta, ComponentStoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import MenuButton from './MenuButton';
 
 export default {
@@ -8,4 +8,4 @@ export default {
   },
 } as Meta<typeof MenuButton>;
 
-export const Default: ComponentStoryObj<typeof MenuButton> = {};
+export const Default: StoryObj<typeof MenuButton> = {};

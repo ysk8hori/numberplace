@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, ComponentStoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import ToggleButton from './ToggleButton';
 import { TiPencil } from 'react-icons/ti';
@@ -16,4 +16,4 @@ export default {
   },
 } as Meta<typeof ToggleButton>;
 
-export const Default: ComponentStoryObj<typeof ToggleButton> = {};
+export const Default: StoryObj<typeof ToggleButton> = {};
