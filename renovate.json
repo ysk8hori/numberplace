@@ -1,11 +1,14 @@
 {
-  "extends": ["config:base", "schedule:earlyMondays"],
+  "extends": ["config:base"],
   "baseBranches": ["develop"],
+  "timezone": "Asiz/Tokyo",
+  "schedule": "after 6pm and before 11:00pm",
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor", "patch"],
-      "labels": ["UPDATE-MINOR&PATCH"],
-      "excludePackageNames": ["typescript"]
+      "matchUpdateTypes": ["major", "minor"],
+      "labels": ["TypeScript"],
+      "includePackageNames": ["typescript"],
+      "groupName": "TypeScript"
     },
     {
       "matchPackageNames": [
@@ -14,8 +17,30 @@
         "react-dom",
         "@types/react-dom"
       ],
-      "matchPackagePatterns": ["@testing-library.*"],
+      "matchPackagePatterns": [".*react.*"],
       "groupName": "react"
+    },
+    {
+      "matchPackagePatterns": [".*storybook.*"],
+      "groupName": "Storybook"
+    },
+    {
+      "matchPackagePatterns": [".*vite.*"],
+      "groupName": "Vite"
+    },
+    {
+      "matchPackagePatterns": [".*jest.*"],
+      "groupName": "Jest"
+    },
+    {
+      "matchPackagePatterns": [".*css.*", ".sass.*"],
+      "groupName": "CSS"
+    },
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "labels": ["UPDATE-MINOR&PATCH"],
+      "excludePackageNames": ["typescript"],
+      "groupName": "minor&patch"
     }
   ],
   "automerge": true
