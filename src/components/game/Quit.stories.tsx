@@ -1,13 +1,13 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import Quit from './Quit';
 import { userEvent, within } from '@storybook/testing-library';
 
 export default {
   component: Quit,
-} as ComponentMeta<typeof Quit>;
+} as Meta<typeof Quit>;
 
-const Template: ComponentStory<typeof Quit> = args => <Quit {...args} />;
+const Template: StoryFn<typeof Quit> = args => <Quit {...args} />;
 
 export const Primary = Template.bind({});
 Primary.storyName = 'ゲームをやめるボタン';

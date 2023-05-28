@@ -1,12 +1,12 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import GameClearModal from './GameClearModal';
 
 export default {
   component: GameClearModal,
-} as ComponentMeta<typeof GameClearModal>;
+} as Meta<typeof GameClearModal>;
 
-const Template: ComponentStory<typeof GameClearModal> = args => (
+const Template: StoryFn<typeof GameClearModal> = args => (
   <GameClearModal {...args} />
 );
 

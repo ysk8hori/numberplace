@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import backgroundimg from '../../images/11-g-90.png';
 
 import GlassCard from './GlassCard';
@@ -13,11 +13,9 @@ export default {
       </div>
     ),
   ],
-} as ComponentMeta<typeof GlassCard>;
+} as Meta<typeof GlassCard>;
 
-const Template: ComponentStory<typeof GlassCard> = args => (
-  <GlassCard {...args} />
-);
+const Template: StoryFn<typeof GlassCard> = args => <GlassCard {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

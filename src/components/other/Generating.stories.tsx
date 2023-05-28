@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import Generating from './Generating';
 
 export default {
@@ -7,11 +7,9 @@ export default {
   parameters: {
     chromatic: { pauseAnimationAtEnd: true },
   },
-} as ComponentMeta<typeof Generating>;
+} as Meta<typeof Generating>;
 
-const Template: ComponentStory<typeof Generating> = args => (
-  <Generating {...args} />
-);
+const Template: StoryFn<typeof Generating> = args => <Generating {...args} />;
 Template.args = {
   cancel: () => console.log('cancel'),
 };

@@ -1,14 +1,14 @@
 import React, { useReducer } from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 
 import ToggleMemoButton from './ToggleMemoButton';
 import { TiPencil } from 'react-icons/ti';
 
 export default {
   component: ToggleMemoButton,
-} as ComponentMeta<typeof ToggleMemoButton>;
+} as Meta<typeof ToggleMemoButton>;
 
-const Template: ComponentStory<typeof ToggleMemoButton> = args => (
+const Template: StoryFn<typeof ToggleMemoButton> = args => (
   <ToggleMemoButton {...args}></ToggleMemoButton>
 );
 Template.args = {
