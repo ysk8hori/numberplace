@@ -7,7 +7,7 @@
     {
       "matchUpdateTypes": ["major", "minor"],
       "labels": ["TypeScript"],
-      "includePackageNames": ["typescript"],
+      "matchPackageNames": ["typescript"],
       "groupName": "TypeScript"
     },
     {
