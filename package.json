@@ -85,7 +85,7 @@
     "storybook": "7.0.18",
     "style-loader": "3.3.3",
     "tailwindcss": "3.3.2",
-    "typescript": "4.9.5",
+    "typescript": "5.0.4",
     "use-interval": "1.4.0",
     "vite": "3.2.7",
     "vite-plugin-pwa": "0.15.1",
