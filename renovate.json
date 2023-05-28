@@ -19,46 +19,21 @@
         "@tanstack/react-query",
         "react-icons",
         "react-modal"
-      ],
-      "schedule": ["every day"]
+      ]
     },
     {
       "groupName": "Storybook related packages",
-      "packagePatterns": ["^@storybook/"],
-      "schedule": ["every day"]
-    },
-    {
-      "groupName": "Testing related packages",
-      "packageNames": ["vitest", "@vitest/ui"],
-      "packagePatterns": ["^@testing-library/"],
-      "schedule": ["every day"]
+      "packagePatterns": ["^@storybook/"]
     },
     {
       "groupName": "ESLint related packages",
       "packageNames": ["eslint", "eslint-config-prettier"],
-      "packagePatterns": ["^@typescript-eslint/", "^eslint-plugin"],
-      "schedule": ["every day"]
+      "packagePatterns": ["^@typescript-eslint/", "^eslint-plugin"]
     },
     {
-      "groupName": "Type checking and TS related packages",
-      "packageNames": ["typescript"],
-      "packagePatterns": ["^@types/"],
-      "schedule": ["every day"]
-    },
-    {
-      "groupName": "Other dependencies",
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "packagePatterns": ["^@?[^/]"],
-      "excludePackagePatterns": [
-        "^react",
-        "^@storybook/",
-        "^@testing-library/",
-        "^eslint",
-        "^@typescript-eslint/",
-        "^typescript",
-        "^@types/"
-      ],
-      "schedule": ["every day"]
+      "groupName": "All minore and patch dependencies",
+      "matchUpdateTypes": ["minor", "patch"],
+      "labels": ["UPDATE-MINOR&PATCH"]
     }
   ]
 }
