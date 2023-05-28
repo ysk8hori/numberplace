@@ -1,8 +1,8 @@
 {
   "extends": ["config:base"],
   "baseBranches": ["develop"],
-  "timezone": "Asiz/Tokyo",
-  "schedule": "after 6pm and before 11:00pm",
+  "timezone": "Asia/Tokyo",
+  "schedule": ["after 5pm and before 10pm"],
   "packageRules": [
     {
       "matchUpdateTypes": ["major", "minor"],
@@ -11,37 +11,54 @@
       "groupName": "TypeScript"
     },
     {
-      "matchPackageNames": [
+      "groupName": "React related packages",
+      "packageNames": [
         "react",
-        "@types/react",
         "react-dom",
-        "@types/react-dom"
+        "@sentry/react",
+        "@tanstack/react-query",
+        "react-icons",
+        "react-modal"
       ],
-      "matchPackagePatterns": [".*react.*"],
-      "groupName": "react"
+      "schedule": ["every day"]
     },
     {
-      "matchPackagePatterns": [".*storybook.*"],
-      "groupName": "Storybook"
+      "groupName": "Storybook related packages",
+      "packagePatterns": ["^@storybook/"],
+      "schedule": ["every day"]
     },
     {
-      "matchPackagePatterns": [".*vite.*"],
-      "groupName": "Vite"
+      "groupName": "Testing related packages",
+      "packageNames": ["vitest", "@vitest/ui"],
+      "packagePatterns": ["^@testing-library/"],
+      "schedule": ["every day"]
     },
     {
-      "matchPackagePatterns": [".*jest.*"],
-      "groupName": "Jest"
+      "groupName": "ESLint related packages",
+      "packageNames": ["eslint", "eslint-config-prettier"],
+      "packagePatterns": ["^@typescript-eslint/", "^eslint-plugin"],
+      "schedule": ["every day"]
     },
     {
-      "matchPackagePatterns": [".*css.*", ".sass.*"],
-      "groupName": "CSS"
+      "groupName": "Type checking and TS related packages",
+      "packageNames": ["typescript"],
+      "packagePatterns": ["^@types/"],
+      "schedule": ["every day"]
     },
     {
-      "matchUpdateTypes": ["minor", "patch"],
-      "labels": ["UPDATE-MINOR&PATCH"],
-      "excludePackageNames": ["typescript"],
-      "groupName": "minor&patch"
+      "groupName": "Other dependencies",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "packagePatterns": ["^@?[^/]"],
+      "excludePackagePatterns": [
+        "^react",
+        "^@storybook/",
+        "^@testing-library/",
+        "^eslint",
+        "^@typescript-eslint/",
+        "^typescript",
+        "^@types/"
+      ],
+      "schedule": ["every day"]
     }
-  ],
-  "automerge": true
+  ]
 }
