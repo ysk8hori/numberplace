@@ -32,18 +32,27 @@ export default function MenuStack({
     [variant],
   );
   const containerClass = useMemo(
-    () => clsx(className, 'shadow border-zinc-500 rounded p-2 bg-zinc-50'),
+    () =>
+      clsx(className, 'shadow border-zinc-500 rounded p-2 bg-zinc-50 flex-col'),
     [className],
   );
   return (
     <div
       className={containerClass}
-      style={{ display: isShow ? 'block' : 'none' }}
+      style={{ display: isShow ? 'flex' : 'none' }}
     >
-      <Button className="text-base block" variant="text" onClick={onSelectNum}>
+      <Button
+        className="block text-xl w-full text-left"
+        variant="text"
+        onClick={onSelectNum}
+      >
         <span className={numClass}></span>数字で遊ぶ
       </Button>
-      <Button className="text-base block" variant="text" onClick={onSelectIcon}>
+      <Button
+        className="block text-xl w-full text-left"
+        variant="text"
+        onClick={onSelectIcon}
+      >
         <span className={iconClass}></span>アイコンで遊ぶ
       </Button>
     </div>
