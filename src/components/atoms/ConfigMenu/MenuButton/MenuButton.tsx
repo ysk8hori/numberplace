@@ -11,12 +11,16 @@ export default function MenuButton({
   onClick: () => void;
 }) {
   const className = useMemo(
-    () => clsx('rounded-full h-6 w-6 px-0', _className),
+    () => clsx('rounded-full h-12 w-12 flex', _className),
     [_className],
   );
   return (
-    <Button onClick={onClick} className={className}>
-      <span className="button-dots-vertical"></span>
+    <Button
+      onClick={onClick}
+      className={className}
+      style={{ borderRadius: '9999px' }}
+    >
+      <div className="button-dots-vertical"></div>
     </Button>
   );
 }
