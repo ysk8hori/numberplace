@@ -2,14 +2,14 @@
 .svg-checked {
   @include smart-svg.show-with-pseudo(
     'check.svg',
-    1rem,
+    1.2rem,
     $fill-color: theme('colors.zinc.600')
   );
 }
 .svg-unchecked {
   @include smart-svg.show-with-pseudo(
     'check.svg',
-    1rem,
+    1.2rem,
     $fill-color: theme('colors.transparent')
   );
 }

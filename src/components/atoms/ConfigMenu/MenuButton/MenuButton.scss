@@ -2,7 +2,7 @@
 .button-dots-vertical {
   @include smart-svg.show-with-pseudo(
     'dots-vertical.svg',
-    1.5rem,
+    3rem,
     $fill-color: theme('colors.white')
   );
 }

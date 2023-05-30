@@ -9,7 +9,7 @@ export default function ConfigMenu() {
       <MenuStack
         isShow={isShowConfig}
         onSelected={() => showConfig(false)}
-        className="fixed bottom-4 right-12"
+        className="fixed bottom-4 right-16"
       ></MenuStack>
       <MenuButton
         onClick={() => showConfig(!isShowConfig)}
