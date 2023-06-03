@@ -1,5 +1,5 @@
 import { BlockSize } from '@ysk8hori/numberplace-generator';
-import React, { useReducer } from 'react';
+import React from 'react';
 import ToggleMemoButton from './ToggleMemoButton';
 import { FaEraser } from 'react-icons/fa';
 import Button from '../../atoms/Button';
@@ -49,7 +49,6 @@ const InputPanel: React.FC<Props> = ({
 
   return (
     <div className={`grid grid-cols-6 gap-1`} {...rest}>
-      <NumberButtons {...numberButtonProps} />
       <Button
         variant="text"
         data-testid={`btn_delete`}
@@ -59,6 +58,7 @@ const InputPanel: React.FC<Props> = ({
       >
         <FaEraser style={{ width: '60%', height: '60%' }} />
       </Button>
+      <NumberButtons {...numberButtonProps} />
       <ToggleMemoButton />
     </div>
   );

@@ -1,0 +1,12 @@
+@use 'smart-svg';
+
+.toggle-memo-button {
+  appearance: none;
+  &::before {
+    @include smart-svg.show-with-pseudo(
+      'TogglePencil.svg',
+      50%,
+      $fill-color: theme('colors[zinc][700]')
+    );
+  }
+}
