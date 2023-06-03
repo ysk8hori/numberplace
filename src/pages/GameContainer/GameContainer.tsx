@@ -68,7 +68,6 @@ export default function GameContainer({
   const fill = useFill(puzzle, selectedPos, blockSize, solved, cross, hyper);
   useFillByKeyboard(fill);
   useDeleteByKeybord(fill);
-  useToggleMemoByKeyboard();
   useArrowSelector(selectedPos, blockSize, setSelectedPos);
   const checkAndUpdate = useCheckAndUpdate(
     solved,
@@ -351,20 +350,5 @@ function useFillByKeyboard(fill: Fill) {
   useEffect(() => {
     window.addEventListener('keydown', fillByKeyboard);
     return () => window.removeEventListener('keydown', fillByKeyboard);
-  });
-}
-
-function useToggleMemoByKeyboard() {
-  const toggleMemoMode = useRecoilCallback(
-    ({ snapshot, set }) =>
-      async ({ shiftKey }: KeyboardEvent) => {
-        if (!shiftKey) return;
-        const mode = await snapshot.getPromise(atomOfInputMode);
-        set(atomOfInputMode, mode === 'memo' ? 'answer' : 'memo');
-      },
-  );
-  useEffect(() => {
-    window.addEventListener('keydown', toggleMemoMode);
-    return () => window.removeEventListener('keydown', toggleMemoMode);
   });
 }
