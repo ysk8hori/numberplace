@@ -1,5 +1,5 @@
 import { BlockSize } from '@ysk8hori/numberplace-generator';
-import React, { useReducer } from 'react';
+import React from 'react';
 import ToggleMemoButton from './ToggleMemoButton';
 import { FaEraser } from 'react-icons/fa';
 import Button from '../../atoms/Button';
