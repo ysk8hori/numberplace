@@ -2,7 +2,6 @@ import React, { useReducer } from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 
 import ToggleMemoButton from './ToggleMemoButton';
-import { TiPencil } from 'react-icons/ti';
 
 export default {
   component: ToggleMemoButton,
@@ -30,9 +29,7 @@ export const Sample = () => {
           className="aspect-square"
           defaultChecked={defaultChecked}
           onClick={toggle}
-        >
-          <TiPencil />
-        </ToggleMemoButton>
+        />
       </div>
     </div>
   );

@@ -1,6 +1,5 @@
 import React from 'react';
 import ToggleButton from '../../atoms/ToggleButton';
-import { TiPencil } from 'react-icons/ti';
 import clsx from 'clsx';
 import { useRecoilState } from 'recoil';
 import { atomOfInputMode } from '../../../pages/GameContainer/atoms';
@@ -19,8 +18,6 @@ export default function ToggleMemoButton({ style, className }: Props) {
         className,
       )}
       aria-label="メモ"
-    >
-      <TiPencil style={{ width: '80%', height: '80%' }} />
-    </ToggleButton>
+    />
   );
 }
