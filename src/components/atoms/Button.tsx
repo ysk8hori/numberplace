@@ -3,7 +3,7 @@ import React, { ComponentProps } from 'react';
 import styled, { css } from 'styled-components';
 import { ButtonState, ButtonVariant } from '../../theme/styled';
 
-function getStyle(variant: ButtonVariant, state: ButtonState) {
+export function getButtonStyle(variant: ButtonVariant, state: ButtonState) {
   return css`
     ${({ theme: { button } }) => css`
       border-style: solid;
@@ -16,15 +16,15 @@ function getStyle(variant: ButtonVariant, state: ButtonState) {
 }
 
 const StyledButton = styled.button<{ buttonVariant: ButtonVariant }>`
-  ${({ buttonVariant }) => getStyle(buttonVariant, 'normal')}
+  ${({ buttonVariant }) => getButtonStyle(buttonVariant, 'normal')}
   &:hover {
-    ${({ buttonVariant }) => getStyle(buttonVariant, 'hover')}
+    ${({ buttonVariant }) => getButtonStyle(buttonVariant, 'hover')}
   }
   &:active {
-    ${({ buttonVariant }) => getStyle(buttonVariant, 'active')}
+    ${({ buttonVariant }) => getButtonStyle(buttonVariant, 'active')}
   }
   &:disabled {
-    ${({ buttonVariant }) => getStyle(buttonVariant, 'disabled')}
+    ${({ buttonVariant }) => getButtonStyle(buttonVariant, 'disabled')}
   }
 `;
 

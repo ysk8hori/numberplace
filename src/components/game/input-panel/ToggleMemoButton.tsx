@@ -1,22 +1,43 @@
+import './toggle-memo-button.scss';
 import React from 'react';
-import ToggleButton from '../../atoms/ToggleButton';
-import clsx from 'clsx';
 import { useRecoilState } from 'recoil';
 import { atomOfInputMode } from '../../../pages/GameContainer/atoms';
+import styled from 'styled-components';
+import { ButtonVariant } from '../../../theme/styled';
+import { getButtonStyle } from '../../atoms/Button';
 
-type Props = React.ComponentProps<typeof ToggleButton>;
+const ToggleInput = styled.input.attrs({ type: 'checkbox' })<{
+  buttonVariant: ButtonVariant;
+}>`
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  :checked {
+    background: radial-gradient(yellow 20px, rgba(255, 255, 255, 0) 60%);
+  }
 
-export default function ToggleMemoButton({ style, className }: Props) {
+  ${({ buttonVariant }) => getButtonStyle(buttonVariant, 'normal')}
+  &:hover {
+    ${({ buttonVariant }) => getButtonStyle(buttonVariant, 'hover')}
+  }
+  &:active {
+    ${({ buttonVariant }) => getButtonStyle(buttonVariant, 'active')}
+  }
+  &:disabled {
+    ${({ buttonVariant }) => getButtonStyle(buttonVariant, 'disabled')}
+  }
+`;
+
+export default function ToggleMemoButton() {
   const [mode, setMode] = useRecoilState(atomOfInputMode);
   return (
-    <ToggleButton
-      onChange={ev => setMode(ev.target.checked ? 'memo' : 'answer')}
+    <ToggleInput
+      buttonVariant="text"
+      className={
+        'toggle-memo-button aspect-square w-full h-full rounded-lg flex justify-center items-center'
+      }
       checked={mode === 'memo'}
-      style={{ ...style }}
-      className={clsx(
-        'aspect-square w-full h-full rounded-lg flex justify-center items-center',
-        className,
-      )}
+      onChange={ev => setMode(ev.target.checked ? 'memo' : 'answer')}
       aria-label="メモ"
     />
   );

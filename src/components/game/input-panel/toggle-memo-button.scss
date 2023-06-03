@@ -1,6 +1,6 @@
 @use 'smart-svg';
 
-.toggle-button {
+.toggle-memo-button {
   appearance: none;
   &::before {
     @include smart-svg.show-with-pseudo(
