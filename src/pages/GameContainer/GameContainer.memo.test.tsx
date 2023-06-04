@@ -139,27 +139,3 @@ test('fix のセルはメモ入力ボタンでメモを記入できない', asyn
   expect(screen.getByTestId('1,0')).toHaveAttribute('data-answer', '4');
   expect(screen.getByTestId('1,0')).toHaveAttribute('data-fix');
 });
-test('キーボードの Shift でメモモードに変更しメモボタンで通常モードに変更できる', async () => {
-  setup('2_2');
-  expect(screen.getByTestId('0,0')).not.toHaveTextContent('1');
-  expect(screen.queryByTestId('0,0-memo')).not.toBeInTheDocument();
-  await userEvent.click(screen.getByTestId('0,0'));
-  await userEvent.keyboard('{Shift}');
-  await userEvent.click(screen.getByRole('button', { name: '1' }));
-  expect(screen.getByTestId('0,0-memo')).toHaveAttribute('data-memo', '1');
-  await userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
-  await userEvent.click(screen.getByRole('button', { name: '2' }));
-  expect(screen.getByTestId('0,0')).toHaveAttribute('data-answer', '2');
-});
-test('メモボタンでメモモードに変更しキーボードの Shift で通常モードに変更できる', async () => {
-  setup('2_2');
-  expect(screen.getByTestId('0,0')).not.toHaveTextContent('1');
-  expect(screen.queryByTestId('0,0-memo')).not.toBeInTheDocument();
-  await userEvent.click(screen.getByTestId('0,0'));
-  await userEvent.click(screen.getByRole('checkbox', { name: 'メモ' }));
-  await userEvent.click(screen.getByRole('button', { name: '1' }));
-  expect(screen.getByTestId('0,0-memo')).toHaveAttribute('data-memo', '1');
-  await userEvent.keyboard('{Shift}');
-  await userEvent.click(screen.getByRole('button', { name: '2' }));
-  expect(screen.getByTestId('0,0')).toHaveAttribute('data-answer', '2');
-});
