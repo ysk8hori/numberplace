@@ -23,7 +23,7 @@
   "dependencies": {
     "@sentry/react": "7.56.0",
     "@sentry/tracing": "7.56.0",
-    "@tanstack/react-query": "4.29.15",
+    "@tanstack/react-query": "4.29.17",
     "@ysk8hori/numberplace-generator": "2.8.2",
     "clsx": "1.2.1",
     "react": "18.2.0",
