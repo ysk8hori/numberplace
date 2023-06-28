@@ -52,8 +52,11 @@ function App() {
         >
           <LoadGameContainer
             onChangeSize={() => setMode('menu')}
-            onRegenerate={blockSize => (
-              setBlockSize(blockSize), setMode('generateAndPlay')
+            onRegenerate={(blockSize, cross, hyper) => (
+              setBlockSize(blockSize),
+              setCross(cross),
+              setHyper(hyper),
+              setMode('generateAndPlay')
             )}
           />
         </div>

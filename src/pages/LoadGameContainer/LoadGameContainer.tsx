@@ -20,7 +20,7 @@ function LoadGameContainer({
   /** 他のサイズで遊ぶコールバック */
   onChangeSize?: () => void;
   /** 同じサイズで遊ぶコールバック */
-  onRegenerate?: (blockSize: BlockSize) => void;
+  onRegenerate?: (blockSize: BlockSize, cross: boolean, hyper: boolean) => void;
 }) {
   const [doneFirstRender, setDoneFirstRender] = useState<boolean>(false);
   const [game, setGame] = useRecoilState(atomOfGame);
@@ -43,7 +43,9 @@ function LoadGameContainer({
   return (
     <div className="grow flex justify-center">
       <GameContainer
-        onRegenerate={() => onRegenerate?.(game.blockSize)}
+        onRegenerate={() =>
+          onRegenerate?.(game.blockSize, game.cross, game.hyper)
+        }
         onChangeSize={onChangeSize}
       />
     </div>
