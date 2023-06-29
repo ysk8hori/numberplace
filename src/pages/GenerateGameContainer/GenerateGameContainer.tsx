@@ -7,7 +7,7 @@ import Generating from '../../components/other/Generating';
 import ConfigMenu from '../../components/atoms/ConfigMenu';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSetRecoilState } from 'recoil';
-import { atomOfGame } from '../../atoms';
+import { atomOfGame, atomOfInitial, atomOfSolved } from '../../atoms';
 import { assertUndefined } from '../../utils/assertNull';
 
 function Inner({
@@ -29,6 +29,8 @@ function Inner({
   count: number;
 }) {
   const setGame = useSetRecoilState(atomOfGame);
+  const setSolved = useSetRecoilState(atomOfSolved);
+  const setInitial = useSetRecoilState(atomOfInitial);
   const { data } = useGenerateGame({
     blockSize,
     difficulty,
@@ -40,11 +42,12 @@ function Inner({
 
   setGame({
     puzzle: data.puzzle,
-    solved: data.solved,
     blockSize,
     cross,
     hyper,
   });
+  setSolved(data.solved);
+  setInitial(data.puzzle);
   return (
     <GameContainer onRegenerate={onRegenerate} onChangeSize={onChangeSize} />
   );

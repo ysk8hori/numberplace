@@ -1,9 +1,14 @@
 import clsx from 'clsx';
 import React, { useCallback, useMemo } from 'react';
-import { useRecoilState } from 'recoil';
-import { atomOfAnswerImageVariant } from '../../../../atoms';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import {
+  atomOfAnswerImageVariant,
+  atomOfGame,
+  atomOfInitial,
+} from '../../../../atoms';
 import Button from '../../Button';
 import './MenuStack.scss';
+import { toURLSearchParam } from '../../../../utils/URLSearchParamConverter';
 
 export default function MenuStack({
   isShow,
@@ -15,6 +20,8 @@ export default function MenuStack({
   className?: string;
 }) {
   const [variant, setVariant] = useRecoilState(atomOfAnswerImageVariant);
+  const initial = useRecoilValue(atomOfInitial);
+  const game = useRecoilValue(atomOfGame);
   const onSelectNum = useCallback(
     () => (setVariant('num'), onSelected()),
     [onSelected, setVariant],
@@ -41,6 +48,27 @@ export default function MenuStack({
       className={containerClass}
       style={{ display: isShow ? 'flex' : 'none' }}
     >
+      {initial && game && navigator.canShare && navigator.share && (
+        <Button
+          className="block text-xl w-full text-left"
+          variant="text"
+          onClick={() => {
+            const params = toURLSearchParam({
+              puzzle: initial,
+              blockSize: game.blockSize,
+              cross: game.cross,
+              hyper: game.hyper,
+            });
+            const url = `${location.origin}/?${params.toString()}`;
+            console.log(url);
+            if (navigator.canShare({ url })) {
+              navigator.share({ url });
+            }
+          }}
+        >
+          シェアする
+        </Button>
+      )}
       <Button
         className="block text-xl w-full text-left"
         variant="text"
