@@ -19,7 +19,6 @@ export default {
       const setGame = useSetRecoilState(atomOfGame);
       setGame({
         puzzle: puzzle_2_2,
-        solved: solved_2_2,
         blockSize: blockSize_2_2,
         cross: false,
         hyper: false,

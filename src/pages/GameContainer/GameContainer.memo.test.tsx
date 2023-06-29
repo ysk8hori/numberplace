@@ -15,7 +15,7 @@ import {
   RecoilServer,
 } from '../../utils/test-utils';
 import GameContainer from '.';
-import { atomOfGame } from '../../atoms';
+import { atomOfGame, atomOfSolved } from '../../atoms';
 
 function setup(size: '2_2' | '2_3') {
   const rendered = render(
@@ -25,12 +25,12 @@ function setup(size: '2_2' | '2_3') {
           node={atomOfGame}
           value={{
             puzzle: puzzle_2_2,
-            solved: solved_2_2,
             blockSize: blockSize_2_2,
             hyper: false,
             cross: false,
           }}
         />
+        <RecoilServer node={atomOfSolved} value={solved_2_2} />
         <GameContainer />
       </>
     ) : (
@@ -39,12 +39,12 @@ function setup(size: '2_2' | '2_3') {
           node={atomOfGame}
           value={{
             puzzle: puzzle_2_3,
-            solved: solved_2_3,
             blockSize: blockSize_2_3,
             hyper: false,
             cross: false,
           }}
         />
+        <RecoilServer node={atomOfSolved} value={solved_2_3} />
         <GameContainer />
       </>
     ),
