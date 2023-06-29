@@ -16,7 +16,7 @@ import {
   useSetRecoilState,
 } from 'recoil';
 import { atomOfInputMode } from './atoms';
-import { atomOfGame, atomOfSolved } from '../../atoms';
+import { atomOfGame, atomOfSolved, atomOfInitial } from '../../atoms';
 import { assertUndefined } from '../../utils/assertNull';
 
 /** basePuzzle をクローンする */
@@ -89,10 +89,12 @@ export default function GameContainer({
   const completeNumbers = getCompleteNumbers(puzzle, blockSize);
   const removeSavedGame = useResetRecoilState(atomOfGame);
   const removeSolvedGame = useResetRecoilState(atomOfSolved);
+  const removeInitialGame = useResetRecoilState(atomOfInitial);
   const reset = useCallback(() => {
     removeSavedGame();
     removeSolvedGame();
-  }, [removeSavedGame, removeSolvedGame]);
+    removeInitialGame();
+  }, [removeSavedGame, removeSolvedGame, removeInitialGame]);
 
   return (
     <div className="max-w-xl grow">

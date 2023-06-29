@@ -25,6 +25,7 @@ export const atomOfAnswerImageVariant = atom<AnswerImageVariant>({
   effects: [localStorageEffect('answerImageVariant')],
 });
 
+/** 現在解いているゲーム */
 export type SaveData = {
   puzzle: MyGame;
   blockSize: BlockSize;
@@ -43,14 +44,16 @@ export const atomOfPazzle = selector<MyGame | undefined>({
   get: ({ get }) => get(atomOfGame)?.puzzle,
 });
 
+/** 現在解いているゲームの解答 */
 export const atomOfSolved = atom<MyGame | undefined>({
   key: 'solved',
   default: undefined,
   effects: [localStorageEffect('solved')],
 });
 
-export const atomOfStarts = atom<MyGame | undefined>({
-  key: 'starts',
+/** 現在解いているゲームの初期状態 */
+export const atomOfInitial = atom<MyGame | undefined>({
+  key: 'initial',
   default: undefined,
-  effects: [localStorageEffect('starts')],
+  effects: [localStorageEffect('initial')],
 });
