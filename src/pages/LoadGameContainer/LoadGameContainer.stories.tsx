@@ -4,7 +4,7 @@ import LoadGameContainer from '.';
 import { blockSize_2_2, puzzle_2_2, solved_2_2 } from '../../utils/samples';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { useSetRecoilState } from 'recoil';
-import { atomOfGame } from '../../atoms';
+import { atomOfGame, atomOfSolved } from '../../atoms';
 
 export default {
   component: LoadGameContainer,
@@ -17,12 +17,14 @@ export default {
   decorators: [
     Story => {
       const setGame = useSetRecoilState(atomOfGame);
+      const setSolved = useSetRecoilState(atomOfSolved);
       setGame({
         puzzle: puzzle_2_2,
         blockSize: blockSize_2_2,
         cross: false,
         hyper: false,
       });
+      setSolved(solved_2_2);
       return <Story />;
     },
   ],
