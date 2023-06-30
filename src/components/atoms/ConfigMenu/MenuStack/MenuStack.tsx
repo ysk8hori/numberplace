@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { useCallback, useMemo } from 'react';
+import React, { memo, useCallback, useMemo } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   atomOfAnswerImageVariant,
@@ -43,12 +43,12 @@ export default function MenuStack({
       clsx(className, 'shadow border-zinc-500 rounded p-2 bg-zinc-50 flex-col'),
     [className],
   );
-  return (
-    <div
-      className={containerClass}
-      style={{ display: isShow ? 'flex' : 'none' }}
-    >
-      {initial && game && navigator.canShare && navigator.share && (
+  const ShareButton = memo(() => {
+    if (!initial || !game) {
+      return null;
+    }
+    if (initial && game && navigator.canShare && navigator.share) {
+      return (
         <Button
           className="block text-xl w-full text-left"
           variant="text"
@@ -68,7 +68,37 @@ export default function MenuStack({
         >
           シェアする
         </Button>
-      )}
+      );
+    } else {
+      return (
+        <Button
+          className="block text-xl w-full text-left"
+          variant="text"
+          onClick={() => {
+            const params = toURLSearchParam({
+              puzzle: initial,
+              blockSize: game.blockSize,
+              cross: game.cross,
+              hyper: game.hyper,
+            });
+            const url = `${location.origin}/?${params.toString()}`;
+            console.log(url);
+            navigator.clipboard
+              .writeText(url)
+              .then(() => alert('コピーしました'));
+          }}
+        >
+          問題のURLをコピー
+        </Button>
+      );
+    }
+  });
+  return (
+    <div
+      className={containerClass}
+      style={{ display: isShow ? 'flex' : 'none' }}
+    >
+      <ShareButton />
       <Button
         className="block text-xl w-full text-left"
         variant="text"
