@@ -16,7 +16,7 @@ import {
   useSetRecoilState,
 } from 'recoil';
 import { atomOfInputMode } from './atoms';
-import { atomOfGame } from '../../atoms';
+import { atomOfGame, atomOfSolved, atomOfInitial } from '../../atoms';
 import { assertUndefined } from '../../utils/assertNull';
 
 /** basePuzzle をクローンする */
@@ -60,12 +60,14 @@ export default function GameContainer({
   onChangeSize?: () => void;
 }) {
   const gameData = useRecoilValue(atomOfGame);
+  const solved = useRecoilValue(atomOfSolved);
   if (!assertUndefined(gameData)) throw new Error('hoge');
-  const { puzzle, solved, blockSize, cross, hyper } = gameData;
+  if (!assertUndefined(solved)) throw new Error('hoge');
+  const { puzzle, blockSize, cross, hyper } = gameData;
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   const [hasMistake, setMistake] = useState(false);
   const [isGameClear, setGameClear] = useState(false);
-  const fill = useFill(puzzle, selectedPos, blockSize, solved, cross, hyper);
+  const fill = useFill(puzzle, selectedPos, blockSize, cross, hyper);
   useFillByKeyboard(fill);
   useDeleteByKeybord(fill);
   useArrowSelector(selectedPos, blockSize, setSelectedPos);
@@ -86,6 +88,13 @@ export default function GameContainer({
 
   const completeNumbers = getCompleteNumbers(puzzle, blockSize);
   const removeSavedGame = useResetRecoilState(atomOfGame);
+  const removeSolvedGame = useResetRecoilState(atomOfSolved);
+  const removeInitialGame = useResetRecoilState(atomOfInitial);
+  const reset = useCallback(() => {
+    removeSavedGame();
+    removeSolvedGame();
+    removeInitialGame();
+  }, [removeSavedGame, removeSolvedGame, removeInitialGame]);
 
   return (
     <div className="max-w-xl grow">
@@ -108,14 +117,14 @@ export default function GameContainer({
         />
       </div>
       <div className="flex justify-center gap-8 pb-4">
-        <Quit onQuit={() => (removeSavedGame(), onChangeSize?.())} />
+        <Quit onQuit={() => (reset(), onChangeSize?.())} />
         <Verifying onStartChecking={() => checkAndUpdate()} />
       </div>
       {hasMistake && <MistakeNoticeModal onOk={clearMistakeAndEmptyInfo} />}
       {isGameClear && (
         <GameClearModal
-          onRegenerate={() => (removeSavedGame(), onRegenerate?.())}
-          onChangeSize={() => (removeSavedGame(), onChangeSize?.())}
+          onRegenerate={() => (reset(), onRegenerate?.())}
+          onChangeSize={() => (reset(), onChangeSize?.())}
         />
       )}
       <ConfigMenu />
@@ -177,7 +186,7 @@ function useCheckAndUpdate(
     });
 
     if (puzzle.cells.every(cell => cell.isFix)) setGameClear(true);
-    saveGame({ puzzle, solved, blockSize, cross, hyper });
+    saveGame({ puzzle, blockSize, cross, hyper });
   }, [
     _puzzle,
     solved,
@@ -270,7 +279,6 @@ function useFill(
   _puzzle: MyGame,
   selectedPos: readonly [number, number],
   blockSize: BlockSize,
-  solved: MyGame,
   cross: boolean,
   hyper: boolean,
 ) {
@@ -286,7 +294,7 @@ function useFill(
         if (answer === undefined) {
           targetCell.answer = answer;
           targetCell.memoList = undefined;
-          saveGame({ puzzle, solved, blockSize, cross, hyper });
+          saveGame({ puzzle, blockSize, cross, hyper });
           return;
         }
         // 扱える範囲の数字かどうかをチェックする
@@ -317,9 +325,9 @@ function useFill(
             targetCell.memoList = list;
           }
         }
-        saveGame({ puzzle, solved, blockSize, cross, hyper });
+        saveGame({ puzzle, blockSize, cross, hyper });
       },
-    [_puzzle, selectedPos, blockSize, solved, cross, hyper],
+    [_puzzle, selectedPos, blockSize, cross, hyper],
   );
 }
 

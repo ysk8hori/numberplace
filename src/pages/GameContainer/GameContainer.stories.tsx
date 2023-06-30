@@ -18,7 +18,11 @@ import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import ReactModal from 'react-modal';
 import { expect } from '@storybook/jest';
 import { useSetRecoilState } from 'recoil';
-import { atomOfAnswerImageVariant, atomOfGame } from '../../atoms';
+import {
+  atomOfAnswerImageVariant,
+  atomOfGame,
+  atomOfSolved,
+} from '../../atoms';
 
 export default {
   component: GameContainer,
@@ -36,13 +40,14 @@ export default {
     },
     Story => {
       const setGame = useSetRecoilState(atomOfGame);
+      const setSolved = useSetRecoilState(atomOfSolved);
       setGame({
         puzzle,
-        solved: solved_2_3,
         blockSize,
         cross: false,
         hyper: false,
       });
+      setSolved(solved_2_3);
       return <Story />;
     },
   ],
@@ -64,13 +69,14 @@ export const Primary_2_2: StoryObj<typeof GameContainer> = {
   decorators: [
     Story => {
       const setGame = useSetRecoilState(atomOfGame);
+      const setSolved = useSetRecoilState(atomOfSolved);
       setGame({
         puzzle: puzzle_2_2,
-        solved: solved_2_2,
         blockSize: blockSize_2_2,
         cross: false,
         hyper: false,
       });
+      setSolved(solved_2_2);
       return <Story />;
     },
   ],
@@ -133,13 +139,14 @@ export const Game_3_3: StoryObj<typeof GameContainer> = {
   decorators: [
     Story => {
       const setGame = useSetRecoilState(atomOfGame);
+      const setSolved = useSetRecoilState(atomOfSolved);
       setGame({
         puzzle: puzzle_3_3,
-        solved: solved_3_3,
         blockSize: blockSize_3_3,
         cross: false,
         hyper: false,
       });
+      setSolved(solved_3_3);
       return <Story />;
     },
   ],
@@ -150,13 +157,14 @@ export const Game_3_3_cross: StoryObj<typeof GameContainer> = {
   decorators: [
     Story => {
       const setGame = useSetRecoilState(atomOfGame);
+      const setSolved = useSetRecoilState(atomOfSolved);
       setGame({
         puzzle: puzzle_3_3,
-        solved: solved_3_3,
         blockSize: blockSize_3_3,
         cross: true,
         hyper: false,
       });
+      setSolved(solved_3_3);
       return <Story />;
     },
   ],
@@ -167,13 +175,14 @@ export const Game_3_3_hyper: StoryObj<typeof GameContainer> = {
   decorators: [
     Story => {
       const setGame = useSetRecoilState(atomOfGame);
+      const setSolved = useSetRecoilState(atomOfSolved);
       setGame({
         puzzle: puzzle_3_3,
-        solved: solved_3_3,
         blockSize: blockSize_3_3,
         cross: false,
         hyper: true,
       });
+      setSolved(solved_2_3);
       return <Story />;
     },
   ],
@@ -184,13 +193,14 @@ export const Game_3_3_hyper_cross: StoryObj<typeof GameContainer> = {
   decorators: [
     Story => {
       const setGame = useSetRecoilState(atomOfGame);
+      const setSolved = useSetRecoilState(atomOfSolved);
       setGame({
         puzzle: puzzle_3_3,
-        solved: solved_3_3,
         blockSize: blockSize_3_3,
         cross: true,
         hyper: true,
       });
+      setSolved(solved_3_3);
       return <Story />;
     },
   ],

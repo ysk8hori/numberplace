@@ -6,8 +6,8 @@ import {
   BlockSize,
   GameType,
 } from '@ysk8hori/numberplace-generator';
-import { useRecoilState } from 'recoil';
-import { atomOfGame } from '../../atoms';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { atomOfGame, atomOfSolved } from '../../atoms';
 import { fromURLSearchParams } from '../../utils/URLSearchParamConverter';
 
 /**
@@ -24,6 +24,7 @@ function LoadGameContainer({
 }) {
   const [doneFirstRender, setDoneFirstRender] = useState<boolean>(false);
   const [game, setGame] = useRecoilState(atomOfGame);
+  const [solved, setSolved] = useRecoilState(atomOfSolved);
   let loadedGameFromParams;
   if (!doneFirstRender) {
     setDoneFirstRender(true);
@@ -32,9 +33,10 @@ function LoadGameContainer({
   if (loadedGameFromParams) {
     // URL からゲームをロードできた場合はローカルストレージに保持して rerender を待つ
     setGame(loadedGameFromParams);
+    setSolved(loadedGameFromParams.solved);
     return null;
   }
-  if (!game) {
+  if (!game || !solved) {
     // 保持しているゲームがない場合やロードしたゲームが不正な場合はメニューへ戻る
     onChangeSize?.();
     return null;
