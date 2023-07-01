@@ -1,14 +1,19 @@
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryObj, Meta } from '@storybook/react';
 import GameClearModal from './GameClearModal';
 
 export default {
   component: GameClearModal,
 } as Meta<typeof GameClearModal>;
 
-const Template: StoryFn<typeof GameClearModal> = args => (
-  <GameClearModal {...args} />
-);
-
-export const Cleared = Template.bind({});
-Cleared.storyName = 'ゲームクリアした際に表示する';
+export const Default: StoryObj<typeof GameClearModal> = {
+  name: 'ゲームクリアした際に表示する',
+};
+export const SmallMobile: StoryObj<typeof GameClearModal> = {
+  name: 'モバイル端末での表示',
+  parameters: {
+    viewport: {
+      defaultViewport: 'mobile1',
+    },
+  },
+};
