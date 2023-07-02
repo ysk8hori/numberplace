@@ -27,16 +27,12 @@ const Quit: React.FC<{
       </Button>
       <Modal isOpen={isOpen} contentLabel="ゲームをやめる確認">
         <p className="text-center">ゲームをやめますか？</p>
-        <div className="w-60 flex gap-4 justify-center">
-          <Button variant="text" onClick={() => close()} className="p-2 w-2/5">
-            いいえ
-          </Button>
-          <Button
-            variant="text"
-            onClick={() => (close(), onQuit?.())}
-            className="p-2 w-2/5"
-          >
+        <div className="flex flex-col justify-center gap-4">
+          <Button variant="text" onClick={() => (close(), onQuit?.())}>
             はい
+          </Button>
+          <Button variant="text" onClick={() => close()}>
+            いいえ
           </Button>
         </div>
       </Modal>
