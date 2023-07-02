@@ -21,28 +21,12 @@ const GameClearModal: React.FC<{
   return (
     <Modal isOpen={!!isOpen} contentLabel="クリア">
       <p className="text-center">クリア！</p>
-      <div className="grid grid-cols-2 justify-center gap-8">
-        <Button
-          variant="text"
-          onClick={() => (close(), onRegenerate?.())}
-          className="p-2 rounded-lg w-full font-black"
-        >
-          同じ
-          <br />
-          大きさで
-          <br />
-          遊ぶ
+      <div className="flex flex-col justify-center gap-4">
+        <Button variant="text" onClick={() => (close(), onRegenerate?.())}>
+          同じ大きさで遊ぶ
         </Button>
-        <Button
-          variant="text"
-          onClick={() => (close(), onChangeSize?.())}
-          className="p-2 rounded-lg w-full font-black"
-        >
-          他の
-          <br />
-          大きさで
-          <br />
-          遊ぶ
+        <Button variant="text" onClick={() => (close(), onChangeSize?.())}>
+          他の大きさで遊ぶ
         </Button>
       </div>
     </Modal>
