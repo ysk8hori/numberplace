@@ -5,7 +5,7 @@ import App from './App';
 import ReactModal from 'react-modal';
 import { registerSW } from 'virtual:pwa-register';
 import * as Sentry from '@sentry/react';
-import { BrowserTracing } from '@sentry/tracing';
+import { BrowserTracing } from '@sentry/browser';
 import { ThemeProvider } from 'styled-components';
 import semanticToken from './theme/semanticToken';
 import { RecoilRoot } from 'recoil';
