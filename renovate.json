@@ -55,5 +55,6 @@
       ]
     }
   ],
-  "automerge": true
+  "automerge": true,
+  "ignoreDeps": ["styled-components"]
 }
