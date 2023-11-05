@@ -3,7 +3,7 @@ import GenerateGameWorker from './generateGame.worker?worker';
 import type { Result } from './generateGame.worker';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import { Difficulty } from '../../../utils/difficulty';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 /**
  * ナンプレのゲームを生成する hooks
@@ -26,14 +26,12 @@ export default function useGenerateGame({
   hyper?: boolean;
   count: number;
 }) {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: ['generate-game', blockSize, difficulty, cross, hyper, count],
     queryFn: ({ signal }) =>
       generateGameAsync({ blockSize, difficulty, cross, hyper, signal }),
-    cacheTime: 0,
+    gcTime: 0,
     staleTime: 0,
-    suspense: true,
-    useErrorBoundary: true,
     refetchOnMount: false,
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
