@@ -19,6 +19,7 @@ export default function MenuButton({
       onClick={onClick}
       className={className}
       style={{ borderRadius: '9999px' }}
+      aria-label="設定"
     >
       <div className="button-dots-vertical"></div>
     </Button>
