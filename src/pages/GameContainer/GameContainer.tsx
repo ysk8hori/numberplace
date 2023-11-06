@@ -7,7 +7,6 @@ import InputPanel from '../../components/game/input-panel/InputPanel';
 import Verifying from '../../components/game/Verifying';
 import MistakeNoticeModal from '../../components/game/MistakeNoticeModal';
 import GameClearModal from '../../components/game/GameClearModal';
-import Quit from '../../components/game/Quit';
 import ConfigMenu from '../../components/atoms/ConfigMenu';
 import {
   useRecoilCallback,
@@ -117,7 +116,6 @@ export default function GameContainer({
         />
       </div>
       <div className="flex justify-center gap-8 pb-4">
-        <Quit onQuit={() => (reset(), onChangeSize?.())} />
         <Verifying onStartChecking={() => checkAndUpdate()} />
       </div>
       {hasMistake && <MistakeNoticeModal onOk={clearMistakeAndEmptyInfo} />}
