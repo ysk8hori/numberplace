@@ -12,14 +12,15 @@ import Button from '../atoms/Button';
 const Quit: React.FC<{
   /** ゲームをやめるコールバック */
   onQuit?: () => void;
-}> = ({ onQuit }) => {
+  onCancel?: () => void;
+}> = ({ onQuit, onCancel }) => {
   const [isOpen, setOpenState] = useState(false);
   const open = useCallback(() => setOpenState(true), [setOpenState]);
   const close = useCallback(() => setOpenState(false), [setOpenState]);
   return (
     <>
       <Button
-        variant="outlined"
+        variant="text"
         onClick={() => open()}
         className="rounded-2xl text-xl"
       >
@@ -31,7 +32,7 @@ const Quit: React.FC<{
           <Button variant="text" onClick={() => (close(), onQuit?.())}>
             はい
           </Button>
-          <Button variant="text" onClick={() => close()}>
+          <Button variant="text" onClick={() => (close(), onCancel?.())}>
             いいえ
           </Button>
         </div>
