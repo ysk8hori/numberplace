@@ -96,8 +96,8 @@ export default function GameContainer({
   }, [removeSavedGame, removeSolvedGame, removeInitialGame]);
 
   return (
-    <div className="max-w-xl grow">
-      <div className="shadow-xl m-2 bg-white relative">
+    <div className="max-w-xl grow flex flex-col gap-6 p-2">
+      <div className="shadow-xl bg-white relative">
         <GameBoard
           puzzle={puzzle}
           blockSize={blockSize}
@@ -107,7 +107,7 @@ export default function GameContainer({
           hyper={hyper}
         />
       </div>
-      <div className="mx-2 my-6">
+      <div>
         <InputPanel
           blockSize={blockSize}
           onInput={fill}
@@ -115,7 +115,7 @@ export default function GameContainer({
           completedNumbers={completeNumbers}
         />
       </div>
-      <div className="flex justify-center gap-8 pb-4">
+      <div className="flex justify-center">
         <Verifying onStartChecking={() => checkAndUpdate()} />
       </div>
       {hasMistake && <MistakeNoticeModal onOk={clearMistakeAndEmptyInfo} />}
