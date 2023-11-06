@@ -125,7 +125,7 @@ export default function GameContainer({
           onChangeSize={() => (reset(), onChangeSize?.())}
         />
       )}
-      <ConfigMenu />
+      <ConfigMenu onQuit={() => (reset(), onChangeSize?.())} />
     </div>
   );
 }

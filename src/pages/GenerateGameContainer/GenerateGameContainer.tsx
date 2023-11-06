@@ -4,7 +4,6 @@ import { BlockSize } from '@ysk8hori/numberplace-generator';
 import { Difficulty } from '../../utils/difficulty';
 import useGenerateGame from './utils/useGenerateGame';
 import Generating from '../../components/other/Generating';
-import ConfigMenu from '../../components/atoms/ConfigMenu';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSetRecoilState } from 'recoil';
 import { atomOfGame, atomOfInitial, atomOfSolved } from '../../atoms';
@@ -99,7 +98,6 @@ function GenerateGameContainer({
           count={count}
         />
       </Suspense>
-      <ConfigMenu />
     </div>
   );
 }

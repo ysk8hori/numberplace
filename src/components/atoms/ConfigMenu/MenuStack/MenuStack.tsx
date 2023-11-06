@@ -9,15 +9,19 @@ import {
 import Button from '../../Button';
 import './MenuStack.scss';
 import { toURLSearchParam } from '../../../../utils/URLSearchParamConverter';
+import Quit from '../../../game/Quit';
 
 export default function MenuStack({
   isShow,
   onSelected,
   className,
+  onQuit,
 }: {
   isShow: boolean;
   onSelected: () => void;
   className?: string;
+  /** ゲームをやめるコールバック */
+  onQuit?: () => void;
 }) {
   const [variant, setVariant] = useRecoilState(atomOfAnswerImageVariant);
   const initial = useRecoilValue(atomOfInitial);
@@ -43,6 +47,9 @@ export default function MenuStack({
       clsx(className, 'shadow border-zinc-500 rounded p-2 bg-zinc-50 flex-col'),
     [className],
   );
+  const QuitButton = memo(() =>
+    !initial || !game ? null : <Quit onQuit={onQuit} onCancel={onSelected} />,
+  );
   const ShareButton = memo(() => {
     if (!initial || !game) {
       return null;
@@ -64,6 +71,7 @@ export default function MenuStack({
             if (navigator.canShare({ url })) {
               navigator.share({ url });
             }
+            onSelected();
           }}
         >
           シェアする
@@ -86,6 +94,7 @@ export default function MenuStack({
             navigator.clipboard
               .writeText(url)
               .then(() => alert('コピーしました'));
+            onSelected();
           }}
         >
           問題のURLをコピー
@@ -98,6 +107,7 @@ export default function MenuStack({
       className={containerClass}
       style={{ display: isShow ? 'flex' : 'none' }}
     >
+      <QuitButton />
       <ShareButton />
       <Button
         className="block text-xl w-full text-left"
