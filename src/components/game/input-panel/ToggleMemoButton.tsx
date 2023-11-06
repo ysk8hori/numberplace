@@ -12,7 +12,7 @@ const ToggleInput = styled.input.attrs({ type: 'checkbox' })<{
   width: 100%;
   height: 100%;
   cursor: pointer;
-  :checked {
+  &:checked {
     background: radial-gradient(yellow 20px, rgba(255, 255, 255, 0) 60%);
   }
 
