@@ -6,7 +6,13 @@ import SelfBuildingSquareSpinner from '../atoms/SelfBuildingSquareSpinner';
 /**
  * ゲーム生成時に表示するローディング画面
  */
-export default function Generating({ cancel }: { cancel?: () => void }) {
+export default function Generating({
+  cancel,
+  reGenerate,
+}: {
+  cancel?: () => void;
+  reGenerate?: () => void;
+}) {
   const [showCancel, setShowCancel] = useState(false);
   useEffect(() => {
     const id = setTimeout(() => setShowCancel(true), 3000);
@@ -24,10 +30,17 @@ export default function Generating({ cancel }: { cancel?: () => void }) {
         >
           キャンセル
         </Button>
+        <Button
+          variant="outlined"
+          onClick={() => reGenerate?.()}
+          className="px-5 py-1"
+        >
+          再生成
+        </Button>
       </HiddenBox>
       <HiddenBox className={showCancel ? 'visible' : undefined}>
         <p>
-          ゲームの生成に時間がかかる場合があります。ゲームが生成されない場合はキャンセルし、他の大きさで遊んでください。
+          ゲームの生成に時間がかかる場合があります。ゲームが生成されない場合は再生成を試みるか、キャンセルし他の大きさで遊んでください。
         </p>
       </HiddenBox>
     </div>
@@ -35,6 +48,8 @@ export default function Generating({ cancel }: { cancel?: () => void }) {
 }
 
 const HiddenBox = styled.div`
+  display: flex;
+  gap: 1rem;
   visibility: hidden;
   opacity: 0;
   transition-property: opacity visibility;
