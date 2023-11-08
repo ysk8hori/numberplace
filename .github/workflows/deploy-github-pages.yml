@@ -43,7 +43,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build
-        run: npm run build --base=/numberplace/
+        run: npm run build:ghpages
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v2
