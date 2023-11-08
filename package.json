@@ -2,9 +2,11 @@
   "name": "numberplace",
   "private": true,
   "version": "2.4.0",
+  "homepage": "https://ysk8hori.github.io/numberplace/",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:ghpages": "tsc && vite build --base=/numberplace/",
     "preview": "tsc && vite build && vite preview",
     "lint:fix": "eslint --fix src",
     "prettier": "prettier --write ./src ./.storybook",
