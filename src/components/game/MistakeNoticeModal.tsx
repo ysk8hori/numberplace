@@ -17,7 +17,11 @@ const MistakeNoticeModal: React.FC<{
     <Modal isOpen={!!isOpen} contentLabel="不正解です">
       <p className="text-center">間違いがあります</p>
       <div className="flex justify-center">
-        <Button variant="text" onClick={() => (close(), onOk?.())}>
+        <Button
+          variant="text"
+          onClick={() => (close(), onOk?.())}
+          className="w-full"
+        >
           OK
         </Button>
       </div>
