@@ -9,6 +9,9 @@
 AWS にデプロイ済みです。
 https://numberp.net
 
+GitHub Pages にもデプロイしています。
+https://ysk8hori.github.io/numberplace/
+
 ## プレイ画面
 
 <div style="display:flex;">
