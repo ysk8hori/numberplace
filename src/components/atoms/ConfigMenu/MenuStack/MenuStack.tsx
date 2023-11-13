@@ -10,7 +10,7 @@ import Button from '../../Button';
 import './MenuStack.scss';
 import { toURLSearchParam } from '../../../../utils/URLSearchParamConverter';
 import Quit from '../../../game/Quit';
-
+// piyo🐥
 export default function MenuStack({
   isShow,
   onSelected,
