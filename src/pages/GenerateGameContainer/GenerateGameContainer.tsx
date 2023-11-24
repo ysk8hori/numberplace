@@ -85,6 +85,18 @@ function GenerateGameContainer({
               });
               onChangeSize?.();
             }}
+            reGenerate={() => {
+              queryClient.cancelQueries({
+                queryKey: [
+                  'generate-game',
+                  blockSize,
+                  difficulty,
+                  cross,
+                  hyper,
+                ],
+              });
+              forceUpdate();
+            }}
           />
         }
       >

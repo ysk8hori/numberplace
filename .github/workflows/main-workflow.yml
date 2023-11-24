@@ -1,9 +1,9 @@
-name: Main Workflow
+name: deploy to s3
 on:
   release:
     types: [created]
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
