@@ -4,94 +4,190 @@
     'images/bold/1.svg',
     $fill-color: theme('colors[zinc][700]')
   );
+  @media (prefers-color-scheme: dark) {
+    @include smart-svg.show(
+      'images/bold/1.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
 }
 .num2bold {
   @include smart-svg.show(
     'images/bold/2.svg',
     $fill-color: theme('colors[zinc][700]')
   );
+  @media (prefers-color-scheme: dark) {
+    @include smart-svg.show(
+      'images/bold/2.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
 }
 .num3bold {
   @include smart-svg.show(
     'images/bold/3.svg',
     $fill-color: theme('colors[zinc][700]')
   );
+  @media (prefers-color-scheme: dark) {
+    @include smart-svg.show(
+      'images/bold/3.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
 }
 .num4bold {
   @include smart-svg.show(
     'images/bold/4.svg',
     $fill-color: theme('colors[zinc][700]')
   );
+  @media (prefers-color-scheme: dark) {
+    @include smart-svg.show(
+      'images/bold/4.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
 }
 .num5bold {
   @include smart-svg.show(
     'images/bold/5.svg',
     $fill-color: theme('colors[zinc][700]')
   );
+  @media (prefers-color-scheme: dark) {
+    @include smart-svg.show(
+      'images/bold/5.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
 }
 .num6bold {
   @include smart-svg.show(
     'images/bold/6.svg',
     $fill-color: theme('colors[zinc][700]')
   );
+  @media (prefers-color-scheme: dark) {
+    @include smart-svg.show(
+      'images/bold/6.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
 }
 .num7bold {
   @include smart-svg.show(
     'images/bold/7.svg',
     $fill-color: theme('colors[zinc][700]')
   );
+  @media (prefers-color-scheme: dark) {
+    @include smart-svg.show(
+      'images/bold/7.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
 }
 .num8bold {
   @include smart-svg.show(
     'images/bold/8.svg',
     $fill-color: theme('colors[zinc][700]')
   );
+  @media (prefers-color-scheme: dark) {
+    @include smart-svg.show(
+      'images/bold/8.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
 }
 .num9bold {
   @include smart-svg.show(
     'images/bold/9.svg',
     $fill-color: theme('colors[zinc][700]')
   );
+  @media (prefers-color-scheme: dark) {
+    @include smart-svg.show(
+      'images/bold/9.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
 }
 .num10bold {
   @include smart-svg.show(
     'images/bold/10.svg',
     $fill-color: theme('colors[zinc][700]')
   );
+  @media (prefers-color-scheme: dark) {
+    @include smart-svg.show(
+      'images/bold/10.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
 }
 .num11bold {
   @include smart-svg.show(
     'images/bold/11.svg',
     $fill-color: theme('colors[zinc][700]')
   );
+  @media (prefers-color-scheme: dark) {
+    @include smart-svg.show(
+      'images/bold/11.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
 }
 .num12bold {
   @include smart-svg.show(
     'images/bold/12.svg',
     $fill-color: theme('colors[zinc][700]')
   );
+  @media (prefers-color-scheme: dark) {
+    @include smart-svg.show(
+      'images/bold/12.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
 }
 .num13bold {
   @include smart-svg.show(
     'images/bold/13.svg',
     $fill-color: theme('colors[zinc][700]')
   );
+  @media (prefers-color-scheme: dark) {
+    @include smart-svg.show(
+      'images/bold/13.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
 }
 .num14bold {
   @include smart-svg.show(
     'images/bold/14.svg',
     $fill-color: theme('colors[zinc][700]')
   );
+  @media (prefers-color-scheme: dark) {
+    @include smart-svg.show(
+      'images/bold/14.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
 }
 .num15bold {
   @include smart-svg.show(
     'images/bold/15.svg',
     $fill-color: theme('colors[zinc][700]')
   );
+  @media (prefers-color-scheme: dark) {
+    @include smart-svg.show(
+      'images/bold/15.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
 }
 .num16bold {
   @include smart-svg.show(
     'images/bold/16.svg',
     $fill-color: theme('colors[zinc][700]')
   );
+  @media (prefers-color-scheme: dark) {
+    @include smart-svg.show(
+      'images/bold/16.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
 }

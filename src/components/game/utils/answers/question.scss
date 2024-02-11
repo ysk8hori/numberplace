@@ -4,4 +4,10 @@
     'question.svg',
     $fill-color: theme('colors[zinc][700]')
   );
+  @media (prefers-color-scheme: dark) {
+    @include smart-svg.show(
+      'question.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
 }
