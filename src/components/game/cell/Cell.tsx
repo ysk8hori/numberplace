@@ -162,8 +162,8 @@ const BorderLayer: React.FC<BorderLayerProps> = ({ right, bottom }) => {
       [
         'w-full h-full',
         'absolute top-0 left-0',
-        right ? 'border-r-2 border-r-black' : '',
-        bottom ? 'border-b-2 border-b-black' : '',
+        right ? 'border-r-2 border-r-black dark:border-r-white' : '',
+        bottom ? 'border-b-2 border-b-black dark:border-b-white' : '',
       ].join(' '),
     [right, bottom],
   );
@@ -171,8 +171,8 @@ const BorderLayer: React.FC<BorderLayerProps> = ({ right, bottom }) => {
     () =>
       [
         'w-full h-full',
-        right ? '' : 'border-r-2',
-        bottom ? '' : 'border-b-2',
+        right ? '' : 'border-r-2 dark:border-r-neutral-600',
+        bottom ? '' : 'border-b-2 dark:border-b-neutral-600',
       ].join(' '),
     [right, bottom],
   );
