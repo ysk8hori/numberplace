@@ -21,7 +21,7 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
-registerSW();
+registerSW(); // 即時リロードさせたい場合は registerSW({ immediate: true }); を指定する
 const queryClient = new QueryClient();
 
 const root = createRoot(document.getElementById('root')!);
