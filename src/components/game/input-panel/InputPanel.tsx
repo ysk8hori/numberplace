@@ -56,7 +56,10 @@ const InputPanel: React.FC<Props> = ({
         aria-label="消す"
         className="row-start-1 row-end-3 flex justify-center items-center"
       >
-        <FaEraser style={{ width: '60%', height: '60%' }} />
+        <FaEraser
+          style={{ width: '60%', height: '60%' }}
+          className="dark:text-white"
+        />
       </Button>
       <NumberButtons {...numberButtonProps} />
       <ToggleMemoButton />

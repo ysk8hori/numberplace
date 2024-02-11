@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Button from '../atoms/Button';
-import SelfBuildingSquareSpinner from '../atoms/SelfBuildingSquareSpinner';
+import ScalingSquaresSpinner from '../atoms/ScalingSquaresSpinner';
 
 /**
  * ゲーム生成時に表示するローディング画面
@@ -21,7 +21,7 @@ export default function Generating({
 
   return (
     <div className="max-w-lg mx-auto flex flex-col justify-center items-center gap-5">
-      <SelfBuildingSquareSpinner />
+      <ScalingSquaresSpinner />
       <HiddenBox className={showCancel ? 'visible' : undefined}>
         <Button
           variant="outlined"
