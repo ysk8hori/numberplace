@@ -95,3 +95,102 @@
     $fill-color: theme('colors[zinc][700]')
   );
 }
+
+@media (prefers-color-scheme: dark) {
+  .asobi1 {
+    @include smart-svg.show(
+      'images/heart.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
+  .asobi2 {
+    @include smart-svg.show(
+      'images/star.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
+  .asobi3 {
+    @include smart-svg.show(
+      'images/airplane.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
+  .asobi4 {
+    @include smart-svg.show(
+      'images/cat.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
+  .asobi5 {
+    @include smart-svg.show(
+      'images/cloud.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
+  .asobi6 {
+    @include smart-svg.show(
+      'images/truck.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
+  .asobi7 {
+    @include smart-svg.show(
+      'images/baguette.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
+  .asobi8 {
+    @include smart-svg.show(
+      'images/tennis-ball.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
+  .asobi9 {
+    @include smart-svg.show(
+      'images/umbrella.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
+  .asobi10 {
+    @include smart-svg.show(
+      'images/hand.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
+  .asobi11 {
+    @include smart-svg.show(
+      'images/train.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
+  .asobi12 {
+    @include smart-svg.show(
+      'images/bird.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
+  .asobi13 {
+    @include smart-svg.show(
+      'images/airballoon.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
+  .asobi14 {
+    @include smart-svg.show(
+      'images/home.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
+  .asobi15 {
+    @include smart-svg.show(
+      'images/diamond.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
+  .asobi16 {
+    @include smart-svg.show(
+      'images/club.svg',
+      $fill-color: theme('colors[zinc][300]')
+    );
+  }
+}
