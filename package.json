@@ -1,7 +1,7 @@
 {
   "name": "numberplace",
   "private": true,
-  "version": "2.4.0",
+  "version": "2.5.0",
   "homepage": "https://ysk8hori.github.io/numberplace/",
   "scripts": {
     "dev": "vite",
