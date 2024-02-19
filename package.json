@@ -26,7 +26,7 @@
     "@sentry/react": "7.101.1",
     "@sentry/tracing": "7.101.1",
     "@tanstack/react-query": "5.21.7",
-    "@ysk8hori/numberplace-generator": "3.0.0-beta.2",
+    "@ysk8hori/numberplace-generator": "3.0.0",
     "clsx": "2.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
