@@ -11,7 +11,7 @@ import ReactModal from 'react-modal';
  */
 const Modal: React.FC<ReactModal.Props> = ({ children, ...rest }) => (
   <ReactModal
-    className="flex flex-col gap-4 absolute border rounded-lg overflow-auto p-5 shadow-lg bg-gray-100"
+    className="flex flex-col gap-4 absolute border rounded-lg overflow-auto p-5 shadow-lg bg-gray-100 dark:bg-zinc-700 dark: text-zinc-300"
     overlayClassName="fixed top-0 left-0 w-full h-full bg-black/30 flex justify-center items-center"
     {...rest}
   >
