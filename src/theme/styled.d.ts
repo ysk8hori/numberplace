@@ -2,7 +2,7 @@ import 'styled-components';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
-    button: AllButton;
+    button: { light: AllButton; dark: AllButton };
   }
 }
 

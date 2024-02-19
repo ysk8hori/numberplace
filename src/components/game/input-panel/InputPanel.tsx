@@ -58,7 +58,7 @@ const InputPanel: React.FC<Props> = ({
       >
         <FaEraser
           style={{ width: '60%', height: '60%' }}
-          className="dark:text-white"
+          className="dark:colors[zinc][300]"
         />
       </Button>
       <NumberButtons {...numberButtonProps} />

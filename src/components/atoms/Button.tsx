@@ -6,11 +6,20 @@ import { ButtonState, ButtonVariant } from '../../theme/styled';
 export function getButtonStyle(variant: ButtonVariant, state: ButtonState) {
   return css`
     ${({ theme: { button } }) => css`
-      border-style: solid;
-      border-width: ${button[variant][state].border_width};
-      border-color: ${button[variant][state].border_color};
-      background-color: ${button[variant][state].bg_color};
-      color: ${button[variant][state].color};
+      @media (prefers-color-scheme: light) {
+        border-style: solid;
+        border-width: ${button.light[variant][state].border_width};
+        border-color: ${button.light[variant][state].border_color};
+        background-color: ${button.light[variant][state].bg_color};
+        color: ${button.light[variant][state].color};
+      }
+      @media (prefers-color-scheme: dark) {
+        border-style: solid;
+        border-width: ${button.dark[variant][state].border_width};
+        border-color: ${button.dark[variant][state].border_color};
+        background-color: ${button.dark[variant][state].bg_color};
+        color: ${button.dark[variant][state].color};
+      }
     `}
   `;
 }

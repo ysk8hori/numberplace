@@ -35,7 +35,8 @@ export default function MenuStack({
     [onSelected, setVariant],
   );
   const numClass = useMemo(
-    () => (variant === 'num' ? 'svg-checked' : 'svg-unchecked'),
+    () =>
+      variant === 'num' ? 'svg-checked dark:bg-zinc-800' : 'svg-unchecked',
     [variant],
   );
   const iconClass = useMemo(
@@ -44,7 +45,10 @@ export default function MenuStack({
   );
   const containerClass = useMemo(
     () =>
-      clsx(className, 'shadow border-zinc-500 rounded p-2 bg-zinc-50 flex-col'),
+      clsx(
+        className,
+        'shadow border-zinc-500 rounded p-2 bg-zinc-50 dark:bg-zinc-700 flex-col',
+      ),
     [className],
   );
   const QuitButton = memo(() =>
