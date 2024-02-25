@@ -67,7 +67,7 @@
     "@vitest/ui": "latest",
     "autoprefixer": "10.4.17",
     "babel-loader": "9.1.3",
-    "chromatic": "10.9.6",
+    "chromatic": "11.0.0",
     "concurrently": "8.2.2",
     "css-loader": "6.10.0",
     "eslint": "8.57.0",
