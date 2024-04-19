@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@sentry/react": "7.111.0",
-    "@sentry/tracing": "7.110.1",
+    "@sentry/tracing": "7.111.0",
     "@tanstack/react-query": "5.29.2",
     "@ysk8hori/numberplace-generator": "3.0.1",
     "clsx": "2.1.0",
