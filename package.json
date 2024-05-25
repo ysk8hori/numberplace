@@ -25,7 +25,7 @@
   "dependencies": {
     "@sentry/react": "7.116.0",
     "@sentry/tracing": "7.114.0",
-    "@tanstack/react-query": "5.37.1",
+    "@tanstack/react-query": "5.38.0",
     "@ysk8hori/numberplace-generator": "3.0.1",
     "clsx": "2.1.1",
     "react": "18.3.1",
@@ -38,10 +38,10 @@
     "usehooks-ts": "3.1.0"
   },
   "devDependencies": {
-    "@babel/core": "7.24.5",
-    "@babel/preset-env": "7.24.5",
-    "@babel/preset-react": "7.24.1",
-    "@babel/preset-typescript": "7.24.1",
+    "@babel/core": "7.24.6",
+    "@babel/preset-env": "7.24.6",
+    "@babel/preset-react": "7.24.6",
+    "@babel/preset-typescript": "7.24.6",
     "@storybook/addon-actions": "7.6.17",
     "@storybook/addon-docs": "7.6.17",
     "@storybook/addon-essentials": "7.6.17",
