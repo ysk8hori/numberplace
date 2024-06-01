@@ -79,7 +79,7 @@
     "eslint-plugin-storybook": "0.8.0",
     "http-server": "14.1.1",
     "jsdom": "latest",
-    "mistcss": "0.5.2",
+    "mistcss": "0.5.3",
     "postcss": "8.4.38",
     "postcss-import": "16.1.0",
     "prettier": "3.2.5",
