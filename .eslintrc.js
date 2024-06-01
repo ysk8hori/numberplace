@@ -23,4 +23,5 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
   },
+  ignores: ['**/*.mist.tsx'],
 };
