@@ -1,7 +1,7 @@
+import { BlockSize, generateGame } from '@ysk8/numberplace-generator';
 import {
-  BlockSize,
   GameType,
-  generateGame,
+  generateGame as generateGameOld,
 } from '@ysk8hori/numberplace-generator';
 import { Difficulty, difficultyAdjustment } from '../../../utils/difficulty';
 import { MyGame } from '../../../utils/typeUtils';
@@ -18,7 +18,12 @@ onmessage = ev => {
   const gameTypes: GameType[] = [];
   if (cross) gameTypes.push('cross');
   if (hyper) gameTypes.push('hyper');
-  const [tempPuzzle, solved] = generateGame(blockSize, { gameTypes });
+  console.log(gameTypes);
+  const [tempPuzzle, solved] = (
+    gameTypes.includes('hyper') ? generateGame : generateGameOld
+  )(blockSize, { gameTypes });
+  console.log(tempPuzzle.toString());
+  console.log(solved.toString());
   const puzzle = difficultyAdjustment({
     puzzle: tempPuzzle,
     solved,
