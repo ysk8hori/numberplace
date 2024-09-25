@@ -20,7 +20,10 @@ onmessage = ev => {
   if (hyper) gameTypes.push('hyper');
   console.log(gameTypes);
   const [tempPuzzle, solved] = (
-    gameTypes.includes('hyper') ? generateGame : generateGameOld
+    gameTypes.includes('hyper') && gameTypes.length === 1
+      ? // gameType が hyper のみの場合のみ新しい generateGame を使う。 generator は v4.0.0-alpha.10 時点では hyper のみがv3より早い。
+        generateGame
+      : generateGameOld
   )(blockSize, { gameTypes });
   console.log(tempPuzzle.toString());
   console.log(solved.toString());
