@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import React, { memo, useCallback, useMemo } from 'react';
-import { useRecoilValue } from 'recoil';
 import { atomOfGame, atomOfInitial } from '../../../../atoms';
 import Button from '../../Button';
 import './MenuStack.scss';
@@ -22,8 +21,8 @@ export default function MenuStack({
   onQuit?: () => void;
 }) {
   const [variant, setVariant] = useAtom(atomOfAnswerImageVariant);
-  const initial = useRecoilValue(atomOfInitial);
-  const game = useRecoilValue(atomOfGame);
+  const [initial] = useAtom(atomOfInitial);
+  const [game] = useAtom(atomOfGame);
   const onSelectNum = useCallback(
     () => (setVariant('num'), onSelected()),
     [onSelected, setVariant],

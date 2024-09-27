@@ -87,7 +87,7 @@ function getInitialStates(): {
   puzzle?: MyGame;
   solved?: MyGame;
 } {
-  // const game = useRecoilValue(atomOfGame);
+  // const game = useAtom(atomOfGame);
   // if (game) {
   //   return {
   //     mode: 'loadAndPlay',

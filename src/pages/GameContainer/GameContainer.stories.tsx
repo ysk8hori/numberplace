@@ -17,7 +17,6 @@ import { inputAnswer, resolve_2_3 } from '../../utils/storybookUtils';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import ReactModal from 'react-modal';
 import { expect } from '@storybook/jest';
-import { useSetRecoilState } from 'recoil';
 import { atomOfGame, atomOfSolved } from '../../atoms';
 import { useAtom } from 'jotai';
 import { atomOfAnswerImageVariant } from '../../jotaiAtoms';
@@ -37,8 +36,8 @@ export default {
       return <Story />;
     },
     Story => {
-      const setGame = useSetRecoilState(atomOfGame);
-      const setSolved = useSetRecoilState(atomOfSolved);
+      const [, setGame] = useAtom(atomOfGame);
+      const [, setSolved] = useAtom(atomOfSolved);
       setGame({
         puzzle,
         blockSize,
@@ -66,8 +65,8 @@ export const IconMode: StoryObj<typeof GameContainer> = {
 export const Primary_2_2: StoryObj<typeof GameContainer> = {
   decorators: [
     Story => {
-      const setGame = useSetRecoilState(atomOfGame);
-      const setSolved = useSetRecoilState(atomOfSolved);
+      const [, setGame] = useAtom(atomOfGame);
+      const [, setSolved] = useAtom(atomOfSolved);
       setGame({
         puzzle: puzzle_2_2,
         blockSize: blockSize_2_2,
@@ -136,8 +135,8 @@ export const Game_3_3: StoryObj<typeof GameContainer> = {
   name: '9x9の表示確認',
   decorators: [
     Story => {
-      const setGame = useSetRecoilState(atomOfGame);
-      const setSolved = useSetRecoilState(atomOfSolved);
+      const [, setGame] = useAtom(atomOfGame);
+      const [, setSolved] = useAtom(atomOfSolved);
       setGame({
         puzzle: puzzle_3_3,
         blockSize: blockSize_3_3,
@@ -154,8 +153,8 @@ export const Game_3_3_cross: StoryObj<typeof GameContainer> = {
   name: '9x9クロスの表示確認',
   decorators: [
     Story => {
-      const setGame = useSetRecoilState(atomOfGame);
-      const setSolved = useSetRecoilState(atomOfSolved);
+      const [, setGame] = useAtom(atomOfGame);
+      const [, setSolved] = useAtom(atomOfSolved);
       setGame({
         puzzle: puzzle_3_3,
         blockSize: blockSize_3_3,
@@ -172,8 +171,8 @@ export const Game_3_3_hyper: StoryObj<typeof GameContainer> = {
   name: '9x9HYPERの表示確認',
   decorators: [
     Story => {
-      const setGame = useSetRecoilState(atomOfGame);
-      const setSolved = useSetRecoilState(atomOfSolved);
+      const [, setGame] = useAtom(atomOfGame);
+      const [, setSolved] = useAtom(atomOfSolved);
       setGame({
         puzzle: puzzle_3_3,
         blockSize: blockSize_3_3,
@@ -190,8 +189,8 @@ export const Game_3_3_hyper_cross: StoryObj<typeof GameContainer> = {
   name: '9x9HYPERxCROSSの表示確認',
   decorators: [
     Story => {
-      const setGame = useSetRecoilState(atomOfGame);
-      const setSolved = useSetRecoilState(atomOfSolved);
+      const [, setGame] = useAtom(atomOfGame);
+      const [, setSolved] = useAtom(atomOfSolved);
       setGame({
         puzzle: puzzle_3_3,
         blockSize: blockSize_3_3,

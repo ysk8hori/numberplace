@@ -5,7 +5,7 @@ import { Difficulty } from '../../utils/difficulty';
 import useGenerateGame from './utils/useGenerateGame';
 import Generating from '../../components/other/Generating';
 import { useQueryClient } from '@tanstack/react-query';
-import { useSetRecoilState } from 'recoil';
+import { useAtom } from 'jotai';
 import { atomOfGame, atomOfInitial, atomOfSolved } from '../../atoms';
 import { assertUndefined } from '../../utils/assertNull';
 
@@ -27,9 +27,9 @@ function Inner({
   hyper?: boolean;
   count: number;
 }) {
-  const setGame = useSetRecoilState(atomOfGame);
-  const setSolved = useSetRecoilState(atomOfSolved);
-  const setInitial = useSetRecoilState(atomOfInitial);
+  const [, setGame] = useAtom(atomOfGame);
+  const [, setSolved] = useAtom(atomOfSolved);
+  const [, setInitial] = useAtom(atomOfInitial);
   const { data } = useGenerateGame({
     blockSize,
     difficulty,

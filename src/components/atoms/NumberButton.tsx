@@ -6,7 +6,6 @@ import '../game/utils/answers/number/normal.scss';
 import '../game/utils/answers/number/disabled.scss';
 import '../game/utils/answers/asobi/normal.scss';
 import '../game/utils/answers/asobi/disabled.scss';
-import { useRecoilValue } from 'recoil';
 import { atomOfAnswerImageVariant } from '../../jotaiAtoms';
 import { useAtom } from 'jotai';
 

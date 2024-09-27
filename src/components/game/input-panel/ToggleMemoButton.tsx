@@ -1,10 +1,10 @@
 import './toggle-memo-button.scss';
 import React from 'react';
-import { useRecoilState } from 'recoil';
 import { atomOfInputMode } from '../../../pages/GameContainer/atoms';
 import styled from 'styled-components';
 import { ButtonVariant } from '../../../theme/styled';
 import { getButtonStyle } from '../../atoms/Button';
+import { useAtom } from 'jotai';
 
 const ToggleInput = styled.input.attrs({ type: 'checkbox' })<{
   buttonVariant: ButtonVariant;
@@ -29,7 +29,7 @@ const ToggleInput = styled.input.attrs({ type: 'checkbox' })<{
 `;
 
 export default function ToggleMemoButton() {
-  const [mode, setMode] = useRecoilState(atomOfInputMode);
+  const [mode, setMode] = useAtom(atomOfInputMode);
   return (
     <ToggleInput
       buttonVariant="text"
