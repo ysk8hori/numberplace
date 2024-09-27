@@ -3,50 +3,41 @@ import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import semanticToken from '../theme/semanticToken';
-import React, { useEffect } from 'react';
-import {
-  RecoilRoot,
-  RecoilState,
-  useRecoilValue,
-  useSetRecoilState,
-} from 'recoil';
+import React, { ReactNode } from 'react';
+import { useHydrateAtoms } from 'jotai/utils';
+import { Provider } from 'jotai';
 
 const customRender = (ui: React.ReactElement, options = {}) =>
   render(ui, {
     // wrap provider(s) here if needed
     wrapper: ({ children }) => {
-      return (
-        <RecoilRoot>
-          <ThemeProvider theme={semanticToken}>{children}</ThemeProvider>
-        </RecoilRoot>
-      );
+      return <ThemeProvider theme={semanticToken}>{children}</ThemeProvider>;
     },
     ...options,
   });
 
-export function RecoilObserver<T>({
-  node,
-  onChange,
+const HydrateAtoms = ({
+  initialValues,
+  children,
 }: {
-  node: RecoilState<T>;
-  onChange: (value: T) => void;
-}) {
-  const value = useRecoilValue(node);
-  useEffect(() => onChange(value), [onChange, value]);
-  return null;
-}
+  initialValues: Parameters<typeof useHydrateAtoms>[0];
+  children: ReactNode;
+}) => {
+  useHydrateAtoms(initialValues);
+  return children;
+};
 
-export function RecoilServer<T>({
-  node,
-  value,
+export const TestProvider = ({
+  initialValues,
+  children,
 }: {
-  node: RecoilState<T>;
-  value: T;
-}) {
-  const set = useSetRecoilState(node);
-  set(value);
-  return null;
-}
+  initialValues: Parameters<typeof useHydrateAtoms>[0];
+  children: ReactNode;
+}) => (
+  <Provider>
+    <HydrateAtoms initialValues={initialValues}>{children}</HydrateAtoms>
+  </Provider>
+);
 
 export * from '@testing-library/react';
 export { default as userEvent } from '@testing-library/user-event';
