@@ -18,11 +18,9 @@ import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import ReactModal from 'react-modal';
 import { expect } from '@storybook/jest';
 import { useSetRecoilState } from 'recoil';
-import {
-  atomOfAnswerImageVariant,
-  atomOfGame,
-  atomOfSolved,
-} from '../../atoms';
+import { atomOfGame, atomOfSolved } from '../../atoms';
+import { useAtom } from 'jotai';
+import { atomOfAnswerImageVariant } from '../../jotaiAtoms';
 
 export default {
   component: GameContainer,
@@ -34,7 +32,7 @@ export default {
   },
   decorators: [
     Story => {
-      const setIconMode = useSetRecoilState(atomOfAnswerImageVariant);
+      const [, setIconMode] = useAtom(atomOfAnswerImageVariant);
       setIconMode('num');
       return <Story />;
     },
@@ -58,7 +56,7 @@ export const Primary: StoryObj<typeof GameContainer> = {};
 export const IconMode: StoryObj<typeof GameContainer> = {
   decorators: [
     Story => {
-      const setIconMode = useSetRecoilState(atomOfAnswerImageVariant);
+      const [, setIconMode] = useAtom(atomOfAnswerImageVariant);
       setIconMode('asobi');
       return <Story />;
     },

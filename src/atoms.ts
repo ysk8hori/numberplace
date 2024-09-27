@@ -17,14 +17,6 @@ const localStorageEffect: <T>(key: string) => AtomEffect<T> =
     });
   };
 
-export type AnswerImageVariant = 'num' | 'asobi';
-
-export const atomOfAnswerImageVariant = atom<AnswerImageVariant>({
-  key: 'answerImageVariant',
-  default: 'num',
-  effects: [localStorageEffect('answerImageVariant')],
-});
-
 /** 現在解いているゲーム */
 export type SaveData = {
   puzzle: MyGame;

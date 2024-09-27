@@ -7,7 +7,8 @@ import '../game/utils/answers/number/disabled.scss';
 import '../game/utils/answers/asobi/normal.scss';
 import '../game/utils/answers/asobi/disabled.scss';
 import { useRecoilValue } from 'recoil';
-import { atomOfAnswerImageVariant } from '../../atoms';
+import { atomOfAnswerImageVariant } from '../../jotaiAtoms';
+import { useAtom } from 'jotai';
 
 type Props = {
   /** ゲームのブロックサイズ */
@@ -31,7 +32,7 @@ export default function NumberButton({
   buttonNumber: number;
   size: number;
 }) {
-  const answerImageVariant = useRecoilValue(atomOfAnswerImageVariant);
+  const [answerImageVariant] = useAtom(atomOfAnswerImageVariant);
   const onClick = useCallback(
     () => onInput(buttonNumber.toString()),
     [onInput, buttonNumber],

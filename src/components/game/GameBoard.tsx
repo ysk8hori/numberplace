@@ -5,8 +5,8 @@ import { MyGame } from '../../utils/typeUtils';
 import clsx from 'clsx';
 import { isSamePos } from '../../utils/positionUtils';
 import { isSameBlockSize } from '../../utils/blockUtils';
-import { useRecoilValue } from 'recoil';
-import { atomOfAnswerImageVariant } from '../../atoms';
+import { useAtom } from 'jotai';
+import { atomOfAnswerImageVariant } from '../../jotaiAtoms';
 
 type Props = {
   /** ナンプレの問題 */
@@ -74,7 +74,7 @@ const GameBoard: React.FC<Props> = ({
     cross,
     blockSize,
   );
-  const answerImageVariant = useRecoilValue(atomOfAnswerImageVariant);
+  const [answerImageVariant] = useAtom(atomOfAnswerImageVariant);
   return (
     <div className={className}>
       {puzzle.cells.map(cell => (

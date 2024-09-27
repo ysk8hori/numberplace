@@ -1,15 +1,13 @@
 import clsx from 'clsx';
 import React, { memo, useCallback, useMemo } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import {
-  atomOfAnswerImageVariant,
-  atomOfGame,
-  atomOfInitial,
-} from '../../../../atoms';
+import { useRecoilValue } from 'recoil';
+import { atomOfGame, atomOfInitial } from '../../../../atoms';
 import Button from '../../Button';
 import './MenuStack.scss';
 import { toURLSearchParam } from '../../../../utils/URLSearchParamConverter';
 import Quit from '../../../game/Quit';
+import { useAtom } from 'jotai';
+import { atomOfAnswerImageVariant } from '../../../../jotaiAtoms';
 
 export default function MenuStack({
   isShow,
@@ -23,7 +21,7 @@ export default function MenuStack({
   /** ゲームをやめるコールバック */
   onQuit?: () => void;
 }) {
-  const [variant, setVariant] = useRecoilState(atomOfAnswerImageVariant);
+  const [variant, setVariant] = useAtom(atomOfAnswerImageVariant);
   const initial = useRecoilValue(atomOfInitial);
   const game = useRecoilValue(atomOfGame);
   const onSelectNum = useCallback(
