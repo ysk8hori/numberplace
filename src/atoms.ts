@@ -12,9 +12,9 @@ export type SaveData = {
 };
 
 export const atomOfGame = atomWithStorage<SaveData | undefined>(
-  'gameData',
+  'game',
   undefined,
-  createJSONStorage(),
+  createJSONStorage(() => localStorage),
   { getOnInit: true },
 );
 
@@ -26,7 +26,7 @@ export const atomOfPazzle = focusAtom(atomOfGame, optic =>
 export const atomOfSolved = atomWithStorage<MyGame | undefined>(
   'solved',
   undefined,
-  createJSONStorage(),
+  createJSONStorage(() => localStorage),
   { getOnInit: true },
 );
 
@@ -34,6 +34,6 @@ export const atomOfSolved = atomWithStorage<MyGame | undefined>(
 export const atomOfInitial = atomWithStorage<MyGame | undefined>(
   'initial',
   undefined,
-  createJSONStorage(),
+  createJSONStorage(() => localStorage),
   { getOnInit: true },
 );
