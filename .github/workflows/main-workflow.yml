@@ -14,19 +14,19 @@ jobs:
         with:
           always-auth: true
           node-version: '20.x'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@ysk8hori'
+
+      - uses: pnpm/action-setup@v4
 
       - name: Install Dependencies
-        run: npm ci
+        run: pnpm install
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Test
-        run: npm run test:run
+        run: pnpm run test:run
 
       - name: Build
-        run: npm run build
+        run: pnpm run build
 
       - name: Deploy
         env:
