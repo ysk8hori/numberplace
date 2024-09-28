@@ -13,7 +13,7 @@ import {
   blockSize_2_3,
   solved_2_3,
   resolve_2_3,
-  RecoilServer,
+  TestProvider,
 } from '../../utils/test-utils';
 import GameContainer from '.';
 import { atomOfGame, atomOfSolved } from '../../atoms';
@@ -21,33 +21,39 @@ import { atomOfGame, atomOfSolved } from '../../atoms';
 function setup(size: '2_2' | '2_3') {
   const rendered = render(
     size === '2_2' ? (
-      <>
-        <RecoilServer
-          node={atomOfGame}
-          value={{
-            puzzle: puzzle_2_2,
-            blockSize: blockSize_2_2,
-            hyper: false,
-            cross: false,
-          }}
-        />
-        <RecoilServer node={atomOfSolved} value={solved_2_2} />
+      <TestProvider
+        initialValues={[
+          [
+            atomOfGame,
+            {
+              puzzle: puzzle_2_2,
+              blockSize: blockSize_2_2,
+              hyper: false,
+              cross: false,
+            },
+          ],
+          [atomOfSolved, solved_2_2],
+        ]}
+      >
         <GameContainer />
-      </>
+      </TestProvider>
     ) : (
-      <>
-        <RecoilServer
-          node={atomOfGame}
-          value={{
-            puzzle: puzzle_2_3,
-            blockSize: blockSize_2_3,
-            hyper: false,
-            cross: false,
-          }}
-        />
-        <RecoilServer node={atomOfSolved} value={solved_2_3} />
+      <TestProvider
+        initialValues={[
+          [
+            atomOfGame,
+            {
+              puzzle: puzzle_2_3,
+              blockSize: blockSize_2_3,
+              hyper: false,
+              cross: false,
+            },
+          ],
+          [atomOfSolved, solved_2_3],
+        ]}
+      >
         <GameContainer />
-      </>
+      </TestProvider>
     ),
   );
   ReactModal.setAppElement(rendered.container);

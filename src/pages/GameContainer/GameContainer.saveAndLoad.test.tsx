@@ -14,7 +14,7 @@ import {
   blockSize_2_3,
   solved_2_3,
   resolve_2_3,
-  RecoilServer,
+  TestProvider,
 } from '../../utils/test-utils';
 import GameContainer from '.';
 import gameHolder from '../../utils/gameHolder';
@@ -24,33 +24,39 @@ import { atomOfGame, atomOfSolved } from '../../atoms';
 function setup(size: '2_2' | '2_3') {
   const rendered = render(
     size === '2_2' ? (
-      <>
-        <RecoilServer
-          node={atomOfGame}
-          value={{
-            puzzle: puzzle_2_2,
-            blockSize: blockSize_2_2,
-            hyper: false,
-            cross: false,
-          }}
-        />
-        <RecoilServer node={atomOfSolved} value={solved_2_2} />
+      <TestProvider
+        initialValues={[
+          [
+            atomOfGame,
+            {
+              puzzle: puzzle_2_2,
+              blockSize: blockSize_2_2,
+              hyper: false,
+              cross: false,
+            },
+          ],
+          [atomOfSolved, solved_2_2],
+        ]}
+      >
         <GameContainer />
-      </>
+      </TestProvider>
     ) : (
-      <>
-        <RecoilServer
-          node={atomOfGame}
-          value={{
-            puzzle: puzzle_2_3,
-            blockSize: blockSize_2_3,
-            hyper: false,
-            cross: false,
-          }}
-        />
-        <RecoilServer node={atomOfSolved} value={solved_2_3} />
+      <TestProvider
+        initialValues={[
+          [
+            atomOfGame,
+            {
+              puzzle: puzzle_2_3,
+              blockSize: blockSize_2_3,
+              hyper: false,
+              cross: false,
+            },
+          ],
+          [atomOfSolved, solved_2_3],
+        ]}
+      >
         <GameContainer />
-      </>
+      </TestProvider>
     ),
   );
   ReactModal.setAppElement(rendered.container);
@@ -102,7 +108,7 @@ test('答え合わせ後に保存する（fix が記録される）', async () =
   expect(JSON.parse(localStorage.getItem('solved')!)).toEqual(solved_2_2);
 });
 
-// 「おなじ おおきさで あそぶ」ボタンが見つからずエラーになる。原因はわからないが手で動かして問題ないことを確認したため一旦 skip する
+// 「同じ大きさで遊ぶ」ボタンが見つからずエラーになる。原因はわからないが手で動かして問題ないことを確認したため一旦 skip する
 test.todo(
   'ゲームクリア後に「ほかの おおきさで あそぶ」をクリックすると保存していたゲームを削除する',
   async () => {
@@ -117,16 +123,16 @@ test.todo(
   },
 );
 
-// 「おなじ おおきさで あそぶ」ボタンが見つからずエラーになる。原因はわからないが手で動かして問題ないことを確認したため一旦 skip する
+// 解答が間違っていて「同じ大きさで遊ぶ」ボタンが見つからずエラーになる。
 test.todo(
-  'ゲームクリア後に「おなじ おおきさで あそぶ」をクリックすると保存していたゲームを削除する',
+  'ゲームクリア後に「同じ大きさで遊ぶ」をクリックすると保存していたゲームを削除する',
   async () => {
     setup('2_3');
     resolve_2_3({ finish: true });
     await userEvent.click(screen.getByRole('button', { name: '答え合わせ' }));
     expect(gameHolder.loadGame()).toBeDefined();
     await userEvent.click(
-      screen.getByRole('button', { name: 'おなじ おおきさで あそぶ' }),
+      screen.getByRole('button', { name: '同じ大きさで遊ぶ' }),
     );
     expect(gameHolder.loadGame()).toBeUndefined();
   },

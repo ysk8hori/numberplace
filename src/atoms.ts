@@ -1,29 +1,7 @@
 import { BlockSize } from '@ysk8hori/numberplace-generator';
-import { atom, AtomEffect, selector } from 'recoil';
 import { MyGame } from './utils/typeUtils';
-
-const localStorageEffect: <T>(key: string) => AtomEffect<T> =
-  key =>
-  ({ setSelf, onSet }) => {
-    const savedValue = localStorage.getItem(key);
-    if (savedValue != null) {
-      setSelf(JSON.parse(savedValue));
-    }
-
-    onSet((newValue, _, isReset) => {
-      isReset
-        ? localStorage.removeItem(key)
-        : localStorage.setItem(key, JSON.stringify(newValue));
-    });
-  };
-
-export type AnswerImageVariant = 'num' | 'asobi';
-
-export const atomOfAnswerImageVariant = atom<AnswerImageVariant>({
-  key: 'answerImageVariant',
-  default: 'num',
-  effects: [localStorageEffect('answerImageVariant')],
-});
+import { focusAtom } from 'jotai-optics';
+import { atomWithStorage, createJSONStorage } from 'jotai/utils';
 
 /** 現在解いているゲーム */
 export type SaveData = {
@@ -33,27 +11,29 @@ export type SaveData = {
   hyper: boolean;
 };
 
-export const atomOfGame = atom<SaveData | undefined>({
-  key: 'gameData',
-  default: undefined,
-  effects: [localStorageEffect('game')],
-});
+export const atomOfGame = atomWithStorage<SaveData | undefined>(
+  'game',
+  undefined,
+  createJSONStorage(() => localStorage),
+  { getOnInit: true },
+);
 
-export const atomOfPazzle = selector<MyGame | undefined>({
-  key: 'puzzle',
-  get: ({ get }) => get(atomOfGame)?.puzzle,
-});
+export const atomOfPazzle = focusAtom(atomOfGame, optic =>
+  optic.optional().prop('puzzle'),
+);
 
 /** 現在解いているゲームの解答 */
-export const atomOfSolved = atom<MyGame | undefined>({
-  key: 'solved',
-  default: undefined,
-  effects: [localStorageEffect('solved')],
-});
+export const atomOfSolved = atomWithStorage<MyGame | undefined>(
+  'solved',
+  undefined,
+  createJSONStorage(() => localStorage),
+  { getOnInit: true },
+);
 
 /** 現在解いているゲームの初期状態 */
-export const atomOfInitial = atom<MyGame | undefined>({
-  key: 'initial',
-  default: undefined,
-  effects: [localStorageEffect('initial')],
-});
+export const atomOfInitial = atomWithStorage<MyGame | undefined>(
+  'initial',
+  undefined,
+  createJSONStorage(() => localStorage),
+  { getOnInit: true },
+);

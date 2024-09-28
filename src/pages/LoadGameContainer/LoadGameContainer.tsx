@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import GameContainer from '../GameContainer';
-import { MyGame } from '../../utils/typeUtils';
 import {
   analyzeGame,
   BlockSize,
   GameType,
 } from '@ysk8hori/numberplace-generator';
-import { useRecoilState, useSetRecoilState } from 'recoil';
 import { atomOfGame, atomOfSolved } from '../../atoms';
 import { fromURLSearchParams } from '../../utils/URLSearchParamConverter';
+import { useAtom } from 'jotai';
 
 /**
  * セーブデータなどからゲームをロードした際に、ゲーム生成処理を介さずにゲームプレイを可能とするコンテナ。
@@ -23,8 +22,8 @@ function LoadGameContainer({
   onRegenerate?: (blockSize: BlockSize, cross: boolean, hyper: boolean) => void;
 }) {
   const [doneFirstRender, setDoneFirstRender] = useState<boolean>(false);
-  const [game, setGame] = useRecoilState(atomOfGame);
-  const [solved, setSolved] = useRecoilState(atomOfSolved);
+  const [game, setGame] = useAtom(atomOfGame);
+  const [solved, setSolved] = useAtom(atomOfSolved);
   let loadedGameFromParams;
   if (!doneFirstRender) {
     setDoneFirstRender(true);

@@ -8,15 +8,11 @@ import Verifying from '../../components/game/Verifying';
 import MistakeNoticeModal from '../../components/game/MistakeNoticeModal';
 import GameClearModal from '../../components/game/GameClearModal';
 import ConfigMenu from '../../components/atoms/ConfigMenu';
-import {
-  useRecoilCallback,
-  useRecoilValue,
-  useResetRecoilState,
-  useSetRecoilState,
-} from 'recoil';
 import { atomOfInputMode } from './atoms';
 import { atomOfGame, atomOfSolved, atomOfInitial } from '../../atoms';
 import { assertUndefined } from '../../utils/assertNull';
+import { useAtom } from 'jotai';
+import { useAtomCallback } from 'jotai/utils';
 
 /** basePuzzle をクローンする */
 function clone(basePuzzle: MyGame): MyGame {
@@ -58,15 +54,15 @@ export default function GameContainer({
   /** 他のサイズで遊ぶコールバック */
   onChangeSize?: () => void;
 }) {
-  const gameData = useRecoilValue(atomOfGame);
-  const solved = useRecoilValue(atomOfSolved);
+  const [gameData] = useAtom(atomOfGame);
+  const [solved] = useAtom(atomOfSolved);
   if (!assertUndefined(gameData)) throw new Error('hoge');
   if (!assertUndefined(solved)) throw new Error('hoge');
   const { puzzle, blockSize, cross, hyper } = gameData;
   const [selectedPos, setSelectedPos] = useState<Position>([0, 0]);
   const [hasMistake, setMistake] = useState(false);
   const [isGameClear, setGameClear] = useState(false);
-  const fill = useFill(puzzle, selectedPos, blockSize, cross, hyper);
+  const fill = useFill(puzzle, selectedPos, blockSize, cross, hyper)();
   useFillByKeyboard(fill);
   useDeleteByKeybord(fill);
   useArrowSelector(selectedPos, blockSize, setSelectedPos);
@@ -86,14 +82,14 @@ export default function GameContainer({
   }, [setMistake]);
 
   const completeNumbers = getCompleteNumbers(puzzle, blockSize);
-  const removeSavedGame = useResetRecoilState(atomOfGame);
-  const removeSolvedGame = useResetRecoilState(atomOfSolved);
-  const removeInitialGame = useResetRecoilState(atomOfInitial);
+  const [, setSavedGame] = useAtom(atomOfGame);
+  const [, setSolvedGame] = useAtom(atomOfSolved);
+  const [, setInitialGame] = useAtom(atomOfInitial);
   const reset = useCallback(() => {
-    removeSavedGame();
-    removeSolvedGame();
-    removeInitialGame();
-  }, [removeSavedGame, removeSolvedGame, removeInitialGame]);
+    setSavedGame(undefined);
+    setSolvedGame(undefined);
+    setInitialGame(undefined);
+  }, [setSavedGame, setSolvedGame, setInitialGame]);
 
   return (
     <div className="max-w-xl grow flex flex-col gap-6 p-2">
@@ -166,7 +162,7 @@ function useCheckAndUpdate(
   hyper: boolean,
   _puzzle: MyGame,
 ) {
-  const saveGame = useSetRecoilState(atomOfGame);
+  const [, saveGame] = useAtom(atomOfGame);
   return useCallback(() => {
     const puzzle = clone(_puzzle);
     solved.cells.forEach(solvedCell => {
@@ -280,52 +276,49 @@ function useFill(
   cross: boolean,
   hyper: boolean,
 ) {
-  const saveGame = useSetRecoilState(atomOfGame);
-  return useRecoilCallback(
-    ({ snapshot }) =>
-      async (answer?: string | undefined) => {
-        const puzzle = clone(_puzzle);
-        const targetCell = puzzle.cells.find(cell =>
-          isSamePos(cell.pos, selectedPos),
-        );
-        if (!targetCell || targetCell.isFix) return;
-        if (answer === undefined) {
-          targetCell.answer = answer;
-          targetCell.memoList = undefined;
-          saveGame({ puzzle, blockSize, cross, hyper });
-          return;
-        }
-        // 扱える範囲の数字かどうかをチェックする
-        const num = Number(answer);
-        if (isNaN(num) || num < 1 || blockSize.height * blockSize.width < num) {
-          return;
-        }
-        const inputMode = await snapshot.getPromise(atomOfInputMode);
-        if (inputMode === 'answer') {
-          targetCell.memoList = undefined;
-          targetCell.answer = answer;
+  return useAtomCallback(
+    (get, set) => async (answer?: string | undefined) => {
+      console.log(answer);
+      // const saveGame = set(atomOfGame);
+      const puzzle = clone(_puzzle);
+      const targetCell = puzzle.cells.find(cell =>
+        isSamePos(cell.pos, selectedPos),
+      );
+      if (!targetCell || targetCell.isFix) return;
+      if (answer === undefined) {
+        targetCell.answer = answer;
+        targetCell.memoList = undefined;
+        set(atomOfGame, { puzzle, blockSize, cross, hyper });
+        return;
+      }
+      // 扱える範囲の数字かどうかをチェックする
+      const num = Number(answer);
+      if (isNaN(num) || num < 1 || blockSize.height * blockSize.width < num) {
+        return;
+      }
+      const inputMode = get(atomOfInputMode);
+      if (inputMode === 'answer') {
+        targetCell.memoList = undefined;
+        targetCell.answer = answer;
+      } else {
+        // ターゲットが通常入力済みセルの場合は通常入力していた値をクリアする
+        targetCell.answer = undefined;
+        // 記入済みの数字ならクリアし、未記入なら記入する
+        if (!targetCell.memoList) targetCell.memoList = [];
+        if (targetCell.memoList.includes(answer)) {
+          targetCell.memoList = targetCell.memoList.reduce((list, current) => {
+            if (current !== answer) list.push(current);
+            return list;
+          }, new Array<string>());
         } else {
-          // ターゲットが通常入力済みセルの場合は通常入力していた値をクリアする
-          targetCell.answer = undefined;
-          // 記入済みの数字ならクリアし、未記入なら記入する
-          if (!targetCell.memoList) targetCell.memoList = [];
-          if (targetCell.memoList.includes(answer)) {
-            targetCell.memoList = targetCell.memoList.reduce(
-              (list, current) => {
-                if (current !== answer) list.push(current);
-                return list;
-              },
-              new Array<string>(),
-            );
-          } else {
-            const list = Array.from(targetCell.memoList);
-            list.push(answer);
-            targetCell.memoList = list;
-          }
+          const list = Array.from(targetCell.memoList);
+          list.push(answer);
+          targetCell.memoList = list;
         }
-        saveGame({ puzzle, blockSize, cross, hyper });
-      },
-    [_puzzle, selectedPos, blockSize, cross, hyper],
+      }
+      set(atomOfGame, { puzzle, blockSize, cross, hyper });
+    },
+    // [_puzzle, selectedPos, blockSize, cross, hyper],)
   );
 }
 

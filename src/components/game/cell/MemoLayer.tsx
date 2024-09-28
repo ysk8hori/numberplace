@@ -1,9 +1,9 @@
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import clsx from 'clsx';
 import React, { useMemo } from 'react';
-import { useRecoilValue } from 'recoil';
-import { atomOfAnswerImageVariant } from '../../../atoms';
+import { atomOfAnswerImageVariant } from '../../../jotaiAtoms';
 import getAnswerClass from '../utils/answers/getAnswerClass';
+import { useAtom } from 'jotai';
 
 export type Props = React.ComponentProps<'div'> & {
   memoList?: string[];
@@ -18,7 +18,7 @@ function MemoCell({
   answerCandidate: string;
   memoList?: string[];
 }) {
-  const answerImageVariant = useRecoilValue(atomOfAnswerImageVariant);
+  const [answerImageVariant] = useAtom(atomOfAnswerImageVariant);
   const imageClassName = useMemo(
     () =>
       clsx(
