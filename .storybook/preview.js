@@ -2,7 +2,6 @@ import { ThemeProvider } from 'styled-components';
 import defaultToken from '../src/theme/semanticToken';
 import '../src/index.scss';
 import './story.css';
-import { RecoilRoot } from 'recoil';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -15,10 +14,8 @@ export const parameters = {
 };
 export const decorators = [
   Story => (
-    <RecoilRoot>
-      <ThemeProvider theme={defaultToken}>
-        <Story />
-      </ThemeProvider>
-    </RecoilRoot>
+    <ThemeProvider theme={defaultToken}>
+      <Story />
+    </ThemeProvider>
   ),
 ];
