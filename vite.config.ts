@@ -6,6 +6,13 @@ import { VitePWA } from 'vite-plugin-pwa';
 export default defineConfig({
   build: {
     target: 'esnext',
+    rollupOptions: {
+      // Rollup failed to resolve import "workbox-window" from "/@vite-plugin-pwa/virtual:pwa-register".
+      // This is most likely unintended because it can break your application at runtime.
+      // If you do want to externalize this module explicitly add it to
+      // `build.rollupOptions.external`
+      external: ['workbox-window'],
+    },
   },
   optimizeDeps: { esbuildOptions: { target: 'esnext' } },
   plugins: [
