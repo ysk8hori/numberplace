@@ -24,8 +24,8 @@
     "chromatic": "npx chromatic --project-token=1d1cac2951ec --patch-build=ysk8hori-patch-2...main"
   },
   "dependencies": {
-    "@sentry/react": "7.119.0",
     "@sentry/browser": "7.119.0",
+    "@sentry/react": "7.119.0",
     "@sentry/tracing": "7.114.0",
     "@tanstack/react-query": "5.56.2",
     "@ysk8/numberplace-generator": "npm:@jsr/ysk8__numberplace-generator@4.0.0-alpha.10",
@@ -56,8 +56,8 @@
     "@storybook/addon-viewport": "8.3.4",
     "@storybook/jest": "0.2.3",
     "@storybook/preset-scss": "1.0.3",
-    "@storybook/react-webpack5": "7.6.17",
     "@storybook/react": "7.6.17",
+    "@storybook/react-webpack5": "7.6.17",
     "@storybook/test-runner": "0.16.0",
     "@storybook/testing-library": "0.2.2",
     "@testing-library/jest-dom": "6.5.0",
@@ -85,6 +85,7 @@
     "jsdom": "latest",
     "postcss": "8.4.47",
     "postcss-import": "16.1.0",
+    "postcss-loader": "8.1.1",
     "prettier": "3.3.3",
     "sass": "1.79.4",
     "sass-loader": "16.0.2",
