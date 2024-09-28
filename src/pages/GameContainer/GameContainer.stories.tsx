@@ -17,9 +17,9 @@ import { inputAnswer, resolve_2_3 } from '../../utils/storybookUtils';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import ReactModal from 'react-modal';
 import { expect } from '@storybook/jest';
-import { atomOfGame, atomOfSolved } from '../../atoms';
-import { useAtom } from 'jotai';
+import { atomOfGame, atomOfSolved, SaveData } from '../../atoms';
 import { atomOfAnswerImageVariant } from '../../jotaiAtoms';
+import { TestProvider } from '../../utils/test-utils';
 
 export default {
   component: GameContainer,
@@ -31,21 +31,23 @@ export default {
   },
   decorators: [
     Story => {
-      const [, setIconMode] = useAtom(atomOfAnswerImageVariant);
-      setIconMode('num');
-      return <Story />;
-    },
-    Story => {
-      const [, setGame] = useAtom(atomOfGame);
-      const [, setSolved] = useAtom(atomOfSolved);
-      setGame({
+      const game = {
         puzzle,
         blockSize,
         cross: false,
         hyper: false,
-      });
-      setSolved(solved_2_3);
-      return <Story />;
+      } satisfies SaveData;
+      return (
+        <TestProvider
+          initialValues={[
+            [atomOfAnswerImageVariant, 'num'],
+            [atomOfGame, game],
+            [atomOfSolved, solved_2_3],
+          ]}
+        >
+          <Story />
+        </TestProvider>
+      );
     },
   ],
 } as Meta<typeof GameContainer>;
@@ -55,9 +57,23 @@ export const Primary: StoryObj<typeof GameContainer> = {};
 export const IconMode: StoryObj<typeof GameContainer> = {
   decorators: [
     Story => {
-      const [, setIconMode] = useAtom(atomOfAnswerImageVariant);
-      setIconMode('asobi');
-      return <Story />;
+      const game = {
+        puzzle,
+        blockSize,
+        cross: false,
+        hyper: false,
+      } satisfies SaveData;
+      return (
+        <TestProvider
+          initialValues={[
+            [atomOfAnswerImageVariant, 'asobi'],
+            [atomOfGame, game],
+            [atomOfSolved, solved_2_3],
+          ]}
+        >
+          <Story />
+        </TestProvider>
+      );
     },
   ],
 };
@@ -65,16 +81,22 @@ export const IconMode: StoryObj<typeof GameContainer> = {
 export const Primary_2_2: StoryObj<typeof GameContainer> = {
   decorators: [
     Story => {
-      const [, setGame] = useAtom(atomOfGame);
-      const [, setSolved] = useAtom(atomOfSolved);
-      setGame({
+      const game = {
         puzzle: puzzle_2_2,
         blockSize: blockSize_2_2,
         cross: false,
         hyper: false,
-      });
-      setSolved(solved_2_2);
-      return <Story />;
+      } satisfies SaveData;
+      return (
+        <TestProvider
+          initialValues={[
+            [atomOfGame, game],
+            [atomOfSolved, solved_2_2],
+          ]}
+        >
+          <Story />
+        </TestProvider>
+      );
     },
   ],
 };
@@ -135,16 +157,22 @@ export const Game_3_3: StoryObj<typeof GameContainer> = {
   name: '9x9の表示確認',
   decorators: [
     Story => {
-      const [, setGame] = useAtom(atomOfGame);
-      const [, setSolved] = useAtom(atomOfSolved);
-      setGame({
+      const game = {
         puzzle: puzzle_3_3,
         blockSize: blockSize_3_3,
         cross: false,
         hyper: false,
-      });
-      setSolved(solved_3_3);
-      return <Story />;
+      } satisfies SaveData;
+      return (
+        <TestProvider
+          initialValues={[
+            [atomOfGame, game],
+            [atomOfSolved, solved_3_3],
+          ]}
+        >
+          <Story />
+        </TestProvider>
+      );
     },
   ],
 };
@@ -153,16 +181,22 @@ export const Game_3_3_cross: StoryObj<typeof GameContainer> = {
   name: '9x9クロスの表示確認',
   decorators: [
     Story => {
-      const [, setGame] = useAtom(atomOfGame);
-      const [, setSolved] = useAtom(atomOfSolved);
-      setGame({
+      const game = {
         puzzle: puzzle_3_3,
         blockSize: blockSize_3_3,
         cross: true,
         hyper: false,
-      });
-      setSolved(solved_3_3);
-      return <Story />;
+      } satisfies SaveData;
+      return (
+        <TestProvider
+          initialValues={[
+            [atomOfGame, game],
+            [atomOfSolved, solved_3_3],
+          ]}
+        >
+          <Story />
+        </TestProvider>
+      );
     },
   ],
 };
@@ -171,16 +205,22 @@ export const Game_3_3_hyper: StoryObj<typeof GameContainer> = {
   name: '9x9HYPERの表示確認',
   decorators: [
     Story => {
-      const [, setGame] = useAtom(atomOfGame);
-      const [, setSolved] = useAtom(atomOfSolved);
-      setGame({
+      const game = {
         puzzle: puzzle_3_3,
         blockSize: blockSize_3_3,
         cross: false,
         hyper: true,
-      });
-      setSolved(solved_2_3);
-      return <Story />;
+      } satisfies SaveData;
+      return (
+        <TestProvider
+          initialValues={[
+            [atomOfGame, game],
+            [atomOfSolved, solved_3_3],
+          ]}
+        >
+          <Story />
+        </TestProvider>
+      );
     },
   ],
 };
@@ -189,16 +229,22 @@ export const Game_3_3_hyper_cross: StoryObj<typeof GameContainer> = {
   name: '9x9HYPERxCROSSの表示確認',
   decorators: [
     Story => {
-      const [, setGame] = useAtom(atomOfGame);
-      const [, setSolved] = useAtom(atomOfSolved);
-      setGame({
+      const game = {
         puzzle: puzzle_3_3,
         blockSize: blockSize_3_3,
         cross: true,
         hyper: true,
-      });
-      setSolved(solved_3_3);
-      return <Story />;
+      } satisfies SaveData;
+      return (
+        <TestProvider
+          initialValues={[
+            [atomOfGame, game],
+            [atomOfSolved, solved_3_3],
+          ]}
+        >
+          <Story />
+        </TestProvider>
+      );
     },
   ],
 };

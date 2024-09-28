@@ -31,7 +31,8 @@ export const TestProvider = ({
   initialValues,
   children,
 }: {
-  initialValues: Parameters<typeof useHydrateAtoms>[0];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  initialValues: any;
   children: ReactNode;
 }) => (
   <Provider>
