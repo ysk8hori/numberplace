@@ -24,7 +24,7 @@
     "chromatic": "npx chromatic --project-token=1d1cac2951ec --patch-build=ysk8hori-patch-2...main"
   },
   "dependencies": {
-    "@sentry/browser": "7.119.0",
+    "@sentry/browser": "7.119.1",
     "@sentry/react": "7.119.0",
     "@sentry/tracing": "7.114.0",
     "@tanstack/react-query": "5.59.0",
