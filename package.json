@@ -83,7 +83,7 @@
     "eslint-plugin-storybook": "0.9.0",
     "http-server": "14.1.1",
     "jsdom": "latest",
-    "playwright": "1.48.0",
+    "playwright": "1.48.1",
     "postcss": "8.4.47",
     "postcss-import": "16.1.0",
     "postcss-loader": "8.1.1",
