@@ -90,7 +90,7 @@
     "prettier": "3.3.3",
     "sass": "1.80.2",
     "sass-loader": "16.0.2",
-    "storybook": "7.6.20",
+    "storybook": "8.3.6",
     "style-loader": "4.0.0",
     "tailwindcss": "3.4.14",
     "typescript": "5.6.3",
