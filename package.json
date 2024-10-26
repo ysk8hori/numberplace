@@ -78,7 +78,7 @@
     "css-loader": "7.1.2",
     "eslint": "9.13.0",
     "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-jsx-a11y": "6.10.1",
+    "eslint-plugin-jsx-a11y": "6.10.2",
     "eslint-plugin-react-hooks": "5.0.0",
     "eslint-plugin-storybook": "0.10.1",
     "http-server": "14.1.1",
