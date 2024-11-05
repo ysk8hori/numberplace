@@ -151,11 +151,11 @@ importers:
         specifier: 9.2.1
         version: 9.2.1(@babel/core@7.26.0)(webpack@5.95.0(@swc/core@1.7.26)(esbuild@0.18.20))
       chromatic:
-        specifier: 11.16.3
-        version: 11.16.3
+        specifier: 11.16.5
+        version: 11.16.5
       concurrently:
-        specifier: 9.0.1
-        version: 9.0.1
+        specifier: 9.1.0
+        version: 9.1.0
       css-loader:
         specifier: 7.1.2
         version: 7.1.2(webpack@5.95.0(@swc/core@1.7.26)(esbuild@0.18.20))
@@ -3491,8 +3491,8 @@ packages:
     resolution: {integrity: sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==}
     engines: {node: '>=10'}
 
-  chromatic@11.16.3:
-    resolution: {integrity: sha512-bckarRbZ3M1BvsmhLqEMschuQPk2FlSD9cvy8383JwoVvaIqLr0dv1tI/DPM4LMuXOjTjeBSZZINVH9r3RMiiA==}
+  chromatic@11.16.5:
+    resolution: {integrity: sha512-wUEKXyu3GYmUg6Jq13uyRE9iC8ph5gbfDHdyHH0vQathkGQrcjHHdoxI/GXKIjU6d+xupLon8sxRV9NuZKTWbA==}
     hasBin: true
     peerDependencies:
       '@chromatic-com/cypress': ^0.*.* || ^1.0.0
@@ -3634,8 +3634,8 @@ packages:
     resolution: {integrity: sha512-27HBghJxjiZtIk3Ycvn/4kbJk/1uZuJFfuPEns6LaEvpvG1f0hTea8lilrouyo9mVc2GWdcEZ8OLoGmSADlrCw==}
     engines: {'0': node >= 0.8}
 
-  concurrently@9.0.1:
-    resolution: {integrity: sha512-wYKvCd/f54sTXJMSfV6Ln/B8UrfLBKOYa+lzc6CHay3Qek+LorVSBdMVfyewFhRbH0Rbabsk4D+3PL/VjQ5gzg==}
+  concurrently@9.1.0:
+    resolution: {integrity: sha512-VxkzwMAn4LP7WyMnJNbHN5mKV9L2IbyDjpzemKr99sXNR3GqRNMMHdm7prV1ws9wg7ETj6WUkNOigZVsptwbgg==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -11755,7 +11755,7 @@ snapshots:
 
   chownr@2.0.0: {}
 
-  chromatic@11.16.3: {}
+  chromatic@11.16.5: {}
 
   chrome-trace-event@1.0.4: {}
 
@@ -11874,7 +11874,7 @@ snapshots:
       readable-stream: 2.3.8
       typedarray: 0.0.6
 
-  concurrently@9.0.1:
+  concurrently@9.1.0:
     dependencies:
       chalk: 4.1.2
       lodash: 4.17.21
