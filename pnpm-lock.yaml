@@ -30,11 +30,11 @@ importers:
         specifier: 2.1.1
         version: 2.1.1
       jotai:
-        specifier: 2.10.1
-        version: 2.10.1(@types/react@18.3.12)(react@18.3.1)
+        specifier: 2.10.2
+        version: 2.10.2(@types/react@18.3.12)(react@18.3.1)
       jotai-optics:
         specifier: 0.4.0
-        version: 0.4.0(jotai@2.10.1(@types/react@18.3.12)(react@18.3.1))(optics-ts@2.4.1)
+        version: 0.4.0(jotai@2.10.2(@types/react@18.3.12)(react@18.3.1))(optics-ts@2.4.1)
       optics-ts:
         specifier: 2.4.1
         version: 2.4.1
@@ -89,7 +89,7 @@ importers:
         version: 7.6.17(react@18.3.1)
       '@storybook/addon-styling':
         specifier: 1.3.7
-        version: 1.3.7(@types/react-dom@18.3.1)(@types/react@18.3.12)(less@4.2.0)(postcss@8.4.47)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.80.6)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.7.26)(esbuild@0.18.20))
+        version: 1.3.7(@types/react-dom@18.3.1)(@types/react@18.3.12)(less@4.2.0)(postcss@8.4.48)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.80.6)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.7.26)(esbuild@0.18.20))
       '@storybook/addon-viewport':
         specifier: 8.3.4
         version: 8.3.4(storybook@7.6.20)
@@ -140,13 +140,13 @@ importers:
         version: 8.13.0(eslint@9.14.0(jiti@1.21.6))(typescript@5.6.3)
       '@vitejs/plugin-react':
         specifier: 4.3.3
-        version: 4.3.3(vite@5.4.10(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1))
+        version: 4.3.3(vite@5.4.11(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1))
       '@vitest/ui':
         specifier: latest
         version: 2.1.4(vitest@2.1.4)
       autoprefixer:
         specifier: 10.4.20
-        version: 10.4.20(postcss@8.4.47)
+        version: 10.4.20(postcss@8.4.48)
       babel-loader:
         specifier: 9.2.1
         version: 9.2.1(@babel/core@7.26.0)(webpack@5.95.0(@swc/core@1.7.26)(esbuild@0.18.20))
@@ -184,14 +184,14 @@ importers:
         specifier: 1.48.2
         version: 1.48.2
       postcss:
-        specifier: 8.4.47
-        version: 8.4.47
+        specifier: 8.4.48
+        version: 8.4.48
       postcss-import:
         specifier: 16.1.0
-        version: 16.1.0(postcss@8.4.47)
+        version: 16.1.0(postcss@8.4.48)
       postcss-loader:
         specifier: 8.1.1
-        version: 8.1.1(postcss@8.4.47)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.7.26)(esbuild@0.18.20))
+        version: 8.1.1(postcss@8.4.48)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.7.26)(esbuild@0.18.20))
       prettier:
         specifier: 3.3.3
         version: 3.3.3
@@ -217,11 +217,11 @@ importers:
         specifier: 1.4.0
         version: 1.4.0(react@18.3.1)
       vite:
-        specifier: 5.4.10
-        version: 5.4.10(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1)
+        specifier: 5.4.11
+        version: 5.4.11(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1)
       vite-plugin-pwa:
         specifier: 0.20.5
-        version: 0.20.5(vite@5.4.10(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1))(workbox-build@7.1.1(@types/babel__core@7.20.5))(workbox-window@7.1.0)
+        version: 0.20.5(vite@5.4.11(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1))(workbox-build@7.1.1(@types/babel__core@7.20.5))(workbox-window@7.1.0)
       vitest:
         specifier: 2.1.4
         version: 2.1.4(@types/node@22.7.4)(@vitest/ui@2.1.4)(jsdom@25.0.1)(less@4.2.0)(sass@1.80.6)(terser@5.34.1)
@@ -5284,8 +5284,8 @@ packages:
       jotai: '>=2.0.0'
       optics-ts: '>=2.0.0'
 
-  jotai@2.10.1:
-    resolution: {integrity: sha512-4FycO+BOTl2auLyF2Chvi6KTDqdsdDDtpaL/WHQMs8f3KS1E3loiUShQzAzFA/sMU5cJ0hz/RT1xum9YbG/zaA==}
+  jotai@2.10.2:
+    resolution: {integrity: sha512-DqsBTlRglIBviuJLfK6JxZzpd6vKfbuJ4IqRCz70RFEDeZf46Fcteb/FXxNr1UnoxR5oUy3oq7IE8BrEq0G5DQ==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
       '@types/react': '>=17.0.0'
@@ -5963,6 +5963,9 @@ packages:
   picocolors@1.1.0:
     resolution: {integrity: sha512-TQ92mBOW0l3LeMeyLV6mzy/kWr8lkd/hp3mTg7wYK7zJhuBStmGMBG0BdeDZS/dZx1IukaX6Bk11zcln25o1Aw==}
 
+  picocolors@1.1.1:
+    resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
+
   picomatch@2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
@@ -6116,8 +6119,8 @@ packages:
   postcss-value-parser@4.2.0:
     resolution: {integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==}
 
-  postcss@8.4.47:
-    resolution: {integrity: sha512-56rxCq7G/XfB4EkXq9Egn5GCqugWvDFjafDOThIdMBsI15iqPqR5r15TfSr1YPYeEI19YeaXMCbY6u88Y76GLQ==}
+  postcss@8.4.48:
+    resolution: {integrity: sha512-GCRK8F6+Dl7xYniR5a4FYbpBzU8XnZVeowqsQFYdcXuSbChgiks7qybSkbvnaeqv0G0B+dd9/jJgH8kkLDQeEA==}
     engines: {node: ^10 || ^12 || >=14}
 
   prelude-ls@1.2.1:
@@ -7321,8 +7324,8 @@ packages:
       '@vite-pwa/assets-generator':
         optional: true
 
-  vite@5.4.10:
-    resolution: {integrity: sha512-1hvaPshuPUtxeQ0hsVH3Mud0ZanOLwVTneA1EgbAM5LhaZEqyPWGRQ7BtaMvUrTDeEaC8pxtj6a6jku3x4z6SQ==}
+  vite@5.4.11:
+    resolution: {integrity: sha512-c7jFQRklXua0mTzneGW9QVyxFjUgwcihC4bXEtujIo2ouWCe1Ajt/amn2PCxYnhYfd5k09JX3SB7OYWFKYqj8Q==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -9930,7 +9933,7 @@ snapshots:
       '@storybook/global': 5.0.0
       ts-dedent: 2.2.0
 
-  '@storybook/addon-styling@1.3.7(@types/react-dom@18.3.1)(@types/react@18.3.12)(less@4.2.0)(postcss@8.4.47)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.80.6)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.7.26)(esbuild@0.18.20))':
+  '@storybook/addon-styling@1.3.7(@types/react-dom@18.3.1)(@types/react@18.3.12)(less@4.2.0)(postcss@8.4.48)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.80.6)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.7.26)(esbuild@0.18.20))':
     dependencies:
       '@babel/template': 7.25.0
       '@babel/types': 7.25.6
@@ -9945,14 +9948,14 @@ snapshots:
       '@storybook/types': 7.6.20
       css-loader: 6.11.0(webpack@5.95.0(@swc/core@1.7.26)(esbuild@0.18.20))
       less-loader: 11.1.4(less@4.2.0)(webpack@5.95.0(@swc/core@1.7.26)(esbuild@0.18.20))
-      postcss-loader: 7.3.4(postcss@8.4.47)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.7.26)(esbuild@0.18.20))
+      postcss-loader: 7.3.4(postcss@8.4.48)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.7.26)(esbuild@0.18.20))
       prettier: 2.8.8
       resolve-url-loader: 5.0.0
       sass-loader: 13.3.3(sass@1.80.6)(webpack@5.95.0(@swc/core@1.7.26)(esbuild@0.18.20))
       style-loader: 3.3.4(webpack@5.95.0(@swc/core@1.7.26)(esbuild@0.18.20))
     optionalDependencies:
       less: 4.2.0
-      postcss: 8.4.47
+      postcss: 8.4.48
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       webpack: 5.95.0(@swc/core@1.7.26)(esbuild@0.18.20)
@@ -11151,14 +11154,14 @@ snapshots:
       '@typescript-eslint/types': 8.13.0
       eslint-visitor-keys: 3.4.3
 
-  '@vitejs/plugin-react@4.3.3(vite@5.4.10(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1))':
+  '@vitejs/plugin-react@4.3.3(vite@5.4.11(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1))':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/plugin-transform-react-jsx-self': 7.24.7(@babel/core@7.26.0)
       '@babel/plugin-transform-react-jsx-source': 7.24.7(@babel/core@7.26.0)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 5.4.10(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1)
+      vite: 5.4.11(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -11169,13 +11172,13 @@ snapshots:
       chai: 5.1.2
       tinyrainbow: 1.2.0
 
-  '@vitest/mocker@2.1.4(vite@5.4.10(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1))':
+  '@vitest/mocker@2.1.4(vite@5.4.11(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1))':
     dependencies:
       '@vitest/spy': 2.1.4
       estree-walker: 3.0.3
       magic-string: 0.30.12
     optionalDependencies:
-      vite: 5.4.10(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1)
+      vite: 5.4.11(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1)
 
   '@vitest/pretty-format@2.1.4':
     dependencies:
@@ -11516,14 +11519,14 @@ snapshots:
 
   at-least-node@1.0.0: {}
 
-  autoprefixer@10.4.20(postcss@8.4.47):
+  autoprefixer@10.4.20(postcss@8.4.48):
     dependencies:
       browserslist: 4.24.0
       caniuse-lite: 1.0.30001664
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.1.0
-      postcss: 8.4.47
+      postcss: 8.4.48
       postcss-value-parser: 4.2.0
 
   available-typed-arrays@1.0.7:
@@ -12030,12 +12033,12 @@ snapshots:
 
   css-loader@6.11.0(webpack@5.95.0(@swc/core@1.7.26)(esbuild@0.18.20)):
     dependencies:
-      icss-utils: 5.1.0(postcss@8.4.47)
-      postcss: 8.4.47
-      postcss-modules-extract-imports: 3.1.0(postcss@8.4.47)
-      postcss-modules-local-by-default: 4.0.5(postcss@8.4.47)
-      postcss-modules-scope: 3.2.0(postcss@8.4.47)
-      postcss-modules-values: 4.0.0(postcss@8.4.47)
+      icss-utils: 5.1.0(postcss@8.4.48)
+      postcss: 8.4.48
+      postcss-modules-extract-imports: 3.1.0(postcss@8.4.48)
+      postcss-modules-local-by-default: 4.0.5(postcss@8.4.48)
+      postcss-modules-scope: 3.2.0(postcss@8.4.48)
+      postcss-modules-values: 4.0.0(postcss@8.4.48)
       postcss-value-parser: 4.2.0
       semver: 7.6.3
     optionalDependencies:
@@ -12043,12 +12046,12 @@ snapshots:
 
   css-loader@7.1.2(webpack@5.95.0(@swc/core@1.7.26)(esbuild@0.18.20)):
     dependencies:
-      icss-utils: 5.1.0(postcss@8.4.47)
-      postcss: 8.4.47
-      postcss-modules-extract-imports: 3.1.0(postcss@8.4.47)
-      postcss-modules-local-by-default: 4.0.5(postcss@8.4.47)
-      postcss-modules-scope: 3.2.0(postcss@8.4.47)
-      postcss-modules-values: 4.0.0(postcss@8.4.47)
+      icss-utils: 5.1.0(postcss@8.4.48)
+      postcss: 8.4.48
+      postcss-modules-extract-imports: 3.1.0(postcss@8.4.48)
+      postcss-modules-local-by-default: 4.0.5(postcss@8.4.48)
+      postcss-modules-scope: 3.2.0(postcss@8.4.48)
+      postcss-modules-values: 4.0.0(postcss@8.4.48)
       postcss-value-parser: 4.2.0
       semver: 7.6.3
     optionalDependencies:
@@ -13282,9 +13285,9 @@ snapshots:
     dependencies:
       safer-buffer: 2.1.2
 
-  icss-utils@5.1.0(postcss@8.4.47):
+  icss-utils@5.1.0(postcss@8.4.48):
     dependencies:
-      postcss: 8.4.47
+      postcss: 8.4.48
 
   idb@7.1.1: {}
 
@@ -13965,12 +13968,12 @@ snapshots:
       '@sideway/formula': 3.0.1
       '@sideway/pinpoint': 2.0.0
 
-  jotai-optics@0.4.0(jotai@2.10.1(@types/react@18.3.12)(react@18.3.1))(optics-ts@2.4.1):
+  jotai-optics@0.4.0(jotai@2.10.2(@types/react@18.3.12)(react@18.3.1))(optics-ts@2.4.1):
     dependencies:
-      jotai: 2.10.1(@types/react@18.3.12)(react@18.3.1)
+      jotai: 2.10.2(@types/react@18.3.12)(react@18.3.1)
       optics-ts: 2.4.1
 
-  jotai@2.10.1(@types/react@18.3.12)(react@18.3.1):
+  jotai@2.10.2(@types/react@18.3.12)(react@18.3.1):
     optionalDependencies:
       '@types/react': 18.3.12
       react: 18.3.1
@@ -14649,6 +14652,8 @@ snapshots:
 
   picocolors@1.1.0: {}
 
+  picocolors@1.1.1: {}
+
   picomatch@2.3.1: {}
 
   picomatch@4.0.2: {}
@@ -14705,77 +14710,77 @@ snapshots:
 
   possible-typed-array-names@1.0.0: {}
 
-  postcss-import@15.1.0(postcss@8.4.47):
+  postcss-import@15.1.0(postcss@8.4.48):
     dependencies:
-      postcss: 8.4.47
+      postcss: 8.4.48
       postcss-value-parser: 4.2.0
       read-cache: 1.0.0
       resolve: 1.22.8
 
-  postcss-import@16.1.0(postcss@8.4.47):
+  postcss-import@16.1.0(postcss@8.4.48):
     dependencies:
-      postcss: 8.4.47
+      postcss: 8.4.48
       postcss-value-parser: 4.2.0
       read-cache: 1.0.0
       resolve: 1.22.8
 
-  postcss-js@4.0.1(postcss@8.4.47):
+  postcss-js@4.0.1(postcss@8.4.48):
     dependencies:
       camelcase-css: 2.0.1
-      postcss: 8.4.47
+      postcss: 8.4.48
 
-  postcss-load-config@4.0.2(postcss@8.4.47):
+  postcss-load-config@4.0.2(postcss@8.4.48):
     dependencies:
       lilconfig: 3.1.2
       yaml: 2.5.1
     optionalDependencies:
-      postcss: 8.4.47
+      postcss: 8.4.48
 
-  postcss-loader@7.3.4(postcss@8.4.47)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.7.26)(esbuild@0.18.20)):
+  postcss-loader@7.3.4(postcss@8.4.48)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.7.26)(esbuild@0.18.20)):
     dependencies:
       cosmiconfig: 8.3.6(typescript@5.6.3)
       jiti: 1.21.6
-      postcss: 8.4.47
+      postcss: 8.4.48
       semver: 7.6.3
       webpack: 5.95.0(@swc/core@1.7.26)(esbuild@0.18.20)
     transitivePeerDependencies:
       - typescript
 
-  postcss-loader@8.1.1(postcss@8.4.47)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.7.26)(esbuild@0.18.20)):
+  postcss-loader@8.1.1(postcss@8.4.48)(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.7.26)(esbuild@0.18.20)):
     dependencies:
       cosmiconfig: 9.0.0(typescript@5.6.3)
       jiti: 1.21.6
-      postcss: 8.4.47
+      postcss: 8.4.48
       semver: 7.6.3
     optionalDependencies:
       webpack: 5.95.0(@swc/core@1.7.26)(esbuild@0.18.20)
     transitivePeerDependencies:
       - typescript
 
-  postcss-modules-extract-imports@3.1.0(postcss@8.4.47):
+  postcss-modules-extract-imports@3.1.0(postcss@8.4.48):
     dependencies:
-      postcss: 8.4.47
+      postcss: 8.4.48
 
-  postcss-modules-local-by-default@4.0.5(postcss@8.4.47):
+  postcss-modules-local-by-default@4.0.5(postcss@8.4.48):
     dependencies:
-      icss-utils: 5.1.0(postcss@8.4.47)
-      postcss: 8.4.47
+      icss-utils: 5.1.0(postcss@8.4.48)
+      postcss: 8.4.48
       postcss-selector-parser: 6.1.2
       postcss-value-parser: 4.2.0
 
-  postcss-modules-scope@3.2.0(postcss@8.4.47):
+  postcss-modules-scope@3.2.0(postcss@8.4.48):
     dependencies:
-      postcss: 8.4.47
+      postcss: 8.4.48
       postcss-selector-parser: 6.1.2
 
-  postcss-modules-values@4.0.0(postcss@8.4.47):
+  postcss-modules-values@4.0.0(postcss@8.4.48):
     dependencies:
-      icss-utils: 5.1.0(postcss@8.4.47)
-      postcss: 8.4.47
+      icss-utils: 5.1.0(postcss@8.4.48)
+      postcss: 8.4.48
 
-  postcss-nested@6.2.0(postcss@8.4.47):
+  postcss-nested@6.2.0(postcss@8.4.48):
     dependencies:
-      postcss: 8.4.47
+      postcss: 8.4.48
       postcss-selector-parser: 6.1.2
 
   postcss-selector-parser@6.1.2:
@@ -14785,10 +14790,10 @@ snapshots:
 
   postcss-value-parser@4.2.0: {}
 
-  postcss@8.4.47:
+  postcss@8.4.48:
     dependencies:
       nanoid: 3.3.7
-      picocolors: 1.1.0
+      picocolors: 1.1.1
       source-map-js: 1.2.1
 
   prelude-ls@1.2.1: {}
@@ -15161,7 +15166,7 @@ snapshots:
       adjust-sourcemap-loader: 4.0.0
       convert-source-map: 1.9.0
       loader-utils: 2.0.4
-      postcss: 8.4.47
+      postcss: 8.4.48
       source-map: 0.6.1
 
   resolve.exports@2.0.2: {}
@@ -15610,7 +15615,7 @@ snapshots:
       '@types/stylis': 4.2.6
       css-to-react-native: 3.2.0
       csstype: 3.1.3
-      postcss: 8.4.47
+      postcss: 8.4.48
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       shallowequal: 1.1.0
@@ -15671,11 +15676,11 @@ snapshots:
       normalize-path: 3.0.0
       object-hash: 3.0.0
       picocolors: 1.1.0
-      postcss: 8.4.47
-      postcss-import: 15.1.0(postcss@8.4.47)
-      postcss-js: 4.0.1(postcss@8.4.47)
-      postcss-load-config: 4.0.2(postcss@8.4.47)
-      postcss-nested: 6.2.0(postcss@8.4.47)
+      postcss: 8.4.48
+      postcss-import: 15.1.0(postcss@8.4.48)
+      postcss-js: 4.0.1(postcss@8.4.48)
+      postcss-load-config: 4.0.2(postcss@8.4.48)
+      postcss-nested: 6.2.0(postcss@8.4.48)
       postcss-selector-parser: 6.1.2
       resolve: 1.22.8
       sucrase: 3.35.0
@@ -16058,7 +16063,7 @@ snapshots:
       cac: 6.7.14
       debug: 4.3.7
       pathe: 1.1.2
-      vite: 5.4.10(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1)
+      vite: 5.4.11(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -16070,21 +16075,21 @@ snapshots:
       - supports-color
       - terser
 
-  vite-plugin-pwa@0.20.5(vite@5.4.10(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1))(workbox-build@7.1.1(@types/babel__core@7.20.5))(workbox-window@7.1.0):
+  vite-plugin-pwa@0.20.5(vite@5.4.11(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1))(workbox-build@7.1.1(@types/babel__core@7.20.5))(workbox-window@7.1.0):
     dependencies:
       debug: 4.3.7
       pretty-bytes: 6.1.1
       tinyglobby: 0.2.6
-      vite: 5.4.10(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1)
+      vite: 5.4.11(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1)
       workbox-build: 7.1.1(@types/babel__core@7.20.5)
       workbox-window: 7.1.0
     transitivePeerDependencies:
       - supports-color
 
-  vite@5.4.10(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1):
+  vite@5.4.11(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1):
     dependencies:
       esbuild: 0.21.5
-      postcss: 8.4.47
+      postcss: 8.4.48
       rollup: 4.22.5
     optionalDependencies:
       '@types/node': 22.7.4
@@ -16096,7 +16101,7 @@ snapshots:
   vitest@2.1.4(@types/node@22.7.4)(@vitest/ui@2.1.4)(jsdom@25.0.1)(less@4.2.0)(sass@1.80.6)(terser@5.34.1):
     dependencies:
       '@vitest/expect': 2.1.4
-      '@vitest/mocker': 2.1.4(vite@5.4.10(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1))
+      '@vitest/mocker': 2.1.4(vite@5.4.11(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1))
       '@vitest/pretty-format': 2.1.4
       '@vitest/runner': 2.1.4
       '@vitest/snapshot': 2.1.4
@@ -16112,7 +16117,7 @@ snapshots:
       tinyexec: 0.3.1
       tinypool: 1.0.1
       tinyrainbow: 1.2.0
-      vite: 5.4.10(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1)
+      vite: 5.4.11(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1)
       vite-node: 2.1.4(@types/node@22.7.4)(less@4.2.0)(sass@1.80.6)(terser@5.34.1)
       why-is-node-running: 2.3.0
     optionalDependencies:
