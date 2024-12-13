@@ -24,7 +24,7 @@
     "chromatic": "npx chromatic --project-token=1d1cac2951ec --patch-build=ysk8hori-patch-2...main"
   },
   "dependencies": {
-    "@sentry/browser": "7.120.1",
+    "@sentry/browser": "7.120.2",
     "@sentry/react": "7.120.2",
     "@sentry/tracing": "7.114.0",
     "@tanstack/react-query": "5.62.7",
@@ -88,7 +88,7 @@
     "postcss-import": "16.1.0",
     "postcss-loader": "8.1.1",
     "prettier": "3.4.2",
-    "sass": "1.82.0",
+    "sass": "1.83.0",
     "sass-loader": "16.0.4",
     "storybook": "7.6.20",
     "style-loader": "4.0.0",
