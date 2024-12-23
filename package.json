@@ -31,7 +31,7 @@
     "@ysk8/numberplace-generator": "npm:@jsr/ysk8__numberplace-generator@4.0.0-alpha.10",
     "@ysk8hori/numberplace-generator": "3.0.2",
     "clsx": "2.1.1",
-    "jotai": "2.10.4",
+    "jotai": "2.11.0",
     "jotai-optics": "0.4.0",
     "optics-ts": "2.4.1",
     "react": "18.3.1",
