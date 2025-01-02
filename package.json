@@ -80,7 +80,7 @@
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-jsx-a11y": "6.10.2",
     "eslint-plugin-react-hooks": "5.1.0",
-    "eslint-plugin-storybook": "0.11.1",
+    "eslint-plugin-storybook": "0.11.2",
     "http-server": "14.1.1",
     "jsdom": "latest",
     "playwright": "1.49.1",
