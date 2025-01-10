@@ -24,9 +24,9 @@
     "chromatic": "npx chromatic --project-token=1d1cac2951ec --patch-build=ysk8hori-patch-2...main"
   },
   "dependencies": {
-    "@sentry/browser": "7.120.2",
+    "@sentry/browser": "7.120.3",
     "@sentry/react": "7.120.2",
-    "@sentry/tracing": "7.114.0",
+    "@sentry/tracing": "7.120.3",
     "@tanstack/react-query": "5.63.0",
     "@ysk8/numberplace-generator": "npm:@jsr/ysk8__numberplace-generator@4.0.0-alpha.10",
     "@ysk8hori/numberplace-generator": "3.0.2",
@@ -98,6 +98,6 @@
     "vite": "6.0.7",
     "vite-plugin-pwa": "0.21.1",
     "vitest": "2.1.8",
-    "wait-on": "8.0.1"
+    "wait-on": "8.0.2"
   }
 }
