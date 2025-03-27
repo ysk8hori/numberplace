@@ -3,7 +3,7 @@
   "private": true,
   "version": "2.6.0",
   "homepage": "https://ysk8hori.github.io/numberplace/",
-  "packageManager": "pnpm@10.6.5",
+  "packageManager": "pnpm@10.7.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
