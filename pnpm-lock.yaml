@@ -18,8 +18,8 @@ importers:
         specifier: 7.120.3
         version: 7.120.3
       '@tanstack/react-query':
-        specifier: 5.82.0
-        version: 5.82.0(react@18.3.1)
+        specifier: 5.83.0
+        version: 5.83.0(react@18.3.1)
       '@ysk8/numberplace-generator':
         specifier: npm:@jsr/ysk8__numberplace-generator@4.0.0-alpha.10
         version: '@jsr/ysk8__numberplace-generator@4.0.0-alpha.10'
@@ -181,8 +181,8 @@ importers:
         specifier: latest
         version: 26.1.0
       playwright:
-        specifier: 1.54.0
-        version: 1.54.0
+        specifier: 1.54.1
+        version: 1.54.1
       postcss:
         specifier: 8.5.6
         version: 8.5.6
@@ -2715,11 +2715,11 @@ packages:
   '@swc/types@0.1.12':
     resolution: {integrity: sha512-wBJA+SdtkbFhHjTMYH+dEH1y4VpfGdAc2Kw/LK09i9bXd/K6j6PkDcFCEzb6iVfZMkPRrl/q0e3toqTAJdkIVA==}
 
-  '@tanstack/query-core@5.82.0':
-    resolution: {integrity: sha512-JrjoVuaajBQtnoWSg8iaPHaT4mW73lK2t+exxHNOSMqy0+13eKLqJgTKXKImLejQIfdAHQ6Un0njEhOvUtOd5w==}
+  '@tanstack/query-core@5.83.0':
+    resolution: {integrity: sha512-0M8dA+amXUkyz5cVUm/B+zSk3xkQAcuXuz5/Q/LveT4ots2rBpPTZOzd7yJa2Utsf8D2Upl5KyjhHRY+9lB/XA==}
 
-  '@tanstack/react-query@5.82.0':
-    resolution: {integrity: sha512-mnk8/ofKEthFeMdhV1dV8YXRf+9HqvXAcciXkoo755d/ocfWq7N/Y9jGOzS3h7ZW9dDGwSIhs3/HANWUBsyqYg==}
+  '@tanstack/react-query@5.83.0':
+    resolution: {integrity: sha512-/XGYhZ3foc5H0VM2jLSD/NyBRIOK4q9kfeml4+0x2DlL6xVuAcVEW+hTlTapAmejObg0i3eNqhkr2dT+eciwoQ==}
     peerDependencies:
       react: ^18 || ^19
 
@@ -6176,18 +6176,18 @@ packages:
   pkg-types@1.2.0:
     resolution: {integrity: sha512-+ifYuSSqOQ8CqP4MbZA5hDpb97n3E8SVWdJe+Wms9kj745lmd3b7EZJiqvmLwAlmRfjrI7Hi5z3kdBJ93lFNPA==}
 
-  playwright-core@1.53.0:
-    resolution: {integrity: sha512-mGLg8m0pm4+mmtB7M89Xw/GSqoNC+twivl8ITteqvAndachozYe2ZA7srU6uleV1vEdAHYqjq+SV8SNxRRFYBw==}
-    engines: {node: '>=18'}
-    hasBin: true
-
   playwright-core@1.54.0:
     resolution: {integrity: sha512-uiWpWaJh3R3etpJ0QrpligEMl62Dk1iSAB6NUXylvmQz+e3eipXHDHvOvydDAssb5Oqo0E818qdn0L9GcJSTyA==}
     engines: {node: '>=18'}
     hasBin: true
 
-  playwright@1.54.0:
-    resolution: {integrity: sha512-y9yzHmXRwEUOpghM7XGcA38GjWuTOUMaTIcm/5rHcYVjh5MSp9qQMRRMc/+p1cx+csoPnX4wkxAF61v5VKirxg==}
+  playwright-core@1.54.1:
+    resolution: {integrity: sha512-Nbjs2zjj0htNhzgiy5wu+3w09YetDx5pkrpI/kZotDlDUaYk0HVA5xrBVPdow4SAUIlhgKcJeJg4GRKW6xHusA==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+  playwright@1.54.1:
+    resolution: {integrity: sha512-peWpSwIBmSLi6aW2auvrUtf2DqY16YYcCMO8rTVx486jKmDTJg7UAhyrraP98GB8BoPURZP8+nxO7TSd4cPr5g==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -10942,7 +10942,7 @@ snapshots:
       jest-serializer-html: 7.1.0
       jest-watch-typeahead: 2.2.2(jest@29.7.0(@types/node@22.7.4))
       node-fetch: 2.7.0
-      playwright: 1.54.0
+      playwright: 1.54.1
       read-pkg-up: 7.0.1
       tempy: 1.0.1
       ts-dedent: 2.2.0
@@ -11060,11 +11060,11 @@ snapshots:
     dependencies:
       '@swc/counter': 0.1.3
 
-  '@tanstack/query-core@5.82.0': {}
+  '@tanstack/query-core@5.83.0': {}
 
-  '@tanstack/react-query@5.82.0(react@18.3.1)':
+  '@tanstack/react-query@5.83.0(react@18.3.1)':
     dependencies:
-      '@tanstack/query-core': 5.82.0
+      '@tanstack/query-core': 5.83.0
       react: 18.3.1
 
   '@testing-library/dom@9.3.4':
@@ -14139,7 +14139,7 @@ snapshots:
       jest-process-manager: 0.4.0
       jest-runner: 29.7.0
       nyc: 15.1.0
-      playwright-core: 1.53.0
+      playwright-core: 1.54.0
       rimraf: 3.0.2
       uuid: 8.3.2
     transitivePeerDependencies:
@@ -15063,13 +15063,13 @@ snapshots:
       mlly: 1.7.1
       pathe: 1.1.2
 
-  playwright-core@1.53.0: {}
-
   playwright-core@1.54.0: {}
 
-  playwright@1.54.0:
+  playwright-core@1.54.1: {}
+
+  playwright@1.54.1:
     dependencies:
-      playwright-core: 1.54.0
+      playwright-core: 1.54.1
     optionalDependencies:
       fsevents: 2.3.2
 
