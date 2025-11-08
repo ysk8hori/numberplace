@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { BlockSize, generateGame } from '@ysk8/numberplace-generator';
 import {
   GameType,
