@@ -1,8 +1,8 @@
 import React from 'react';
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react-webpack5';
 
 import ToggleMemoButton from './ToggleMemoButton';
-import { userEvent, within } from '@storybook/test';
+import { userEvent, within } from 'storybook/test';
 
 export default {
   component: ToggleMemoButton,

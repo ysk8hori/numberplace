@@ -1,7 +1,7 @@
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import Quit from './Quit';
-import { userEvent, within } from '@storybook/test';
+import { userEvent, within } from 'storybook/test';
 
 export default {
   component: Quit,

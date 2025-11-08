@@ -1,8 +1,8 @@
 import React from 'react';
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react-webpack5';
 import LoadGameContainer from '.';
 import { blockSize_2_2, puzzle_2_2, solved_2_2 } from '../../utils/samples';
-import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+import { INITIAL_VIEWPORTS } from 'storybook/viewport';
 import { atomOfGame, atomOfSolved, SaveData } from '../../atoms';
 import { TestProvider } from '../../utils/test-utils';
 

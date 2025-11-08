@@ -1,8 +1,8 @@
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 
 import Cell from './Cell';
-import { within } from '@storybook/test';
+import { within } from 'storybook/test';
 import sleep from '../../../utils/sleep';
 import { blockSize_2_3 } from '../../../utils/samples';
 
