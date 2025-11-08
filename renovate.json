@@ -1,6 +1,6 @@
 {
   "extends": ["config:recommended"],
-  "baseBranches": ["main"],
+  "baseBranchPatterns": ["main"],
   "timezone": "Asia/Tokyo",
   "schedule": ["after 5pm and before 10pm on Thursday"],
   "minimumReleaseAge": "7 days",
@@ -14,7 +14,7 @@
     },
     {
       "groupName": "React related packages",
-      "packageNames": [
+      "matchPackageNames": [
         "react",
         "react-dom",
         "@sentry/react",
@@ -24,36 +24,37 @@
     },
     {
       "groupName": "Vite related packages",
-      "packageNames": ["vite"],
-      "packagePatterns": ["^@vitejs"]
+      "matchPackageNames": ["vite", "/^@vitejs/"]
     },
     {
       "groupName": "Storybook related packages",
-      "packagePatterns": ["^@storybook/"]
+      "matchPackageNames": ["/^@storybook//"]
     },
     {
       "groupName": "ESLint related packages",
-      "packageNames": ["eslint", "eslint-config-prettier"],
-      "packagePatterns": ["^@typescript-eslint/", "^eslint-plugin"]
+      "matchPackageNames": [
+        "eslint",
+        "eslint-config-prettier",
+        "/^@typescript-eslint//",
+        "/^eslint-plugin/"
+      ]
     },
     {
       "groupName": "All minore and patch dependencies",
       "matchUpdateTypes": ["minor", "patch"],
       "labels": ["UPDATE-MINOR&PATCH"],
-      "excludePackageNames": [
-        "typescript",
-        "react",
-        "react-dom",
-        "@sentry/react",
-        "react-icons",
-        "react-modal",
-        "eslint",
-        "eslint-config-prettier"
-      ],
-      "excludePackagePatterns": [
-        "^@storybook/",
-        "^@typescript-eslint/",
-        "^eslint-plugin"
+      "matchPackageNames": [
+        "!typescript",
+        "!react",
+        "!react-dom",
+        "!@sentry/react",
+        "!react-icons",
+        "!react-modal",
+        "!eslint",
+        "!eslint-config-prettier",
+        "!/^@storybook//",
+        "!/^@typescript-eslint//",
+        "!/^eslint-plugin/"
       ]
     }
   ],
