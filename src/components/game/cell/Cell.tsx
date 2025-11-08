@@ -154,7 +154,7 @@ type BorderLayerProps = {
  * cell のボーダーを表示するレイヤー。
  *
  * 2段構造になっているのは、黒いボーダーと灰色のボーダーが交差する箇所で黒いボーダーを勝たせるため。
- * @see https://twitter.com/ysk8_/status/1504855146240811012?s=21
+ * @see https://x.com/ysk8_/status/1504855146240811012?s=21
  */
 const BorderLayer: React.FC<BorderLayerProps> = ({ right, bottom }) => {
   const className = useMemo(
