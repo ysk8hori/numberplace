@@ -23,7 +23,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: node_modules をキャッシュ
-        uses: actions/cache/save@v3
+        uses: actions/cache/save@v4
         with:
           path: 'node_modules'
           key: node-${{ github.sha }}
@@ -44,7 +44,7 @@ jobs:
           scope: '@ysk8hori'
 
       - name: Restore Dependencies
-        uses: actions/cache/restore@v3
+        uses: actions/cache/restore@v4
         with:
           path: 'node_modules'
           key: node-${{ github.sha }}
@@ -71,7 +71,7 @@ jobs:
           scope: '@ysk8hori'
 
       - name: Restore Dependencies
-        uses: actions/cache/restore@v3
+        uses: actions/cache/restore@v4
         with:
           path: 'node_modules'
           key: node-${{ github.sha }}
@@ -95,7 +95,7 @@ jobs:
           scope: '@ysk8hori'
 
       - name: Restore Dependencies
-        uses: actions/cache/restore@v3
+        uses: actions/cache/restore@v4
         with:
           path: 'node_modules'
           key: node-${{ github.sha }}
