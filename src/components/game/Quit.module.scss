@@ -1,0 +1,19 @@
+.popoverContainer {
+  display: none;
+  &:popover-open {
+    display: grid;
+    // row で 1fr を指定すると safari で高さが最大に取られてしまう
+    // grid: 1fr 1fr / 1fr 1fr;
+    grid: 3rem 3rem / 1fr 1fr;
+    gap: 8px;
+  }
+
+  > p {
+    font-size: 2rem;
+    grid-column: 1 / -1;
+  }
+
+  > button {
+    text-align: center;
+  }
+}
