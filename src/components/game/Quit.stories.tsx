@@ -1,7 +1,7 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import Quit from './Quit';
-import { userEvent, within } from '@storybook/testing-library';
+import { userEvent, within } from '@storybook/test';
 
 export default {
   component: Quit,

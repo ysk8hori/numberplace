@@ -19,3 +19,4 @@ export const decorators = [
     </ThemeProvider>
   ),
 ];
+export const tags = ['autodocs'];
