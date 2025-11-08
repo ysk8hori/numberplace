@@ -1,0 +1,35 @@
+@use 'smart-svg';
+.svgChecked {
+  @include smart-svg.show-with-pseudo(
+    'check.svg',
+    2rem,
+    $fill-color: light-dark(#52525b, #d4d4d8)
+  );
+}
+.svgUnchecked {
+  @include smart-svg.show-with-pseudo(
+    'check.svg',
+    2rem,
+    $fill-color: theme('colors.transparent')
+  );
+}
+
+ul.menu > li {
+  display: block;
+  button {
+    cursor: pointer;
+    width: 100%;
+    padding-inline: 0.5rem;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: light-dark(#d4d4d8, #52525b);
+    }
+  }
+
+  > button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}

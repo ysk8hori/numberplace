@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
-import Modal from '../atoms/Modal';
-import Button from '../atoms/Button';
+import styles from './Quit.module.scss';
+
+const MODAL_ID = 'quit-confirm-modal';
 
 /**
  * ゲームをやめるボタンとモーダル
@@ -14,29 +15,16 @@ const Quit: React.FC<{
   onQuit?: () => void;
   onCancel?: () => void;
 }> = ({ onQuit, onCancel }) => {
-  const [isOpen, setOpenState] = useState(false);
-  const open = useCallback(() => setOpenState(true), [setOpenState]);
-  const close = useCallback(() => setOpenState(false), [setOpenState]);
   return (
     <>
-      <Button
-        variant="text"
-        onClick={() => open()}
-        className="rounded-2xl text-xl"
-      >
-        ゲームをやめる
-      </Button>
-      <Modal isOpen={isOpen} contentLabel="ゲームをやめる確認">
-        <p className="text-center">ゲームをやめますか？</p>
-        <div className="flex flex-col justify-center gap-4">
-          <Button variant="text" onClick={() => (close(), onQuit?.())}>
-            はい
-          </Button>
-          <Button variant="text" onClick={() => (close(), onCancel?.())}>
-            いいえ
-          </Button>
-        </div>
-      </Modal>
+      <button popoverTarget={MODAL_ID}>ゲームをやめる</button>
+      <div className={styles.popoverContainer} id={MODAL_ID} popover="auto">
+        <p>ゲームをやめますか？</p>
+        <button onClick={onQuit}>はい</button>
+        <button popoverTarget={MODAL_ID} popoverTargetAction="hide">
+          いいえ
+        </button>
+      </div>
     </>
   );
 };

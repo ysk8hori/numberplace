@@ -2,30 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  color-scheme: light dark;
+  ::backdrop {
+    backdrop-filter: blur(4px) brightness(0.5);
+  }
+}
+
 body {
   margin: 0;
   font-size: 1.4rem;
   color: theme('colors.zinc[700]');
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #eee;
-  @media (prefers-color-scheme: dark) {
-    background-color: rgb(23, 23, 23);
-  }
+  background-color: light-dark(#eee, rgb(23, 23, 23));
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 /* 
  * grid-cols-n をスクリプトで動的に使用したいが、tailwind はクラス名を完全な状態で記載していないとスタイルを生成してくれない。
  * そのためここでラッパーを定義して回避している。
- * @see https://twitter.com/ysk8_/status/1505018757391200256?s=21
+ * @see https://x.com/ysk8_/status/1505018757391200256?s=21
  */
 .grid-cols-wrap-1 {
   @apply grid-cols-1;
@@ -65,4 +69,9 @@ code {
 }
 .grid-cols-wrap-16 {
   grid-template-columns: repeat(16, minmax(0, 1fr));
+}
+
+:popover-open {
+  border-radius: 8px;
+  padding: 4px;
 }
