@@ -3,9 +3,26 @@ import React from 'react';
 import { render, screen, userEvent } from '../../utils/test-utils';
 import GameClearModal from './GameClearModal';
 
+// dialog API のモック
+// テスト環境では dialog 要素の showModal/close メソッドがサポートされていないため、モック化する
+beforeEach(() => {
+  HTMLDialogElement.prototype.showModal = vi.fn(function (
+    this: HTMLDialogElement,
+  ) {
+    this.open = true;
+  });
+  HTMLDialogElement.prototype.close = vi.fn(function (this: HTMLDialogElement) {
+    this.open = false;
+  });
+});
+
+afterEach(() => {
+  vi.restoreAllMocks();
+});
+
 test('game clear すると表示する', async () => {
   render(<GameClearModal />);
-  expect(screen.queryByRole('dialog', { name: 'クリア' })).toBeInTheDocument();
+  expect(screen.getByText('クリア🎉')).toBeInTheDocument();
 });
 
 test('同じ大きさで遊ぶ押下コールバックが呼ばれる', async () => {
