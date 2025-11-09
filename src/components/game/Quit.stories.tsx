@@ -1,5 +1,5 @@
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react-webpack5';
+import { StoryFn, Meta } from '@storybook/react-vite';
 import Quit from './Quit';
 import { userEvent, within } from 'storybook/test';
 

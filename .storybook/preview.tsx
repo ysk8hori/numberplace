@@ -1,5 +1,6 @@
 import { ThemeProvider } from 'styled-components';
 import defaultToken from '../src/theme/semanticToken';
+import { Decorator } from '@storybook/react-vite';
 import '../src/index.scss';
 import './story.css';
 
@@ -12,7 +13,7 @@ export const parameters = {
     },
   },
 };
-export const decorators = [
+export const decorators: Decorator[] = [
   Story => (
     <ThemeProvider theme={defaultToken}>
       <Story />

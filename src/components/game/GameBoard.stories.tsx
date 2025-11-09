@@ -1,5 +1,5 @@
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react-webpack5';
+import { StoryFn, Meta } from '@storybook/react-vite';
 import GameBoard from './GameBoard';
 import {
   blockSize_2_3 as blockSize,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, StoryObj } from '@storybook/react-webpack5';
+import { Meta, StoryObj } from '@storybook/react-vite';
 
 import ToggleMemoButton from './ToggleMemoButton';
 import { userEvent, within } from 'storybook/test';

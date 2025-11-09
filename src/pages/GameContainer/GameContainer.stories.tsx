@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, StoryObj } from '@storybook/react-webpack5';
+import { Meta, StoryObj } from '@storybook/react-vite';
 import { within, userEvent } from 'storybook/test';
 import GameContainer from '.';
 import {
@@ -14,7 +14,6 @@ import {
   solved_3_3,
 } from '../../utils/samples';
 import { inputAnswer, resolve_2_3 } from '../../utils/storybookUtils';
-import { INITIAL_VIEWPORTS } from 'storybook/viewport';
 import ReactModal from 'react-modal';
 import { expect } from 'storybook/test';
 import { atomOfGame, atomOfSolved, SaveData } from '../../atoms';
@@ -23,12 +22,6 @@ import { TestProvider } from '../../utils/test-utils';
 
 export default {
   component: GameContainer,
-  parameters: {
-    viewport: {
-      viewports: INITIAL_VIEWPORTS,
-      defaultViewport: 'iphone12mini',
-    },
-  },
   decorators: [
     Story => {
       const game = {
