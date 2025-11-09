@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom';
 import React from 'react';
-import { test, expect } from 'vitest';
 import { render, screen } from '../../utils/test-utils';
 import MistakeNoticeModal from './MistakeNoticeModal';
 

@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom';
 import React from 'react';
-import { test, vi, expect } from 'vitest';
 import { render, screen, userEvent } from '../../utils/test-utils';
 import Verifying from './Verifying';
 

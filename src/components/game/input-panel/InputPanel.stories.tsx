@@ -1,5 +1,5 @@
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-vite';
 import InputPanel from './InputPanel';
 import { blockSize_2_2 } from '../../../utils/samples';
 

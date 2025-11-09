@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 import ReactModal from 'react-modal';
-import { test, expect } from 'vitest';
 import { isSamePos } from '../../utils/positionUtils';
 import {
   render,

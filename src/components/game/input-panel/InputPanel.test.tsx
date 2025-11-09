@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom';
 import React from 'react';
-import { describe, test, expect, vi } from 'vitest';
 import { render, screen, userEvent } from '../../../utils/test-utils';
 import InputPanel from './InputPanel';
 import { blockSize_2_2 } from '../../../utils/test-utils';

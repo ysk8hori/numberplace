@@ -1,5 +1,4 @@
-import { expect } from '@storybook/jest';
-import { within, userEvent, waitFor } from '@storybook/testing-library';
+import { expect, within, userEvent, waitFor } from '@storybook/test';
 
 export async function inputAnswer(
   canvas: ReturnType<typeof within>,

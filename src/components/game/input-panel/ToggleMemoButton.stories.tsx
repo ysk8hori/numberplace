@@ -1,8 +1,8 @@
 import React from 'react';
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react-vite';
 
 import ToggleMemoButton from './ToggleMemoButton';
-import { userEvent, within } from '@storybook/testing-library';
+import { userEvent, within } from 'storybook/test';
 
 export default {
   component: ToggleMemoButton,

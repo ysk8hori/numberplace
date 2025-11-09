@@ -1,4 +1,3 @@
-import { it, expect } from 'vitest';
 import { getLevel } from './difficulty';
 
 it('{ width: 3, height: 1 } の easy を指定すると maxEmptyCount 1 の Level を返す', () => {

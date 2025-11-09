@@ -1,4 +1,3 @@
-import { describe, it, expect } from 'vitest';
 import { blockSize_2_2, puzzle_2_2 } from './test-utils';
 import { MyGame } from './typeUtils';
 import { findCompletedNumbers } from './utils';

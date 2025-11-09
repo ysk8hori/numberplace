@@ -1,8 +1,8 @@
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-vite';
 
 import Cell from './Cell';
-import { within } from '@storybook/testing-library';
+import { within } from 'storybook/test';
 import sleep from '../../../utils/sleep';
 import { blockSize_2_3 } from '../../../utils/samples';
 
