@@ -14,7 +14,6 @@ import {
   solved_3_3,
 } from '../../utils/samples';
 import { inputAnswer, resolve_2_3 } from '../../utils/storybookUtils';
-import ReactModal from 'react-modal';
 import { expect } from 'storybook/test';
 import { atomOfGame, atomOfSolved, SaveData } from '../../atoms';
 import { atomOfAnswerImageVariant } from '../../jotaiAtoms';
@@ -121,7 +120,6 @@ export const FillableByPanel: StoryObj<typeof GameContainer> = {
 export const ClearModal: StoryObj<typeof GameContainer> = {
   name: 'クリア時にはクリアモーダルを表示する',
   play: async ({ canvasElement }) => {
-    ReactModal.setAppElement(canvasElement);
     // モーダルが canvasElement の外に描画されモーダル内の要素が取れないので body を canvas にしないと動かない
     const canvas = within(canvasElement.parentElement!);
     await resolve_2_3(canvas, { finish: true });
@@ -134,7 +132,6 @@ export const ClearModal: StoryObj<typeof GameContainer> = {
 export const MistakeModal: StoryObj<typeof GameContainer> = {
   name: 'ミスが有る状態で答え合わせボタンを謳歌した場合はミステイクモーダルを表示する',
   play: async ({ canvasElement }) => {
-    ReactModal.setAppElement(canvasElement);
     // モーダルが canvasElement の外に描画されモーダル内の要素が取れないので body を canvas にしないと動かない
     const canvas = within(canvasElement.parentElement!);
     await inputAnswer(canvas, '0,0', '1');

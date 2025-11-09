@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom';
 import React from 'react';
-import ReactModal from 'react-modal';
 import { isSamePos } from '../../utils/positionUtils';
 import {
   render,
@@ -58,7 +57,6 @@ function setup(size: '2_2' | '2_3') {
       </TestProvider>
     ),
   );
-  ReactModal.setAppElement(rendered.container);
 }
 
 test('数字入力時に保存する', async () => {

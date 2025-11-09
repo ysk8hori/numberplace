@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom';
 import React from 'react';
-import ReactModal from 'react-modal';
 import {
   render,
   screen,
@@ -55,7 +54,6 @@ function setup(size: '2_2' | '2_3') {
       </TestProvider>
     ),
   );
-  ReactModal.setAppElement(rendered.container);
 }
 
 test('「答え合わせ」によって正しい Cell のみ fix する', async () => {

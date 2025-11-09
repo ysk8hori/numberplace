@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom';
 import React from 'react';
-import ReactModal from 'react-modal';
 import {
   render,
   screen,
@@ -54,7 +53,6 @@ function setup(size: '2_2' | '2_3') {
       </TestProvider>
     ),
   );
-  ReactModal.setAppElement(rendered.container);
 }
 
 test('メモモードで入力パネルから空欄セルにメモを記入できる', async () => {

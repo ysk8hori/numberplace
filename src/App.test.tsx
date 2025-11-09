@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom';
 import React from 'react';
-import ReactModal from 'react-modal';
 import {
   render,
   screen,
@@ -39,7 +38,6 @@ vi.mock('./pages/GenerateGameContainer/utils/useGenerateGame', () => ({
 
 function setup() {
   const rendered = render(<App />);
-  ReactModal.setAppElement(rendered.container);
 }
 
 // beforeEach(() => {
