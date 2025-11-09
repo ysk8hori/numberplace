@@ -18,8 +18,7 @@
         "react",
         "react-dom",
         "@sentry/react",
-        "react-icons",
-        "react-modal"
+        "react-icons"
       ]
     },
     {
@@ -49,7 +48,6 @@
         "!react-dom",
         "!@sentry/react",
         "!react-icons",
-        "!react-modal",
         "!eslint",
         "!eslint-config-prettier",
         "!/^@storybook//",

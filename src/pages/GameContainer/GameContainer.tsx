@@ -114,7 +114,10 @@ export default function GameContainer({
       <div className="flex justify-center">
         <Verifying onStartChecking={() => checkAndUpdate()} />
       </div>
-      {hasMistake && <MistakeNoticeModal onOk={clearMistakeAndEmptyInfo} />}
+      <MistakeNoticeModal
+        clearMistake={clearMistakeAndEmptyInfo}
+        hasMistake={hasMistake}
+      />
       {isGameClear && (
         <GameClearModal
           onRegenerate={() => (reset(), onRegenerate?.())}

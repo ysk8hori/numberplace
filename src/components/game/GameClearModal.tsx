@@ -1,5 +1,4 @@
-import React, { useCallback, useState } from 'react';
-import Modal from '../atoms/Modal';
+import React, { useCallback, useEffect, useState } from 'react';
 import Button from '../atoms/Button';
 
 /**
@@ -18,9 +17,22 @@ const GameClearModal: React.FC<{
 }> = ({ onRegenerate, onChangeSize }) => {
   const [isOpen, setOpenState] = useState(true);
   const close = useCallback(() => setOpenState(false), [setOpenState]);
+
+  useEffect(() => {
+    if (isOpen) {
+      (
+        document.getElementById('game-clear-modal') as HTMLDialogElement
+      ).showModal();
+    } else {
+      (
+        document.getElementById('game-clear-modal') as HTMLDialogElement
+      ).close();
+    }
+  }, [isOpen]);
+
   return (
-    <Modal isOpen={!!isOpen} contentLabel="クリア">
-      <p className="text-center">クリア！</p>
+    <dialog id="game-clear-modal">
+      <p className="text-center">クリア🎉</p>
       <div className="flex flex-col justify-center gap-4">
         <Button variant="text" onClick={() => (close(), onRegenerate?.())}>
           同じ大きさで遊ぶ
@@ -29,7 +41,7 @@ const GameClearModal: React.FC<{
           他の大きさで遊ぶ
         </Button>
       </div>
-    </Modal>
+    </dialog>
   );
 };
 export default GameClearModal;

@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom';
 import React from 'react';
-import ReactModal from 'react-modal';
 import {
   render,
   screen,
@@ -16,6 +15,17 @@ import {
 } from '../../utils/test-utils';
 import GameContainer from '.';
 import { atomOfGame, atomOfSolved } from '../../atoms';
+
+// popover API のモック
+// テスト環境では Popover API がサポートされていないため、showPopover/hidePopover をモック化する
+beforeEach(() => {
+  HTMLElement.prototype.showPopover = vi.fn();
+  HTMLElement.prototype.hidePopover = vi.fn();
+});
+
+afterEach(() => {
+  vi.restoreAllMocks();
+});
 
 function setup(size: '2_2' | '2_3') {
   const rendered = render(
@@ -55,7 +65,6 @@ function setup(size: '2_2' | '2_3') {
       </TestProvider>
     ),
   );
-  ReactModal.setAppElement(rendered.container);
 }
 
 test('「答え合わせ」によって正しい Cell のみ fix する', async () => {
@@ -102,9 +111,7 @@ test('「答え合わせ」によって誤りのセルや空欄のセルがあ�
   expect(screen.getByTestId('2,0')).not.toHaveAttribute('data-fix'); // 未記入セル
   expect(screen.getByTestId('1,1')).not.toHaveAttribute('data-fix'); // 誤答を記入したセル
   await userEvent.click(screen.getByRole('button', { name: '答え合わせ' }));
-  expect(
-    screen.getByRole('dialog', { name: '不正解です' }),
-  ).toBeInTheDocument();
+  expect(screen.getByText('間違いがあります')).toBeInTheDocument();
 });
 test('誤りのセルや空欄のセルがある状態で「答え合わせ」を２度連続で行った場合、２度ともダイアログで通知する', async () => {
   setup('2_3');
@@ -117,14 +124,10 @@ test('誤りのセルや空欄のセルがある状態で「答え合わせ」�
   expect(screen.getByTestId('2,0')).not.toHaveAttribute('data-fix'); // 未記入セル
   expect(screen.getByTestId('1,1')).not.toHaveAttribute('data-fix'); // 誤答を記入したセル
   await userEvent.click(screen.getByRole('button', { name: '答え合わせ' }));
-  expect(
-    screen.getByRole('dialog', { name: '不正解です' }),
-  ).toBeInTheDocument();
-  await userEvent.click(screen.getByRole('button', { name: 'OK' }));
+  expect(screen.getByText('間違いがあります')).toBeInTheDocument();
+  // popover は clearMistake で自動的に閉じられる
   await userEvent.click(screen.getByRole('button', { name: '答え合わせ' }));
-  expect(
-    screen.getByRole('dialog', { name: '不正解です' }),
-  ).toBeInTheDocument();
+  expect(screen.getByText('間違いがあります')).toBeInTheDocument();
 });
 test.todo(
   '間違いがない場合はクリアのエフェクトと、クリア後のメニューを出す。',

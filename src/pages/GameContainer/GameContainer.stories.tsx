@@ -14,7 +14,6 @@ import {
   solved_3_3,
 } from '../../utils/samples';
 import { inputAnswer, resolve_2_3 } from '../../utils/storybookUtils';
-import ReactModal from 'react-modal';
 import { expect } from 'storybook/test';
 import { atomOfGame, atomOfSolved, SaveData } from '../../atoms';
 import { atomOfAnswerImageVariant } from '../../jotaiAtoms';
@@ -121,28 +120,26 @@ export const FillableByPanel: StoryObj<typeof GameContainer> = {
 export const ClearModal: StoryObj<typeof GameContainer> = {
   name: 'クリア時にはクリアモーダルを表示する',
   play: async ({ canvasElement }) => {
-    ReactModal.setAppElement(canvasElement);
     // モーダルが canvasElement の外に描画されモーダル内の要素が取れないので body を canvas にしないと動かない
     const canvas = within(canvasElement.parentElement!);
     await resolve_2_3(canvas, { finish: true });
-    await expect(canvas.queryByText('クリア！')).not.toBeInTheDocument();
+    await expect(canvas.queryByText('クリア🎉')).not.toBeInTheDocument();
     await userEvent.click(canvas.getByRole('button', { name: '答え合わせ' }));
-    await expect(canvas.getByText('クリア！')).toBeInTheDocument();
+    await expect(canvas.getByText('クリア🎉')).toBeInTheDocument();
   },
 };
 
 export const MistakeModal: StoryObj<typeof GameContainer> = {
   name: 'ミスが有る状態で答え合わせボタンを謳歌した場合はミステイクモーダルを表示する',
   play: async ({ canvasElement }) => {
-    ReactModal.setAppElement(canvasElement);
     // モーダルが canvasElement の外に描画されモーダル内の要素が取れないので body を canvas にしないと動かない
     const canvas = within(canvasElement.parentElement!);
     await inputAnswer(canvas, '0,0', '1');
     await expect(
-      canvas.queryByText('間違いがあります'),
-    ).not.toBeInTheDocument();
+      canvas.findByText('間違いがあります'),
+    ).resolves.not.toBeVisible();
     await userEvent.click(canvas.getByRole('button', { name: '答え合わせ' }));
-    await expect(canvas.getByText('間違いがあります')).toBeInTheDocument();
+    await expect(canvas.findByText('間違いがあります')).resolves.toBeVisible();
   },
 };
 
