@@ -4,6 +4,16 @@
 
 :root {
   color-scheme: light dark;
+
+  :popover-open,
+  dialog[open] {
+    border-radius: 8px;
+    padding: 4px;
+    @media (prefers-color-scheme: dark) {
+      border: #eeeeee33 2px solid;
+    }
+  }
+
   ::backdrop {
     backdrop-filter: blur(4px) brightness(0.5);
   }
@@ -69,9 +79,4 @@ code {
 }
 .grid-cols-wrap-16 {
   grid-template-columns: repeat(16, minmax(0, 1fr));
-}
-
-:popover-open {
-  border-radius: 8px;
-  padding: 4px;
 }
