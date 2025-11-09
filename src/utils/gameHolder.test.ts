@@ -1,4 +1,3 @@
-import { it, expect, beforeEach } from 'vitest';
 import gameHolder from './gameHolder';
 import { blockSize_2_2, solved_2_2, puzzle_2_2 } from './test-utils';
 

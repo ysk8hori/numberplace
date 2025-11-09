@@ -1,4 +1,3 @@
-import { describe, expect, test } from 'vitest';
 import { puzzle_4_4 as puzzle_4_4_nofix } from './test-utils';
 import { MyGame } from './typeUtils';
 import {
@@ -7,6 +6,10 @@ import {
   stringToPuzzle,
   toURLSearchParam,
 } from './URLSearchParamConverter';
+
+function fail() {
+  throw new Error('テスト失敗');
+}
 
 export const puzzle_2_3: MyGame = {
   ...JSON.parse(

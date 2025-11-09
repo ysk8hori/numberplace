@@ -1,4 +1,3 @@
-import { describe, test, expect } from 'vitest';
 import { moveX, moveY } from './positionUtils';
 
 describe('moveX', () => {

@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom';
 import React from 'react';
-import { test, expect } from 'vitest';
 import { render, screen } from '../../../utils/test-utils';
 import MemoLayer from './MemoLayer';
 import { blockSize_2_2 } from '../../../utils/test-utils';

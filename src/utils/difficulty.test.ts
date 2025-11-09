@@ -1,4 +1,3 @@
-import { it, expect } from 'vitest';
 import { difficultyAdjustment } from './difficulty';
 import { solved_3_3, puzzle_3_3, blockSize_3_3 } from './test-utils';
 import { collectCellsByAnswer } from './utils';
