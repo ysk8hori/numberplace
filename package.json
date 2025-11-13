@@ -47,7 +47,7 @@
     "@babel/preset-env": "7.28.3",
     "@babel/preset-react": "7.27.1",
     "@babel/preset-typescript": "7.27.1",
-    "@chromatic-com/storybook": "^4.1.2",
+    "@chromatic-com/storybook": "4.1.2",
     "@storybook/addon-docs": "10.0.6",
     "@storybook/addon-links": "10.0.6",
     "@storybook/addon-webpack5-compiler-swc": "^4.0.1",
