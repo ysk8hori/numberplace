@@ -3,7 +3,7 @@
   "private": true,
   "version": "2.6.0",
   "homepage": "https://ysk8hori.github.io/numberplace/",
-  "packageManager": "pnpm@10.27.0+sha512.72d699da16b1179c14ba9e64dc71c9a40988cbdc65c264cb0e489db7de917f20dcf4d64d8723625f2969ba52d4b7e2a1170682d9ac2a5dcaeaab732b7e16f04a",
+  "packageManager": "pnpm@10.28.0+sha512.05df71d1421f21399e053fde567cea34d446fa02c76571441bfc1c7956e98e363088982d940465fd34480d4d90a0668bc12362f8aa88000a64e83d0b0e47be48",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -27,11 +27,11 @@
     "@sentry/browser": "7.120.4",
     "@sentry/react": "7.120.4",
     "@sentry/tracing": "7.120.4",
-    "@tanstack/react-query": "5.90.16",
+    "@tanstack/react-query": "5.90.17",
     "@ysk8/numberplace-generator": "npm:@jsr/ysk8__numberplace-generator@4.0.0-alpha.10",
     "@ysk8hori/numberplace-generator": "3.0.2",
     "clsx": "2.1.1",
-    "jotai": "2.16.1",
+    "jotai": "2.16.2",
     "jotai-optics": "0.4.0",
     "optics-ts": "2.4.1",
     "react": "18.3.1",
@@ -43,8 +43,8 @@
     "usehooks-ts": "3.1.1"
   },
   "devDependencies": {
-    "@babel/core": "7.28.5",
-    "@babel/preset-env": "7.28.5",
+    "@babel/core": "7.28.6",
+    "@babel/preset-env": "7.28.6",
     "@babel/preset-react": "7.28.5",
     "@babel/preset-typescript": "7.28.5",
     "@chromatic-com/storybook": "4.1.3",
@@ -58,7 +58,7 @@
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.1",
     "@testing-library/user-event": "14.6.1",
-    "@types/react": "19.2.7",
+    "@types/react": "19.2.8",
     "@types/react-dom": "19.2.3",
     "@types/styled-components": "5.1.36",
     "@typescript-eslint/eslint-plugin": "8.52.0",
@@ -81,7 +81,7 @@
     "postcss": "8.5.6",
     "postcss-import": "16.1.1",
     "postcss-loader": "8.2.0",
-    "prettier": "3.7.4",
+    "prettier": "3.8.0",
     "sass": "1.97.2",
     "sass-loader": "16.0.6",
     "storybook": "10.1.11",
@@ -91,7 +91,7 @@
     "use-interval": "1.4.0",
     "vite": "7.3.1",
     "vite-plugin-pwa": "1.2.0",
-    "vitest": "4.0.16",
+    "vitest": "4.0.17",
     "wait-on": "9.0.3"
   }
 }
