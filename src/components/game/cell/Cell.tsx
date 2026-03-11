@@ -58,7 +58,7 @@ function Cell({
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
       className={'relative aspect-square select-none w-full h-full'}
-      onMouseDown={onSelect}
+      onPointerDown={onSelect}
       data-testid={dataTestid}
       data-select={select}
       data-fix={fix}
