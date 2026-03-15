@@ -13,46 +13,103 @@
       "groupName": "TypeScript"
     },
     {
-      "groupName": "React related packages",
+      "groupName": "React & Sentry related packages",
+      "labels": ["React"],
       "matchPackageNames": [
         "react",
         "react-dom",
-        "@sentry/react",
-        "react-icons"
+        "react-icons",
+        "/^@sentry/"
       ]
     },
     {
       "groupName": "Vite related packages",
+      "labels": ["Vite"],
       "matchPackageNames": ["vite", "/^@vitejs/"]
     },
     {
-      "groupName": "Storybook related packages",
-      "matchPackageNames": ["/^@storybook//"]
+      "groupName": "Storybook & Chromatic related packages",
+      "labels": ["Storybook"],
+      "matchPackageNames": [
+        "storybook",
+        "chromatic",
+        "/^@storybook/",
+        "/^@chromatic-com/"
+      ]
     },
     {
-      "groupName": "ESLint related packages",
+      "groupName": "ESLint & Prettier related packages",
+      "labels": ["ESLint"],
       "matchPackageNames": [
         "eslint",
         "eslint-config-prettier",
-        "/^@typescript-eslint//",
+        "prettier",
+        "/^@typescript-eslint/",
         "/^eslint-plugin/"
       ]
     },
     {
-      "groupName": "All minore and patch dependencies",
+      "groupName": "Testing related packages",
+      "labels": ["Testing"],
+      "matchPackageNames": [
+        "/^@testing-library/",
+        "vitest",
+        "/^@vitest/",
+        "jsdom"
+      ]
+    },
+    {
+      "groupName": "Styles and assets tools",
+      "labels": ["Styles"],
+      "matchPackageNames": [
+        "postcss",
+        "postcss-import",
+        "postcss-loader",
+        "sass",
+        "sass-loader",
+        "tailwindcss",
+        "autoprefixer"
+      ]
+    },
+    {
+      "groupName": "Babel related packages",
+      "matchPackageNames": [
+        "/^@babel/"
+      ]
+    },
+    {
+      "groupName": "All minor and patch dependencies",
       "matchUpdateTypes": ["minor", "patch"],
       "labels": ["UPDATE-MINOR&PATCH"],
       "matchPackageNames": [
         "!typescript",
         "!react",
         "!react-dom",
-        "!@sentry/react",
         "!react-icons",
+        "!/^@sentry/",
+        "!vite",
+        "!/^@vitejs/",
+        "!storybook",
+        "!chromatic",
+        "!/^@storybook/",
+        "!/^@chromatic-com/",
         "!eslint",
         "!eslint-config-prettier",
-        "!/^@storybook//",
-        "!/^@typescript-eslint//",
-        "!/^eslint-plugin/"
+        "!prettier",
+        "!/^@typescript-eslint/",
+        "!/^eslint-plugin/",
+        "!/^@testing-library/",
+        "!vitest",
+        "!/^@vitest/",
+        "!jsdom",
+        "!postcss",
+        "!postcss-import",
+        "!postcss-loader",
+        "!sass",
+        "!sass-loader",
+        "!tailwindcss",
+        "!autoprefixer",
+        "!/^@babel/"
       ]
     }
   ],
