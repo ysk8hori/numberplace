@@ -78,7 +78,7 @@
     "http-server": "14.1.1",
     "jsdom": "latest",
     "playwright": "1.59.1",
-    "postcss": "8.5.14",
+    "postcss": "8.5.15",
     "postcss-import": "16.1.1",
     "postcss-loader": "8.2.1",
     "prettier": "3.8.3",
