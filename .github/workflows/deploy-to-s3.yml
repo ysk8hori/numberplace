@@ -12,12 +12,12 @@ jobs:
         uses: actions/checkout@v6.0.2
 
       - name: Use Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.4.0
         with:
           always-auth: true
           node-version: '24.14.1'
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v4.4.0
 
       - name: Install Dependencies
         run: pnpm install
