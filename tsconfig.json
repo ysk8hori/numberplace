@@ -2,13 +2,12 @@
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": false,
     "skipLibCheck": true,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
+    "verbatimModuleSyntax": false, // 一時的な false
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
