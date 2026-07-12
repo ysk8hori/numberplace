@@ -84,7 +84,7 @@ function NumberButtons({
     <>
       {new Array(9 < size ? size : 9)
         .fill(true)
-        .map((_, index) => ++index)
+        .map((_, index) => index + 1)
         .map(buttonNumber => (
           <NumberButton
             key={buttonNumber}

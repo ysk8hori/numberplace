@@ -75,7 +75,7 @@ export default function MemoLayer({
     () =>
       Array(blockSize.width * blockSize.height)
         .fill(0)
-        .map((_, i) => (++i).toString())
+        .map((_, i) => (i + 1).toString())
         .map(answerCandidate => {
           return (
             <MemoCell

@@ -21,7 +21,7 @@ const MistakeNoticeModal: React.FC<{
       }
     }
     clearMistake?.();
-  }, [hasMistake]);
+  }, [hasMistake, clearMistake]);
   return (
     <div id={MISTAKE_NOTICE_MODAL_ID} popover="auto">
       <p className="text-center">間違いがあります</p>

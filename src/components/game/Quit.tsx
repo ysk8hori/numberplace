@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import styles from './Quit.module.scss';
 
 const MODAL_ID = 'quit-confirm-modal';
@@ -13,8 +13,7 @@ const MODAL_ID = 'quit-confirm-modal';
 const Quit: React.FC<{
   /** ゲームをやめるコールバック */
   onQuit?: () => void;
-  onCancel?: () => void;
-}> = ({ onQuit, onCancel }) => {
+}> = ({ onQuit }) => {
   return (
     <>
       <button popoverTarget={MODAL_ID}>ゲームをやめる</button>

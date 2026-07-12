@@ -22,7 +22,7 @@ const gameHolder = {
     if (!game) return undefined;
     try {
       return JSON.parse(game);
-    } catch (_) {
+    } catch {
       return undefined;
     }
   },

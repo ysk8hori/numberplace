@@ -12,7 +12,7 @@ export function findCompletedNumbers(
 ): string[] {
   return Array(blockSize.height * blockSize.width)
     .fill(0)
-    .map((_, index) => (++index).toString())
+    .map((_, index) => (index + 1).toString())
     .map(numStr =>
       puzzle.cells.map(cell => cell.answer).filter(answer => answer === numStr)
         .length >=

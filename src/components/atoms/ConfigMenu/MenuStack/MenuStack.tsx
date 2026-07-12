@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { atomOfGame, atomOfInitial } from '../../../../atoms';
 import styles from './MenuStack.module.scss';
 import { toURLSearchParam } from '../../../../utils/URLSearchParamConverter';
@@ -14,9 +14,6 @@ export default function MenuStack(props: {
   const [variant, setVariant] = useAtom(atomOfAnswerImageVariant);
   const [initial] = useAtom(atomOfInitial);
   const [game] = useAtom(atomOfGame);
-  const QuitButton = memo(() =>
-    !initial || !game ? null : <Quit onQuit={props.onQuit} />,
-  );
 
   const createUrl = useCallback(() => {
     if (!initial || !game) {
@@ -33,48 +30,40 @@ export default function MenuStack(props: {
     return url;
   }, [initial, game]);
 
-  const ShareButton = memo(() => {
-    if (!initial || !game) {
-      return null;
+  const canShowActions = Boolean(initial && game);
+  const canShare = canShowActions && Boolean(navigator.share);
+
+  const handleShare = useCallback(() => {
+    const url = createUrl();
+    if (!url) return;
+    if (navigator.canShare({ url })) {
+      navigator.share({ url }).catch(err => {
+        if (err.name !== 'AbortError') {
+          // キャンセル 以外の場合は再スローする
+          throw new Error(err.message, { cause: err });
+        }
+      });
     }
-    if (initial && game && navigator.canShare && navigator.share) {
-      return (
-        <button
-          onClick={() => {
-            const url = createUrl();
-            if (!url) return;
-            if (navigator.canShare({ url })) {
-              navigator.share({ url });
-            }
-          }}
-        >
-          シェアする
-        </button>
-      );
-    } else {
-      return (
-        <button
-          onClick={() => {
-            const url = createUrl();
-            if (!url) return;
-            navigator.clipboard
-              .writeText(url)
-              .then(() => alert('コピーしました'));
-          }}
-        >
-          問題のURLをコピー
-        </button>
-      );
-    }
-  });
+  }, [createUrl]);
+
+  const handleCopyUrl = useCallback(() => {
+    const url = createUrl();
+    if (!url) return;
+    navigator.clipboard.writeText(url).then(() => alert('URLをコピーしました'));
+  }, [createUrl]);
+
   return (
     <div className="popover-menu" id={props.id} popover="auto">
       <ul className={styles.menu}>
+        <li>{canShowActions ? <Quit onQuit={props.onQuit} /> : null}</li>
+
+        {canShare ? (
+          <li>
+            <button onClick={handleShare}>ゲームをシェアする</button>
+          </li>
+        ) : null}
         <li>
-          <QuitButton />
-        </li>
-        <li>
-          <ShareButton />
+          <button onClick={handleCopyUrl}>ゲームのURLをコピー</button>
         </li>
         <li>
           <button onClick={() => setVariant('num')}>

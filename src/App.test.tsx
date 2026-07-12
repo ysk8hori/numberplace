@@ -37,7 +37,7 @@ vi.mock('./pages/GenerateGameContainer/utils/useGenerateGame', () => ({
 // }
 
 function setup() {
-  const rendered = render(<App />);
+  render(<App />);
 }
 
 // beforeEach(() => {

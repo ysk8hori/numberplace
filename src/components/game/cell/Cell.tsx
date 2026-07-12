@@ -55,7 +55,7 @@ function Cell({
   HyperGroupLayerProps) {
   return (
     // Cell はクリック可能ではあるが、現状これがボタンとしてフォーカスされたところでアクセシビリティの向上に寄与せずUXが悪くなると考えられるため、ボタンとしては実装しない。
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+     
     <div
       className={'relative aspect-square select-none w-full h-full'}
       onPointerDown={onSelect}
