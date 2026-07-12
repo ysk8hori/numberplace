@@ -55,16 +55,21 @@ export default function MenuStack(props: {
   return (
     <div className="popover-menu" id={props.id} popover="auto">
       <ul className={styles.menu}>
-        <li>{canShowActions ? <Quit onQuit={props.onQuit} /> : null}</li>
-
-        {canShare ? (
-          <li>
-            <button onClick={handleShare}>ゲームをシェアする</button>
-          </li>
-        ) : null}
-        <li>
-          <button onClick={handleCopyUrl}>ゲームのURLをコピー</button>
-        </li>
+        {canShowActions && (
+          <>
+            <li>
+              <Quit onQuit={props.onQuit} />
+            </li>
+            {canShare && (
+              <li>
+                <button onClick={handleShare}>ゲームをシェアする</button>
+              </li>
+            )}
+            <li>
+              <button onClick={handleCopyUrl}>ゲームのURLをコピー</button>
+            </li>
+          </>
+        )}
         <li>
           <button onClick={() => setVariant('num')}>
             <span className={getIconClass(variant, 'num')}></span>
