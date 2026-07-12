@@ -28,7 +28,7 @@ afterEach(() => {
 });
 
 function setup(size: '2_2' | '2_3') {
-  const rendered = render(
+  render(
     size === '2_2' ? (
       <TestProvider
         initialValues={[
