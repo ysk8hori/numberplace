@@ -6,7 +6,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 export default defineConfig({
   build: {
     target: 'esnext',
-    rollupOptions: {
+    rolldownOptions: {
       // Rollup failed to resolve import "workbox-window" from "/@vite-plugin-pwa/virtual:pwa-register".
       // This is most likely unintended because it can break your application at runtime.
       // If you do want to externalize this module explicitly add it to
@@ -14,7 +14,7 @@ export default defineConfig({
       external: ['workbox-window'],
     },
   },
-  optimizeDeps: { esbuildOptions: { target: 'esnext' } },
+  optimizeDeps: { rolldownOptions: {} },
   plugins: [
     react(),
     VitePWA({
@@ -46,4 +46,8 @@ export default defineConfig({
       },
     }),
   ],
+  define: {
+    // numberplace-generator 内の deno 向けコード `import.meta` の warning を抑制する
+    'import.meta.main': 'false',
+  },
 });
