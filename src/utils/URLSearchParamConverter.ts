@@ -33,10 +33,7 @@ export function toURLSearchParam({
 }
 
 type FromURLSearchParamsFailureStatus =
-  | 'not_implemented'
-  | 'invalid_size'
-  | 'invalid_answer'
-  | 'invalid_puzzle';
+  'not_implemented' | 'invalid_size' | 'invalid_answer' | 'invalid_puzzle';
 
 export function fromURLSearchParams(
   param: URLSearchParams,
@@ -143,9 +140,7 @@ export function puzzleToString({
 }
 
 type StringToPuzzleFailureStatus =
-  | 'invalid_size'
-  | 'not_implemented'
-  | 'invalid_answer';
+  'invalid_size' | 'not_implemented' | 'invalid_answer';
 
 export function stringToPuzzle({
   puzzleStr,
@@ -166,7 +161,7 @@ export function stringToPuzzle({
       }
     > {
   const rowsStr = puzzleStr.split(rowSplitter);
-  if (rowsStr.length < 4 || 16 < rowsStr.length) {
+  if (rowsStr.length < 3 || 16 < rowsStr.length) {
     return Result.create('invalid_size');
   }
   /** 注：rowsAnswers での answer はまだ16進の文字 */

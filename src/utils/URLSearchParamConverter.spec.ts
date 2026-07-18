@@ -179,6 +179,33 @@ describe('fromURLSearchParams', () => {
     const result = fromURLSearchParams(params);
     expect(result.status).toEqual('invalid_puzzle');
   });
+  test('puzzle_1_3', () => {
+    const params = new URLSearchParams('v=1&p=n1x2n3&w=3&h=1');
+    const result = fromURLSearchParams(params);
+    console.log(result.status);
+    if (result.status === 'success') {
+      expect(result.data).toEqual({
+        puzzle: {
+          cells: [
+            { pos: [0, 0] },
+            { pos: [1, 0] },
+            { pos: [2, 0] },
+            { pos: [0, 1], answer: '1', isFix: true },
+            { pos: [1, 1] },
+            { pos: [2, 1], answer: '2', isFix: true },
+            { pos: [0, 2], answer: '3', isFix: true },
+            { pos: [1, 2] },
+            { pos: [2, 2] },
+          ],
+        },
+        blockSize: { width: 3, height: 1 },
+        hyper: false,
+        cross: false,
+      });
+    } else {
+      fail();
+    }
+  });
   test('puzzle_2_3', () => {
     const puzzleInfo = {
       puzzle: puzzle_2_3,
