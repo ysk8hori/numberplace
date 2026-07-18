@@ -17,7 +17,7 @@ function setup(onChangeSize?: () => void) {
 
 beforeEach(() => {
   localStorage.clear();
-  history.replaceState('', '', '/');
+  history.replaceState('', '', import.meta.env.BASE_URL);
 });
 
 test('URL に正しいパズル情報がある場合はゲーム画面を表示する', async () => {

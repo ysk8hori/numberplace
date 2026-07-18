@@ -25,7 +25,7 @@ export default function MenuStack(props: {
       cross: game.cross,
       hyper: game.hyper,
     });
-    const url = `${location.origin}/?${params.toString()}`;
+    const url = `${location.origin}${import.meta.env.BASE_URL}?${params.toString()}`;
     console.log(url);
     return url;
   }, [initial, game]);

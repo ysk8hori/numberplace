@@ -30,7 +30,7 @@ function LoadGameContainer({
 
   useEffect(() => {
     if (initialSearch) {
-      history.replaceState('', '', '/');
+      history.replaceState('', '', import.meta.env.BASE_URL);
     }
   }, [initialSearch]);
 
