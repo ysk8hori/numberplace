@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import GameContainer from '../GameContainer';
 import {
   analyzeGame,
@@ -21,23 +21,35 @@ function LoadGameContainer({
   /** 同じサイズで遊ぶコールバック */
   onRegenerate?: (blockSize: BlockSize, cross: boolean, hyper: boolean) => void;
 }) {
-  const [doneFirstRender, setDoneFirstRender] = useState<boolean>(false);
+  const [initialSearch] = useState(() => location.search);
+  const [loadedGameFromParams] = useState(() =>
+    loadGameFromParams(initialSearch),
+  );
   const [game, setGame] = useAtom(atomOfGame);
   const [solved, setSolved] = useAtom(atomOfSolved);
-  let loadedGameFromParams;
-  if (!doneFirstRender) {
-    setDoneFirstRender(true);
-    loadedGameFromParams = loadGameFromParams();
-  }
-  if (loadedGameFromParams) {
-    // URL からゲームをロードできた場合はローカルストレージに保持して rerender を待つ
-    setGame(loadedGameFromParams);
-    setSolved(loadedGameFromParams.solved);
-    return null;
-  }
+
+  useEffect(() => {
+    if (initialSearch) {
+      history.replaceState('', '', '/');
+    }
+  }, [initialSearch]);
+
+  useEffect(() => {
+    if (loadedGameFromParams) {
+      // URL からゲームをロードできた場合はローカルストレージに保持する
+      setGame(loadedGameFromParams);
+      setSolved(loadedGameFromParams.solved);
+    }
+  }, [loadedGameFromParams, setGame, setSolved]);
+
+  useEffect(() => {
+    if (!loadedGameFromParams && (!game || !solved)) {
+      // 保持しているゲームがない場合やロードしたゲームが不正な場合はメニューへ戻る
+      onChangeSize?.();
+    }
+  }, [game, loadedGameFromParams, onChangeSize, solved]);
+
   if (!game || !solved) {
-    // 保持しているゲームがない場合やロードしたゲームが不正な場合はメニューへ戻る
-    onChangeSize?.();
     return null;
   }
 
@@ -55,11 +67,10 @@ function LoadGameContainer({
 
 export default LoadGameContainer;
 
-function loadGameFromParams() {
-  if (!location.search) return;
+function loadGameFromParams(search: string) {
+  if (!search) return;
 
-  const params = new URLSearchParams(location.search);
-  history.replaceState('', '', '/');
+  const params = new URLSearchParams(search);
   const result = fromURLSearchParams(params);
   if (result.status !== 'success') {
     console.log(result.status);
