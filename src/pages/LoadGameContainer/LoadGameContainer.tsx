@@ -5,7 +5,7 @@ import {
   BlockSize,
   GameType,
 } from '@ysk8hori/numberplace-generator';
-import { atomOfGame, atomOfSolved } from '../../atoms';
+import { atomOfGame, atomOfSolved, atomOfInitial } from '../../atoms';
 import { fromURLSearchParams } from '../../utils/URLSearchParamConverter';
 import { useAtom } from 'jotai';
 
@@ -27,6 +27,7 @@ function LoadGameContainer({
   );
   const [game, setGame] = useAtom(atomOfGame);
   const [solved, setSolved] = useAtom(atomOfSolved);
+  const [, setInitial] = useAtom(atomOfInitial);
 
   useEffect(() => {
     if (initialSearch) {
@@ -37,10 +38,12 @@ function LoadGameContainer({
   useEffect(() => {
     if (loadedGameFromParams) {
       // URL からゲームをロードできた場合はローカルストレージに保持する
+      const { solved: solvedData, ...others } = loadedGameFromParams;
       setGame(loadedGameFromParams);
-      setSolved(loadedGameFromParams.solved);
+      setSolved(solvedData);
+      setInitial(others.puzzle);
     }
-  }, [loadedGameFromParams, setGame, setSolved]);
+  }, [loadedGameFromParams, setGame, setSolved, setInitial]);
 
   useEffect(() => {
     if (!loadedGameFromParams && (!game || !solved)) {
