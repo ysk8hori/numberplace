@@ -35,6 +35,16 @@ jobs:
           always-auth: true
           node-version: '24.14.1'
 
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - name: Install wasm-pack
+        uses: taiki-e/install-action@v2
+        with:
+          tool: wasm-pack
+
       - uses: pnpm/action-setup@v4
 
       - name: Install Dependencies

@@ -2,7 +2,6 @@ import '@testing-library/jest-dom';
 import React from 'react';
 import { render, screen, waitFor, TestProvider } from '../../utils/test-utils';
 import LoadGameContainer from '.';
-import { userEvent } from '@testing-library/user-event';
 
 function setup(onChangeSize?: () => void) {
   render(
