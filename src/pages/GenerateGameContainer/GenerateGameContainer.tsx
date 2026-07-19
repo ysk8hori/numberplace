@@ -31,6 +31,7 @@ function Inner({
   const setSolved = useSetAtom(atomOfSolved);
   const setInitial = useSetAtom(atomOfInitial);
   const gameData = useAtomValue(atomOfGame);
+  const initialData = useAtomValue(atomOfInitial);
   const solvedData = useAtomValue(atomOfSolved);
   const { data } = useGenerateGame({
     blockSize,
@@ -53,7 +54,11 @@ function Inner({
 
   if (!assertUndefined(data)) return null;
   const isReady =
-    gameData?.puzzle === data.puzzle && solvedData?.cells === data.solved.cells;
+    initialData?.cells === data.puzzle.cells &&
+    solvedData?.cells === data.solved.cells &&
+    gameData?.blockSize === blockSize &&
+    gameData?.cross === cross &&
+    gameData?.hyper === hyper;
   if (!isReady) return null;
 
   return (

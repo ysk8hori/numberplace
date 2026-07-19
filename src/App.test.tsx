@@ -14,10 +14,12 @@ import gameHolder from './utils/gameHolder';
 import { Provider } from 'jotai';
 import { atomOfGame, atomOfSolved } from './atoms';
 
+const { useGenerateGameMock } = vi.hoisted(() => ({
+  useGenerateGameMock: vi.fn(),
+}));
+
 vi.mock('./pages/GenerateGameContainer/utils/useGenerateGame', () => ({
-  default: vi.fn(() => {
-    return { puzzle: puzzle_2_3, solved: solved_2_3 };
-  }),
+  default: useGenerateGameMock,
 }));
 
 // function spy(): SpyInstance<
@@ -50,6 +52,13 @@ function setup() {
 beforeEach(() => {
   localStorage.clear();
   history.replaceState('', '', '/');
+  useGenerateGameMock.mockReset();
+  useGenerateGameMock.mockReturnValue({
+    data: {
+      puzzle: structuredClone(puzzle_2_3),
+      solved: structuredClone(solved_2_3),
+    },
+  });
 });
 
 // beforeEach(() => {
