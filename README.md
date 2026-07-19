@@ -12,6 +12,23 @@ https://numberp.net
 GitHub Pages にもデプロイしています。
 https://ysk8hori.github.io/numberplace/
 
+## 問題生成エンジン (WASM)
+
+問題生成は [numberplace-generator-wasm](https://github.com/ysk8hori/numberplace-generator-wasm/tree/main) を利用します。
+
+初回または更新時は、以下を実行してください。
+
+```bash
+pnpm run wasm:build
+```
+
+`pnpm install` 後は `postinstall` により自動で `pnpm run wasm:build` が実行されます。
+
+このコマンドで以下を行います。
+
+- `vendor/numberplace-generator-wasm` にライブラリを取得または更新
+- `wasm-pack build --target web` で `rust-src/pkg` を生成
+
 ## プレイ画面
 
 <div style="display:flex;">

@@ -1,6 +1,6 @@
 // vite では xxx?worker の形でインポートすることで WebWorker として利用できる
 import GenerateGameWorker from './generateGame.worker?worker';
-import type { Result } from './generateGame.worker';
+import type { SuccessResult } from './generateGame.worker';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import { Difficulty } from '../../../utils/difficulty';
 import { useSuspenseQuery } from '@tanstack/react-query';
@@ -52,20 +52,41 @@ function generateGameAsync({
   cross?: boolean;
   hyper?: boolean;
   signal: AbortSignal | undefined;
-}): Promise<Result> {
+}): Promise<SuccessResult> {
   const worker = new GenerateGameWorker();
-  signal?.addEventListener('abort', () => {
+  let terminated = false;
+  const terminate = () => {
+    if (terminated) return;
+    terminated = true;
     worker.terminate();
+  };
+  const onAbort = () => {
+    terminate();
     console.log('worker terminated by cancel signal.');
-  });
+  };
+  signal?.addEventListener('abort', onAbort);
   console.log('worker generated.');
-  return new Promise<Result>(resolve => {
+  return new Promise<SuccessResult>((resolve, reject) => {
     // ワーカーにゲーム生成を依頼
     worker.postMessage({ blockSize, difficulty, cross, hyper });
     // ワーカーからゲーム生成結果が渡された際の処理を登録
-    worker.onmessage = ({ data }) => resolve(data);
+    worker.onmessage = ({ data }) => {
+      if ('errorMessage' in data) {
+        reject(new Error(data.errorMessage));
+        return;
+      }
+      resolve(data as SuccessResult);
+    };
+    worker.onerror = ev => {
+      reject(
+        new Error(
+          ev.message || 'ゲーム生成ワーカーで予期しないエラーが発生しました。',
+        ),
+      );
+    };
   }).finally(() => {
-    worker.terminate();
+    signal?.removeEventListener('abort', onAbort);
+    terminate();
     console.log('worker terminated.');
   });
 }

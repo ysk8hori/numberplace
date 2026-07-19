@@ -1,11 +1,11 @@
 import GameContainer from '../GameContainer';
-import React, { Suspense, useReducer } from 'react';
+import React, { Suspense, useEffect, useReducer } from 'react';
 import { BlockSize } from '@ysk8hori/numberplace-generator';
 import { Difficulty } from '../../utils/difficulty';
 import useGenerateGame from './utils/useGenerateGame';
 import Generating from '../../components/other/Generating';
 import { useQueryClient } from '@tanstack/react-query';
-import { useAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { atomOfGame, atomOfInitial, atomOfSolved } from '../../atoms';
 import { assertUndefined } from '../../utils/assertNull';
 
@@ -27,9 +27,11 @@ function Inner({
   hyper?: boolean;
   count: number;
 }) {
-  const [, setGame] = useAtom(atomOfGame);
-  const [, setSolved] = useAtom(atomOfSolved);
-  const [, setInitial] = useAtom(atomOfInitial);
+  const setGame = useSetAtom(atomOfGame);
+  const setSolved = useSetAtom(atomOfSolved);
+  const setInitial = useSetAtom(atomOfInitial);
+  const gameData = useAtomValue(atomOfGame);
+  const solvedData = useAtomValue(atomOfSolved);
   const { data } = useGenerateGame({
     blockSize,
     difficulty,
@@ -37,16 +39,23 @@ function Inner({
     hyper,
     count,
   });
-  if (!assertUndefined(data)) return null;
+  useEffect(() => {
+    if (!assertUndefined(data)) return;
+    setGame({
+      puzzle: data.puzzle,
+      blockSize,
+      cross,
+      hyper,
+    });
+    setSolved(data.solved);
+    setInitial(data.puzzle);
+  }, [blockSize, cross, data, hyper, setGame, setInitial, setSolved]);
 
-  setGame({
-    puzzle: data.puzzle,
-    blockSize,
-    cross,
-    hyper,
-  });
-  setSolved(data.solved);
-  setInitial(data.puzzle);
+  if (!assertUndefined(data)) return null;
+  const isReady =
+    gameData?.puzzle === data.puzzle && solvedData?.cells === data.solved.cells;
+  if (!isReady) return null;
+
   return (
     <GameContainer onRegenerate={onRegenerate} onChangeSize={onChangeSize} />
   );
