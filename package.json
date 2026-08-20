@@ -68,7 +68,7 @@
     "@types/styled-components": "5.1.36",
     "@typescript-eslint/eslint-plugin": "8.65.0",
     "@typescript-eslint/parser": "8.65.0",
-    "@vitejs/plugin-react": "6.0.4",
+    "@vitejs/plugin-react": "6.0.5",
     "@vitest/ui": "latest",
     "autoprefixer": "10.5.4",
     "babel-loader": "10.1.1",
@@ -97,7 +97,7 @@
     "typescript-eslint": "8.63.0",
     "typescript7": "npm:typescript@7.0.2",
     "use-interval": "1.4.0",
-    "vite": "8.1.5",
+    "vite": "8.2.1",
     "vite-plugin-pwa": "1.2.0",
     "vitest": "4.1.10",
     "wait-on": "9.0.4"
